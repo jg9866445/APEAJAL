@@ -1,0 +1,34 @@
+nav.img {
+    width: 10%;
+    height: 10%;
+}
+
+nav.logo {
+    background-color: #52672E;
+}
+
+nav.menu {
+    background-color: #FFFFFF;
+}
+
+.menu.catalago {
+    margin-right: 15VW;
+    margin-left: 10VW;
+}
+
+.menu.movimientos {
+    margin-right: 20VW;
+    margin-left: 16VW;
+}
+
+.menu.consultas {
+    margin-right: 5VW;
+    margin-left: 5VW;
+}
+
+.linea {
+    width: 80%;
+    height: 1VH;
+    background: #52672E;
+    margin-left: 10VW;
+}
