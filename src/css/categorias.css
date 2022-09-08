@@ -2,3 +2,23 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+button.bottom {
+    background-color: #52672E;
+    color: #FFFFFF;
+}
+
+input+label::after {
+    content: '';
+    color: black;
+}
+
+input:focus+label::after {
+    content: 'Datos erroneos verifique';
+    color: red;
+}
+
+input:valid+label::after {
+    content: '';
+    color: green;
+}
