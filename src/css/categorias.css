@@ -8,17 +8,20 @@ button.bottom {
     color: #FFFFFF;
 }
 
-input+label::after {
-    content: '';
-    color: black;
-}
-
-input:focus+label::after {
-    content: 'Datos erroneos verifique';
+input:placeholder-shown:focus+label::after {
+    content: 'Este campo no puede estar vacio';
     color: red;
 }
 
-input:valid+label::after {
+input:not(:placeholder-shown):focus+label::after {
     content: '';
-    color: green;
+}
+
+input:invalid:focus:not(:placeholder-shown)+label::before {
+    content: 'Error en la informacion ingresada';
+    color: red;
+}
+
+input:valid:focus+label::before {
+    content: '';
 }

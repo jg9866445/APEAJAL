@@ -35,7 +35,6 @@
                                 <li><a class="dropdown-item" href="../Categorias/Plantas.html">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="../Categorias/Clientes.html">Clientes</a></li>
                                 <li><a class="dropdown-item" href="../Categorias/Predio.html">Predio</a></li>
-
                             </ul>
                         </li>
 
@@ -107,15 +106,42 @@
                         <div class="modal-body">
                             <div class="mb-3 row">
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Cliente</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Nombre" name="Nombre" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40"></input>
+                                    <select class="form-select" name="idCliente" id="idCliente" required>
+                                    <option disabled selected>Escoja una opcion</option>
+                                    <option value="1">Hugo</option>
+                                    <option value="2">Martín</option>
+                                </select>
+                                    <label for="input"></label>
+                                </div>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Municipio</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="Municipio" name="Municipio" placeholder="Municipio del predio" required pattern="[A-Za-z ]+" minlength="3" maxlength="40"></input>
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Extension</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40"></input>
+                                    <input class="form-control" type="text" id="Extension" name="Extension" placeholder="Extension del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40"></input>
+                                    <label for="input"></label>
+                                </div>
+
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Uso de predio</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" name="usoPredio" id="usoPredio" required>
+                                    <option disabled selected>Escoja una opcion</option>
+                                    <option value="1">agrícola</option>
+                                    <option value="2">pecuario</option>
+                                    <option value="3">forestal</option>
+                                    <option value="4">urbano</option>
+                                </select>
+                                    <label for="input"></label>
+                                </div>
+
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Coordenadas (grados, minutos, segundos)</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="Cordenadas" name="Cordenadas" placeholder="Cordenadas del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40"></input>
                                     <label for="input"></label>
                                 </div>
                             </div>
@@ -132,7 +158,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
+
                 </div>
+
                 <div class="col-lg-8 ">
                     <h2>Nombre de tabla</h2>
                     <br>
@@ -140,33 +168,48 @@
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
+                                <th>Cliente</th>
+                                <th>Municipio</th>
+                                <th>extension</th>
+                                <th>Uso de predio</th>
+                                <th>coodernadas</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>micorrizas</td>
-                                <td>asociaciones simbióticas entre los hongos y las raíces de las plantas vasculares. </td>
+                                <td>Cliente</td>
+                                <td>Municipio</td>
+                                <td>existencia</td>
+                                <td>predio</td>
+                                <td>coodernadas</td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>Fertilizante fuerte</td>
-                                <td>Es un Fertilizante muy fuerte </td>
+                                <td>1</td>
+                                <td>Cliente</td>
+                                <td>Municipio</td>
+                                <td>existencia</td>
+                                <td>predio</td>
+                                <td>coodernadas</td>
                             </tr>
                             <tr>
-                                <td>3</td>
-                                <td>Pesticida debil</td>
-                                <td>Pesticida muy fuerte</td>
+                                <td>1</td>
+                                <td>Cliente</td>
+                                <td>Municipio</td>
+                                <td>existencia</td>
+                                <td>predio</td>
+                                <td>coodernadas</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
                 <div class="col-lg-2">
+
                 </div>
             </div>
         </div>
+
     </div>
 
 
