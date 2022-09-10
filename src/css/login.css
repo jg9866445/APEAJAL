@@ -1,1 +1,8 @@
-login-card {}
+.card.login {
+    border-radius: 1rem;
+}
+
+button.bottom {
+    background-color: #52672E;
+    color: #FFFFFF;
+}
