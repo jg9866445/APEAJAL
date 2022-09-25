@@ -1,0 +1,32 @@
+/*Boton de agregar nuevo elemento*/
+
+.container.botton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button.bottom {
+    background-color: #52672E;
+    color: #FFFFFF;
+}
+
+
+/*Validacion de input*/
+
+input:placeholder-shown:focus+label::after {
+    content: 'Este campo no puede estar vacio';
+    color: red;
+}
+
+input:not(:placeholder-shown):focus+label::after {
+    content: '';
+}
+
+input:invalid:focus:not(:placeholder-shown)+label::before {
+    content: 'Error en la informacion ingresada';
+    color: red;
+}
+
+input:valid:focus+label::before {
+    content: '';
+}
