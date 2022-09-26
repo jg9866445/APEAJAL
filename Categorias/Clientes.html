@@ -126,47 +126,17 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>ITCG</td>
-                                <td>AJSMJNKIOPLKM</td>
-                                <td>20 de noviembre</td>
-                                <td>Guzman</td>
-                                <td>Jalisco</td>
-                                <td>ITCG@gmail.com</td>
-                                <td>3411344460</td>
-                                <td>Donacion</td>
-                                <td>Constancia fiscal</td>
-                                <td>0</td>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"><i class="bi bi-nut"></i>  </button></td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Cusur</td>
-                                <td>AHJPMCITNJUPA</td>
-                                <td>16 de septiembre</td>
-                                <td>Guzman</td>
-                                <td>Jalisco</td>
-                                <td>Cusur@gmail.com</td>
-                                <td>3411239090</td>
-                                <td>Donacion</td>
-                                <td>Constancia fiscal</td>
-                                <td>0</td>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"><i class="bi bi-nut"></i>  </button></td>
-
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Caja popular</td>
-                                <td>NOKMNHJASBJIA</td>
-                                <td>Enrique Gonzalez</td>
-                                <td>Ciudad Guzman</td>
-                                <td>Jalisco</td>
-                                <td>caja_popular@gmail.com</td>
-                                <td>341198989</td>
-                                <td>Venta</td>
-                                <td>Constancia fiscal</td>
-                                <td>99</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"><i class="bi bi-nut"></i>  </button></td>
                             </tr>
                         </tbody>
@@ -187,16 +157,16 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agrega nuevo regristro</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar nuevo cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form>
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Razon Social</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre o Razon Social</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre o Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -206,27 +176,27 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad de residencia habitual</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Estado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Estado de residencia habitual</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado  de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="correo" name="correo" placeholder="Correo Electronico del cliente" required/>
+                                <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico del cliente" required/>
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono" required pattern="[0-9]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo del cliente" required pattern="[0-9]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -238,15 +208,15 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Tipo de cliente</label>
                             <div class="col-sm-10">
-                                <select class="form-select" name="idClasificacion" id="idClasificacion" required>
-                                    <option disabled selected>Escoja una opcion</option>
-                                    <option value="1">Donacion</option>
+                                <select class="form-select" name="idTipoCliente" id="idTipoCliente" required>
+                                    <option disabled selected>Elija una opción</option>
+                                    <option value="1">Donación</option>
                                     <option value="2">Compra</option>
                                 </select>
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Constancia fiscal</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Constancia de Situación Fiscal</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="file" id="constanciaFiscal" name="constanciaFiscal " />
                                 <label for="input"></label>
@@ -272,16 +242,16 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modificar regristro</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar datos del cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form>
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Razon Social</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre o Razon Social</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre o Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -291,27 +261,27 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad de residencia habitual</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Estado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Estado de residencia habitual</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="correo" name="correo" placeholder="Correo Electronico del cliente" required/>
+                                <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico del cliente" required/>
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono" required pattern="[0-9]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo del cliente" required pattern="[0-9]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -323,15 +293,15 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Tipo de cliente</label>
                             <div class="col-sm-10">
-                                <select class="form-select" name="idClasificacion" id="idClasificacion" required>
-                                    <option disabled selected>Escoja una opcion</option>
-                                    <option value="1">Donacion</option>
+                                <select class="form-select" name="idTipoCliente" id="idTipoCliente" required>
+                                    <option disabled selected>Elija una opción</option>
+                                    <option value="1">Donación</option>
                                     <option value="2">Compra</option>
                                 </select>
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Constancia fiscal</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Constancia de Situación Fiscal</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="file" id="constanciaFiscal" name="constanciaFiscal " />
                                 <label for="input"></label>

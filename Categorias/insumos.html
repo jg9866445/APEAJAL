@@ -99,31 +99,31 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo insumo</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form>
                         <div class="modal-body">
                             <div class="mb-3 row">
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Nombre" name="Nombre" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="NombreInsumo" name="NombreInsumo" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripción del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripción del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoria</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoría del insumo</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="idClasificacion" id="idClasificacion" required>
-                                    <option disabled selected>Escoja una opcion</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option disabled selected>Elija una opción</option>
+                                    <option value="2"></option>
+                                    <option value="3"></option>
                                 </select>
                                     <label for="input"></label>
                                 </div>
@@ -134,25 +134,25 @@
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia del insumo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Maximo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maximo del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maxima del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Minimo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minimo del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minima del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio del insumo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo Promedio del insumo" required pattern="[0-9,.]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
@@ -192,37 +192,14 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>micorrizas</td>
-                                <td>asociaciones simbióticas entre los hongos y las raíces de las plantas vasculares. </td>
-                                <td>Fertilizante</td>
-                                <td>gramos</td>
-                                <td>100</td>
-                                <td>0.5 pesos por gramo</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"><i class="bi bi-nut"></i>  </button></td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Fertilizante fuerte</td>
-                                <td>Es un Fertilizante muy fuerte </td>
-                                <td>Fertilizante</td>
-                                <td>gramos</td>
-                                <td>10000</td>
-                                <td>6.5 pesos por gramo</td>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"><i class="bi bi-nut"></i>  </button></td>
-
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Pesticida debil</td>
-                                <td>Pesticida muy fuerte</td>
-                                <td>Pesticida</td>
-                                <td>gramos</td>
-                                <td>8000</td>
-                                <td>1.5 pesos por gramo</td>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"><i class="bi bi-nut"></i>  </button></td>
-
                             </tr>
                         </tbody>
                     </table>
@@ -234,114 +211,37 @@
             </div>
         </div>
 
-        <!-- Modal insert -->
-        <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Agrega nuevo regristro</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form>
-                        <div class="modal-body">
-                            <div class="mb-3 row">
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Nombre" name="Nombre" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoria</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" name="idClasificacion" id="idClasificacion" required>
-                                    <option disabled selected>Escoja una opcion</option>
-                                    <option value="2">Semillas</option>
-                                    <option value="3">Sustrato</option>
-                                    <option value="3">Nutricion</option>
-                                    <option value="3">Plagisida</option>
-                                </select>
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad de medida</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="UnidadMedida" name="UnidadMedida" placeholder="Unidad de medida del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Maximo</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maximo del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Minimo</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minimo del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo Promedio del insumo" required pattern="[0-9,.]+" minlength="1" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 
         <!-- Modal update-->
         <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modificar regristro</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Modificar datos del insumo</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form>
                         <div class="modal-body">
                             <div class="mb-3 row">
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Nombre" name="Nombre" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="NombreInsumo" name="NombreInsumo" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripción del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripción del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoria</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoría del insumo</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="idClasificacion" id="idClasificacion" required>
-                                    <option disabled selected>Escoja una opcion</option>
-                                    <option value="1">Semillas</option>
-                                    <option value="2">Sustrato</option>
-                                    <option value="3">Nutricion</option>
-                                    <option value="4">Plagisida</option>
+                                    <option disabled selected>Elija una opción</option>
+                                    <option value="2"></option>
+                                    <option value="3"></option>
                                 </select>
                                     <label for="input"></label>
                                 </div>
@@ -352,25 +252,25 @@
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia del insumo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Maximo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maximo del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maxima del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Minimo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minimo del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minima del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio del insumo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo Promedio del insumo" required pattern="[0-9,.]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>

@@ -77,8 +77,6 @@
 
 
 
-
-
     <div>
         <div class="container botton">
             <div class="row">
@@ -111,33 +109,19 @@
                                 <th>Municipio</th>
                                 <th>extension</th>
                                 <th>Uso de predio</th>
-                                <th>coodernadas</th>
+                                <th>Latitud</th>
+                                <th>Longitud</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>ITCG</td>
-                                <td>Ciudad Guzman</td>
-                                <td>5 hectarias</td>
-                                <td>agrícola</td>
-                                <td>Latitud 19°42'7.70"N, Longitud 103°33'22.04"O</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Cusur</td>
-                                <td>Ciudad Guzman</td>
-                                <td>6 hectarias</td>
-                                <td>pecuario</td>
-                                <td>Latitud 19°42'7.70"N, Longitud 103°33'22.04"O</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Caja popular</td>
-                                <td>Ciudad Guzman</td>
-                                <td>7 hectarias</td>
-                                <td>forestal</td>
-                                <td>Latitud 19°42'7.70"N, Longitud 103°33'22.04"O</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -157,29 +141,29 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agrega nuevo regristro</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo predio</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form>
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Cliente</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del cliente</label>
                             <div class="col-sm-10">
                                 <select class="form-select" name="idCliente" id="idCliente" required>
-                                    <option disabled selected>Escoja una opcion</option>
-                                    <option value="1">Hugo</option>
-                                    <option value="2">Martín</option>
+                                    <option disabled selected>Elija una opción</option>
+                                    <option value="1"></option>
+                                    <option value="2"></option>
                                 </select>
                                 <label for="input"></label>
                             </div>
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Municipio</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Municipio donde se ubica el predio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Municipio" name="Municipio" placeholder="Municipio del predio" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Municipio" name="Municipio" placeholder="Municipio donde se ubica el predio" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Extension</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Extension del predio</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="Extension" name="Extension" placeholder="Extension del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
@@ -188,7 +172,7 @@
                             <label for="staticEmail" class="col-sm-2 col-form-label">Uso de predio</label>
                             <div class="col-sm-10">
                                 <select class="form-select" name="usoPredio" id="usoPredio" required>
-                                    <option disabled selected>Escoja una opcion</option>
+                                    <option disabled selected>Elija una opción</option>
                                     <option value="1">agrícola</option>
                                     <option value="2">pecuario</option>
                                     <option value="3">forestal</option>
@@ -197,9 +181,15 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Coordenadas (grados, minutos, segundos)</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Latitud del predio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Cordenadas" name="Cordenadas" placeholder="Cordenadas del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Latitud" name="Latitud" placeholder="Latitud del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <label for="input"></label>
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Longitud del predio</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="Longitud" name="Longitud" placeholder="Longitud del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                         </div>
