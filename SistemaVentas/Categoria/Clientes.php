@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE.php>
 <html lang="en">
 
 <head>
@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
-    <link href="../src/css/menu.css" rel="stylesheet">
-    <link href="../src/css/categorias.css" rel="stylesheet">
+    <link href="/src/css/menu.css" rel="stylesheet">
+    <link href="/src/css/categorias.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -28,44 +28,31 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../Categorias/insumos.html">Insumos</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Clasificacion.html">Clasificación de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Provedores.html">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Responsable.html">Responsable</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Especies.html">Especies de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Plantas.html">Plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Clientes.html">Clientes</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Predio.html">Predio</a></li>
-
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies de plantas forestales</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Predios.php">Predios</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../Movimientos/OrdenProduccion.html">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/ComprasInsumos.html">Compras de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/ValesSalidaInsumos.html">Vales de salida de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/DevolucionesInsumos.html">Devolución de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/PedidosPlantas.html">Pedidos de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/SolicitudPlantas.html">Solicitud de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/SalidaPlantas.html">Salida de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/Pagos.html">Pagos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas forestales</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas forestales</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pagos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../Reportes/SolicitudPendeinteAtender.html">Repote de solicitud pendientes atender</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/SolicitudPendientesPago.html">Reporte de solicitud pendientes de pago</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/PlantasExsistencia.html">Reporte de plantas en existencias</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/PlantasDonacionPeriodo.html">Reporte de plantas en donación por período</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/VentasPeriodo.html">Reporte de ventas por período</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/VentasClientes.html">Reporte de ventas por clientes</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/InsimosCalsificaciones.html">Reporte de insumos por clasificación</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/Provedores.html">Reporte de proveedores</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/ValesSalidaPeriodos.html">Reporte de vales de salida por período</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/OrdenProduccionPendiente.html">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Repote de solicitud pendientes atender</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendientesPago.php">Reporte de solicitud pendientes de pago</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de plantas en existencias</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasDonacionPeriodo.php">Reporte de plantas en donación por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/VentasPeriodo.php">Reporte de ventas por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/VentasClientes.php">Reporte de ventas por clientes</a></li>
                             </ul>
                         </li>
                     </ul>

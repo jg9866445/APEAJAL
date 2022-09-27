@@ -1,14 +1,21 @@
+nav.logo {
+    background-color: #52672E;
+}
+
 nav.img {
     width: 10%;
     height: 10%;
 }
 
-nav.logo {
-    background-color: #52672E;
-}
-
 nav.menu {
     background-color: #FFFFFF;
+}
+
+.linea {
+    width: 80%;
+    height: 1VH;
+    background: #52672E;
+    margin-left: 10VW;
 }
 
 .menu.catalago {
@@ -31,20 +38,13 @@ nav.menu {
     margin-top: 2VH;
 }
 
-.menu.consultas.despegable {
-    margin-left: -13VW;
-    margin-right: 5VW;
-    margin-top: 2VH;
-}
-
 .menu.consultas {
     margin-right: 5VW;
     margin-left: 5VW;
 }
 
-.linea {
-    width: 80%;
-    height: 1VH;
-    background: #52672E;
-    margin-left: 10VW;
+.menu.consultas.despegable {
+    margin-left: -12VW;
+    margin-right: 0VW;
+    margin-top: 2VH;
 }

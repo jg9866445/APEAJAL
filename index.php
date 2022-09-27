@@ -19,7 +19,7 @@
                         <div class="card-body p-5 text-center">
 
                             <div class="mb-md-5 mt-md-4 pb-5">
-                                <form action="../home.html">
+                                <form action="../menu.html">
 
 
                                     <h2 class="fw-bold mb-2 text-uppercase"><img src="src/imagenes/Logo.jpeg" width="50%" height="50%"></h2>

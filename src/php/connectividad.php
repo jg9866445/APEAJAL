@@ -1,8 +1,8 @@
 <?php
 class DB_Connect {
-    const URL = 'mysql:host=mysql-momentousjoker2.alwaysdata.net;dbname=momentousjoker2_api';
-    const USERNAME = '219364_momentous';
-    const PASSWORD = 'abPHA_E?+jkl';
+    const URL = 'mysql:host=mysql-recidenciacyj.alwaysdata.net;dbname=recidenciacyj_apeajal';
+    const USERNAME = '279932_jessica';
+    const PASSWORD = 'BTS2103';
     const OPCION = [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"];
     var $connection=null;
 
