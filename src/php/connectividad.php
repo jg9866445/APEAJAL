@@ -23,6 +23,7 @@ class DB_Connect {
         catch (PDOException $e) {
             print "¡Error!: " . $e->getMessage() . "<br/>";
             die();
+            $this->close();
         }
         return $this->connection;
     }
