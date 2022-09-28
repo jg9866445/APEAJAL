@@ -28,43 +28,28 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../Categorias/insumos.html">Insumos</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Clasificacion.html">Clasificación de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Provedores.html">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Responsable.html">Responsable</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Especies.html">Especies de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Plantas.html">Plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Clientes.html">Clientes</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Predio.html">Predio</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.html">Insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.html">Clasificación de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.html">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.html">Responsable</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../Movimientos/OrdenProduccion.html">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/ComprasInsumos.html">Compras de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/ValesSalidaInsumos.html">Vales de salida de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/DevolucionesInsumos.html">Devolución de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/PedidosPlantas.html">Pedidos de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/SolicitudPlantas.html">Solicitud de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/SalidaPlantas.html">Salida de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/Pagos.html">Pagos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.html">Órdenes producción</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.html">Compras de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.html">Vales de salida de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.html">Devolución de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../Reportes/SolicitudPendeinteAtender.html">Repote de solicitud pendientes atender</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/SolicitudPendientesPago.html">Reporte de solicitud pendientes de pago</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/PlantasExsistencia.html">Reporte de plantas en existencias</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/PlantasDonacionPeriodo.html">Reporte de plantas en donación por período</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/VentasPeriodo.html">Reporte de ventas por período</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/VentasClientes.html">Reporte de ventas por clientes</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/InsimosCalsificaciones.html">Reporte de insumos por clasificación</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/Provedores.html">Reporte de proveedores</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/ValesSalidaPeriodos.html">Reporte de vales de salida por período</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/OrdenProduccionPendiente.html">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.html">Reporte de insumos por clasificación</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.html">Reporte de proveedores</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.html">Reporte de vales de salida por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.html">Reporte de órdenes de producción pendientes</a></li>
                             </ul>
                         </li>
                     </ul>
