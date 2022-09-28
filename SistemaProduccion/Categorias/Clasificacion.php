@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
-    <link href="../src/css/menu.css" rel="stylesheet">
-    <link href="../src/css/categorias.css" rel="stylesheet">
+    <link href="/src/css/menu.css" rel="stylesheet">
+    <link href="/src/css/categorias.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
@@ -27,44 +27,28 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../Categorias/insumos.html">Insumos</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Clasificacion.html">Clasificación de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Provedores.html">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Responsable.html">Responsable</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Especies.html">Especies de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Plantas.html">Plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Clientes.html">Clientes</a></li>
-                                <li><a class="dropdown-item" href="../Categorias/Predio.html">Predio</a></li>
-
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../Movimientos/OrdenProduccion.html">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/ComprasInsumos.html">Compras de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/ValesSalidaInsumos.html">Vales de salida de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/DevolucionesInsumos.html">Devolución de insumos</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/PedidosPlantas.html">Pedidos de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/SolicitudPlantas.html">Solicitud de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/SalidaPlantas.html">Salida de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="../Movimientos/Pagos.html">Pagos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../Reportes/SolicitudPendeinteAtender.html">Repote de solicitud pendientes atender</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/SolicitudPendientesPago.html">Reporte de solicitud pendientes de pago</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/PlantasExsistencia.html">Reporte de plantas en existencias</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/PlantasDonacionPeriodo.html">Reporte de plantas en donación por período</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/VentasPeriodo.html">Reporte de ventas por período</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/VentasClientes.html">Reporte de ventas por clientes</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/InsimosCalsificaciones.html">Reporte de insumos por clasificación</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/Provedores.html">Reporte de proveedores</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/ValesSalidaPeriodos.html">Reporte de vales de salida por período</a></li>
-                                <li><a class="dropdown-item" href="../Reportes/OrdenProduccionPendiente.html">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -76,6 +60,11 @@
         </nav>
     </div>
 
+<?php
+    if (http_response_code()===201) {
+        echo  "<script language='javascript'>alert('juas');</script>';";
+    }
+?>
 
 
 
@@ -113,12 +102,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                           
+                            <?php
+                                include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Funciones.php");
+                                $conexion = new Funciones();
+                                $resultado = $conexion->getAllClasificaciones();
+                                
+                                    foreach ($resultado as $row) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['idClasificacion'] . "</td>";
+                                        echo "<td>" . $row['concepto'] . "</td>";
+                                        echo "<td>" . $row['descripcion'] . "</td>";
+                                        echo "</tr>";
+                                    }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -141,18 +137,19 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar nueva clasificación</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form action="/src/php/SistemaProduccion/insert.php" method="POST">
+                    <input type="hidden" name="categoria" value="Clasificacion">
                     <div class="modal-body">
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Concepto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreClasificacion" name="NombreClasificacion" placeholder="Nombre de la clasificacion del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreClasificacion" name="NombreClasificacion" placeholder="Nombre de la clasificacion del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="50" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion por tipo de clasificación</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DescripcionClasificacion" name="DescripcionClasificacion" placeholder="Descripcion del tipo de insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="DescripcionClasificacion" name="DescripcionClasificacion" placeholder="Descripcion del tipo de insumo" required pattern="[A-Za-z ().,]+" minlength="3" maxlength="255" />
                                 <label for="input"></label>
                             </div>
 
