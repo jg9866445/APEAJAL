@@ -10,6 +10,12 @@
     <link href="/src/css/categorias.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Datatable plugin CSS file -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    
 </head>
 
 <body>
@@ -59,13 +65,10 @@
             <div class="linea"></div>
         </nav>
     </div>
-
-<?php
-    if (http_response_code()===201) {
-        echo  "<script language='javascript'>alert('juas');</script>';";
-    }
-?>
-
+    <?php
+        include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Funciones.php");
+        $conexion = new Funciones();
+    ?>
 
 
 
@@ -93,7 +96,7 @@
                 <div class="col-lg-8 ">
                     <h2>Clasificaicon de tipo de insumos</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -103,8 +106,6 @@
                         </thead>
                         <tbody>
                             <?php
-                                include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Funciones.php");
-                                $conexion = new Funciones();
                                 $resultado = $conexion->getAllClasificaciones();
                                 
                                     foreach ($resultado as $row) {
@@ -137,8 +138,8 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar nueva clasificación</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/src/php/SistemaProduccion/insert.php" method="POST">
-                    <input type="hidden" name="categoria" value="Clasificacion">
+                <form action="/SistemaProduccion/Categorias/Clasificacion.php" method="POST">
+                    <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Concepto</label>
@@ -164,7 +165,35 @@
         </div>
     </div>
 
+        <script>
+
+        /* Initialization of datatable */
+    $(document).ready( function () {
+        $('#table_id').DataTable();
+    } );
+
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <?php
+    if (isset($_POST)){
+        if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+            $concepto = $_POST['NombreClasificacion'];
+            $descripcion = $_POST['DescripcionClasificacion'];
+            $resultado = $conexion->insertClasificacion($concepto, $descripcion);
+            unset($_POST);
+            ob_start();
+            $URL = $_SERVER['PHP_SELF'];
+            echo("<meta http-equiv='refresh' content='1'>");
+        }
+    }
+    
+    
+    ?>
+
+
+
+
 </body>
 
 </html>
