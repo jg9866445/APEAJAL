@@ -44,6 +44,17 @@ class Funciones {
 
     }
 
+    public function getAllInsumos() {
+        $sql = "SELECT i.idInsumo, c.concepto , i.nombre, i.descripcion,i.unidadMedida,i.existencia,i.maximo,i.minimo,i.costoPromedio FROM insumo as i INNER JOIN clasificacion as c ON i.idClasificacion = c.idClasificacion;";
+        $query = $this->connect->prepare($sql);
+        $query->execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+        }
+
+
+//
+
 
 
 }
