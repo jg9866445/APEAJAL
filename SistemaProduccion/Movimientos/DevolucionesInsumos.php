@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
     <link href="/src/css/menu.css" rel="stylesheet">
-    <link href="/src/css/categorias.css" rel="stylesheet">
+    <link href="/src/css/movimientos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
@@ -61,7 +61,6 @@
         </nav>
     </div>
 
-    <div>
         <div class="container botton">
             <div class="row">
                 <div class="col-lg-2 ">
@@ -122,19 +121,20 @@
 
         <!-- Modal -->
         <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Devolucion de Insumos</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                    <form>
-                        <div class="modal-body">
-                            <div class="mb-3 row">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Fecha</label>
-                                <div class="col-sm-10">
-                                <input class="form-control" type="date" />
-                                <label for="input"></label>
+                    </div>
+                        <form>
+                            <div class="modal-body">
+                                <div class="mb-3 row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Fecha</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="date" />
+                                        <label for="input"></label>
+                                    </div>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">vale salida</label>
@@ -145,7 +145,6 @@
                                         <option value="2"></option>
                                     </select>
                                     <label for="input"></label>
-                                    </div>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Clasificacion</label>
@@ -156,7 +155,6 @@
                                         <option value="2"></option>
                                     </select>
                                     <label for="input"></label>
-                                    </div>
                                 </div>  
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Insumo</label>
@@ -167,7 +165,6 @@
                                         <option value="2"></option>
                                     </select>
                                     <label for="input"></label>
-                                    </div>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad de insumo a regresar</label>
@@ -188,13 +185,12 @@
                                     <label for="input"></label>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                        </div>              
-                    </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            </div>              
+                        </form>
                 </div>
             </div>
         </div>
