@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
     <link href="/src/css/menu.css" rel="stylesheet">
-    <link href="/src/css/categorias.css" rel="stylesheet">
+    <link href="/src/css/movimientos.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -72,7 +72,7 @@
 
                 </div>
                 <div class="col-lg-7 ">
-
+                    <h1 style="text-align:center">Pagos de plantas forestales</h1>
                 </div>
                 <div class="col-lg-2">
                     <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
@@ -182,38 +182,37 @@
                                     <input class="form-control" type="number" id="CantidadSurtida" name="CantidadSurtida" placeholder="Cantidad de plantas Surtidas" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
-                                
                             </div>                    
                         </div>
-                    </div>
-                    <br>
-                    <div class="card">
-                        <div>
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#datosPago" aria-expanded="false" aria-controls="datosPago">
+                        <br>
+                        <div class="card">
+                            <div>
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#datosPago" aria-expanded="false" aria-controls="datosPago">
                                 Datos de pago
-                            </button>
+                                </button>
+                            </div>
+
+                            <div id="datosPago" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosPago">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Archivo comprovante</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="file" id="archivoComprobante" name="archivoComprobante" />
+                                    <label for="input"></label>
+                                </div>
+
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Concepto general</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="conceptoGeneral" name="conceptoGeneral" placeholder="Consepto General del pago" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <label for="input"></label>
+                                </div>
+
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Importe</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="number" id="Importe" name="Importe" placeholder="Importe a pagar" required pattern="[0-9,.]+" minlength="3" maxlength="13" />
+                                    <label for="input"></label>
+                                </div>    
+                            </div>            
                         </div>
-                        <div id="datosPago" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosPago">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Archivo comprovante</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="file" id="archivoComprobante" name="archivoComprobante" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Concepto general</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="conceptoGeneral" name="conceptoGeneral" placeholder="Consepto General del pago" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Importe</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="number" id="Importe" name="Importe" placeholder="Importe a pagar" required pattern="[0-9,.]+" minlength="3" maxlength="13" />
-                                <label for="input"></label>
-                            </div>    
-                        </div>            
-                    </div>
-                       
+                    </div>          
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
@@ -223,8 +222,9 @@
         </div>
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>    
+
 </body>
 
 </html>
