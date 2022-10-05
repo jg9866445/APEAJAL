@@ -13,9 +13,11 @@
 <body>
     <div>
         <nav class="navbar logo">
-            <a class="navbar-brand">
-                <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
-            </a>
+            <div class="navbar-brand ">
+                <img class="d-inline-block" width="100VW" height="100VH" src="/src/imagenes/Logo.jpeg">
+                <h1 class="titulo d-inline-block">Sistema de control de inventario</h1>
+                <!-- TODO: En esta area no esta funcionando el css correctamente dentro de la clase navbar logo -->
+            </div>
         </nav>
 
         <nav class="navbar navbar-expand-lg menu">
@@ -68,7 +70,6 @@
             <div class="col-lg-5 col-md-6">
                 <br>
 
-                <h1 class="text-center">Sistema de control de inventario de insumos</h1>
                 <br>
                 <h1 class="text-center">Bienvenido: Encargado</h1>
                 <br>

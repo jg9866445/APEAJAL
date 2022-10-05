@@ -94,16 +94,18 @@
                 <div class="col-lg-8 ">
                     <h2>Insumos</h2>
                     <br>
-                    <table id="table_id" class="display table table-responsive table-hover">
+                    <table id="table_id" class="display nowrap table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>Nombre</th>
+                                <th>idInsumo</th>
+                                <th>concepto</th>
                                 <th>Descripcion</th>
                                 <th>Clasificacion</th>
                                 <th>Unidad metrica</th>
                                 <th>Existencia</th>
                                 <th>Costo Promedio</th>
+                                <th>Minimo</th>
+                                <th>Maximo</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
@@ -116,26 +118,17 @@
                                         echo "<tr>";
                                         echo "<td>" . $row['idInsumo'] . "</td>";
                                         echo "<td>" . $row['concepto'] . "</td>";
-                                        echo "<td>" . $row['nombre'] . "</td>";
                                         echo "<td>" . $row['descripcion'] . "</td>";
+                                        echo "<td>" . $row['nombre'] . "</td>";
                                         echo "<td>" . $row['unidadMedida'] . "</td>";
                                         echo "<td>" . $row['existencia'] . "</td>";
                                         echo "<td>" . $row['maximo'] . "</td>";
                                         echo "<td>" . $row['minimo'] . "</td>";
                                         echo "<td>" . $row['costoPromedio'] . "</td>";
-                                        echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update'><i class='bi bi-nut'></i>  </button></td>";
+                                        echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
                                         echo "</tr>";
                                     }
                             ?>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -174,9 +167,14 @@
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Categoría del insumo</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="idClasificacion" id="idClasificacion" required>
-                                    <option disabled selected>Elija una opción</option>
-                                    <option value="2"></option>
-                                    <option value="3"></option>
+                                    <option disabled selected value="">Elija una opción</option>
+                                    <?php
+                                        $resultado = $conexion->getAllClasificaciones();
+                                
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idClasificacion'].">". $row['concepto']."</option>";
+                                        }
+                                    ?>
                                 </select>
                                     <label for="input"></label>
                                 </div>
@@ -184,6 +182,12 @@
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Unidad de medida</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" id="UnidadMedida" name="UnidadMedida" placeholder="Unidad de medida del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <option disabled selected value="">Elija una opción</option>
+                                    <option selected value="Kilos">Kilos</option>
+                                    <option selected value="Gramos">Gramos</option>
+                                    <option selected value="Centrimetros">Centrimetros</option>
+                                    <option selected value="Metros">Metros</option>
+                                    <option selected value="Pieza">Pieza</option>
                                     <label for="input"></label>
                                 </div>
 
@@ -229,25 +233,26 @@
                         <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo insumo</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form>
+                    <form accept="/SistemaProduccion/Categorias/insumos.php" method="POST" >
+                    <input type="hidden" name="categoria" value="Agregar">
                         <div class="modal-body">
                             <div class="mb-3 row">
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="NombreInsumo" name="NombreInsumo" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="NombreInsumoM" name="NombreInsumo" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Descripción del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripción del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="DescripcionM" name="Descripcion" placeholder="Descripción del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Categoría del insumo</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" name="idClasificacion" id="idClasificacion" required>
+                                    <select class="form-select" name="idClasificacion" id="idClasificacionM" required>
                                     <option disabled selected value="">Elija una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllClasificaciones();
@@ -255,47 +260,52 @@
                                         foreach ($resultado as $row) {
                                             echo "<option value=".$row['idClasificacion'].">". $row['concepto']."</option>";
                                         }
-                            ?>
-                                    <option value="2"></option>
-                                    <option value="3"></option>
+                                    ?>
                                 </select>
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Unidad de medida</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="UnidadMedida" name="UnidadMedida" placeholder="Unidad de medida del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
+                                    <select class="form-select" name="UnidadMedida" id="UnidadMedidaM" required>
+                                        <option disabled selected value="">Elija una opción</option>
+                                        <option selected value="Kilos">Kilos</option>
+                                        <option selected value="Gramos">Gramos</option>
+                                        <option selected value="Centrimetros">Centrimetros</option>
+                                        <option selected value="Metros">Metros</option>
+                                        <option selected value="Pieza">Pieza</option>
+                                    </select>
+                                        <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Existencia del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="number" id="ExistenciaM" name="Existencia" placeholder="Cantidad en existencia del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maxima del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="number" id="MaximoM" name="Maximo" placeholder="Cantidad maxima del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minima del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="number" id="MinimoM" name="Minimo" placeholder="Cantidad minima del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio del insumo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo Promedio del insumo" required pattern="[0-9,.]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="text" id="CostoPromedioM" name="CostoPromedio" placeholder="Costo Promedio del insumo" required pattern="[0-9,.]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            <button type="submit" class="btn btn-primary">Agregar regristro</button>
                         </div>
                     </form>
                 </div>
@@ -306,11 +316,60 @@
 
         /* Initialization of datatable */
         $(document).ready( function () {
-            $('#table_id').DataTable();
-        } );
+            var table = $('#table_id').DataTable();
+
+        });
+        function update(context){
+
+            var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
+
+            document.getElementById('NombreInsumoM').value=elementosTD[1].textContent;
+            const DescripcionM = document.getElementById('DescripcionM');
+            const idClasificacionM = document.getElementById('idClasificacionM');
+            const UnidadMedidaM = document.getElementById('UnidadMedidaM');
+            const ExistenciaM = document.getElementById('ExistenciaM');
+            const MaximoM = document.getElementById('MaximoM');
+            const MinimoM = document.getElementById('MinimoM');
+            const CostoPromedioM = document.getElementById('CostoPromedioM');
+
+            DescripcionM.value=[2].textContent;
+            //idClasificacionM.value=[1].textContent;
+            //UnidadMedidaM.value=[3].textContent;
+            ExistenciaM.value=[4].textContent;
+            MaximoM.value=[5].textContent;
+            MinimoM.value=[6].textContent;
+            CostoPromedioM.value=[7].textContent;
+
+
+
+
+            console.log( elementosTD);
+            console.log( elementosTD[1].textContent)
+            }
 
     </script>
 
+    <?php
+    if (isset($_POST)){
+        if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+            $NombreInsumo = $_POST['NombreInsumo'];
+            $Descripcion = $_POST['Descripcion'];
+            $idClasificacion = $_POST['idClasificacion'];
+            $UnidadMedida = $_POST['UnidadMedida'];
+            $Existencia = $_POST['Existencia'];
+            $Maximo = $_POST['Maximo'];
+            $Minimo = $_POST['Minimo'];
+            $CostoPromedio = $_POST['CostoPromedio'];
+            //$resultado = $conexion->insertClasificacion($concepto, $descripcion);
+            //unset($_POST);
+           // ob_start();
+            //$URL = $_SERVER['PHP_SELF'];
+            //echo("<meta http-equiv='refresh' content='1'>");
+        }
+    }
+    
+    
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

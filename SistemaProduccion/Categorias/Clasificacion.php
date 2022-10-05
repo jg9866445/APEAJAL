@@ -24,6 +24,7 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
+            
         </nav>
 
         <nav class="navbar navbar-expand-lg menu">
@@ -175,6 +176,14 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+
+
+
+</body>
+
+</html>
     <?php
     if (isset($_POST)){
         if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
@@ -190,10 +199,3 @@
     
     
     ?>
-
-
-
-
-</body>
-
-</html>
