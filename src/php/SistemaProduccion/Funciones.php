@@ -53,6 +53,22 @@ class Funciones {
         }
 
 
+    public function insertInsumos($idInsumo, $idClasificacion, $nombre, $descripcion, $unidadMedida, $existencia, $maximo, $minimo, $costoPromedio) {
+        $sql = "INSERT INTO insumo (idInsumo, idClasificacion, nombre, descripcion, unidadMedida, existencia, maximo, minimo, costoPromedio) VALUES (:idInsumo, :idClasificacion, :nombre, :descripcion, :unidadMedida, :existencia, :maximo, :minimo, :costoPromedio)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idInsumo', $idInsumo);
+        $query->bindParam(':idClasificacion', $idClasificacion);
+        $query->bindParam(':nombre', $nombre);
+        $query->bindParam(':descripcion', $descripcion);
+        $query->bindParam(':unidadMedida', $unidadMedida);
+        $query->bindParam(':existencia', $existencia);
+        $query->bindParam(':maximo', $maximo);
+        $query->bindParam(':minimo', $minimo);
+        $query->bindParam(':costoPromedio', $costoPromedio);
+        $results = $query -> fetchAll(); 
+        return $results;
+        }
+
 //
 
 
