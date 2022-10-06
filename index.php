@@ -11,8 +11,7 @@
 </head>
 
 <body>
-    <section class="vh-100 gradient-custom">
-        <div class="container py-5 h-100">
+        <div class="container py-3 h-25">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card login">
@@ -44,7 +43,6 @@
                 </div>
             </div>
         </div>
-    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
