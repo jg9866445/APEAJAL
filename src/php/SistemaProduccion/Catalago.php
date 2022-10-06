@@ -122,6 +122,7 @@ class Catalago {
         $request=$query->execute(); 
         return $request;
     }
+    
     function updateProveedor($idProveedor, $nombre, $contacto, $domicilio, $ciudad, $telefono, $email, $ActaSituacionFiscal){
         $sql = "UPDATE proveedor SET nombre=:nombre,contacto=:contacto,domicilio=:domicilio,ciudad=:ciudad,telefono=:telefono,email=:email,ActaSituacionFiscal=:ActaSituacionFiscal where idProveedor=:idProveedor";
         $query = $this->connect->prepare($sql);

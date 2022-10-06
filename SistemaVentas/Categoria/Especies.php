@@ -1,3 +1,7 @@
+<?php
+    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Catalago.php");
+    $conexion = new Catalago();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +10,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
-    <link href="/src/css/menu.css" rel="stylesheet">
+    <<link href="/src/css/menu.css" rel="stylesheet">
     <link href="/src/css/categorias.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- Datatable plugin CSS file -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -63,10 +71,6 @@
         </nav>
     </div>
 
-
-
-
-
     <div>
         <div class="container botton">
             <div class="row">
@@ -89,7 +93,7 @@
                 <div class="col-lg-8 ">
                     <h2>Especies de plantas</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -98,11 +102,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                        <?php
+                            $resultado = $conexion->getEspecies();    
+                                foreach ($resultado as $row) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row['idEspecie'] . "</td>";
+                                    echo "<td>" . $row['nombre'] . "</td>";
+                                    echo "<td>" . $row['descripcion'] . "</td>";
+                                    echo "</tr>";
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -120,7 +129,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar nueva especie</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form action="/SistemaVentas/Categoria/Especies.php" method="POST">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
@@ -132,7 +141,7 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion de la especie</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la especie" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="DescripcionEspecie" name="DescripcionEspecie" placeholder="Descripcion de la especie" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -146,6 +155,24 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready( function () {
+            $('#table_id').DataTable();
+        } );
+    </script>
+    <?php
+        if (isset($_POST)){
+            if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+                $nombre = $_POST['NombreEspecie'];
+                $descripcion = $_POST['DescripcionEspecie'];
+                $resultado = $conexion->insertEspecies($nombre, $descripcion);
+                unset($_POST);
+                ob_start();
+                $URL = $_SERVER['PHP_SELF'];
+                echo("<meta http-equiv='refresh' content='1'>");
+            }
+        }
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

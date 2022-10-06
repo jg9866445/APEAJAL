@@ -25,7 +25,7 @@ class Catalago {
         unset($this->connect);
     }
 
-    function getEspecies(){
+    public function getEspecies(){
         $sql = "SELECT * FROM especie";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -33,7 +33,7 @@ class Catalago {
         return $results;
     }
 
-    function getPlantasForestal(){
+    public function getPlantasForestal(){
         $sql = "SELECT p.idPlanta, e.nombre, p.descripcion, p.existencia FROM plantaForestal as p INNER JOIN especie as e ON e.idEspecie = p.idEspecie";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -41,7 +41,7 @@ class Catalago {
         return $results;
     }
 
-    function getResponsables(){
+    public function getResponsables(){
         $sql = "SELECT * FROM responsable";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -49,7 +49,7 @@ class Catalago {
         return $results;
     }
 
-    function getClient(){
+    public function getClient(){
         $sql = "SELECT * FROM clientes";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -57,7 +57,7 @@ class Catalago {
         return $results;
     }
 
-    function getPredios(){
+    public function getPredios(){
         $sql = "SELECT * FROM predios";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -76,24 +76,134 @@ class Catalago {
         return $query->rowCount(); 
     }
 
+    function insertEspecies($idEspecie, $nombre, $descripcion){
+        $sql = "INSERT INTO especie (idEspecie, nombre, descripcion) VALUES (:idEspecie,:nombre,:descripcion)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":idEspecie",$idEspecie);
+        $query->bindParam(":nombre",$nombre);
+        $query->bindParam(":descripcion",$descripcion);
+        $query->execute();  
+        return $query->rowCount(); 
+    }
 
-//INSERT INTO plantaForestal(idPlanta, idEspecie, descripcion, existencia) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')
-//INSERT INTO especie(idEspecie, nombre, descripcion) VALUES ('[value-1]','[value-2]','[value-3]')
-//INSERT INTO responsable(idResponsable, nombre, puesto, usuario, password) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')
-//INSERT INTO clientes(idCliente, razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, constanciaFiscal, saldo, domicilioFiscal, usuario, password) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]','[value-12]','[value-13]','[value-14]','[value-15]')
-//INSERT INTO predios(idPredio, idCliente, municipio, extencion, usoPredio, longitud, latitud, RegistroSADER) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]')
+    function insertResponsable($idResponsable, $nombre, $puesto, $usuario, $password){
+        $sql = "INSERT INTO responsable (idResponsable, nombre, puesto, usuario, password) VALUES (:idResponsable, :nombre, :puesto, :usuario, :password)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idResponsable', $idResponsable);
+        $query->bindParam(':nombre', $nombre);
+        $query->bindParam(':puesto', $puesto);
+        $query->bindParam(':usuario', $usuario);
+        $query->bindParam(':password', $password);
+        $request=$query->execute(); 
+        return $request;
+    }
 
+    function insertClientes($idCliente, $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password){
+        $sql = "INSERT INTO clientes(idCliente, razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, constanciaFiscal, saldo, domicilioFiscal, usuario, password) VALUES (:idCliente, :razonSocial, :RFC, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :constanciaFiscal, :saldo, :domicilioFiscal, :usuario, :password)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":idCliente",$idCliente);
+        $query->bindParam(":razonSocial",$razonSocial);
+        $query->bindParam(":RFC",$RFC);
+        $query->bindParam(":domicilio",$domicilio);
+        $query->bindParam(":ciudad",$ciudad);
+        $query->bindParam(":estado",$estado);
+        $query->bindParam(":email",$email);
+        $query->bindParam(":telefono",$telefono);
+        $query->bindParam(":celular",$celular);
+        $query->bindParam(":tipoCliente",$tipoCliente);
+        $query->bindParam(":constanciaFiscal",$constanciaFiscal);
+        $query->bindParam(":saldo",$saldo);
+        $query->bindParam(":domicilioFiscal",$domicilioFiscal);
+        $query->bindParam(":usuario",$usuario);
+        $query->bindParam(":passwordo",$passwordo);
+        $query->execute();  
+        return $query->rowCount(); 
+    }
 
+    function insertPredios(idPredio, idCliente, municipio, extencion, usoPredio, longitud, latitud, RegistroSADER){
+        $sql = "INSERT INTO predios(idPredio, idCliente, municipio, extencion, usoPredio, longitud, latitud, RegistroSADER) VALUES ( :idPredio, :idCliente, :municipio, :extencion, :usoPredio, :longitud, :latitud, :RegistroSADER)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPredio', $idPredio);
+        $query->bindParam(':idCliente', $idCliente);
+        $query->bindParam(':municipio', $municipio);
+        $query->bindParam(':extencion', $extencion);
+        $query->bindParam(':usoPredio', $usoPredio);
+        $query->bindParam(':longitud', $longitud);
+        $query->bindParam(':latitud', $latitud);
+        $query->bindParam(':RegistroSADER', $RegistroSADER);
+        $request=$query->execute(); 
+        return $request;
+    }
 
+    function updatePlantaForestal($idPlanta, $idEspecie, $descripcion, $existencia){
+        $sql = "UPDATE plantaForestal SET idEspecie=:idEspecie,descripcion=:descripcion,existencia=:existencia where $idPlanta=:$idPlanta";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':$idPlanta', $idPlanta);
+        $query->bindParam(':idEspecie', $idEspecie);
+        $query->bindParam(':descripcion', $descripcion);
+        $query->bindParam(':existencia', $existencia);
+        $request=$query->execute(); 
+        return $request;    
+    }
 
+    function updateEspecies($idEspecie, $nombre, $descripcion){
+        $sql = "UPDATE especie SET nombre=:nombre,descripcion=:descripcion where $idEspecie=:$idEspecie";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':$idEspecie', $idEspecie);
+        $query->bindParam(':nombre', $nombre);
+        $query->bindParam(':descripcion', $descripcion);
+        $request=$query->execute(); 
+        return $request;    
+    }
 
-
-//UPDATE plantaForestal SET idPlanta='[value-1]',idEspecie='[value-2]',descripcion='[value-3]',existencia='[value-4]' WHERE 1
-//UPDATE especie SET idEspecie='[value-1]',nombre='[value-2]',descripcion='[value-3]' WHERE 1
-//UPDATE responsable SET idResponsable='[value-1]',nombre='[value-2]',puesto='[value-3]',usuario='[value-4]',password='[value-5]' WHERE 1
-//UPDATE clientes SET idCliente='[value-1]',razonSocial='[value-2]',RFC='[value-3]',domicilio='[value-4]',ciudad='[value-5]',estado='[value-6]',email='[value-7]',telefono='[value-8]',celular='[value-9]',tipoCliente='[value-10]',constanciaFiscal='[value-11]',saldo='[value-12]',domicilioFiscal='[value-13]',usuario='[value-14]',password='[value-15]' WHERE 1
-//UPDATE predios SET idPredio='[value-1]',idCliente='[value-2]',municipio='[value-3]',extencion='[value-4]',usoPredio='[value-5]',longitud='[value-6]',latitud='[value-7]',RegistroSADER='[value-8]' WHERE 1
-
+    function updateResponsable($idResponsable, $nombre, $puesto, $usuario, $password){
+        $sql = "UPDATE responsable SET nombre=:nombre, puesto=:puesto, usuario=:usuario, password=:password  where $idResponsable=:$idResponsable";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idResponsable', $idResponsable);
+        $query->bindParam(':nombre', $nombre);
+        $query->bindParam(':puesto', $puesto);
+        $query->bindParam(':usuario', $usuario);
+        $query->bindParam(':password', $password);
+        $request=$query->execute(); 
+        return $request;    
+    }
+    
+    function updateClientes($idCliente, $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password){
+        $sql = "UPDATE clientes SET razonSocial=:razonSocia, RFC=:RFC, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente, constanciaFiscal=:constanciaFiscal, saldo=:saldo, domicilioFiscal=:domicilioFiscal, usuario=:usuario, password=:password  where $idCliente=:$idCliente";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":idCliente",$idCliente);
+        $query->bindParam(":razonSocial",$razonSocial);
+        $query->bindParam(":RFC",$RFC);
+        $query->bindParam(":domicilio",$domicilio);
+        $query->bindParam(":ciudad",$ciudad);
+        $query->bindParam(":estado",$estado);
+        $query->bindParam(":email",$email);
+        $query->bindParam(":telefono",$telefono);
+        $query->bindParam(":celular",$celular);
+        $query->bindParam(":tipoCliente",$tipoCliente);
+        $query->bindParam(":constanciaFiscal",$constanciaFiscal);
+        $query->bindParam(":saldo",$saldo);
+        $query->bindParam(":domicilioFiscal",$domicilioFiscal);
+        $query->bindParam(":usuario",$usuario);
+        $query->bindParam(":passwordo",$passwordo);
+        $request=$query->execute(); 
+        return $request;    
+    }
+    
+    function updatePredios($idPredio, $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud, $RegistroSADER){
+        $sql = "UPDATE predios SET idCliente=:idCliente, municipio=:municipio, extencion=:extencion, usoPredio=:usoPredio, longitud=:longitud, latitud=:latitud, RegistroSADER=:RegistroSADER  where $idPredio=:$idPredio";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPredio', $idPredio);
+        $query->bindParam(':idCliente', $idCliente);
+        $query->bindParam(':municipio', $municipio);
+        $query->bindParam(':extencion', $extencion);
+        $query->bindParam(':usoPredio', $usoPredio);
+        $query->bindParam(':longitud', $longitud);
+        $query->bindParam(':latitud', $latitud);
+        $query->bindParam(':RegistroSADER', $RegistroSADER);
+        $request=$query->execute(); 
+        return $request;    
+    }
 
 
 //INSERT INTO solicitudes(idSolicitud, idCliente, fecha, estado) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')
