@@ -1,0 +1,19 @@
+nav.logo {
+    background-color: #52672E;
+}
+
+nav.img {
+    width: 10%;
+    height: 10%;
+}
+
+nav.menu {
+    background-color: #FFFFFF;
+}
+
+.linea {
+    width: 80%;
+    height: 1VH;
+    background: #52672E;
+    margin-left: 10VW;
+}
