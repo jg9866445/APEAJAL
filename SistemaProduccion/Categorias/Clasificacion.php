@@ -1,3 +1,7 @@
+<?php
+    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Catalago.php");
+    $conexion = new Catalago();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,13 +70,6 @@
             <div class="linea"></div>
         </nav>
     </div>
-    <?php
-        include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Funciones.php");
-        $conexion = new Funciones();
-    ?>
-
-
-
     <div>
         <div class="container botton">
             <div class="row">
@@ -166,36 +163,26 @@
         </div>
     </div>
 
-        <script>
-
-        /* Initialization of datatable */
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
-
+    <script>
+        $(document).ready( function () {
+            $('#table_id').DataTable();
+        } );
     </script>
+    <?php
+        if (isset($_POST)){
+            if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+                $concepto = $_POST['NombreClasificacion'];
+                $descripcion = $_POST['DescripcionClasificacion'];
+                $resultado = $conexion->insertClasificacion($concepto, $descripcion);
+                unset($_POST);
+                ob_start();
+                $URL = $_SERVER['PHP_SELF'];
+                echo("<meta http-equiv='refresh' content='1'>");
+            }
+        }
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
-
-
-
 </body>
-
 </html>
-    <?php
-    if (isset($_POST)){
-        if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
-            $concepto = $_POST['NombreClasificacion'];
-            $descripcion = $_POST['DescripcionClasificacion'];
-            $resultado = $conexion->insertClasificacion($concepto, $descripcion);
-            unset($_POST);
-            ob_start();
-            $URL = $_SERVER['PHP_SELF'];
-            echo("<meta http-equiv='refresh' content='1'>");
-        }
-    }
     
-    
-    ?>
