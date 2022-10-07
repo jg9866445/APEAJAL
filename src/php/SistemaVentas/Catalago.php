@@ -71,7 +71,7 @@ class Catalago {
         $query->bindParam(":idEspecie",$idEspecie);
         $query->bindParam(":descripcion",$descripcion);
         $query->bindParam(":existencia",$existencia);
-        $query->execute();  
+        $query->execute();
         return $query->rowCount(); 
     }
 
@@ -117,7 +117,7 @@ class Catalago {
     }
 
     function insertPredios( $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud, $RegistroSADER){
-        $sql = "INSERT INTO predios( idCliente, municipio, extencion, usoPredio, longitud, latitud, RegistroSADER) VALUES ( :idPredio, :idCliente, :municipio, :extencion, :usoPredio, :longitud, :latitud, :RegistroSADER)";
+        $sql = "INSERT INTO predios( idCliente, municipio, extencion, usoPredio, longitud, latitud, RegistroSADER) VALUES ( :idCliente, :municipio, :extencion, :usoPredio, :longitud, :latitud, :RegistroSADER)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idCliente', $idCliente);
         $query->bindParam(':municipio', $municipio);
@@ -133,7 +133,7 @@ class Catalago {
     function updatePlantaForestal($idPlanta, $idEspecie, $descripcion, $existencia){
         $sql = "UPDATE plantaForestal SET idEspecie=:idEspecie,descripcion=:descripcion,existencia=:existencia where idPlanta=:idPlanta";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':$idPlanta', $idPlanta);
+        $query->bindParam(':idPlanta', $idPlanta);
         $query->bindParam(':idEspecie', $idEspecie);
         $query->bindParam(':descripcion', $descripcion);
         $query->bindParam(':existencia', $existencia);

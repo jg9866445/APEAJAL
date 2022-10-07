@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
-    <<link href="/src/css/menu.css" rel="stylesheet">
+    <link href="/src/css/menu.css" rel="stylesheet">
     <link href="/src/css/categorias.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -102,8 +102,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php
-                            $resultado = $conexion->getEspecies();    
+                            <?php
+                                $resultado = $conexion->getEspecies();    
                                 foreach ($resultado as $row) {
                                     echo "<tr>";
                                     echo "<td>" . $row['idEspecie'] . "</td>";
@@ -130,6 +130,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="/SistemaVentas/Categoria/Especies.php" method="POST">
+                    <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
 

@@ -1,3 +1,7 @@
+<?php
+    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Catalago.php");
+    $conexion = new Catalago();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +14,10 @@
     <link href="/src/css/categorias.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- Datatable plugin CSS file -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -92,26 +100,29 @@
                 <div class="col-lg-8 ">
                     <h2>Nombre de tabla</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
                                 <th>Especie</th>
+                                <th>Descripcion</th>
                                 <th>Existencia</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"><i class="bi bi-nut"></i>  </button></td>
-                            </tr>
+                        <?php
+                            $resultado = $conexion->getPlantasForestal();    
+                                foreach ($resultado as $row) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row['idPlanta'] . "</td>";
+                                    echo "<td>" . $row['nombre'] . "</td>";
+                                    echo "<td>" . $row['descripcion'] . "</td>";
+                                    echo "<td>" . $row['existencia'] . "</td>";
+                                    echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
+                                    echo "</tr>";
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -125,7 +136,7 @@
     </div>
 
 
-    <!-- Modal -->
+    <!-- Modal insert-->
     <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -133,30 +144,28 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar nueva planta</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form action="/SistemaVentas/Categoria/Plantas.php" method="POST" >
+                    <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre de planta</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombrePlanta" name="NombrePlanta" placeholder="Nombre de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Especie</label>
                             <div class="col-sm-10">
                                 <select class="form-select" name="idEspecie" id="idEspecie" required>
                                     <option disabled selected>Elija una opción</option>
-                                    <option value="1"></option>
-                                    <option value="2"></option>
-                                    <option value="3"></option>
+                                    <?php
+                                        $resultado = $conexion->getEspecies();
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idEspecie'].">". $row['nombre']."</option>";
+                                        }
+                                    ?>
                                 </select>
+                                <label for="input"></label>
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" />
                                 <label for="input"></label>
                             </div>
 
@@ -176,7 +185,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Modificar-->
     <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -184,36 +193,35 @@
                     <h5 class="modal-title" id="exampleModalLabel">Modificar datos de la planta</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form action="/SistemaVentas/Categoria/Plantas.php" method="POST" >
+                <input type="hidden" name="categoria" value="Modificar">
+                <input type="hidden" name="idPlanta" id="idPlanta">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre de planta</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Especie</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombrePlanta" name="NombrePlanta" placeholder="Nombre de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <select class="form-select" name="idEspecieM" id="idEspecieM" required>
+                                    <option disabled selected>Elija una opción</option>
+                                    <?php
+                                        $resultado = $conexion->getEspecies();
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idEspecie'].">". $row['nombre']."</option>";
+                                        }
+                                    ?>
+                                </select>
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Especie</label>
-                            <div class="col-sm-10">
-                                <select class="form-select" name="idEspecie" id="idEspecie" required>
-                                    <option disabled selected>Elija una opción</option>
-                                    <option value="1"></option>
-                                    <option value="2"></option>
-                                    <option value="3"></option>
-                                </select>
+                                <input class="form-control" type="text" id="DescripcionM" name="DescripcionM" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Existencia de la planta</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia de la planta" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                <input class="form-control" type="number" id="ExistenciaM" name="ExistenciaM" placeholder="Cantidad en existencia de la planta" required pattern="[0-9]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -227,6 +235,46 @@
         </div>
     </div>
 
+    <script>
+
+        /* Initialization of datatable */
+        $(document).ready( function () {
+            var table = $('#table_id').DataTable();
+
+        });
+        function update(context){
+
+            var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
+            document.getElementById("idPlanta").value=elementosTD[0].textContent;
+            document.getElementById('idEspecieM').value=elementosTD[1].textContent;
+            document.getElementById('DescripcionM').value=elementosTD[2].textContent;
+            document.getElementById('ExistenciaM').value=elementosTD[3].textContent;
+            }
+
+    </script>
+
+    <?php
+    if (isset($_POST)){
+        if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+            $idEspecie = $_POST['idEspecie'];
+            $descripcion = $_POST['Descripcion'];
+            $existencia = $_POST['Existencia'];
+            $resultado = $conexion->insertPlantaForestal($idEspecie, $descripcion, $existencia);
+            unset($_POST);
+            ob_start();
+            echo("<meta http-equiv='refresh' content='1'>");
+        }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
+            $idPlanta = $_POST["idPlanta"];
+            $idEspecie = $_POST['idEspecieM'];
+            $descripcion = $_POST['DescripcionM'];
+            $existencia = $_POST['ExistenciaM'];
+            $resultado = $conexion->updatePlantaForestal($idPlanta, $idEspecie, $descripcion, $existencia);
+            unset($_POST);
+            ob_start();
+            echo("<meta http-equiv='refresh' content='1'>");
+        }
+    }
+    ?>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

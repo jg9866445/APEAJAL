@@ -165,15 +165,14 @@
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Categoría del insumo</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="idClasificacion" id="idClasificacionM" required>
-                                    <option disabled selected value="">Elija una opción</option>
-                                    <?php
-                                        $resultado = $conexion->getAllClasificaciones();
-                                
-                                        foreach ($resultado as $row) {
+                                        <option disabled selected value="">Elija una opción</option>
+                                        <?php
+                                            $resultado = $conexion->getAllClasificaciones();
+                                            foreach ($resultado as $row) {
                                             echo "<option value=".$row['idClasificacion'].">". $row['concepto']."</option>";
-                                        }
-                                    ?>
-                                </select>
+                                            }
+                                        ?>
+                                    </select>
                                     <label for="input"></label>
                                 </div>
 
@@ -190,7 +189,7 @@
 
                                     <label for="input"></label>
                                 </div>
-
+                                <!--TODO: EMMANUEL TE FALTA COLOCAR M EN EL CAMPO NAME DE LOS INPUT DE MODIFICAR-->
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Existencia del insumo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="number" id="ExistenciaM" name="Existencia" placeholder="Cantidad en existencia del insumo" required pattern="[0-9]+" minlength="1"  />
@@ -261,7 +260,7 @@
                                             echo "<option value=".$row['idClasificacion'].">". $row['concepto']."</option>";
                                         }
                                     ?>
-                                </select>
+                                    </select>
                                     <label for="input"></label>
                                 </div>
 
