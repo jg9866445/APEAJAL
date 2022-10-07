@@ -1,3 +1,7 @@
+    <?php
+        include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Catalago.php");
+        $conexion = new Catalago();
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +14,10 @@
     <link href="/src/css/categorias.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Datatable plugin CSS file -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -93,16 +101,23 @@
                                 <th>id</th>
                                 <th>Nombre</th>
                                 <th>Puesto</th>
+                                <th>Usuario</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"><i class="bi bi-nut"></i>  </button></td>
-                            </tr>
+                            <?php
+                                $resultado = $conexion->getAllResponsable();
+                                    foreach ($resultado as $row) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['idResponsable'] . "</td>";
+                                        echo "<td>" . $row['nombre'] . "</td>";
+                                        echo "<td>" . $row['puesto'] . "</td>";
+                                        echo "<td>" . $row['usuario'] . "</td>";
+                                        echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
+                                        echo "</tr>";
+                                    }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -121,7 +136,8 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo responsable</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form action="/SistemaProduccion/Categorias/Responsable.php" method="POST" >
+                                        <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
@@ -136,11 +152,23 @@
                                 <input class="form-control" type="text" id="Puesto" name="Puesto" placeholder="Puesto del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
+                            
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Usuario del empleado</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="Usuario" name="Usuario" placeholder="Usuario del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <label for="input"></label>
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">password del empleado</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="password" name="password" placeholder="password del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <label for="input"></label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -155,22 +183,35 @@
                     <h5 class="modal-title" id="exampleModalLabel">Modificar datos del empleado</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form action="/SistemaProduccion/Categorias/Responsable.php" method="POST" >
+                    <input type="hidden" name="categoria" value="Modificar">
+                    <input type="hidden" name="idResponsable" id="idResponsable">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del empleado</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreResponsable" name="NombreResponsable" placeholder="Nombre del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreResponsableM" name="NombreResponsableM" placeholder="Nombre del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Puesto del empleado</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Puesto" name="Puesto" placeholder="Puesto del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="PuestoM" name="PuestoM" placeholder="Puesto del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
-                        </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Usuario del empleado</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="UsuarioM" name="UsuarioM" placeholder="Usuario del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <label for="input"></label>
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">password del empleado</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="password del empleado" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <label for="input"></label>
+                            </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -182,6 +223,46 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
 
+    <script>
+        $(document).ready( function () {
+            var table = $('#table_id').DataTable();
+        });
+
+        function update(context){
+            var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
+            document.getElementById("idResponsable").value=elementosTD[0].textContent;
+            document.getElementById("NombreResponsableM").value=elementosTD[1].textContent;
+            document.getElementById('PuestoM').value=elementosTD[2].textContent;
+            document.getElementById('UsuarioM').value=elementosTD[3].textContent;
+            document.getElementById('passwordM').value=elementosTD[4].textContent;
+            }
+
+    </script>
+    
+</body>
+    <?php
+    if (isset($_POST)){
+        if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+            $NombreResponsableM = $_POST['NombreResponsable'];
+            $PuestoM = $_POST['Puesto'];
+            $UsuarioM = $_POST['Usuario'];
+            $passwordM = $_POST['password'];
+            $resultado = $conexion->insertResponsable($NombreResponsableM, $PuestoM, $UsuarioM, $passwordM);
+            unset($_POST);
+            ob_start();
+            echo("<meta http-equiv='refresh' content='1'>");
+        }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
+            $idResponsable=$_POST["idResponsable"];
+            $NombreResponsableM = $_POST['NombreResponsableM'];
+            $PuestoM = $_POST['PuestoM'];
+            $UsuarioM = $_POST['UsuarioM'];
+            $passwordM = $_POST['passwordM'];
+            $resultado = $conexion->updateResponsable($idResponsable,$NombreResponsableM, $PuestoM, $UsuarioM, $passwordM);
+            unset($_POST);
+            ob_start();
+            echo("<meta http-equiv='refresh' content='1'>");
+        }
+    }
+    ?>
 </html>

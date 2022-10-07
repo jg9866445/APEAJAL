@@ -41,7 +41,7 @@ class Catalago {
         return $results;
     }
 
-    public function getResponsables(){
+    public function getAllResponsable(){
         $sql = "SELECT * FROM responsable";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -65,10 +65,9 @@ class Catalago {
         return $results;
     }
 
-    function insertPlantaForestal($idPlanta, $idEspecie, $descripcion, $existencia){
-        $sql = "INSERT INTO plantaForestal (idPlanta, idEspecie, descripcion, existencia) VALUES (:idPlanta,:idEspecie,:descripcion,:existencia)";
+    function insertPlantaForestal( $idEspecie, $descripcion, $existencia){
+        $sql = "INSERT INTO plantaForestal ( idEspecie, descripcion, existencia) VALUES (:idEspecie,:descripcion,:existencia)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(":idPlanta",$idPlanta);
         $query->bindParam(":idEspecie",$idEspecie);
         $query->bindParam(":descripcion",$descripcion);
         $query->bindParam(":existencia",$existencia);
@@ -76,10 +75,9 @@ class Catalago {
         return $query->rowCount(); 
     }
 
-    function insertEspecies($idEspecie, $nombre, $descripcion){
-        $sql = "INSERT INTO especie (idEspecie, nombre, descripcion) VALUES (:idEspecie,:nombre,:descripcion)";
+    function insertEspecies( $nombre, $descripcion){
+        $sql = "INSERT INTO especie ( nombre, descripcion) VALUES (:nombre,:descripcion)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(":idEspecie",$idEspecie);
         $query->bindParam(":nombre",$nombre);
         $query->bindParam(":descripcion",$descripcion);
         $query->execute();  
@@ -87,9 +85,8 @@ class Catalago {
     }
 
     function insertResponsable($idResponsable, $nombre, $puesto, $usuario, $password){
-        $sql = "INSERT INTO responsable (idResponsable, nombre, puesto, usuario, password) VALUES (:idResponsable, :nombre, :puesto, :usuario, :password)";
+        $sql = "INSERT INTO responsable ( nombre, puesto, usuario, password) VALUES ( :nombre, :puesto, :usuario, :password)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':idResponsable', $idResponsable);
         $query->bindParam(':nombre', $nombre);
         $query->bindParam(':puesto', $puesto);
         $query->bindParam(':usuario', $usuario);
@@ -98,10 +95,9 @@ class Catalago {
         return $request;
     }
 
-    function insertClientes($idCliente, $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password){
-        $sql = "INSERT INTO clientes(idCliente, razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, constanciaFiscal, saldo, domicilioFiscal, usuario, password) VALUES (:idCliente, :razonSocial, :RFC, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :constanciaFiscal, :saldo, :domicilioFiscal, :usuario, :password)";
+    function insertClientes( $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password){
+        $sql = "INSERT INTO clientes( razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, constanciaFiscal, saldo, domicilioFiscal, usuario, password) VALUES ( :razonSocial, :RFC, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :constanciaFiscal, :saldo, :domicilioFiscal, :usuario, :password)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(":idCliente",$idCliente);
         $query->bindParam(":razonSocial",$razonSocial);
         $query->bindParam(":RFC",$RFC);
         $query->bindParam(":domicilio",$domicilio);
@@ -120,10 +116,9 @@ class Catalago {
         return $query->rowCount(); 
     }
 
-    function insertPredios(idPredio, idCliente, municipio, extencion, usoPredio, longitud, latitud, RegistroSADER){
-        $sql = "INSERT INTO predios(idPredio, idCliente, municipio, extencion, usoPredio, longitud, latitud, RegistroSADER) VALUES ( :idPredio, :idCliente, :municipio, :extencion, :usoPredio, :longitud, :latitud, :RegistroSADER)";
+    function insertPredios( $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud, $RegistroSADER){
+        $sql = "INSERT INTO predios( idCliente, municipio, extencion, usoPredio, longitud, latitud, RegistroSADER) VALUES ( :idPredio, :idCliente, :municipio, :extencion, :usoPredio, :longitud, :latitud, :RegistroSADER)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':idPredio', $idPredio);
         $query->bindParam(':idCliente', $idCliente);
         $query->bindParam(':municipio', $municipio);
         $query->bindParam(':extencion', $extencion);
@@ -136,7 +131,7 @@ class Catalago {
     }
 
     function updatePlantaForestal($idPlanta, $idEspecie, $descripcion, $existencia){
-        $sql = "UPDATE plantaForestal SET idEspecie=:idEspecie,descripcion=:descripcion,existencia=:existencia where $idPlanta=:$idPlanta";
+        $sql = "UPDATE plantaForestal SET idEspecie=:idEspecie,descripcion=:descripcion,existencia=:existencia where idPlanta=:idPlanta";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':$idPlanta', $idPlanta);
         $query->bindParam(':idEspecie', $idEspecie);
@@ -147,7 +142,7 @@ class Catalago {
     }
 
     function updateEspecies($idEspecie, $nombre, $descripcion){
-        $sql = "UPDATE especie SET nombre=:nombre,descripcion=:descripcion where $idEspecie=:$idEspecie";
+        $sql = "UPDATE especie SET nombre=:nombre,descripcion=:descripcion where idEspecie=:idEspecie";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':$idEspecie', $idEspecie);
         $query->bindParam(':nombre', $nombre);
@@ -157,7 +152,7 @@ class Catalago {
     }
 
     function updateResponsable($idResponsable, $nombre, $puesto, $usuario, $password){
-        $sql = "UPDATE responsable SET nombre=:nombre, puesto=:puesto, usuario=:usuario, password=:password  where $idResponsable=:$idResponsable";
+        $sql = "UPDATE responsable SET nombre=:nombre, puesto=:puesto, usuario=:usuario, password=:password  where idResponsable=:idResponsable";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idResponsable', $idResponsable);
         $query->bindParam(':nombre', $nombre);
@@ -169,7 +164,7 @@ class Catalago {
     }
     
     function updateClientes($idCliente, $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password){
-        $sql = "UPDATE clientes SET razonSocial=:razonSocia, RFC=:RFC, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente, constanciaFiscal=:constanciaFiscal, saldo=:saldo, domicilioFiscal=:domicilioFiscal, usuario=:usuario, password=:password  where $idCliente=:$idCliente";
+        $sql = "UPDATE clientes SET razonSocial=:razonSocia, RFC=:RFC, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente, constanciaFiscal=:constanciaFiscal, saldo=:saldo, domicilioFiscal=:domicilioFiscal, usuario=:usuario, password=:password  where idCliente=:idCliente";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":idCliente",$idCliente);
         $query->bindParam(":razonSocial",$razonSocial);
@@ -191,7 +186,7 @@ class Catalago {
     }
     
     function updatePredios($idPredio, $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud, $RegistroSADER){
-        $sql = "UPDATE predios SET idCliente=:idCliente, municipio=:municipio, extencion=:extencion, usoPredio=:usoPredio, longitud=:longitud, latitud=:latitud, RegistroSADER=:RegistroSADER  where $idPredio=:$idPredio";
+        $sql = "UPDATE predios SET idCliente=:idCliente, municipio=:municipio, extencion=:extencion, usoPredio=:usoPredio, longitud=:longitud, latitud=:latitud, RegistroSADER=:RegistroSADER  where idPredio=:idPredio";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idPredio', $idPredio);
         $query->bindParam(':idCliente', $idCliente);
@@ -204,12 +199,6 @@ class Catalago {
         $request=$query->execute(); 
         return $request;    
     }
-
-
-//INSERT INTO solicitudes(idSolicitud, idCliente, fecha, estado) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]')
-
-
-
 }
 
 
