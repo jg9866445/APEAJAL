@@ -1,4 +1,8 @@
-<!DOCTYPE.php>
+    <?php
+        include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Catalago.php");
+        $conexion = new Catalago();
+    ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,9 +12,12 @@
     <title>SISTEMA APEAJAL</title>
     <link href="/src/css/menu.css" rel="stylesheet">
     <link href="/src/css/categorias.css" rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- Datatable plugin CSS file -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -64,10 +71,6 @@
         </nav>
     </div>
 
-
-
-
-
     <div>
         <div class="container botton">
             <div class="row">
@@ -83,6 +86,7 @@
             </div>
         </div>
 
+    <div>
 
 
         <div class="container">
@@ -94,7 +98,7 @@
                 <div class="col-lg-8 ">
                     <h2>Clientes</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -105,27 +109,39 @@
                                 <th>Estado</th>
                                 <th>Correo</th>
                                 <th>Telefono</th>
+                                <th>Celular</th>
                                 <th>Tipo de cliente</th>
                                 <th>Constancia fiscal</th>
                                 <th>Saldo</th>
+                                <th>domicilio Fiscal</th>
+                                <th>Usuario</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
+                        <!--Tipo de cliente al momento de consultar tranformar segun si es 1 o 2-->
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update"><i class="bi bi-nut"></i>  </button></td>
-                            </tr>
+                            <?php
+                                $resultado = $conexion->getAllClient();
+                                    foreach ($resultado as $row) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['idCliente'] . "</td>";
+                                        echo "<td>" . $row['razonSocial'] . "</td>";
+                                        echo "<td>" . $row['RFC'] . "</td>";
+                                        echo "<td>" . $row['domicilio'] . "</td>";
+                                        echo "<td>" . $row['ciudad'] . "</td>";
+                                        echo "<td>" . $row['estado'] . "</td>";
+                                        echo "<td>" . $row['email'] . "</td>";
+                                        echo "<td>" . $row['telefono'] . "</td>";
+                                        echo "<td>" . $row['celular'] . "</td>";
+                                        echo "<td>" . $row['tipoCliente'] . "</td>";
+                                        echo "<td><a href=/src/PDF/ConstanciaFiscal/". $row['constanciaFiscal'].">Descargar</a></td>";
+                                        echo "<td>" . $row['saldo'] . "</td>";
+                                        echo "<td>" . $row['domicilioFiscal'] . "</td>";
+                                        echo "<td>" . $row['usuario'] . "</td>";
+                                        echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
+                                        echo "</tr>";
+                                    }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -147,13 +163,14 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar nuevo cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form action="/SistemaVentas/Categoria/Clientes.php" method="POST" enctype="multipart/form-data"   >
+                <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre o Razon Social</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre o Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre o Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
@@ -163,15 +180,21 @@
                                 <label for="input"></label>
                             </div>
 
+                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio de residencia habitual</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="domicilio" name="domicilio" placeholder="domicilio de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <label for="input"></label>
+                            </div>
+
                             <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad de residencia habitual</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Estado de residencia habitual</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado  de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado  de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
@@ -183,13 +206,13 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo del cliente" required pattern="[0-9]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo del cliente" required pattern="[0-9]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Celular</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Celular" name="Celular" placeholder="Celular del cliente" required pattern="[0-9,.]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="Celular" name="Celular" placeholder="Celular del cliente" required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
@@ -205,13 +228,31 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Constancia de Situación Fiscal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="file" id="constanciaFiscal" name="constanciaFiscal " />
+                                <input class="form-control" type="file" id="file" name="file" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Saldo</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Saldo" name="Saldo" placeholder="Saldo del cliente" required pattern="[0-9,.]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Saldo" name="Saldo" placeholder="Saldo del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <label for="input"></label>
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio Fiscal</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="domicilioFiscal" name="domicilioFiscal" placeholder="domicilioFiscal del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <label for="input"></label>
+                            </div>
+
+                                <label for="staticEmail" class="col-sm-2 col-form-label">usuario</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="usuario" name="usuario" placeholder="usuario del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <label for="input"></label>
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">password</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="password" name="password" placeholder="password del cliente" required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -224,6 +265,7 @@
             </div>
         </div>
     </div>
+
     <!-- Modal update -->
     <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
@@ -232,55 +274,63 @@
                     <h5 class="modal-title" id="exampleModalLabel">Modificar datos del cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
-                    <div class="modal-body">
+                <form action="/SistemaVentas/Categoria/Clientes.php" method="POST" enctype="multipart/form-data"   >
+                    <input type="hidden" name="categoria" value="Modificar">
+                    <input type="hidden" name="idCliente" id="idCliente">
+                        <div class="modal-body">
                         <div class="mb-3 row">
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre o Razon Social</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre o Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="RazonSocialM" name="RazonSocialM" placeholder="Nombre o Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">RFC</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RFC" name="RFC" placeholder="RFC del cliente" required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
+                                <input class="form-control" type="text" id="RFCM" name="RFCM" placeholder="RFC del cliente" required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
+                                <label for="input"></label>
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio de residencia habitual</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="domicilioM" name="domicilioM" placeholder="domicilio de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad de residencia habitual</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Estado de residencia habitual</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="EstadoM" name="EstadoM" placeholder="Estado de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico del cliente" required/>
+                                <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico del cliente" required/>
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo del cliente" required pattern="[0-9]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="TelefonoM" name="TelefonoM" placeholder="Telefono fijo del cliente" required pattern="[0-9]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Celular</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Celular" name="Celular" placeholder="Celular del cliente" required pattern="[0-9,.]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="CelularM" name="CelularM" placeholder="Celular del cliente" required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Tipo de cliente</label>
                             <div class="col-sm-10">
-                                <select class="form-select" name="idTipoCliente" id="idTipoCliente" required>
+                                <select class="form-select" name="idTipoClienteM" id="idTipoClienteM" required>
                                     <option disabled selected>Elija una opción</option>
                                     <option value="1">Donación</option>
                                     <option value="2">Compra</option>
@@ -290,13 +340,31 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Constancia de Situación Fiscal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="file" id="constanciaFiscal" name="constanciaFiscal " />
+                                <input class="form-control" type="file" id="file" name="file" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Saldo</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Saldo" name="Saldo" placeholder="Saldo del cliente" required pattern="[0-9,.]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="saldoM" name="saldoM" placeholder="Saldo del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <label for="input"></label>
+                            </div>
+                            
+                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio Fiscal</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="domicilioFiscalM" name="domicilioFiscalM" placeholder="domicilioFiscal del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <label for="input"></label>
+                            </div>
+
+                                <label for="staticEmail" class="col-sm-2 col-form-label">usuario</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="usuarioM" name="usuarioM" placeholder="usuario del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <label for="input"></label>
+                            </div>
+                            
+                            <label for="staticEmail" class="col-sm-2 col-form-label">password</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="password del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -309,9 +377,114 @@
             </div>
         </div>
     </div>
+    </div>
+
+<script>
+        /* Initialization of datatable */
+        $(document).ready( function () {
+            var table = $('#table_id').DataTable();
+        });
+
+        function update(context){
+            var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
+ 
+            document.getElementById("idCliente").value=elementosTD[0].textContent;
+            document.getElementById("RazonSocialM").value=elementosTD[1].textContent;
+            document.getElementById("RFCM").value=elementosTD[2].textContent;
+            document.getElementById("domicilioM").value=elementosTD[3].textContent;
+            document.getElementById('CiudadM').value=elementosTD[4].textContent;
+            document.getElementById('EstadoM').value=elementosTD[5].textContent;
+            document.getElementById('emailM').value=elementosTD[6].textContent;
+            document.getElementById('TelefonoM').value=elementosTD[7].textContent;
+            document.getElementById('CelularM').value=elementosTD[8].textContent;
+            document.getElementById('idTipoClienteM').value=elementosTD[9].textContent;
+            document.getElementById('saldoM').value=elementosTD[11].textContent;
+            document.getElementById('domicilioFiscalM').value=elementosTD[12].textContent;
+            document.getElementById('usuarioM').value=elementosTD[13].textContent;
+            }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<?php
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    if (isset($_POST)){
+        if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+            $RazonSocial = $_POST['RazonSocial'];
+            $RFC = $_POST['RFC'];
+            $domicilio = $_POST['domicilio'];
+            $Ciudad = $_POST['Ciudad'];
+            $Estado = $_POST['Estado'];
+            $email = $_POST['email'];
+            $Telefono = $_POST['Telefono'];
+            $Celular = $_POST['Celular'];
+            $idTipoCliente = $_POST['idTipoCliente'];
+            $constanciaFiscal=GuardarArchivo($RazonSocial);
+            $saldo = $_POST['Saldo'];
+            $domicilioFiscal = $_POST['domicilioFiscal'];
+            $usuario = $_POST['usuario'];
+            $password = $_POST['password'];
+
+            $resultado = $conexion->insertClientes($RazonSocial,$RFC,$domicilio,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente , $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password);
+            unset($_POST);
+            unset($_FILES);
+            ob_start();
+            echo("<meta http-equiv='refresh' content='1'>");
+        }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
+            $idCliente = $_POST['idCliente'];
+            $RazonSocial = $_POST['RazonSocialM'];
+            $RFC = $_POST['RFCM'];
+            $domicilio = $_POST['domicilioM'];
+            $Ciudad = $_POST['CiudadM'];
+            $Estado = $_POST['EstadoM'];
+            $email = $_POST['emailM'];
+            $Telefono = $_POST['TelefonoM'];
+            $Celular = $_POST['CelularM'];
+            $idTipoCliente = $_POST['idTipoClienteM'];
+            $constanciaFiscal=GuardarArchivo($RazonSocial);
+            $saldo = $_POST['saldoM'];
+            $domicilioFiscal = $_POST['domicilioFiscalM'];
+            $usuario = $_POST['usuarioM'];
+            $password = $_POST['passwordM'];
+            $resultado = $conexion->updateClientes($idCliente,$RazonSocial,$RFC,$domicilio,$Ciudad,$Estado,$email,$Telefono,$Celular,$idTipoCliente,$constanciaFiscal,$saldo,$domicilioFiscal,$usuario,$password);
+            unset($_POST);
+            unset($_FILES);
+            ob_start();
+            echo("<meta http-equiv='refresh' content='1'>");
+        }
+    }
+
+    function GuardarArchivo($nombre){
+        $nombre=strtr($nombre, " ", "_");
+        $nombre=strtolower($nombre);
+        $nombre=$nombre.".pdf";
+        $carpetaDestino=$_SERVER['DOCUMENT_ROOT']."/src/PDF/ConstanciaFiscal/";
+        if(isset($_FILES["file"]))
+            {
+                if($_FILES["file"]["type"]=="application/pdf")
+                {
+                    if(!file_exists($carpetaDestino)){
+                        mkdir($carpetaDestino, 0777);
+                    }
+                    $origen=$_FILES["file"]["tmp_name"];
+                    $destino=$carpetaDestino.$nombre;
+                    if(move_uploaded_file($origen, $destino))
+                    {
+                    return $nombre;
+                        }else{
+                            log("Error : archivos no movido");
+                        }
+                }else{
+                    log("Error : archivos no es pdf");
+                }
+            }else{
+                log("Error : archivos no encotrados");
+            }
+    }
+?>
+
+
 </body>
 
 </html>

@@ -94,7 +94,7 @@
                 <div class="col-lg-8 ">
                     <h2>Provedores</h2>
                     <br>
-                    <table id="table_id" class="compact display table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th>idProveedor</th>
@@ -120,7 +120,7 @@
                                         echo "<td>" . $row['ciudad'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td>" . $row['telefono'] . "</td>";
-                                        echo "<td>Archivo</td>";
+                                        echo "<td><a href=/src/PDF/ActaSituacionFiscal/'". $row['ActaSituacionFiscal']."'>Descargar</a></td>";
                                         echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
                                         echo "</tr>";
                                     }
@@ -284,11 +284,9 @@
             document.getElementById('TelefonoM').value=elementosTD[6].textContent;
             }
 
-    </script>
+</script>
 
-    <?php
-    
-
+<?php
 
 
     if (isset($_POST)){
@@ -350,14 +348,6 @@
             }
     }
 ?>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
-
 </html>
-
-
-
-<!--TODO:te falta agregar el boton apra descargar archivo ver si es mejor en php o javascript-->
