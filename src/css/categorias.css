@@ -25,14 +25,3 @@ input:invalid:focus:not(:placeholder-shown)+label::before {
 input:valid:focus+label::before {
     content: '';
 }
-
-table {
-    table-layout: fixed;
-}
-
-table td {
-    word-wrap: break-word;
-    white-space: normal;
-    overflow: hidden;
-    white-space: nowrap;
-}

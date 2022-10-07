@@ -326,7 +326,7 @@
         $nombre=strtr($nombre, " ", "_");
         $nombre=strtolower($nombre);
         $nombre=$nombre.".pdf";
-        $carpetaDestino=$_SERVER['DOCUMENT_ROOT']."/src/ActaSituacionFiscal/";
+        $carpetaDestino=$_SERVER['DOCUMENT_ROOT']."/src/PDF/ActaSituacionFiscal/";
         if(isset($_FILES["file"]))
             {
                 if($_FILES["file"]["type"]=="application/pdf")
