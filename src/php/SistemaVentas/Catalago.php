@@ -49,7 +49,7 @@ class Catalago {
         return $results;
     }
 
-    public function getClient(){
+    public function getAllClient(){
         $sql = "SELECT * FROM clientes";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -111,9 +111,9 @@ class Catalago {
         $query->bindParam(":saldo",$saldo);
         $query->bindParam(":domicilioFiscal",$domicilioFiscal);
         $query->bindParam(":usuario",$usuario);
-        $query->bindParam(":passwordo",$passwordo);
-        $query->execute();  
-        return $query->rowCount(); 
+        $query->bindParam(":password",$password);
+        $request=$query->execute(); 
+        return $request;
     }
 
     function insertPredios( $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud, $RegistroSADER){
@@ -164,7 +164,7 @@ class Catalago {
     }
     
     function updateClientes($idCliente, $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password){
-        $sql = "UPDATE clientes SET razonSocial=:razonSocia, RFC=:RFC, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente, constanciaFiscal=:constanciaFiscal, saldo=:saldo, domicilioFiscal=:domicilioFiscal, usuario=:usuario, password=:password  where idCliente=:idCliente";
+        $sql = "UPDATE clientes SET razonSocial=:razonSocial, RFC=:RFC, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente, constanciaFiscal=:constanciaFiscal, saldo=:saldo, domicilioFiscal=:domicilioFiscal, usuario=:usuario, password=:password  where idCliente=:idCliente";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":idCliente",$idCliente);
         $query->bindParam(":razonSocial",$razonSocial);
@@ -180,7 +180,7 @@ class Catalago {
         $query->bindParam(":saldo",$saldo);
         $query->bindParam(":domicilioFiscal",$domicilioFiscal);
         $query->bindParam(":usuario",$usuario);
-        $query->bindParam(":passwordo",$passwordo);
+        $query->bindParam(":password",$password);
         $request=$query->execute(); 
         return $request;    
     }
