@@ -35,8 +35,8 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
                             </ul>
@@ -45,9 +45,9 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -98,7 +98,6 @@
                                 <th>id</th>
                                 <th>Nombre</th>
                                 <th>Puesto</th>
-                                <th>Usuario</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
@@ -110,7 +109,6 @@
                                         echo "<td>" . $row['idResponsable'] . "</td>";
                                         echo "<td>" . $row['nombre'] . "</td>";
                                         echo "<td>" . $row['puesto'] . "</td>";
-                                        echo "<td>" . $row['usuario'] . "</td>";
                                         echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
                                         echo "</tr>";
                                     }
@@ -207,8 +205,6 @@
             document.getElementById("idResponsable").value=elementosTD[0].textContent;
             document.getElementById("NombreResponsableM").value=elementosTD[1].textContent;
             document.getElementById('PuestoM').value=elementosTD[2].textContent;
-            document.getElementById('UsuarioM').value=elementosTD[3].textContent;
-            document.getElementById('passwordM').value=elementosTD[4].textContent;
             }
 
     </script>
@@ -219,9 +215,7 @@
         if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
             $NombreResponsableM = $_POST['NombreResponsable'];
             $PuestoM = $_POST['Puesto'];
-            $UsuarioM = $_POST['Usuario'];
-            $passwordM = $_POST['password'];
-            $resultado = $conexion->insertResponsable($NombreResponsableM, $PuestoM, $UsuarioM, $passwordM);
+            $resultado = $conexion->insertResponsable($NombreResponsableM, $PuestoM);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
@@ -229,9 +223,7 @@
             $idResponsable=$_POST["idResponsable"];
             $NombreResponsableM = $_POST['NombreResponsableM'];
             $PuestoM = $_POST['PuestoM'];
-            $UsuarioM = $_POST['UsuarioM'];
-            $passwordM = $_POST['passwordM'];
-            $resultado = $conexion->updateResponsable($idResponsable,$NombreResponsableM, $PuestoM, $UsuarioM, $passwordM);
+            $resultado = $conexion->updateResponsable($idResponsable,$NombreResponsableM, $PuestoM);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");

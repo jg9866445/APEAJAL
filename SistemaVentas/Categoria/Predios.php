@@ -171,9 +171,9 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Extension del predio</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Extension </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Extension" name="Extension" placeholder="Extension del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Extension" name="Extension" placeholder="Extension " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -189,15 +189,15 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Latitud del predio</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Latitud </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Latitud" name="Latitud" placeholder="Latitud del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Latitud" name="Latitud" placeholder="Latitud " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Longitud del predio</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Longitud </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Longitud" name="Longitud" placeholder="Longitud del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Longitud" name="Longitud" placeholder="Longitud " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -251,9 +251,9 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Extension del predio</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Extension </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="ExtensionM" name="ExtensionM" placeholder="Extension del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="ExtensionM" name="ExtensionM" placeholder="Extension " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -269,15 +269,15 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Latitud del predio</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Latitud </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="LatitudM" name="LatitudM" placeholder="Latitud del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="LatitudM" name="LatitudM" placeholder="Latitud " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Longitud del predio</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Longitud </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="LongitudM" name="LongitudM" placeholder="Longitud del predio" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="LongitudM" name="LongitudM" placeholder="Longitud " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 

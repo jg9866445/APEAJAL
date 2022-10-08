@@ -29,6 +29,10 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
+            <span class="navbar-text">
+                Cristian Emmanuel Amezcua Moreno
+                <br/>
+            </span>
         </nav>
 
         <nav class="navbar navbar-expand-lg menu">
@@ -38,8 +42,8 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
                             </ul>
@@ -48,9 +52,9 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -118,9 +122,9 @@
                                         echo "<td>" . $row['idInsumo'] . "</td>";
                                         echo "<td>" . $row['concepto'] . "</td>";
                                         echo "<td>" . $row['descripcion'] . "</td>";
-                                        echo "<td>" . $row['nombre'] . "</td>";
-                                        echo "<td>" . $row['unidadMedida'] . "</td>";
-                                        echo "<td>" . $row['existencia'] . "</td>";
+                                        echo "<td>" . $row['nombre'] . " <div style='visibility: hidden'>" . $row['idClasificacion'] . " </div></td>";
+                                        echo "<td>" . $row['unidadMetrica'] . "</td>";
+                                        echo "<td>" . $row['existencias'] . "</td>";
                                         echo "<td>" . $row['maximo'] . "</td>";
                                         echo "<td>" . $row['minimo'] . "</td>";
                                         echo "<td>" . $row['costoPromedio'] . "</td>";
@@ -152,19 +156,19 @@
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="NombreInsumoM" name="NombreInsumo" placeholder="Nombre" required pattern="[A-Za-z ]+" minlength="3"  />
+                                    <input class="form-control" type="text" id="NombreInsumoM" name="NombreInsumoM" placeholder="Nombre" required pattern="[A-Za-z ]+" minlength="1" maxlength="30" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="DescripcionM" name="Descripcion" placeholder="Descripción" required pattern="[A-Za-z ]+" minlength="3"  />
+                                    <input class="form-control" type="text" id="DescripcionM" name="DescripcionM" placeholder="Descripción" required pattern="[A-Za-z ]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Categoría</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" name="idClasificacion" id="idClasificacionM" required>
+                                    <select class="form-select" name="idClasificacionM" id="idClasificacionM" required>
                                         <option disabled selected value="">Elija una opción</option>
                                         <?php
                                             $resultado = $conexion->getAllClasificaciones();
@@ -178,7 +182,7 @@
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Unidad de medida</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" name="UnidadMedida" id="UnidadMedidaM" required>
+                                    <select class="form-select" name="UnidadMedidaM" id="UnidadMedidaM" required>
                                         <option disabled selected value="">Elija una opción</option>
                                         <option selected value="Kilos">Kilos</option>
                                         <option selected value="Gramos">Gramos</option>
@@ -192,25 +196,25 @@
                                 <!--TODO: EMMANUEL TE FALTA COLOCAR M EN EL CAMPO NAME DE LOS INPUT DE MODIFICAR-->
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="ExistenciaM" name="Existencia" placeholder="Cantidad en existencia" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="ExistenciaM" name="ExistenciaM" placeholder="Cantidad en existencia" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="MaximoM" name="Maximo" placeholder="Cantidad maxima" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="MaximoM" name="MaximoM" placeholder="Cantidad maxima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="MinimoM" name="Minimo" placeholder="Cantidad minima" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="MinimoM" name="MinimoM" placeholder="Cantidad minima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="CostoPromedioM" name="CostoPromedio" placeholder="Costo Promedio" required pattern="[0-9,.]+" minlength="1"  />
+                                    <input class="form-control" type="text" id="CostoPromedioM" name="CostoPromedioM" placeholder="Costo Promedio" required pattern="[0-9,.]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
                             </div>
@@ -239,13 +243,13 @@
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="NombreInsumo" name="NombreInsumo" placeholder="Nombre" required pattern="[A-Za-z ,().]+" minlength="3"  />
+                                    <input class="form-control" type="text" id="NombreInsumo" name="NombreInsumo" placeholder="Nombre" required pattern="[A-Za-z ,().]+" minlength="1" maxlength="30" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripción" required pattern="[A-Za-z ,().]+" minlength="3"  />
+                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripción" required pattern="[A-Za-z ,().]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
@@ -257,7 +261,7 @@
                                         $resultado = $conexion->getAllClasificaciones();
                                 
                                         foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idClasificacion'].">". $row['concepto']."</option>";
+                                            echo "<option value='".$row['idClasificacion']."'>". $row['concepto']."</option>";
                                         }
                                     ?>
                                     </select>
@@ -316,7 +320,6 @@
         /* Initialization of datatable */
         $(document).ready( function () {
             var table = $('#table_id').DataTable();
-
         });
         function update(context){
 
@@ -324,7 +327,7 @@
             document.getElementById("idInsumo").value=elementosTD[0].textContent;
             document.getElementById('NombreInsumoM').value=elementosTD[1].textContent;
             document.getElementById('DescripcionM').value=elementosTD[2].textContent;
-            document.getElementById('idClasificacionM').value=elementosTD[3].textContent;
+            document.getElementById('idClasificacionM').value=elementosTD[3].textContent.match(/(\d+)/g);
             document.getElementById('UnidadMedidaM').value=elementosTD[4].textContent;
             document.getElementById('ExistenciaM').value=elementosTD[5].textContent;
             document.getElementById('MaximoM').value=elementosTD[6].textContent;
@@ -351,14 +354,14 @@
             echo("<meta http-equiv='refresh' content='1'>");
         }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
             $idInsumo=$_POST["idInsumo"];
-            $NombreInsumo = $_POST['NombreInsumo'];
-            $Descripcion = $_POST['Descripcion'];
-            $idClasificacion = $_POST['idClasificacion'];
-            $UnidadMedida = $_POST['UnidadMedida'];
-            $Existencia = $_POST['Existencia'];
-            $Maximo = $_POST['Maximo'];
-            $Minimo = $_POST['Minimo'];
-            $CostoPromedio = $_POST['CostoPromedio'];
+            $NombreInsumo = $_POST['NombreInsumoM'];
+            $Descripcion = $_POST['DescripcionM'];
+            $idClasificacion = $_POST['idClasificacionM'];
+            $UnidadMedida = $_POST['UnidadMedidaM'];
+            $Existencia = $_POST['ExistenciaM'];
+            $Maximo = $_POST['MaximoM'];
+            $Minimo = $_POST['MinimoM'];
+            $CostoPromedio = $_POST['CostoPromedioM'];
             $resultado = $conexion->updateInsumos($idInsumo,$idClasificacion,$NombreInsumo,$Descripcion,$UnidadMedida,$Existencia,$Maximo,$Minimo,$CostoPromedio);
             unset($_POST);
             ob_start();

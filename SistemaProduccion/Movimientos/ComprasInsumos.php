@@ -1,3 +1,7 @@
+<?php
+    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
+    $conexion = new Movimientos();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,8 +14,11 @@
     <link href="/src/css/movimientos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+            <!-- Datatable plugin CSS file -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
-
 <body>
     <div>
         <nav class="navbar logo">
@@ -27,8 +34,8 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
                             </ul>
@@ -37,9 +44,9 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -79,35 +86,41 @@
         
         <div class="container">
             <div class="row">
-                <div class="col-lg-1 ">
+                <div class="col-lg-2 ">
 
                 </div>
-
                 <div class="col-lg-8 ">
-                    <h2>Insumos</h2>
+                    <h2>Compra de insumos</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th>Clasificacion</th>
-                                <th>Unidad metrica</th>
-                                <th>Existencia</th>
-                                <th>Costo Promedio</th>
+                                <th>factura</th>
+                                <th>fecha</th>
+                                <th>Nombre de provedor</th>
+                                <th>Nombre de insumo</th>
+                                <th>cantidad</th>
+                                <th>costo</th>
+                                <th>total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <?php
+                                $resultado = $conexion->getAllComprasInsumos();
+                                    foreach ($resultado as $row) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['idOrdenCompra'] . "</td>";
+                                        echo "<td>" . $row['factura'] . "</td>";
+                                        echo "<td>" . $row['fecha'] . "</td>";
+                                        echo "<td>" . $row['proveedores'] . "</td>";
+                                        echo "<td>" . $row['insumos'] . "</td>";
+                                        echo "<td>" . $row['cantidad'] . "</td>";
+                                        echo "<td>" . $row['costo'] . "</td>";
+                                        echo "<td>" . $row['total'] . "</td>";
+                                        echo "</tr>";
+                                    }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -119,7 +132,6 @@
         </div>
 
     
-        <!-- Modal -->
         <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -127,12 +139,12 @@
                         <h5 class="modal-title" id="exampleModalLabel">Compra de insumos</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form>
+                    <form action="/SistemaProduccion/Movimientos/ComprasInsumos.php" method="POST">
                         <div class="modal-body">
                             <div class="card">
                                 <div>
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#datosOrden" aria-expanded="false" aria-controls="datosOrden">
-                                        Datos del orden
+                                        Datos de compra
                                     </button>
                                 </div>
 
@@ -155,31 +167,35 @@
                                 <div id="datosProvedores" class="accordion-collapse collapse card-body" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Provedores</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="idProvedor" id="idProvedor" required>
+                                        <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
                                             <option disabled selected>Escoja una opcion</option>
-                                            <option value="1"></option>
-                                            <option value="2"></option>
+                                            <?php
+                                                $resultado = $conexion->getAllProveedores();
+                                                foreach ($resultado as $row) {
+                                                    echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                                }
+                                            ?>
                                         </select>
                                         <label for="input"></label>
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" disabled />
+                                        <input class="form-control" type="text" name="nombreProveedor" id="nombreProveedor" disabled />
                                         <label for="input"></label>
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" disabled />
+                                        <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                         <label for="input"></label>
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" disabled/>
+                                        <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
                                         <label for="input"></label>
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Celular</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" disabled />
+                                        <input class="form-control" type="text" name="celularProveedor" id="celularProveedor" disabled />
                                         <label for="input"></label>
                                     </div>
 
@@ -196,31 +212,40 @@
                                 <div id="datosInsumos" class="accordion-collapse collapse card-body" aria-labelledby="headingOne" data-bs-parent="#datosInsumos">
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Insumo</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="idInsumo" id="idInsumo" required>
+                                        <select class="form-select" name="idInsumo" id="idInsumo" required onchange="getInsumos()">
                                             <option disabled selected>Escoja una opcion</option>
-                                            <option value="1"></option>
-                                            <option value="2"></option>
+                                            <?php
+                                                $resultado = $conexion->getAllInsumos();
+                                                foreach ($resultado as $row) {
+                                                    echo "<option value=".$row['idInsumo'].">". $row['nombre']."</option>";
+                                                }
+                                            ?>
                                         </select>
                                         <label for="input"></label>
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" disabled />
+                                        <input class="form-control" type="text" name="nombreInsumos" id="nombreInsumos" disabled />
+                                        <label for="input"></label>
+                                    </div>
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="text" name="descripcionInsumos" id="descripcionInsumo" disabled />
                                         <label for="input"></label>
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Unidad metrica</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" disabled />
+                                        <input class="form-control" type="text" name="unidadMetrica" id="unidadMetrica" disabled />
                                         <label for="input"></label>
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" name="cantidad" id="cantidad" required pattern="[0-9,.]+" minlength="1" maxlength="20" />
                                         <label for="input"></label>
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Costo</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" name="costo" id="costo" required pattern="[0-9,.]+" minlength="1" maxlength="20" />
                                         <label for="input"></label>
                                     </div>
                                 </div>
@@ -228,18 +253,20 @@
                             <br>
 
                             <div class="card">
-                                <div class="card-header">
-                                    Datos de facturacion
+                                <div>
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#datosFactura" aria-expanded="false" aria-controls="datosFactura">
+                                        Datos del Factura
+                                    </button>
                                 </div>
-                                <div class="card-body">
+                                <div id="datosFactura" class="accordion-collapse collapse card-body" aria-labelledby="headingOne" data-bs-parent="#datosFactura">
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Factura</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" id="factura" name="factura" required pattern="[A-Za-z0-9,. ]+" minlength="1" maxlength="20" />
                                         <label for="input"></label>
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Total</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" id="total" name="total" required pattern="[0-9,.]+" minlength="1" maxlength="20" />
                                         <label for="input"></label>
                                     </div>
                                 </div>
@@ -254,89 +281,77 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- Modal insert -->
-        <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Comprar un nuevo insumo</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form>
-                        <div class="modal-body">
-                            <div class="mb-3 row">
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Nombre" name="Nombre" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoria</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" name="idClasificacion" id="idClasificacion" required>
-                                    <option disabled selected>Escoja una opcion</option>
-                                    <option value="2">Semillas</option>
-                                    <option value="3">Sustrato</option>
-                                    <option value="3">Nutricion</option>
-                                    <option value="3">Plagisida</option>
-                                </select>
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad de medida</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="UnidadMedida" name="UnidadMedida" placeholder="Unidad de medida del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Maximo</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maximo del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Minimo</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minimo del insumo" required pattern="[0-9]+" minlength="1" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo Promedio del insumo" required pattern="[0-9,.]+" minlength="1" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
     </div>
+    <script>
+        /* Initialization of datatable */
+        $(document).ready( function () {
+            var table = $('#table_id').DataTable();
+        });
+        function getProveedores(){
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Busqueda":"CompraInsumosDatosProveedores",
+                    "idProveedor":document.getElementById("idProvedor").value
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("nombreProveedor").value=respuesta[0]['nombre'];
+                    document.getElementById("domicilioProveedor").value=respuesta[0]['domicilio'];
+                    document.getElementById("telefonoProveedor").value=respuesta[0]['telefono'];
+                    document.getElementById("celularProveedor").value=respuesta[0]['contacto'];
+                    console.log(respuesta);
+                }
+            })   
+        }
+    function getInsumos(){
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Busqueda":"CompraInsumosDatosInsumos",
+                    "idInsumo":document.getElementById("idInsumo").value
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("nombreInsumos").value=respuesta[0]['nombre'];
+                    document.getElementById("descripcionInsumo").value=respuesta[0]['descripcion'];
+                    document.getElementById("unidadMetrica").value=respuesta[0]['unidadMetrica'];
+                    console.log(respuesta);
+                }
+            })   
+        }
 
+    </script>
+        <?php
+        if (isset($_POST)){
+            if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+                $fechaCompraInsumos = $_POST['fechaCompraInsumos'];
+                $idProvedor = $_POST['idProvedor'];
+                $idInsumo = $_POST['idInsumo'];
+                $cantidad = $_POST['cantidad'];
+                $costo = $_POST['costo'];
+                $factura = $_POST['factura'];
+                $total = $_POST['total'];
+                $resultado = $conexion->insertClasificacion($concepto, $descripcion);
+                unset($_POST);
+                ob_start();
+                $URL = $_SERVER['PHP_SELF'];
+                echo("<meta http-equiv='refresh' content='1'>");
+            }
+        }
+    ?>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 </body>
 
 </html>
+
+
+
+
+
+

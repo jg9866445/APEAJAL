@@ -25,30 +25,47 @@ class Movimientos {
         unset($this->connect);
     }
 
-    public function getSolicitudPlantas()
-    {
-        $sql = "Select s.idSolicitud,s.fecha,c.razonSocial,c.RFC,c.domicilio,c.estado,c.tipoCliente,p.municipio,p.usoPredio,e.nombre,pf.descripcion,ds.cantidadSolicitada from solicitudes as s INNER JOIN clientes as c on c.idCliente = s.idCliente INNER Join predios as p on p.idCliente=s.idCliente INNER JOIN detalleSolicitud as ds on ds.idSolicitud = s.idSolicitud INNER JOIN plantaForestal as pf on pf.idPlanta = ds.idPlanta INNER JOIN especie as e on e.idEspecie = pf.idEspecie";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-    public function getClientes(){
-        $sql = "SELECT * FROM clientes";
+    public function getAllComprasInsumos(){
+        $sql = "SELECT fc.idOrdenCompra,fc.factura,fc.fecha,p.nombre as 'proveedores',i.nombre as 'insumos',dfc.cantidad,dfc.costo,fc.total from  facturaCompras as fc INNER JOIN proveedor as p on fc.idProveedor= p.idProveedor INNER JOIN detalleFacturaCompra as dfc on fc.idOrdenCompra = dfc.idOrdenCompra INNER JOIN insumo as i on i.idInsumo = dfc.idInsumo";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    public function getPlantasForestal(){
-        $sql = "SELECT * FROM plantaForestal";
+    public function getAllProveedores() {
+        $sql = "SELECT * from  proveedor";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-
+    public function getAllInsumos(){
+        $sql = "SELECT * from  insumo";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
     
+    public function getProveedores($idProveedor) {
+        $sql = "SELECT * from  proveedor WHERE idProveedor=:idProveedor";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idProveedor', $idProveedor);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getInsumos($idInsumo){
+        $sql = "SELECT * FROM insumo WHERE idInsumo=:idInsumo";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idInsumo', $idInsumo);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
 }

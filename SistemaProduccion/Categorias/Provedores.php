@@ -35,8 +35,8 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
                             </ul>
@@ -45,9 +45,9 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -80,18 +80,18 @@
 
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
+                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert" onclick='getUltimoInsert()'>Nuevo Registro</button>
                 </div>
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-1 ">
 
                 </div>
 
-                <div class="col-lg-8 ">
+                <div class="col-lg-9 ">
                     <h2>Provedores</h2>
                     <br>
                     <table id="table_id" class="display table table-responsive table-hover">
@@ -120,7 +120,7 @@
                                         echo "<td>" . $row['ciudad'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td>" . $row['telefono'] . "</td>";
-                                        echo "<td><a href=/src/PDF/ActaSituacionFiscal/'". $row['ActaSituacionFiscal']."'>Descargar</a></td>";
+                                        echo "<td><a href=/src/PDF/ActaSituacionFiscal/". $row['idProveedor'].".pdf>Descargar</a></td>";
                                         echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
                                         echo "</tr>";
                                     }
@@ -147,42 +147,43 @@
                 </div>
                 <form action="/SistemaProduccion/Categorias/Provedores.php" method="POST" enctype="multipart/form-data"  >
                     <input type="hidden" name="categoria" value="Agregar">
+                    <input type="hidden" name="idProvedor" id="idProvedor">
                         <div class="modal-body">
                         <div class="mb-3 row">
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreProveedor" name="NombreProveedor" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreProveedor" name="NombreProveedor" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Contacto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Contacto" name="Contacto" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
+                                <input class="form-control" type="text" id="Contacto" name="Contacto" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio " required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad" required pattern="[A-Za-z ]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico " required/>
+                                <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico " required minlength="1" maxlength="20"/>
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
@@ -210,51 +211,51 @@
                     <h5 class="modal-title" id="exampleModalLabel">Modificar datos </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/SistemaProduccion/Categorias/insumos.php" method="POST" enctype="multipart/form-data"  >
+                <form action="/SistemaProduccion/Categorias/Provedores.php" method="POST" enctype="multipart/form-data"  >
                     <input type="hidden" name="categoria" value="Modificar">
-                    <input type="hidden" name="idProvedor" id="idProvedor">
+                    <input type="hidden" name="idProvedorM" id="idProvedorM">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreProveedorM" name="NombreProveedorM" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreProveedorM" name="NombreProveedorM" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Contacto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="ContactoM" name="ContactoM" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
+                                <input class="form-control" type="text" id="ContactoM" name="ContactoM" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DomicilioM" name="DomicilioM" placeholder="Domicilio " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="DomicilioM" name="DomicilioM" placeholder="Domicilio" required pattern="[A-Za-z ]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad de residencia habitual " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad" required pattern="[A-Za-z ]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico " required/>
+                                <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico " required minlength="1" maxlength="20"/>
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Telefono fijo</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="TelefonoM" name="TelefonoM" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="TelefonoM" name="TelefonoM" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Acta de situacion fiscal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" required />
+                                <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -275,7 +276,7 @@
         });
         function update(context){
             var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
-            document.getElementById("idProvedor").value=elementosTD[0].textContent;
+            document.getElementById("idProvedorM").value=elementosTD[0].textContent;
             document.getElementById("NombreProveedorM").value=elementosTD[1].textContent;
             document.getElementById('ContactoM').value=elementosTD[2].textContent;
             document.getElementById('DomicilioM').value=elementosTD[3].textContent;
@@ -283,6 +284,19 @@
             document.getElementById('emailM').value=elementosTD[5].textContent;
             document.getElementById('TelefonoM').value=elementosTD[6].textContent;
             }
+        function getUltimoInsert(){
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubCatalagos.php",
+                method: "POST",
+                data: {
+                    "Busqueda":"NextProveedor"
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("idProvedor").value=respuesta[0]['AUTO_INCREMENT'];
+                }
+            })   
+        }
 
 </script>
 
@@ -291,28 +305,35 @@
 
     if (isset($_POST)){
         if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+            $idProveedor = $_POST['idProvedor'];
             $NombreProveedor = $_POST['NombreProveedor'];
             $Contacto = $_POST['Contacto'];
             $Domicilio = $_POST['Domicilio'];
             $Ciudad = $_POST['Ciudad'];
             $email = $_POST['email'];
-            $Telefono = $_POST['Telefono'];
-            $archivo=GuardarArchivo($NombreProveedor);
-            $resultado = $conexion->insertProveedor($NombreProveedor,$Contacto,$Domicilio,$Ciudad,$Telefono,$email,$archivo);
+            $Telefono = $_POST['Telefono'];                    
+            if(isset($_FILES))
+            {
+                GuardarArchivo($idProveedor);
+            }
+            $resultado = $conexion->insertProveedor($NombreProveedor,$Contacto,$Domicilio,$Ciudad,$Telefono,$email);
             unset($_POST);
             unset($_FILES);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
         }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
-            $idProveedor = $_POST['idProvedor'];
+            $idProveedor = $_POST['idProvedorM'];
             $NombreProveedor = $_POST['NombreProveedorM'];
             $Contacto = $_POST['ContactoM'];
             $Domicilio = $_POST['DomicilioM'];
             $Ciudad = $_POST['CiudadM'];
             $email = $_POST['emailM'];
             $Telefono = $_POST['TelefonoM'];
-            $archivo=GuardarArchivo($NombreProveedor);
-            $resultado = $conexion->updateProveedor($idProveedor,$NombreProveedor,$Contacto,$Domicilio,$Ciudad,$Telefono,$email,$archivo);
+            if(!isset($_FILES))
+            {
+                GuardarArchivo($idProveedor);
+            }
+            $resultado = $conexion->updateProveedor($idProveedor,$NombreProveedor,$Contacto,$Domicilio,$Ciudad,$Telefono,$email);
             unset($_POST);
             unset($_FILES);
             ob_start();
@@ -321,8 +342,6 @@
     }
 
     function GuardarArchivo($nombre){
-        $nombre=strtr($nombre, " ", "_");
-        $nombre=strtolower($nombre);
         $nombre=$nombre.".pdf";
         $carpetaDestino=$_SERVER['DOCUMENT_ROOT']."/src/PDF/ActaSituacionFiscal/";
         if(isset($_FILES["file"]))
