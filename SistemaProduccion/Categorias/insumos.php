@@ -108,9 +108,9 @@
                                 <th>Clasificacion</th>
                                 <th>Unidad metrica</th>
                                 <th>Existencia</th>
-                                <th>Costo Promedio</th>
                                 <th>Minimo</th>
                                 <th>Maximo</th>
+                                <th>Costo Promedio</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
@@ -140,7 +140,6 @@
             </div>
         </div>
 
-        <!-- Modal update-->
         <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -193,7 +192,6 @@
 
                                     <label for="input"></label>
                                 </div>
-                                <!--TODO: EMMANUEL TE FALTA COLOCAR M EN EL CAMPO NAME DE LOS INPUT DE MODIFICAR-->
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="number" id="ExistenciaM" name="ExistenciaM" placeholder="Cantidad en existencia" required pattern="[0-9]+" minlength="1"  />
@@ -227,8 +225,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal Insert -->
         <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">

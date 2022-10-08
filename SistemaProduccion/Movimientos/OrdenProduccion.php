@@ -1,5 +1,5 @@
     <?php
-        include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimiento.php");
+        include_once($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
         $conexion = new Movimientos();
     ?>
 
@@ -15,6 +15,10 @@
     <link href="/src/css/movimientos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+            <!-- Datatable plugin CSS file -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -32,8 +36,8 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
                             </ul>
@@ -68,13 +72,12 @@
         <div class="container botton">
             <div class="row">
                 <div class="col-lg-2 ">
-
+                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nueva Orden</button>
                 </div>
                 <div class="col-lg-7 ">
-                    <h1 style="text-align:center">Devoluciones de Insumos</h1>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
+                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Concluir orden</button>
                 </div>
             </div>
         </div>
@@ -89,7 +92,7 @@
                 <div class="col-lg-8 ">
                     <h2>Orden Produccion</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -107,20 +110,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+
+                            <?php
+                                $resultado = $conexion->getAllOrdenProduccion();
+                                    foreach ($resultado as $row) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['idOrden'] . "</td>";
+                                        echo "<td>" . $row['Responsable'] . "</td>";
+                                        echo "<td>" . $row['puesto'] . "</td>";
+                                        echo "<td>" . $row['Planta'] . "</td>";
+                                        echo "<td>" . $row['ciudad'] . "</td>";
+                                        echo "<td>" . $row['email'] . "</td>";
+                                        echo "<td>" . $row['telefono'] . "</td>";
+                                        echo "<td><a href=/src/PDF/ActaSituacionFiscal/". $row['idProveedor'].".pdf>Descargar</a></td>";
+                                        echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
+                                        echo "</tr>";
+                                    }
+                            ?>
                         </tbody>
                     </table>
                 </div>

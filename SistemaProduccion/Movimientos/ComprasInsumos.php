@@ -74,7 +74,6 @@
 
                 </div>
                 <div class="col-lg-7 ">
-                    <h1 style="text-align:center">Compra de Insumos</h1>
                 </div>
                 <div class="col-lg-2">
                     <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
@@ -140,6 +139,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="/SistemaProduccion/Movimientos/ComprasInsumos.php" method="POST">
+                        <input type="hidden" name="categoria" value="Agregar">
                         <div class="modal-body">
                             <div class="card">
                                 <div>
@@ -266,7 +266,7 @@
                                     </div>
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Total</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="text" id="total" name="total" required pattern="[0-9,.]+" minlength="1" maxlength="20" />
+                                        <input class="form-control" type="text" id="total" name="total" required pattern="[0-9,.]+" minlength="1" maxlength="20" readonly/>
                                         <label for="input"></label>
                                     </div>
                                 </div>
@@ -322,7 +322,10 @@
                 }
             })   
         }
-
+            $('#cantidad,#costo').bind('blur', function() {
+                document.getElementById("total").value=document.getElementById("costo").value * document.getElementById("cantidad").value;
+            })
+    
     </script>
         <?php
         if (isset($_POST)){
@@ -334,13 +337,16 @@
                 $costo = $_POST['costo'];
                 $factura = $_POST['factura'];
                 $total = $_POST['total'];
-                $resultado = $conexion->insertClasificacion($concepto, $descripcion);
+                $resultado = $conexion->insertCompraInsumos($fechaCompraInsumos,$idProvedor,$idInsumo,$cantidad,$costo,$factura,$total);
+                var_dump($resultado);
+
                 unset($_POST);
                 ob_start();
                 $URL = $_SERVER['PHP_SELF'];
                 echo("<meta http-equiv='refresh' content='1'>");
             }
         }
+
     ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
