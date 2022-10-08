@@ -1,4 +1,9 @@
-<!DOCTYPE.php>
+    <?php
+        include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Movimiento.php");
+        $conexion = new Movimientos();
+    ?>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,7 +16,10 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
+        <!-- Datatable plugin CSS file -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script></head>
 
 <body>
     <div>
@@ -88,7 +96,7 @@
                 <div class="col-lg-8 ">
                     <h2>Solicitudes</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
@@ -106,20 +114,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <?php
+                                $resultado = $conexion->getSolicitudPlantas();
+                                    foreach ($resultado as $row) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['idSolicitud'] . "</td>";
+                                        echo "<td>" . $row['fecha'] . "</td>";
+                                        echo "<td>" . $row['razonSocial'] . "</td>";
+                                        echo "<td>" . $row['RFC'] . "</td>";
+                                        echo "<td>" . $row['domicilio'] . "</td>";
+                                        echo "<td>" . $row['estado'] . "</td>";
+                                        echo "<td>" . $row['tipoCliente'] . "</td>";
+                                        echo "<td>" . $row['municipio'] . "</td>";
+                                        echo "<td>" . $row['usoPredio'] . "</td>";
+                                        echo "<td>" . $row['nombre'] . "</td>";
+                                        echo "<td>" . $row['descripcion'] . "</td>";
+                                        echo "<td>" . $row['cantidadSolicitada'] . "</td>";
+                                        echo "</tr>";
+                                    }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -151,57 +164,57 @@
                             <div id="datosCliente" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosCliente">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Solicitud</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" name="idCliente" id="idCliente" required>
-                                        <option disabled selected>Elija una opción</option>                                            
-                                        <option value="1"></option>
-                                        <option value="2"></option>
+                                    <select class="form-select" name="idCliente" id="idCliente" required onchange="selectClientes()">
+                                    <option disabled selected>Elija una opción</option>
+                                    <?php
+                                        $resultado = $conexion->getClientes();
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idCliente'].">". $row['razonSocial']."</option>";
+                                        }
+                                    ?>
                                     </select>
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Razon social</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre de la empresa o cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre de la empresa o cliente" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">RFC</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="rfc" name="rfc" placeholder="RFC del cliente o empresa" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="rfc" name="rfc" placeholder="RFC del cliente o empresa" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="domicilio" name="domicilio" placeholder="Domicilio del cliente o empresa" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="domicilio" name="domicilio" placeholder="Domicilio del cliente o empresa" disabled />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">estado</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Estado</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" name="idEstado" id="idEstado" required>
-                                        <option disabled selected>Elija una opción</option>                                            
-                                        <option value="1"></option>
-                                        <option value="2"></option>
-                                    </select>
+                                    <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado del cliente o empresa" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Telefono" name="Telefono" placeholder="Telefono del cliente" required pattern="[0-9,.]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="number" id="Telefono" name="Telefono" placeholder="Telefono del cliente" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Celular</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Celular" name="Celular" placeholder="Celular del cliente" required pattern="[0-9,.]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="number" id="Celular" name="Celular" placeholder="Celular del cliente" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Tipo cliente</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="TipoCliente" name="TipoCliente" placeholder="Tipo de Cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="TipoCliente" name="TipoCliente" placeholder="Tipo de Cliente" disabled />
                                     <label for="input"></label>
                                 </div>
                             </div>   
@@ -217,41 +230,40 @@
                             <div id="datosPredio" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosPredio">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">predio</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" name="idPredio" id="idPredio" required>
-                                        <option disabled selected>Elija una opción</option>                                            
-                                        <option value="1"></option>
-                                        <option value="2"></option>
+                                    <select class="form-select" name="idPredio" id="idPredio" required onchange="selectPredioDatos()">
+                                                                        <option disabled selected>Elija una opción</option>
+
                                     </select>
                                     <label for="input"></label>
                                 </div>
                             
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Municipio</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Municipio" name="Municipio" placeholder="Municipio" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="Municipio" name="Municipio" placeholder="Municipio" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Extencion</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Extencion" name="Extencion" placeholder="Extencion del predio" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="Extencion" name="Extencion" placeholder="Extencion del predio" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Uso del predio</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="UsoPredio" name="UsoPredio" placeholder="Uso del predio" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="UsoPredio" name="UsoPredio" placeholder="Uso del predio" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Longitud</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Longitud" name="Longitud" placeholder="Longitud" required pattern="[0-9,.]+ minlength="3" maxlength="40" />
+                                    <input class="form-control" type="number" id="Longitud" name="Longitud" placeholder="Longitud" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Latitud</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Latitud" name="Latitud" placeholder="Latitud" required pattern="[0-9,.]+ minlength="3" maxlength="40" />
+                                    <input class="form-control" type="number" id="Latitud" name="Latitud" placeholder="Latitud" disabled />
                                     <label for="input"></label>
                                 </div>
                             </div>
@@ -267,23 +279,26 @@
                             <div id="datosPlanta" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosPlanta">
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Planta</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" name="idPlanta" id="idPlanta" required>
-                                        <option disabled selected>Elija una opción</option>                                            
-                                        <option value="1"></option>
-                                        <option value="2"></option>
-                                    </select>
+                                    <select class="form-select" name="idPlanta" id="idPlanta" required onchange="selectPlanta()">
+                                    <option disabled selected>Elija una opción</option>
+                                    <?php
+                                        $resultado = $conexion->getClientes();
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idCliente'].">". $row['razonSocial']."</option>";
+                                        }
+                                    ?>
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Planta</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Planta" name="Plantao" placeholder="Nombre de la Planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="Planta" name="Planta" placeholder="Nombre de la Planta" disabled />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" disabled />
                                     <label for="input"></label>
                                 </div>
                             </div>
@@ -309,18 +324,13 @@
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Surtida</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="CantidadSurtida" name="CantidadSurtida" placeholder="Cantidad Surtida" required pattern="[0-9,.]+ minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Estado</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="idEstado" id="idEstado" required>
                                         <option disabled selected>Elija una opción</option>                                            
-                                        <option value="1"></option>
-                                        <option value="2"></option>
+                                        <option value="Atendida"></option>
+                                        <option value="Pendiente"></option>
+                                        <option value="Cancelada"></option>
                                     </select>
                                     <label for="input"></label>
                                 </div>
@@ -335,7 +345,90 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready( function () {
+            $('#table_id').DataTable();
+        } );
 
+
+        function selectClientes(){
+            var idCliente = $("#idCliente").val();
+            $.ajax({
+                url: "/src/php/SistemaVentas/Movimientos/SolicitudPlantas.php",
+                method: "POST",
+                data: {
+                    "Busqueda":'DatosCliente',
+                    "idCliente": idCliente
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("RazonSocial").value=respuesta[0]['razonSocial'];
+                    document.getElementById("rfc").value=respuesta[0]['RFC'];
+                    document.getElementById("domicilio").value=respuesta[0]['domicilio'];
+                    document.getElementById("Estado").value=respuesta[0]['estado'];
+                    document.getElementById("Telefono").value=respuesta[0]['telefono'];
+                    document.getElementById("Celular").value=respuesta[0]['celular'];
+                    document.getElementById("TipoCliente").value=respuesta[0]['tipoCliente'];
+                    selectPredio();
+                }  
+            })        
+        }
+
+        function selectPredio(){
+            var idCliente = $("#idCliente").val();
+            $.ajax({
+                url: "/src/php/SistemaVentas/Movimientos/SolicitudPlantas.php",
+                method: "POST",
+                data: {
+                    "Busqueda":'Predio',
+                    "idCliente": idCliente
+                },
+                success: function(respuesta){
+                    $("#idPredio").attr("disabled", false);
+                    $("#idPredio").html(respuesta);
+                }
+            })     
+        }
+
+        function selectPredioDatos(){
+            var idPredio = $("#idPredio").val();
+            $.ajax({
+                url: "/src/php/SistemaVentas/Movimientos/SolicitudPlantas.php",
+                method: "POST",
+                data: {
+                    "Busqueda":'DatosPredio',
+                    "idPredio": idPredio
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("Municipio").value=respuesta[0]['municipio'];
+                    document.getElementById("Extencion").value=respuesta[0]['extencion'];
+                    document.getElementById("UsoPredio").value=respuesta[0]['usoPredio'];
+                    document.getElementById("Longitud").value=respuesta[0]['longitud'];
+                    document.getElementById("Latitud").value=respuesta[0]['latitud'];
+                }
+            })     
+        }
+
+        function selectPlanta(){
+            var idPlanta = $("#idPlanta").val();
+            $.ajax({
+                url: "/src/php/SistemaVentas/Movimientos/SolicitudPlantas.php",
+                method: "POST",
+                data: {
+                    "Busqueda":'DatosPlantas',
+                    "idPlanta": idPlanta
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("Planta").value=respuesta[0]['nombre'];
+                    document.getElementById("Descripcion").value=respuesta[0]['descripcion'];
+                }
+            })     
+        }
+
+        
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
