@@ -67,16 +67,7 @@
 
             </div>
 
-            <div class="col-lg-5 col-md-6">
-                <br>
 
-                <br>
-                <h1 class="text-center">Bienvenido: Encargado</h1>
-                <br>
-                <h2 class="text-center">Cristian Emmnauel Amezcua Moreno</h2>
-                <br>
-                <h3 class="text-center">Fecha DD/MM/YYYY</h3>
-            </div>
 
             <div class="col-lg-2 col-md-6">
 

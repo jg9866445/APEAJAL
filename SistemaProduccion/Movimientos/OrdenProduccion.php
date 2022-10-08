@@ -1,3 +1,8 @@
+    <?php
+        include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimiento.php");
+        $conexion = new Movimientos();
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -170,12 +175,12 @@
                                 <br>
                                 <div class="card">
                                     <div>
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#datosOrdenProduccion" aria-expanded="false" aria-controls="datosOrdenProduccion">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#datosPlanta" aria-expanded="false" aria-controls="datosOrdenProduccion">
                                             Datos de la planta
                                         </button>
                                     </div>
                                     
-                                    <div id="datosOrdenProduccion" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosOrdenProduccion">
+                                    <div id="datosPlanta" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosPlanta">
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Planta</label>
                                         <div class="col-sm-10">
                                             <select class="form-select" name="idPlanta" id="idPlanta" required>

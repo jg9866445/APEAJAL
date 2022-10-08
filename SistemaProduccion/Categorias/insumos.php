@@ -141,7 +141,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modificar datos del insumo</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Modificar datos</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="/SistemaProduccion/Categorias/insumos.php" method="POST" >
@@ -150,19 +150,19 @@
                         <div class="modal-body">
                             <div class="mb-3 row">
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="NombreInsumoM" name="NombreInsumo" placeholder="Nombre del insumo" required pattern="[A-Za-z ]+" minlength="3"  />
+                                    <input class="form-control" type="text" id="NombreInsumoM" name="NombreInsumo" placeholder="Nombre" required pattern="[A-Za-z ]+" minlength="3"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripción del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="DescripcionM" name="Descripcion" placeholder="Descripción del insumo" required pattern="[A-Za-z ]+" minlength="3"  />
+                                    <input class="form-control" type="text" id="DescripcionM" name="Descripcion" placeholder="Descripción" required pattern="[A-Za-z ]+" minlength="3"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoría del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoría</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="idClasificacion" id="idClasificacionM" required>
                                         <option disabled selected value="">Elija una opción</option>
@@ -190,27 +190,27 @@
                                     <label for="input"></label>
                                 </div>
                                 <!--TODO: EMMANUEL TE FALTA COLOCAR M EN EL CAMPO NAME DE LOS INPUT DE MODIFICAR-->
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="ExistenciaM" name="Existencia" placeholder="Cantidad en existencia del insumo" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="ExistenciaM" name="Existencia" placeholder="Cantidad en existencia" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="MaximoM" name="Maximo" placeholder="Cantidad maxima del insumo" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="MaximoM" name="Maximo" placeholder="Cantidad maxima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="MinimoM" name="Minimo" placeholder="Cantidad minima del insumo" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="MinimoM" name="Minimo" placeholder="Cantidad minima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="CostoPromedioM" name="CostoPromedio" placeholder="Costo Promedio del insumo" required pattern="[0-9,.]+" minlength="1"  />
+                                    <input class="form-control" type="text" id="CostoPromedioM" name="CostoPromedio" placeholder="Costo Promedio" required pattern="[0-9,.]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
                             </div>
@@ -237,19 +237,19 @@
                         <div class="modal-body">
                             <div class="mb-3 row">
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="NombreInsumo" name="NombreInsumo" placeholder="Nombre del insumo" required pattern="[A-Za-z ,().]+" minlength="3"  />
+                                    <input class="form-control" type="text" id="NombreInsumo" name="NombreInsumo" placeholder="Nombre" required pattern="[A-Za-z ,().]+" minlength="3"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripción del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripción del insumo" required pattern="[A-Za-z ,().]+" minlength="3"  />
+                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripción" required pattern="[A-Za-z ,().]+" minlength="3"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoría del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Categoría</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="idClasificacion" id="idClasificacion" required>
                                     <option disabled selected value="">Elija una opción</option>
@@ -277,27 +277,27 @@
                                         <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia del insumo" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maxima del insumo" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maxima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minima del insumo" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio del insumo</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo Promedio del insumo" required pattern="[0-9,.]+" minlength="1"  />
+                                    <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo Promedio" required pattern="[0-9,.]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
                             </div>

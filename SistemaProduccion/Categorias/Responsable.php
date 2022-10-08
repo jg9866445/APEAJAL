@@ -138,27 +138,15 @@
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del empleado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreResponsable" name="NombreResponsable" placeholder="Nombre del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreResponsable" name="NombreResponsable" placeholder="Nombre" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto del empleado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Puesto" name="Puesto" placeholder="Puesto del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-                            
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Usuario del empleado</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Usuario" name="Usuario" placeholder="Usuario del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">password del empleado</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="password" name="password" placeholder="password del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Puesto" name="Puesto" placeholder="Puesto" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -177,7 +165,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modificar datos del empleado</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar datos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="/SistemaProduccion/Categorias/Responsable.php" method="POST" >
@@ -186,27 +174,15 @@
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del empleado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreResponsableM" name="NombreResponsableM" placeholder="Nombre del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreResponsableM" name="NombreResponsableM" placeholder="Nombre" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto del empleado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="PuestoM" name="PuestoM" placeholder="Puesto del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Usuario del empleado</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="UsuarioM" name="UsuarioM" placeholder="Usuario del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">password del empleado</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="password del empleado" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="PuestoM" name="PuestoM" placeholder="Puesto" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                     </div>

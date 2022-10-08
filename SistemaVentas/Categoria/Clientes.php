@@ -168,51 +168,51 @@
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre o Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre o Razon Social " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">RFC</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RFC" name="RFC" placeholder="RFC del cliente" required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
+                                <input class="form-control" type="text" id="RFC" name="RFC" placeholder="RFC " required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio de residencia habitual</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="domicilio" name="domicilio" placeholder="domicilio de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="domicilio" name="domicilio" placeholder="domicilio  " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad de residencia habitual</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad  " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Estado de residencia habitual</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Estado </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado  de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado   " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico del cliente" required/>
+                                <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico " required/>
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo del cliente" required pattern="[0-9]+" minlength="3"  />
+                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Celular</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Celular" name="Celular" placeholder="Celular del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <input class="form-control" type="tel" id="Celular" name="Celular" placeholder="Celular " required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
@@ -234,25 +234,25 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Saldo</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Saldo" name="Saldo" placeholder="Saldo del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <input class="form-control" type="text" id="Saldo" name="Saldo" placeholder="Saldo " required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">domicilio Fiscal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="domicilioFiscal" name="domicilioFiscal" placeholder="domicilioFiscal del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <input class="form-control" type="text" id="domicilioFiscal" name="domicilioFiscal" placeholder="domicilioFiscal " required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">usuario</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="usuario" name="usuario" placeholder="usuario del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <input class="form-control" type="text" id="usuario" name="usuario" placeholder="usuario " required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">password</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="password" name="password" placeholder="password del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <input class="form-control" type="text" id="password" name="password" placeholder="password " required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -271,7 +271,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modificar datos del cliente</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar datos </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="/SistemaVentas/Categoria/Clientes.php" method="POST" enctype="multipart/form-data"   >
@@ -280,51 +280,51 @@
                         <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre o Razon Social</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RazonSocialM" name="RazonSocialM" placeholder="Nombre o Razon Social del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="RazonSocialM" name="RazonSocialM" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">RFC</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RFCM" name="RFCM" placeholder="RFC del cliente" required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
+                                <input class="form-control" type="text" id="RFCM" name="RFCM" placeholder="RFC " required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio de residencia habitual</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="domicilioM" name="domicilioM" placeholder="domicilio de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="domicilioM" name="domicilioM" placeholder="domicilio  " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad de residencia habitual</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad  " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Estado de residencia habitual</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Estado </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="EstadoM" name="EstadoM" placeholder="Estado de residencia habitual del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="EstadoM" name="EstadoM" placeholder="Estado  " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico del cliente" required/>
+                                <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico " required/>
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="TelefonoM" name="TelefonoM" placeholder="Telefono fijo del cliente" required pattern="[0-9]+" minlength="3"  />
+                                <input class="form-control" type="tel" id="TelefonoM" name="TelefonoM" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Celular</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="CelularM" name="CelularM" placeholder="Celular del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <input class="form-control" type="tel" id="CelularM" name="CelularM" placeholder="Celular " required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
@@ -346,25 +346,25 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Saldo</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="saldoM" name="saldoM" placeholder="Saldo del cliente" required pattern="[0-9,.]+" minlength="3"  />
+                                <input class="form-control" type="text" id="saldoM" name="saldoM" placeholder="Saldo " required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
                             
                             <label for="staticEmail" class="col-sm-2 col-form-label">domicilio Fiscal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="domicilioFiscalM" name="domicilioFiscalM" placeholder="domicilioFiscal del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="domicilioFiscalM" name="domicilioFiscalM" placeholder="domicilioFiscal " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">usuario</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="usuarioM" name="usuarioM" placeholder="usuario del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="usuarioM" name="usuarioM" placeholder="usuario " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
                             
                             <label for="staticEmail" class="col-sm-2 col-form-label">password</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="password del cliente" required pattern="[A-Za-z ]+" minlength="3"  />
+                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="password " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
                         </div>

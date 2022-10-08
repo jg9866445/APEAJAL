@@ -150,39 +150,39 @@
                         <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del proveedor</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreProveedor" name="NombreProveedor" placeholder="Nombre del proveedor" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreProveedor" name="NombreProveedor" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Contacto directo del proveedor</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Contacto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Contacto" name="Contacto" placeholder="Contacto directo del proveedor" required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
+                                <input class="form-control" type="text" id="Contacto" name="Contacto" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio del proveedor</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio del proveedor" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad de residencia habitual</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad de residencia habitual del proveedor" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico del proveedor" required/>
+                                <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico " required/>
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Telefono fijo del proveedor</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo del proveedor" required pattern="[0-9]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -207,7 +207,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modificar datos del proveedor</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar datos </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="/SistemaProduccion/Categorias/insumos.php" method="POST" enctype="multipart/form-data"  >
@@ -216,39 +216,39 @@
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del proveedor</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreProveedorM" name="NombreProveedorM" placeholder="Nombre del proveedor" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreProveedorM" name="NombreProveedorM" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Contacto directo del proveedor</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Contacto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="ContactoM" name="ContactoM" placeholder="Contacto directo del proveedor" required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
+                                <input class="form-control" type="text" id="ContactoM" name="ContactoM" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio del proveedor</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DomicilioM" name="DomicilioM" placeholder="Domicilio del proveedor" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="DomicilioM" name="DomicilioM" placeholder="Domicilio " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad de residencia habitual</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad de residencia habitual del proveedor" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad de residencia habitual " required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico del proveedor" required/>
+                                <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico " required/>
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Telefono fijo del proveedor</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Telefono fijo</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="tel" id="TelefonoM" name="TelefonoM" placeholder="Telefono fijo del proveedor" required pattern="[0-9]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="tel" id="TelefonoM" name="TelefonoM" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 

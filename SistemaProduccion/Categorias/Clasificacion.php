@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="col-lg-8 ">
-                    <h2>Clasificaicon de tipo de insumos</h2>
+                    <h2>Clasificacion de tipo de insumos</h2>
                     <br>
                     <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
@@ -142,13 +142,13 @@
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Concepto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreClasificacion" name="NombreClasificacion" placeholder="Nombre de la clasificacion del insumo" required pattern="[A-Za-z ]+" minlength="3" maxlength="50" />
+                                <input class="form-control" type="text" id="NombreClasificacion" name="NombreClasificacion" placeholder="Nombre" required pattern="[A-Za-z ]+" minlength="3" maxlength="50" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion por tipo de clasificación</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DescripcionClasificacion" name="DescripcionClasificacion" placeholder="Descripcion del tipo de insumo" required pattern="[A-Za-z ().,]+" minlength="3" maxlength="255" />
+                                <input class="form-control" type="text" id="DescripcionClasificacion" name="DescripcionClasificacion" placeholder="Descripcion" required pattern="[A-Za-z ().,]+" minlength="3" maxlength="255" />
                                 <label for="input"></label>
                             </div>
 
