@@ -34,7 +34,7 @@ class Catalago {
     }
 
     public function getPlantasForestal(){
-        $sql = "SELECT p.idPlanta, e.nombre, p.descripcion, p.existencia FROM plantaForestal as p INNER JOIN especie as e ON e.idEspecie = p.idEspecie";
+        $sql = "SELECT p.idPlanta,e.idEspecie, e.nombre, p.descripcion, p.existencia FROM plantaForestal as p INNER JOIN especie as e ON e.idEspecie = p.idEspecie";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -93,8 +93,8 @@ class Catalago {
         return $request;
     }
 
-    function insertClientes( $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal){
-        $sql = "INSERT INTO clientes( razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, constanciaFiscal, saldo, domicilioFiscal) VALUES ( :razonSocial, :RFC, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :constanciaFiscal, :saldo, :domicilioFiscal)";
+    function insertClientes( $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $saldo, $domicilioFiscal){
+        $sql = "INSERT INTO clientes( razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, saldo, domicilioFiscal) VALUES ( :razonSocial, :RFC, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :saldo, :domicilioFiscal)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":razonSocial",$razonSocial);
         $query->bindParam(":RFC",$RFC);
@@ -105,7 +105,6 @@ class Catalago {
         $query->bindParam(":telefono",$telefono);
         $query->bindParam(":celular",$celular);
         $query->bindParam(":tipoCliente",$tipoCliente);
-        $query->bindParam(":constanciaFiscal",$constanciaFiscal);
         $query->bindParam(":saldo",$saldo);
         $query->bindParam(":domicilioFiscal",$domicilioFiscal);
         $request=$query->execute(); 
@@ -157,8 +156,8 @@ class Catalago {
         return $request;    
     }
     
-    function updateClientes($idCliente, $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal){
-        $sql = "UPDATE clientes SET razonSocial=:razonSocial, RFC=:RFC, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente, constanciaFiscal=:constanciaFiscal, saldo=:saldo, domicilioFiscal=:domicilioFiscal where idCliente=:idCliente";
+    function updateClientes($idCliente, $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $domicilioFiscal){
+        $sql = "UPDATE clientes SET razonSocial=:razonSocial, RFC=:RFC, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente, domicilioFiscal=:domicilioFiscal where idCliente=:idCliente";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":idCliente",$idCliente);
         $query->bindParam(":razonSocial",$razonSocial);
@@ -170,8 +169,6 @@ class Catalago {
         $query->bindParam(":telefono",$telefono);
         $query->bindParam(":celular",$celular);
         $query->bindParam(":tipoCliente",$tipoCliente);
-        $query->bindParam(":constanciaFiscal",$constanciaFiscal);
-        $query->bindParam(":saldo",$saldo);
         $query->bindParam(":domicilioFiscal",$domicilioFiscal);
         $request=$query->execute(); 
         return $request;    

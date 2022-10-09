@@ -39,7 +39,6 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Predios.php">Predios</a></li>
                             </ul>
                         </li>
 
@@ -49,6 +48,8 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pagos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.php">Predios</a></li>
+
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -133,20 +134,20 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo responsable</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/SistemaProduccion/Categorias/Responsable.php" method="POST" >
+                <form action="/SistemaVentas/Categoria/Responsable.php" method="POST" >
                     <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreResponsable" name="NombreResponsable" placeholder="Nombre del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreResponsable" name="NombreResponsable" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Puesto </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Puesto" name="Puesto" placeholder="Puesto del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Puesto" name="Puesto" placeholder="Puesto" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -169,21 +170,21 @@
                     <h5 class="modal-title" id="exampleModalLabel">Modificar datos del empleado</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/SistemaProduccion/Categorias/Responsable.php" method="POST" >
+                <form action="/SistemaVentas/Categoria/Responsable.php" method="POST" >
                     <input type="hidden" name="categoria" value="Modificar">
-                    <input type="hidden" name="idResponsable" id="idResponsable">
+                    <input type="hidden" name="idResponsableM" id="idResponsableM">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreResponsableM" name="NombreResponsableM" placeholder="Nombre del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreResponsableM" name="NombreResponsableM" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Puesto </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="PuestoM" name="PuestoM" placeholder="Puesto del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="PuestoM" name="PuestoM" placeholder="Puesto" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -205,7 +206,7 @@
 
         function update(context){
             var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
-            document.getElementById("idResponsable").value=elementosTD[0].textContent;
+            document.getElementById("idResponsableM").value=elementosTD[0].textContent;
             document.getElementById("NombreResponsableM").value=elementosTD[1].textContent;
             document.getElementById('PuestoM').value=elementosTD[2].textContent;
             }
@@ -221,7 +222,7 @@
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
         }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
-            $idResponsable=$_POST["idResponsable"];
+            $idResponsable=$_POST["idResponsableM"];
             $NombreResponsable = $_POST['NombreResponsableM'];
             $Puesto = $_POST['PuestoM'];
             $resultado = $conexion->updateResponsable($idResponsable, $NombreResponsable, $Puesto);

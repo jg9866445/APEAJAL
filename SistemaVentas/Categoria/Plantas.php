@@ -39,7 +39,6 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Predios.php">Predios</a></li>
                             </ul>
                         </li>
 
@@ -49,6 +48,8 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pagos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.php">Predios</a></li>
+
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -66,6 +67,8 @@
                 </div>
             </div>
         </nav>
+
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -100,7 +103,7 @@
                     <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th> </th>
+                                <th>id </th>
                                 <th>Especie</th>
                                 <th>Descripción</th>
                                 <th>Existencia</th>
@@ -113,7 +116,7 @@
                                 foreach ($resultado as $row) {
                                     echo "<tr>";
                                     echo "<td>" . $row['idPlanta'] . "</td>";
-                                    echo "<td>" . $row['nombre'] . "</td>";
+                                    echo "<td>" . $row['nombre'] . "<div style='visibility: hidden'>" . $row['idEspecie'] . " </div></td>";
                                     echo "<td>" . $row['descripcion'] . "</td>";
                                     echo "<td>" . $row['existencia'] . "</td>";
                                     echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
@@ -162,13 +165,13 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"  minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia de la planta" required pattern="[0-9]+" minlength="1" maxlength="11" />
+                                <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Existencia" required pattern="[0-9]+" minlength="1" maxlength="11" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -192,7 +195,7 @@
                 </div>
                 <form action="/SistemaVentas/Categoria/Plantas.php" method="POST" >
                 <input type="hidden" name="categoria" value="Modificar">
-                <input type="hidden" name="idPlanta" id="idPlanta">
+                <input type="hidden" name="idPlantaM" id="idPlantaM">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
@@ -212,7 +215,7 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DescripcionM" name="DescripcionM" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="DescripcionM" name="DescripcionM" placeholder="Descripcion de la planta" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -243,8 +246,8 @@
         function update(context){
 
             var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
-            document.getElementById("idPlanta").value=elementosTD[0].textContent;
-            document.getElementById('idEspecieM').value=elementosTD[1].textContent;
+            document.getElementById("idPlantaM").value=elementosTD[0].textContent;
+            document.getElementById('idEspecieM').value=elementosTD[1].textContent.match(/(\d+)/g);
             document.getElementById('DescripcionM').value=elementosTD[2].textContent;
             document.getElementById('ExistenciaM').value=elementosTD[3].textContent;
             }
@@ -262,7 +265,7 @@
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
         }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
-            $idPlanta = $_POST["idPlanta"];
+            $idPlanta = $_POST["idPlantaM"];
             $idEspecie = $_POST['idEspecieM'];
             $descripcion = $_POST['DescripcionM'];
             $existencia = $_POST['ExistenciaM'];

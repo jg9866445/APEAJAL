@@ -39,7 +39,6 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Predios.php">Predios</a></li>
                             </ul>
                         </li>
 
@@ -49,6 +48,8 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pagos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.php">Predios</a></li>
+
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -66,6 +67,7 @@
                 </div>
             </div>
         </nav>
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -136,13 +138,13 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreEspecie" name="NombreEspecie" placeholder="Nombre de la especie" required pattern="[A-Za-z ]+" minlength="3" maxlength="30" />
+                                <input class="form-control" type="text" id="NombreEspecie" name="NombreEspecie" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"  minlength="3" maxlength="30" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DescripcionEspecie" name="DescripcionEspecie" placeholder="Descripcion de la especie" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="DescripcionEspecie" name="DescripcionEspecie" placeholder="Descripcion" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"  minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                         </div>
