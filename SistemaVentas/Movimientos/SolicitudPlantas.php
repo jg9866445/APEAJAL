@@ -425,15 +425,13 @@
     </script>
 
 <?php
-
-
     if (isset($_POST)){
         if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+            $idSolicitud = $_POST['idSolicitud'];
+            $cantidasSolicitada = $_POST['CantidadSolicitada'];
+            $fecha = $_POST['fecha'];
             var_dump($_POST);
-
-            $RazonSocial = $_POST['RazonSocial'];
-
-            //$resultado = $conexion->insertClientes($RazonSocial,$RFC,$domicilio,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente , $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password);
+            $resultado = $conexion->insertSolicitudPlantas($idSolicitud, $cantidasSolicitada, $fecha);
             //unset($_POST);
             //unset($_FILES);
             //ob_start();

@@ -59,6 +59,20 @@ class Movimientos {
         return $results;
     }
 
+    public function insertSolicitudPlantas($idSolicitud, $fecha){
+        $sql="INSERT INTO solicitudes(idSolicitud, fecha) VALUES ( :idSolicitud, :fecha)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idProveedor', $idProveedor);
+        $query->bindParam(':factura', $fecha);
+        $query->execute();
+        $idOrdenCompra=$this->connect->lastInsertId();
 
-    
+        $sql="INSERT INTO detalleFacturaCompra(idOrdenCompra, idInsumo, cantidad, costo) VALUES (:idOrdenCompra, :idInsumo, :cantidad, :costo)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idOrdenCompra', $idOrdenCompra);
+        $query->bindParam(':idInsumo', $idInsumo);
+        $query->bindParam(':cantidad', $cantidad);
+        $query->bindParam(':costo', $costo);
+        $query->execute();
+    }
 }
