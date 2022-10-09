@@ -76,6 +76,7 @@
                 <div class="col-lg-7 ">
                 </div>
                 <div class="col-lg-2">
+                    <a class="btn active bottom" href="/SistemaProduccion/Movimientos/AddComprasInsumos.php">Nuevo Registro</a>
                     <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
                 </div>
             </div>

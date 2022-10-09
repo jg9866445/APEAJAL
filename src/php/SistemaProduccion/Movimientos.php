@@ -67,6 +67,21 @@ class Movimientos {
         return $results;
     }
 
+    public function getAllResponsables(){
+        $sql = "SELECT * FROM responsable";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllPlantasForestales(){
+        $sql = "Select pf.idPlanta,e.nombre from plantaForestal as pf INNER JOIN especie as e = e.idEspecie = pf.idEspecie";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
 
     function getAllOrdenProduccion(){

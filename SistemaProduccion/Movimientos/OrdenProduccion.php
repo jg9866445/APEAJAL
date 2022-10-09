@@ -110,7 +110,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <?php
                                 $resultado = $conexion->getAllOrdenProduccion();
                                     foreach ($resultado as $row) {
@@ -119,11 +118,14 @@
                                         echo "<td>" . $row['Responsable'] . "</td>";
                                         echo "<td>" . $row['puesto'] . "</td>";
                                         echo "<td>" . $row['Planta'] . "</td>";
-                                        echo "<td>" . $row['ciudad'] . "</td>";
-                                        echo "<td>" . $row['email'] . "</td>";
-                                        echo "<td>" . $row['telefono'] . "</td>";
-                                        echo "<td><a href=/src/PDF/ActaSituacionFiscal/". $row['idProveedor'].".pdf>Descargar</a></td>";
-                                        echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
+                                        echo "<td>" . $row['descripcion'] . "</td>";
+                                        echo "<td>" . $row['fechaOrden'] . "</td>";
+                                        echo "<td>" . $row['fechaAproxTermino'] . "</td>";
+                                        echo "<td>" . $row['detalleOrden'] . "</td>";
+                                        echo "<td>" . $row['cantidadEsperada'] . "</td>";
+                                        echo "<td>" . $row['cantidadLograda'] . "</td>";
+                                        echo "<td>" . $row['fechaRealTermino'] . "</td>";
+                                        echo "<td>" . $row['estado'] . "</td>";
                                         echo "</tr>";
                                     }
                             ?>
@@ -157,10 +159,13 @@
                                     <div id="datosOrdenProduccion" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosOrdenProduccion">
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Responsable</label>
                                         <div class="col-sm-10">
-                                            <select class="form-select" name="idResponsable" id="idResponsable" required>
-                                                <option disabled selected>Escoja una opcion</option>
-                                                <option value="1"></option>
-                                                <option value="2"></option>
+                                            <select class="form-select" name="idResponsable" id="idResponsable" required onchange="getResponsable()">
+                                            <?php
+                                                $resultado = $conexion->getAllResponsables();
+                                                foreach ($resultado as $row) {
+                                                    echo "<option value='".$row['idResponsable']."'>". $row['nombre']."</option>";
+                                                }
+                                            ?>
                                             </select>
                                             <label for="input"></label>
                                         </div>
@@ -190,9 +195,12 @@
                                         <label for="staticEmail" class="col-sm-2 col-form-label">Planta</label>
                                         <div class="col-sm-10">
                                             <select class="form-select" name="idPlanta" id="idPlanta" required>
-                                                <option disabled selected>Escoja una opcion</option>
-                                                <option value="1"></option>
-                                                <option value="2"></option>
+                                            <?php
+                                                $resultado = $conexion->getAllPlantasForestales();
+                                                foreach ($resultado as $row) {
+                                                    echo "<option value='".$row['idPlanta']."'>". $row['nombre']."</option>";
+                                                }
+                                            ?>
                                             </select>
                                             <label for="input"></label>
                                         </div>
@@ -242,28 +250,6 @@
                                             <input class="form-control" type="number" id="CantidadEsperada" name="CantidadEsperada" placeholder="Cantidad esperada de plantas" required pattern="[0-9,.]+" minlength="3" maxlength="255" />
                                             <label for="input"></label>
                                         </div>
-
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Lograda</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="number" id="CantidadLograda" name="CantidadLograda" placeholder="Cantidad lograda de plantas" required pattern="[0-9,.]+" minlength="3" maxlength="255" />
-                                            <label for="input"></label>
-                                        </div>
-
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">Fecha real de termino</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="date" />
-                                            <label for="input"></label>
-                                        </div>
-
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">Estado</label>
-                                        <div class="col-sm-10">
-                                            <select class="form-select" name="idPlanta" id="idPlanta" required>
-                                                <option disabled selected>Escoja una opcion</option>
-                                                <option value="1"></option>
-                                                <option value="2"></option>
-                                            </select>
-                                            <label for="input"></label>
-                                        </div>
                                     </div>    
                                 </div>   
                             </div>
@@ -276,6 +262,53 @@
                 </div>
             </div>
         </div>
+
+        <script>
+        /* Initialization of datatable */
+        $(document).ready( function () {
+            var table = $('#table_id').DataTable();
+        });
+        function update(context){
+            var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
+            document.getElementById('TelefonoM').value=elementosTD[6].textContent;
+            }
+                function getResponsable(){
+                    $.ajax({
+                        url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                        method: "POST",
+                        data: {
+                            "Busqueda":"OrdenProduccionResponsables",
+                            "idResponsable":document.getElementById("idResponsable").value
+                        },
+                        success: function(respuesta){
+                            respuesta=JSON.parse(respuesta);
+                            document.getElementById("nombreProveedor").value=respuesta[0]['nombre'];
+                            document.getElementById("domicilioProveedor").value=respuesta[0]['domicilio'];
+                            document.getElementById("telefonoProveedor").value=respuesta[0]['telefono'];
+                            document.getElementById("celularProveedor").value=respuesta[0]['contacto'];
+                            console.log(respuesta);
+                        }
+                    })   
+        }
+        function getUltimoInsert(){
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubCatalagos.php",
+                method: "POST",
+                data: {
+                    "Busqueda":"NextProveedor"
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("idProvedor").value=respuesta[0]['AUTO_INCREMENT'];
+                }
+            })
+
+
+        
+        }
+
+        </script>
+
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
