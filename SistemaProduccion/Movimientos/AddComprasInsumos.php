@@ -67,39 +67,170 @@
         </nav>
     </div>
 
-    <div>
+    
         <div class="container botton">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-4 ">
 
                 </div>
-                <div class="col-lg-7 ">
+                <div class="col-lg-6 ">
+                    <h1> Compra de insumos</h1>
                 </div>
                 <div class="col-lg-2">
                 </div>
             </div>
         </div>
-
-        
-        
-        <div class="container">
+        <div class="container botton">
             <div class="row">
-                <div class="col-lg-2 ">
-
+                <div class="col-lg-4 ">
                 </div>
-                <div class="col-lg-8 ">
+                <div class="col-lg-6 ">
+                    <div class="card">
+                                <div class="row g-3">
+                                    <div class="col-md-10">
+                                        <label for="staticEmail" class="col-sm-10 col-form-label">Fecha de compra de insumos</label>
+                                        <input class="form-control" type="date" id="fechaCompraInsumos" name="fechaCompraInsumos" placeholder="Compra de insumos" min="2021-01-01" />
+                                        <label for="input"></label>
+                                    </div>
+                                </div>
+                            </div>
                 </div>
-
                 <div class="col-lg-2">
-
                 </div>
             </div>
         </div>
-    </div>
+        <div class="container botton">
+            <div class="row">
+                <div class="col-lg-4 ">
+                </div>
+                <div class="col-lg-6 ">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Provedores</label>
+                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
+                                <option disabled selected>Escoja una opcion</option>
+                                    <?php
+                                        $resultado = $conexion->getAllProveedores();
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <label for="input"></label>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Domicilio</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Telefono</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Celular</label>
+                                    <input class="form-control" type="text" name="celularProveedor" id="celularProveedor" disabled />
+                                </div>
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                </div>
+            </div>
+        </div>
+        <div class="container botton">
+            <div class="row">
+                <div class="col-lg-4 ">
+                </div>
+                <div class="col-lg-6 ">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-3">
+                            <div class="col-sm-10">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Insumo</label>
+                                <select class="form-select" name="idInsumo" id="idInsumo" required onchange="getInsumos()">
+                                        <option disabled selected>Escoja una opcion</option>
+                                        <?php
+                                            $resultado = $conexion->getAllInsumos();
+                                            foreach ($resultado as $row) {
+                                                echo "<option value=".$row['idInsumo'].">". $row['nombre']."</option>";
+                                            }
+                                        ?>
+                                </select>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Domicilio</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Telefono</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Celular</label>
+                                    <input class="form-control" type="text" name="celularProveedor" id="celularProveedor" disabled />
+                                </div>
+                            </div>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                </div>
+            </div>
+        </div>
+
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
+    <script>
+        /* Initialization of datatable */
+        $(document).ready( function () {
+            var table = $('#table_id').DataTable();
+        });
+        function getProveedores(){
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Busqueda":"CompraInsumosDatosProveedores",
+                    "idProveedor":document.getElementById("idProvedor").value
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("domicilioProveedor").value=respuesta[0]['domicilio'];
+                    document.getElementById("telefonoProveedor").value=respuesta[0]['telefono'];
+                    document.getElementById("celularProveedor").value=respuesta[0]['contacto'];
+                    console.log(respuesta);
+                }
+            })   
+        }
+        function getInsumos(){
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Busqueda":"CompraInsumosDatosInsumos",
+                    "idInsumo":document.getElementById("idInsumo").value
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("nombreInsumos").value=respuesta[0]['nombre'];
+                    document.getElementById("descripcionInsumo").value=respuesta[0]['descripcion'];
+                    document.getElementById("unidadMetrica").value=respuesta[0]['unidadMetrica'];
+                    console.log(respuesta);
+                }
+            })   
+        }
+        $('#cantidad,#costo').bind('blur', function() {
+                document.getElementById("total").value=document.getElementById("costo").value * document.getElementById("cantidad").value;
+        })
+    
+    </script>
 </body>
 
 </html>

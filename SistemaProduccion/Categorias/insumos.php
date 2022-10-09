@@ -152,13 +152,13 @@
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="NombreInsumoM" name="NombreInsumoM" placeholder="Nombre" required pattern="[A-Za-z ]+" minlength="1" maxlength="30" />
+                                    <input class="form-control" type="text" id="NombreInsumoM" name="NombreInsumoM" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="30" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="DescripcionM" name="DescripcionM" placeholder="Descripción" required pattern="[A-Za-z ]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="text" id="DescripcionM" name="DescripcionM" placeholder="Descripción" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
@@ -191,25 +191,25 @@
                                 </div>
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="ExistenciaM" name="ExistenciaM" placeholder="Cantidad en existencia" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="ExistenciaM" name="ExistenciaM" placeholder="Existencia" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Máximo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="MaximoM" name="MaximoM" placeholder="Cantidad maxima" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="MaximoM" name="MaximoM" placeholder="Máximo" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Mínimo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="MinimoM" name="MinimoM" placeholder="Cantidad minima" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="MinimoM" name="MinimoM" placeholder="Mínimo" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Costo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="CostoPromedioM" name="CostoPromedioM" placeholder="Costo Promedio" required pattern="[0-9,.]+" minlength="1"  />
+                                    <input class="form-control" type="text" id="CostoPromedioM" name="CostoPromedioM" placeholder="Costo" required pattern="[0-9,.]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
                             </div>
@@ -236,13 +236,13 @@
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="NombreInsumo" name="NombreInsumo" placeholder="Nombre" required pattern="[A-Za-z ,().]+" minlength="1" maxlength="30" />
+                                    <input class="form-control" type="text" id="NombreInsumo" name="NombreInsumo" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="30" />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripción" required pattern="[A-Za-z ,().]+" minlength="1" maxlength="40" />
+                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripción" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
 
@@ -276,25 +276,25 @@
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Existencia" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Máximo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maxima" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Maxima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Mínimo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minima" required pattern="[0-9]+" minlength="1"  />
+                                    <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Minima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Costo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo Promedio" required pattern="[0-9,.]+" minlength="1"  />
+                                    <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo" required pattern="[0-9,.]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
                             </div>

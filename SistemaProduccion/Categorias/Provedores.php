@@ -154,25 +154,25 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreProveedor" name="NombreProveedor" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="1" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreProveedor" name="NombreProveedor" placeholder="Nombre " required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Contacto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Contacto" name="Contacto" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="40" />
+                                <input class="form-control" type="text" id="Contacto" name="Contacto" placeholder="Contacto directo " required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio " required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="20" />
+                                <input class="form-control" type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio " required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad" required pattern="[A-Za-z ]+" minlength="1" maxlength="20" />
+                                <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
@@ -220,25 +220,25 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreProveedorM" name="NombreProveedorM" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="1" maxlength="40" />
+                                <input class="form-control" type="text" id="NombreProveedorM" name="NombreProveedorM" placeholder="Nombre " required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Contacto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="ContactoM" name="ContactoM" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+[0-9]+" minlength="1" maxlength="40" />
+                                <input class="form-control" type="text" id="ContactoM" name="ContactoM" placeholder="Contacto directo " required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DomicilioM" name="DomicilioM" placeholder="Domicilio" required pattern="[A-Za-z ]+" minlength="1" maxlength="40" />
+                                <input class="form-control" type="text" id="DomicilioM" name="DomicilioM" placeholder="Domicilio" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad" required pattern="[A-Za-z ]+" minlength="1" maxlength="20" />
+                                <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 

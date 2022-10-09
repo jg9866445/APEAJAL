@@ -148,13 +148,13 @@
                         <div class="mb-3 row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Concepto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreClasificacion" name="NombreClasificacion" placeholder="Nombre" required pattern="[A-Za-z ]+" minlength="1" maxlength="30" />
+                                <input class="form-control" type="text" id="NombreClasificacion" name="NombreClasificacion" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+"  minlength="1" maxlength="30" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DescripcionClasificacion" name="DescripcionClasificacion" placeholder="Descripcion" required pattern="[A-Za-z ().,]+" minlength="1" maxlength="60" />
+                                <input class="form-control" type="text" id="DescripcionClasificacion" name="DescripcionClasificacion" placeholder="Descripcion" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="60" />
                                 <label for="input"></label>
                             </div>
 
