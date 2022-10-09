@@ -35,8 +35,8 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
                             </ul>
@@ -45,9 +45,9 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -63,6 +63,7 @@
                 </div>
             </div>
         </nav>
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -92,18 +93,18 @@
                 </div>
 
                 <div class="col-lg-9 ">
-                    <h2>Provedores</h2>
+                    <h2>Proveedores</h2>
                     <br>
                     <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>idProveedor</th>
+                                <th>  </th>
                                 <th>Nombre</th>
                                 <th>Contacto</th>
                                 <th>Domicilio</th>
                                 <th>Ciudad</th>
-                                <th>email</th>
-                                <th>telefono</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
                                 <th>Archivo</th>
                                 <th>Modificar</th>
                             </tr>
@@ -175,19 +176,19 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico " required minlength="1" maxlength="20"/>
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Teléfono</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Acta de situacion fiscal</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Acta de situación fiscal</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" required />
                                 <label for="input"></label>
@@ -225,13 +226,13 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Contacto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="ContactoM" name="ContactoM" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="40" />
+                                <input class="form-control" type="text" id="ContactoM" name="ContactoM" placeholder="Contacto directo " required pattern="[A-Za-z1-9 ]+[0-9]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DomicilioM" name="DomicilioM" placeholder="Domicilio" required pattern="[A-Za-z ]+" minlength="1" maxlength="20" />
+                                <input class="form-control" type="text" id="DomicilioM" name="DomicilioM" placeholder="Domicilio" required pattern="[A-Za-z ]+" minlength="1" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -241,19 +242,19 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico " required minlength="1" maxlength="20"/>
+                                <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico " required minlength="1" maxlength="40"/>
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Telefono fijo</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Teléfono</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="tel" id="TelefonoM" name="TelefonoM" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="1" maxlength="20" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Acta de situacion fiscal</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Acta de situación fiscal</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" />
                                 <label for="input"></label>
