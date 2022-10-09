@@ -41,7 +41,7 @@ class Catalago {
         return $results;
     }
 
-    public function getAllResponsable(){
+    public function getResponsable(){
         $sql = "SELECT * FROM responsable";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -49,7 +49,7 @@ class Catalago {
         return $results;
     }
 
-    public function getAllClient(){
+    public function getClient(){
         $sql = "SELECT * FROM clientes";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -58,7 +58,7 @@ class Catalago {
     }
 
     public function getPredios(){
-        $sql = "SELECT * FROM predios";
+        $sql = "SELECT p.idPredio, c.razonSocial, p.municipio, p.extencion, p.usoPredio, p.longitud, p.latitud, p.RegistroSADER FROM predios as p INNER JOIN clientes as c On c.idCliente = p.idCliente";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -84,19 +84,17 @@ class Catalago {
         return $query->rowCount(); 
     }
 
-    function insertResponsable($idResponsable, $nombre, $puesto, $usuario, $password){
-        $sql = "INSERT INTO responsable ( nombre, puesto, usuario, password) VALUES ( :nombre, :puesto, :usuario, :password)";
+    function insertResponsable($idResponsable, $nombre, $puesto){
+        $sql = "INSERT INTO responsable ( nombre, puesto) VALUES ( :nombre, :puesto)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':nombre', $nombre);
         $query->bindParam(':puesto', $puesto);
-        $query->bindParam(':usuario', $usuario);
-        $query->bindParam(':password', $password);
         $request=$query->execute(); 
         return $request;
     }
 
-    function insertClientes( $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password){
-        $sql = "INSERT INTO clientes( razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, constanciaFiscal, saldo, domicilioFiscal, usuario, password) VALUES ( :razonSocial, :RFC, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :constanciaFiscal, :saldo, :domicilioFiscal, :usuario, :password)";
+    function insertClientes( $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal){
+        $sql = "INSERT INTO clientes( razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, constanciaFiscal, saldo, domicilioFiscal) VALUES ( :razonSocial, :RFC, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :constanciaFiscal, :saldo, :domicilioFiscal)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":razonSocial",$razonSocial);
         $query->bindParam(":RFC",$RFC);
@@ -110,8 +108,6 @@ class Catalago {
         $query->bindParam(":constanciaFiscal",$constanciaFiscal);
         $query->bindParam(":saldo",$saldo);
         $query->bindParam(":domicilioFiscal",$domicilioFiscal);
-        $query->bindParam(":usuario",$usuario);
-        $query->bindParam(":password",$password);
         $request=$query->execute(); 
         return $request;
     }
@@ -151,20 +147,18 @@ class Catalago {
         return $request;    
     }
 
-    function updateResponsable($idResponsable, $nombre, $puesto, $usuario, $password){
-        $sql = "UPDATE responsable SET nombre=:nombre, puesto=:puesto, usuario=:usuario, password=:password  where idResponsable=:idResponsable";
+    function updateResponsable($idResponsable, $nombre, $puesto){
+        $sql = "UPDATE responsable SET nombre=:nombre, puesto=:puesto  where idResponsable=:idResponsable";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idResponsable', $idResponsable);
         $query->bindParam(':nombre', $nombre);
         $query->bindParam(':puesto', $puesto);
-        $query->bindParam(':usuario', $usuario);
-        $query->bindParam(':password', $password);
         $request=$query->execute(); 
         return $request;    
     }
     
-    function updateClientes($idCliente, $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password){
-        $sql = "UPDATE clientes SET razonSocial=:razonSocial, RFC=:RFC, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente, constanciaFiscal=:constanciaFiscal, saldo=:saldo, domicilioFiscal=:domicilioFiscal, usuario=:usuario, password=:password  where idCliente=:idCliente";
+    function updateClientes($idCliente, $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $constanciaFiscal, $saldo, $domicilioFiscal){
+        $sql = "UPDATE clientes SET razonSocial=:razonSocial, RFC=:RFC, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente, constanciaFiscal=:constanciaFiscal, saldo=:saldo, domicilioFiscal=:domicilioFiscal where idCliente=:idCliente";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":idCliente",$idCliente);
         $query->bindParam(":razonSocial",$razonSocial);
@@ -179,8 +173,6 @@ class Catalago {
         $query->bindParam(":constanciaFiscal",$constanciaFiscal);
         $query->bindParam(":saldo",$saldo);
         $query->bindParam(":domicilioFiscal",$domicilioFiscal);
-        $query->bindParam(":usuario",$usuario);
-        $query->bindParam(":password",$password);
         $request=$query->execute(); 
         return $request;    
     }
@@ -198,6 +190,14 @@ class Catalago {
         $query->bindParam(':RegistroSADER', $RegistroSADER);
         $request=$query->execute(); 
         return $request;    
+    }
+
+    function getNextIdCliente(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'clientes'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
     }
 }
 

@@ -1,4 +1,5 @@
     <?php
+
         include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Movimiento.php");
         $conexion = new Movimientos();
     ?>
@@ -36,7 +37,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies de plantas forestales</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
@@ -55,7 +56,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Repote de solicitud pendientes atender</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitud pendientes atender</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendientesPago.php">Reporte de solicitud pendientes de pago</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de plantas en existencias</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasDonacionPeriodo.php">Reporte de plantas en donación por período</a></li>
@@ -67,6 +68,7 @@
                 </div>
             </div>
         </nav>
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -99,7 +101,7 @@
                     <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
+                                <th>  </th>
                                 <th>Fecha</th>
                                 <th>Razon social</th>
                                 <th>RFC</th>
@@ -152,7 +154,8 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar una nueva solicitud</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form>
+                <form action="/SistemaVentas/Movimientos/SolicitudPlantas.php" method="POST">
+                <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="card">
                             <div>
@@ -166,12 +169,13 @@
                                 <div class="col-sm-10">
                                     <select class="form-select" name="idCliente" id="idCliente" required onchange="selectClientes()">
                                     <option disabled selected>Elija una opción</option>
-                                    <?php
-                                        $resultado = $conexion->getClientes();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idCliente'].">". $row['razonSocial']."</option>";
-                                        }
-                                    ?>
+                                        <?php
+                                            
+                                            $resultado = $conexion->getClientes();
+                                                foreach ($resultado as $row) {
+                                                    echo "<option value=".$row['idCliente'].">". $row['razonSocial']."</option>";
+                                                }
+                                        ?>
                                     </select>
                                     <label for="input"></label>
                                 </div>
@@ -231,8 +235,13 @@
                                 <label for="staticEmail" class="col-sm-2 col-form-label">predio</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="idPredio" id="idPredio" required onchange="selectPredioDatos()">
-                                                                        <option disabled selected>Elija una opción</option>
-
+                                        <option disabled selected>Elija una opción</option>
+                                        <?php
+                                            $resultado = $conexion->getPredios();
+                                                foreach ($resultado as $row) {
+                                                    echo "<option value=".$row['idPredio'].">". $row['razonSocial']."</option>";
+                                                }
+                                        ?>
                                     </select>
                                     <label for="input"></label>
                                 </div>
@@ -282,9 +291,9 @@
                                     <select class="form-select" name="idPlanta" id="idPlanta" required onchange="selectPlanta()">
                                     <option disabled selected>Elija una opción</option>
                                     <?php
-                                        $resultado = $conexion->getClientes();
+                                        $resultado = $conexion->getPlantasForestal();
                                         foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idCliente'].">". $row['razonSocial']."</option>";
+                                            echo "<option value=".$row['idPlanta'].">". $row['descripcion']."</option>";
                                         }
                                     ?>
                                     <label for="input"></label>
@@ -323,17 +332,6 @@
                                     <input class="form-control" type="number" id="CantidadSolicitada" name="CantidadSolicitada" placeholder="Cantidad Solicitada" required pattern="[0-9,.]+ minlength="3" maxlength="40" />
                                     <label for="input"></label>
                                 </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Estado</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" name="idEstado" id="idEstado" required>
-                                        <option disabled selected>Elija una opción</option>                                            
-                                        <option value="Atendida"></option>
-                                        <option value="Pendiente"></option>
-                                        <option value="Cancelada"></option>
-                                    </select>
-                                    <label for="input"></label>
-                                </div>
                             </div>
                         </div>   
                     </div>
@@ -350,7 +348,6 @@
             $('#table_id').DataTable();
         } );
 
-
         function selectClientes(){
             var idCliente = $("#idCliente").val();
             $.ajax({
@@ -365,7 +362,6 @@
                     document.getElementById("RazonSocial").value=respuesta[0]['razonSocial'];
                     document.getElementById("rfc").value=respuesta[0]['RFC'];
                     document.getElementById("domicilio").value=respuesta[0]['domicilio'];
-                    document.getElementById("Estado").value=respuesta[0]['estado'];
                     document.getElementById("Telefono").value=respuesta[0]['telefono'];
                     document.getElementById("Celular").value=respuesta[0]['celular'];
                     document.getElementById("TipoCliente").value=respuesta[0]['tipoCliente'];
@@ -426,9 +422,25 @@
                 }
             })     
         }
-
-        
     </script>
+
+<?php
+
+
+    if (isset($_POST)){
+        if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+            var_dump($_POST);
+
+            $RazonSocial = $_POST['RazonSocial'];
+
+            //$resultado = $conexion->insertClientes($RazonSocial,$RFC,$domicilio,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente , $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password);
+            //unset($_POST);
+            //unset($_FILES);
+            //ob_start();
+            //echo("<meta http-equiv='refresh' content='1'>");
+        }
+    }
+?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 

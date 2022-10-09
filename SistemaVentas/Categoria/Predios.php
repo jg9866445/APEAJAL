@@ -35,7 +35,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies de plantas forestales</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
@@ -54,7 +54,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Repote de solicitud pendientes atender</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitud pendientes atender</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendientesPago.php">Reporte de solicitud pendientes de pago</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de plantas en existencias</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasDonacionPeriodo.php">Reporte de plantas en donación por período</a></li>
@@ -71,17 +71,12 @@
         </nav>
     </div>
 
-
-
-
     <div>
         <div class="container botton">
             <div class="row">
                 <div class="col-lg-2 ">
-
                 </div>
                 <div class="col-lg-7 ">
-
                 </div>
                 <div class="col-lg-2">
                     <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
@@ -92,22 +87,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
-
                 </div>
-
                 <div class="col-lg-8 ">
-                    <h2>Pledios</h2>
+                    <h2 style="text-align:center">Predios</h2>
                     <br>
                     <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
+                                <th>  </th>
                                 <th>Cliente</th>
                                 <th>Municipio</th>
-                                <th>extension</th>
+                                <th>Extensión</th>
                                 <th>Uso de predio</th>
                                 <th>Latitud</th>
                                 <th>Longitud</th>
+                                <th>Registro SADER</th>
+                                <th>Modificar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,12 +111,13 @@
                                 foreach ($resultado as $row) {
                                     echo "<tr>";
                                     echo "<td>" . $row['idPredio'] . "</td>";
-                                    echo "<td>" . $row['idCliente'] . "</td>";
+                                    echo "<td>" . $row['razonSocial'] . "</td>";
                                     echo "<td>" . $row['municipio'] . "</td>";
                                     echo "<td>" . $row['extencion'] . "</td>";
                                     echo "<td>" . $row['usoPredio'] . "</td>";
-                                    echo "<td>" . $row['longitud'] . "</td>";
                                     echo "<td>" . $row['latitud'] . "</td>";
+                                    echo "<td>" . $row['longitud'] . "</td>";
+                                    echo "<td>" . $row['RegistroSADER'] . "</td>";
                                     echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
                                     echo "</tr>";
                                 }
@@ -152,7 +148,7 @@
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del cliente</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del cliente </label>
                             <div class="col-sm-10">
                                 <select class="form-select" name="idCliente" id="idCliente" required>
                                     <option disabled selected>Elija una opción</option>
@@ -165,13 +161,13 @@
                                 </select>
                                 <label for="input"></label>
                             </div>
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Municipio donde se ubica el predio</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Municipio</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="Municipio" name="Municipio" placeholder="Municipio donde se ubica el predio" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Extension </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Extensión</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="Extension" name="Extension" placeholder="Extension " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
@@ -210,7 +206,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="submit" class="btn btn-primary">Guardar registro</button>
                     </div>
                 </form>
             </div>
@@ -245,13 +241,13 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Municipio donde se ubica el predio</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Municipio </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="MunicipioM" name="MunicipioM" placeholder="Municipio donde se ubica el predio" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Extension </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Extensión </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="ExtensionM" name="ExtensionM" placeholder="Extension " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
@@ -299,21 +295,20 @@
 
     <script>
 
-        /* Initialization of datatable */
         $(document).ready( function () {
-            var table = $('#table_id').DataTable();
+            $('#table_id').DataTable();
+        } );
 
-        });
         function update(context){
 
             var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
-            document.getElementById("idClienteM").value=elementosTD[0].textContent;
-            document.getElementById('MunicipioM').value=elementosTD[1].textContent;
-            document.getElementById('ExtensionM').value=elementosTD[2].textContent;
-            document.getElementById('usoPredioM').value=elementosTD[3].textContent;
-            document.getElementById('LatitudM').value=elementosTD[4].textContent;
-            document.getElementById('LongitudM').value=elementosTD[5].textContent;
-            ocument.getElementById('RegistroSaderM').value=elementosTD[6].textContent;
+            document.getElementById("idClienteM").value=elementosTD[1].textContent;
+            document.getElementById('MunicipioM').value=elementosTD[2].textContent;
+            document.getElementById('ExtensionM').value=elementosTD[3].textContent;
+            document.getElementById('usoPredioM').value=elementosTD[4].textContent;
+            document.getElementById('LatitudM').value=elementosTD[5].textContent;
+            document.getElementById('LongitudM').value=elementosTD[6].textContent;
+            ocument.getElementById('RegistroSaderM').value=elementosTD[7].textContent;
             }
 
     </script>

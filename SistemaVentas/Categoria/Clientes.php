@@ -15,9 +15,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <!-- Datatable plugin CSS file -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -35,7 +35,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies de plantas forestales</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
@@ -54,7 +54,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Repote de solicitud pendientes atender</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitud pendientes atender</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendientesPago.php">Reporte de solicitud pendientes de pago</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de plantas en existencias</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasDonacionPeriodo.php">Reporte de plantas en donación por período</a></li>
@@ -66,6 +66,7 @@
                 </div>
             </div>
         </nav>
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -96,32 +97,30 @@
                 </div>
 
                 <div class="col-lg-8 ">
-                    <h2>Clientes</h2>
+                    <h2 style="text-align:center">Clientes</h2>
                     <br>
                     <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>Razon social</th>
+                                <th>  </th>
+                                <th>Razón social</th>
                                 <th>RFC</th>
                                 <th>Domicilio</th>
                                 <th>Ciudad</th>
                                 <th>Estado</th>
                                 <th>Correo</th>
-                                <th>Telefono</th>
+                                <th>Teléfono</th>
                                 <th>Celular</th>
                                 <th>Tipo de cliente</th>
-                                <th>Constancia fiscal</th>
                                 <th>Saldo</th>
-                                <th>domicilio Fiscal</th>
-                                <th>Usuario</th>
+                                <th>Domicilio Fiscal</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
                         <!--Tipo de cliente al momento de consultar tranformar segun si es 1 o 2-->
                         <tbody>
                             <?php
-                                $resultado = $conexion->getAllClient();
+                                $resultado = $conexion->getClient();
                                     foreach ($resultado as $row) {
                                         echo "<tr>";
                                         echo "<td>" . $row['idCliente'] . "</td>";
@@ -134,10 +133,8 @@
                                         echo "<td>" . $row['telefono'] . "</td>";
                                         echo "<td>" . $row['celular'] . "</td>";
                                         echo "<td>" . $row['tipoCliente'] . "</td>";
-                                        echo "<td><a href=/src/PDF/ConstanciaFiscal/". $row['constanciaFiscal'].">Descargar</a></td>";
                                         echo "<td>" . $row['saldo'] . "</td>";
                                         echo "<td>" . $row['domicilioFiscal'] . "</td>";
-                                        echo "<td>" . $row['usuario'] . "</td>";
                                         echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
                                         echo "</tr>";
                                     }
@@ -155,7 +152,7 @@
     </div>
 
 
-    <!-- Modal insert -->
+    <!-- Modal formulario insertar -->
     <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -168,7 +165,7 @@
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Razón social</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="RazonSocial" name="RazonSocial" placeholder="Nombre o Razon Social " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
@@ -180,7 +177,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="domicilio" name="domicilio" placeholder="domicilio  " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
@@ -204,7 +201,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Teléfono</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="tel" id="Telefono" name="Telefono" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="3"  />
                                 <label for="input"></label>
@@ -228,31 +225,13 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Constancia de Situación Fiscal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="file" id="file" name="file" />
+                                <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Saldo</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Saldo" name="Saldo" placeholder="Saldo " required pattern="[0-9,.]+" minlength="3"  />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio Fiscal</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio Fiscal</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="domicilioFiscal" name="domicilioFiscal" placeholder="domicilioFiscal " required pattern="[0-9,.]+" minlength="3"  />
-                                <label for="input"></label>
-                            </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">usuario</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="usuario" name="usuario" placeholder="usuario " required pattern="[0-9,.]+" minlength="3"  />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">password</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="password" name="password" placeholder="password " required pattern="[0-9,.]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -280,7 +259,7 @@
                         <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Razón social</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="RazonSocialM" name="RazonSocialM" placeholder="Nombre " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
@@ -292,7 +271,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="domicilioM" name="domicilioM" placeholder="domicilio  " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
@@ -316,7 +295,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Telefono</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Teléfono</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="tel" id="TelefonoM" name="TelefonoM" placeholder="Telefono fijo " required pattern="[0-9]+" minlength="3"  />
                                 <label for="input"></label>
@@ -333,42 +312,25 @@
                                 <select class="form-select" name="idTipoClienteM" id="idTipoClienteM" required>
                                     <option disabled selected>Elija una opción</option>
                                     <option value="1">Donación</option>
-                                    <option value="2">Compra</option>
+                                    <option value="2">Venta</option>
                                 </select>
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Constancia de Situación Fiscal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="file" id="file" name="file" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Saldo</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="saldoM" name="saldoM" placeholder="Saldo " required pattern="[0-9,.]+" minlength="3"  />
+                                <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" />
                                 <label for="input"></label>
                             </div>
                             
-                            <label for="staticEmail" class="col-sm-2 col-form-label">domicilio Fiscal</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio Fiscal</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="domicilioFiscalM" name="domicilioFiscalM" placeholder="domicilioFiscal " required pattern="[A-Za-z ]+" minlength="3"  />
                                 <label for="input"></label>
                             </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">usuario</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="usuarioM" name="usuarioM" placeholder="usuario " required pattern="[A-Za-z ]+" minlength="3"  />
-                                <label for="input"></label>
-                            </div>
-                            
-                            <label for="staticEmail" class="col-sm-2 col-form-label">password</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="password " required pattern="[A-Za-z ]+" minlength="3"  />
-                                <label for="input"></label>
-                            </div>
                         </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
@@ -387,7 +349,7 @@
 
         function update(context){
             var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
- 
+
             document.getElementById("idCliente").value=elementosTD[0].textContent;
             document.getElementById("RazonSocialM").value=elementosTD[1].textContent;
             document.getElementById("RFCM").value=elementosTD[2].textContent;
@@ -402,9 +364,21 @@
             document.getElementById('domicilioFiscalM').value=elementosTD[12].textContent;
             document.getElementById('usuarioM').value=elementosTD[13].textContent;
             }
-</script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            function getUltimoInsert(){
+            $.ajax({
+                url: "/src/php/SistemaVentas/SubCatalagos.php",
+                method: "POST",
+                data: {
+                    "Busqueda":"NextCliente"
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("idCliente").value=respuesta[0]['AUTO_INCREMENT'];
+                }
+            })   
+        }
+</script>
 
 <?php
 
@@ -420,12 +394,14 @@
             $Telefono = $_POST['Telefono'];
             $Celular = $_POST['Celular'];
             $idTipoCliente = $_POST['idTipoCliente'];
-            $constanciaFiscal=GuardarArchivo($RazonSocial);
             $saldo = $_POST['Saldo'];
             $domicilioFiscal = $_POST['domicilioFiscal'];
             $usuario = $_POST['usuario'];
             $password = $_POST['password'];
-
+            if(isset($_FILES))
+            {
+                GuardarArchivo($idCliente);
+            }
             $resultado = $conexion->insertClientes($RazonSocial,$RFC,$domicilio,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente , $constanciaFiscal, $saldo, $domicilioFiscal, $usuario, $password);
             unset($_POST);
             unset($_FILES);
@@ -442,11 +418,14 @@
             $Telefono = $_POST['TelefonoM'];
             $Celular = $_POST['CelularM'];
             $idTipoCliente = $_POST['idTipoClienteM'];
-            $constanciaFiscal=GuardarArchivo($RazonSocial);
             $saldo = $_POST['saldoM'];
             $domicilioFiscal = $_POST['domicilioFiscalM'];
             $usuario = $_POST['usuarioM'];
             $password = $_POST['passwordM'];
+            if(!isset($_FILES))
+            {
+                GuardarArchivo($idCliente);
+            }
             $resultado = $conexion->updateClientes($idCliente,$RazonSocial,$RFC,$domicilio,$Ciudad,$Estado,$email,$Telefono,$Celular,$idTipoCliente,$constanciaFiscal,$saldo,$domicilioFiscal,$usuario,$password);
             unset($_POST);
             unset($_FILES);
@@ -484,6 +463,7 @@
     }
 ?>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>
 

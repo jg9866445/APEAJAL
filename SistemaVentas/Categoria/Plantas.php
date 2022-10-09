@@ -35,7 +35,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies de plantas forestales</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
@@ -54,7 +54,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Repote de solicitud pendientes atender</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitud pendientes atender</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendientesPago.php">Reporte de solicitud pendientes de pago</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de plantas en existencias</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasDonacionPeriodo.php">Reporte de plantas en donación por período</a></li>
@@ -70,9 +70,6 @@
             <div class="linea"></div>
         </nav>
     </div>
-
-
-
 
 
     <div>
@@ -98,14 +95,14 @@
                 </div>
 
                 <div class="col-lg-8 ">
-                    <h2>Nombre de tabla</h2>
+                    <h2 style="text-align:center">Plantas forestales</h2>
                     <br>
                     <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
+                                <th> </th>
                                 <th>Especie</th>
-                                <th>Descripcion</th>
+                                <th>Descripción</th>
                                 <th>Existencia</th>
                                 <th>Modificar</th>
                             </tr>
@@ -136,7 +133,7 @@
     </div>
 
 
-    <!-- Modal insert-->
+    <!-- Modal formulario insertar-->
     <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -163,15 +160,15 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" />
+                                <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Existencia de la planta</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia de la planta" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Cantidad en existencia de la planta" required pattern="[0-9]+" minlength="1" maxlength="11" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -185,7 +182,7 @@
         </div>
     </div>
 
-    <!-- Modal Modificar-->
+    <!-- Modal formulario Modificar-->
     <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -213,15 +210,15 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="DescripcionM" name="DescripcionM" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Existencia de la planta</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Existencia</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="number" id="ExistenciaM" name="ExistenciaM" placeholder="Cantidad en existencia de la planta" required pattern="[0-9]+" minlength="1" maxlength="40" />
+                                <input class="form-control" type="number" id="ExistenciaM" name="ExistenciaM" placeholder="Cantidad en existencia de la planta" required pattern="[0-9]+" minlength="1" maxlength="11" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -237,11 +234,12 @@
 
     <script>
 
-        /* Initialization of datatable */
+        /*los datos obtenidos de la modificacion se asignan por posicion en los elementos de la lista td*/
         $(document).ready( function () {
             var table = $('#table_id').DataTable();
 
         });
+
         function update(context){
 
             var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');

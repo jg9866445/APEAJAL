@@ -33,7 +33,9 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
-    public function getClientes(){
+
+    public function getClientes()
+    {
         $sql = "SELECT * FROM clientes";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -43,6 +45,14 @@ class Movimientos {
 
     public function getPlantasForestal(){
         $sql = "SELECT * FROM plantaForestal";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getPredios(){
+        $sql = "SELECT p.idPredio, c.razonSocial, p.municipio, p.extencion, p.usoPredio, p.longitud, p.latitud, p.RegistroSADER FROM predios as p INNER JOIN clientes as c On c.idCliente = p.idCliente";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 

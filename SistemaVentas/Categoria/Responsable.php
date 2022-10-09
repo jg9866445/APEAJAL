@@ -14,10 +14,10 @@
     <link href="/src/css/categorias.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!-- Datatable plugin CSS file -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+        <!-- Datatable plugin CSS file -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -35,7 +35,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies de plantas forestales</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
@@ -54,7 +54,7 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Repote de solicitud pendientes atender</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitud pendientes atender</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendientesPago.php">Reporte de solicitud pendientes de pago</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de plantas en existencias</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasDonacionPeriodo.php">Reporte de plantas en donación por período</a></li>
@@ -66,12 +66,11 @@
                 </div>
             </div>
         </nav>
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
     </div>
-
-
 
     <div>
         <div class="container botton">
@@ -93,27 +92,25 @@
                 <div class="col-lg-2 ">
                 </div>
                 <div class="col-lg-8 ">
-                    <h2>Responsable</h2>
+                    <h2 style="text-align:center">Responsable</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
+                                <th> </th>
                                 <th>Nombre</th>
                                 <th>Puesto</th>
-                                <th>Usuario</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $resultado = $conexion->getAllResponsable();
+                                $resultado = $conexion->getResponsable();
                                     foreach ($resultado as $row) {
                                         echo "<tr>";
                                         echo "<td>" . $row['idResponsable'] . "</td>";
                                         echo "<td>" . $row['nombre'] . "</td>";
                                         echo "<td>" . $row['puesto'] . "</td>";
-                                        echo "<td>" . $row['usuario'] . "</td>";
                                         echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
                                         echo "</tr>";
                                     }
@@ -128,7 +125,7 @@
     </div>
 
 
-    <!-- Modal insert-->
+    <!-- Modal formulario insertar-->
     <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -137,35 +134,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="/SistemaProduccion/Categorias/Responsable.php" method="POST" >
-                                        <input type="hidden" name="categoria" value="Agregar">
+                    <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del empleado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="NombreResponsable" name="NombreResponsable" placeholder="Nombre del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto del empleado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="Puesto" name="Puesto" placeholder="Puesto del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
-                            
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Usuario del empleado</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Usuario" name="Usuario" placeholder="Usuario del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">password del empleado</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="password" name="password" placeholder="password del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
                         </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -175,7 +161,7 @@
         </div>
     </div>
 
-    <!-- Modal Update-->
+    <!-- Modal formulario modificar-->
     <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -189,30 +175,20 @@
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del empleado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="NombreResponsableM" name="NombreResponsableM" placeholder="Nombre del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto del empleado</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="PuestoM" name="PuestoM" placeholder="Puesto del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Usuario del empleado</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="UsuarioM" name="UsuarioM" placeholder="Usuario del empleado" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">password del empleado</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="password del empleado" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
+                        </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
@@ -222,47 +198,40 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
     <script>
         $(document).ready( function () {
-            var table = $('#table_id').DataTable();
-        });
+            $('#table_id').DataTable();
+        } );
 
         function update(context){
             var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
             document.getElementById("idResponsable").value=elementosTD[0].textContent;
             document.getElementById("NombreResponsableM").value=elementosTD[1].textContent;
             document.getElementById('PuestoM').value=elementosTD[2].textContent;
-            document.getElementById('UsuarioM').value=elementosTD[3].textContent;
-            document.getElementById('passwordM').value=elementosTD[4].textContent;
             }
-
     </script>
-    
-</body>
+
     <?php
     if (isset($_POST)){
         if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
             $NombreResponsableM = $_POST['NombreResponsable'];
             $PuestoM = $_POST['Puesto'];
-            $UsuarioM = $_POST['Usuario'];
-            $passwordM = $_POST['password'];
-            $resultado = $conexion->insertResponsable($NombreResponsableM, $PuestoM, $UsuarioM, $passwordM);
+            $resultado = $conexion->insertResponsable($NombreResponsable, $Puesto);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
         }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
             $idResponsable=$_POST["idResponsable"];
-            $NombreResponsableM = $_POST['NombreResponsableM'];
-            $PuestoM = $_POST['PuestoM'];
-            $UsuarioM = $_POST['UsuarioM'];
-            $passwordM = $_POST['passwordM'];
-            $resultado = $conexion->updateResponsable($idResponsable,$NombreResponsableM, $PuestoM, $UsuarioM, $passwordM);
+            $NombreResponsable = $_POST['NombreResponsableM'];
+            $Puesto = $_POST['PuestoM'];
+            $resultado = $conexion->updateResponsable($idResponsable, $NombreResponsable, $Puesto);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
         }
     }
     ?>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
 </html>
