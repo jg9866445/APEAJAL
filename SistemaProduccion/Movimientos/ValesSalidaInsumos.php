@@ -37,8 +37,8 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
                             </ul>
                         </li>
@@ -55,6 +55,7 @@
                 </div>
             </div>
         </nav>
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -67,7 +68,7 @@
 
                 </div>
                 <div class="col-lg-7 ">
-                    <h1 style="text-align:center">Vale de salida de insumos</h1>
+                    <h1 style="text-align:center">Vales de salida de insumos</h1>
                 </div>
                 <div class="col-lg-2">
                     <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
@@ -88,13 +89,13 @@
                     <table class="table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
+                                <th> </th>
                                 <th>Fecha</th>
-                                <th>Clasificacion</th>
-                                <th>insumo</th>
-                                <th>cantidad</th>
+                                <th>Clasificación</th>
+                                <th>Insumo</th>
+                                <th>Cantidad</th>
                                 <th>Nombre</th>
-                                <th>Descripcion</th>
+                                <th>Descripción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -123,7 +124,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Vale de salida de insumos</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Vale de salida</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form>
@@ -162,13 +163,13 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del Insumo</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="Nombre" name="Nombre" placeholder="Nombre del Insumo" required pattern="[A-Za-z ().,]+" minlength="3" maxlength="255" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion del Insumo</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del insumo" required pattern="[A-Za-z ().,]+" minlength="3" maxlength="255" />
                                 <label for="input"></label>

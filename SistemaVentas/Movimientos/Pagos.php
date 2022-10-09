@@ -75,153 +75,58 @@
                     <h1 style="text-align:center">Pagos de plantas forestales</h1>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
+                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo</button>
                 </div>
             </div>
         </div>
 
-
-        <div class="container">
+        <div>
+        <div class="container botton">
             <div class="row">
-                <div class="col-lg-1 ">
-
+                <div class="col-lg-2 ">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Solicitud</label>
+                    <div class="col-sm-10">
+                        <select class="form-select" name="idSolicitud" id="idSolicitud" required>                                            <option disabled selected>Elija una opción</option>                                            
+                            <option value="1"></option>
+                            <option value="2"></option>
+                        </select>
+                        <label for="input"></label>
+                    </div>
                 </div>
 
-                <div class="col-lg-8 ">
-                    <h2>Pagos</h2>
-                    <br>
-                    <table class="table table-responsive table-hover">
-                        <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>Fecha</th>
-                                <th>Solicitud</th>
-                                <th>Cliente</th>
-                                <th>Planta</th>
-                                <th>Descripción</th>
-                                <th>Cantidad Surtida</th>
-                                <th>Archivo comprobante</th>
-                                <th>Concepto general</th>
-                                <th>Importe</th>
-                                <th>Saldo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="col-lg-7 ">
+                    
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Cliente</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="NombreCliente" name="NombreCliente" placeholder="Nombre del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                        <label for="input"></label>
+                    </div>
+
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Planta</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="Planta" name="Planta" placeholder="Nombre de la planta" required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
+                        <label for="input"></label>
+                    </div>
+
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                        <label for="input"></label>
+                    </div>
                 </div>
 
                 <div class="col-lg-2">
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Modal insert -->
-    <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo pago</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form>
-                    <div class="modal-body">
-                        <div class="card">
-                            <div>
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#datosSolicitud" aria-expanded="false" aria-controls="datosSolicitud">
-                                    Datos de la solicitud
-                                </button>
-                            </div>
-                            <div id="datosSolicitud" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosSolicitud">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Solicitud</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" name="idSolicitud" id="idSolicitud" required>
-                                        <option disabled selected>Elija una opción</option>                                            
-                                        <option value="1"></option>
-                                        <option value="2"></option>
-                                    </select>
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cliente</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="NombreCliente" name="NombreCliente" placeholder="Nombre del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-                                
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Planta</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Planta" name="Planta" placeholder="Nombre de la planta" required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad surtida</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="CantidadSurtida" name="CantidadSurtida" placeholder="Cantidad de plantas Surtidas" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-                            </div>                    
-                        </div>
-                        <br>
-                        <div class="card">
-                            <div>
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#datosPago" aria-expanded="false" aria-controls="datosPago">
-                                Datos de pago
-                                </button>
-                            </div>
-
-                            <div id="datosPago" class="accordion-collapse collapse card-body " aria-labelledby="headingOne" data-bs-parent="#datosPago">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Archivo comprovante</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="file" id="archivoComprobante" name="archivoComprobante" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Concepto general</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="conceptoGeneral" name="conceptoGeneral" placeholder="Consepto General del pago" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                    <label for="input"></label>
-                                </div>
-
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Importe</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="number" id="Importe" name="Importe" placeholder="Importe a pagar" required pattern="[0-9,.]+" minlength="3" maxlength="13" />
-                                    <label for="input"></label>
-                                </div>    
-                            </div>            
-                        </div>
-                    </div>          
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad surtida</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="number" id="CantidadSurtida" name="CantidadSurtida" placeholder="Cantidad de plantas Surtidas" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                        <label for="input"></label>
                     </div>
-                </form>
+                    
+                    
+                </div>
             </div>
         </div>
-    </div>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>    
 

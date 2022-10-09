@@ -29,10 +29,6 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
-            <span class="navbar-text">
-                Cristian Emmanuel Amezcua Moreno
-                <br/>
-            </span>
         </nav>
 
         <nav class="navbar navbar-expand-lg menu">
@@ -42,8 +38,8 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
                             </ul>
@@ -52,9 +48,9 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -70,6 +66,7 @@
                 </div>
             </div>
         </nav>
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -102,15 +99,15 @@
                     <table id="table_id" class="compact display table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>idInsumo</th>
+                                <th>  </th>
                                 <th>concepto</th>
-                                <th>Descripcion</th>
-                                <th>Clasificacion</th>
-                                <th>Unidad metrica</th>
+                                <th>Descripción</th>
+                                <th>Clasificación</th>
+                                <th>Unidad</th>
                                 <th>Existencia</th>
-                                <th>Minimo</th>
-                                <th>Maximo</th>
-                                <th>Costo Promedio</th>
+                                <th>Mínimo</th>
+                                <th>Máximo</th>
+                                <th>Costo</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
@@ -179,13 +176,13 @@
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad de medida</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="UnidadMedidaM" id="UnidadMedidaM" required>
                                         <option disabled selected value="">Elija una opción</option>
                                         <option selected value="Kilos">Kilos</option>
                                         <option selected value="Gramos">Gramos</option>
-                                        <option selected value="Centrimetros">Centrimetros</option>
+                                        <option selected value="Centrimetros">Centímetros</option>
                                         <option selected value="Metros">Metros</option>
                                         <option selected value="Pieza">Pieza</option>
                                     </select>
@@ -198,19 +195,19 @@
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Máximo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="number" id="MaximoM" name="MaximoM" placeholder="Cantidad maxima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Mínimo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="number" id="MinimoM" name="MinimoM" placeholder="Cantidad minima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" id="CostoPromedioM" name="CostoPromedioM" placeholder="Costo Promedio" required pattern="[0-9,.]+" minlength="1"  />
                                     <label for="input"></label>
@@ -264,7 +261,7 @@
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad de medida</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="UnidadMedida" id="UnidadMedida" required>
                                         <option disabled selected value="">Elija una opción</option>
@@ -283,19 +280,19 @@
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Maxima</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Máximo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="number" id="Maximo" name="Maximo" placeholder="Cantidad maxima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad Minima</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Mínimo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="number" id="Minimo" name="Minimo" placeholder="Cantidad minima" required pattern="[0-9]+" minlength="1"  />
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo Promedio</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Costo</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo Promedio" required pattern="[0-9,.]+" minlength="1"  />
                                     <label for="input"></label>
