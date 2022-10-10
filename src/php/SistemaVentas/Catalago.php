@@ -34,7 +34,7 @@ class Catalago {
     }
 
     public function getPlantasForestal(){
-        $sql = "SELECT p.idPlanta,e.idEspecie, e.nombre, p.descripcion, p.existencia FROM plantaForestal as p INNER JOIN especie as e ON e.idEspecie = p.idEspecie";
+        $sql = "SELECT p.idPlanta,e.idEspecie, e.nombre, p.descripcion, p.existencia, p.precio FROM plantaForestal as p INNER JOIN especie as e ON e.idEspecie = p.idEspecie";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -65,12 +65,13 @@ class Catalago {
         return $results;
     }
 
-    function insertPlantaForestal( $idEspecie, $descripcion, $existencia){
-        $sql = "INSERT INTO plantaForestal ( idEspecie, descripcion, existencia) VALUES (:idEspecie,:descripcion,:existencia)";
+    function insertPlantaForestal( $idEspecie, $descripcion, $existencia, $precio){
+        $sql = "INSERT INTO plantaForestal ( idEspecie, descripcion, existencia, precio) VALUES (:idEspecie,:descripcion,:existencia, :precio)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":idEspecie",$idEspecie);
         $query->bindParam(":descripcion",$descripcion);
         $query->bindParam(":existencia",$existencia);
+        $query->bindParam(":precio",$precio);
         $query->execute();
         return $query->rowCount(); 
     }
@@ -125,13 +126,14 @@ class Catalago {
         return $request;
     }
 
-    function updatePlantaForestal($idPlanta, $idEspecie, $descripcion, $existencia){
-        $sql = "UPDATE plantaForestal SET idEspecie=:idEspecie,descripcion=:descripcion,existencia=:existencia where idPlanta=:idPlanta";
+    function updatePlantaForestal($idPlanta, $idEspecie, $descripcion, $existencia, $precio){
+        $sql = "UPDATE plantaForestal SET idEspecie=:idEspecie,descripcion=:descripcion,existencia=:existencia, precio=:precio where idPlanta=:idPlanta";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idPlanta', $idPlanta);
         $query->bindParam(':idEspecie', $idEspecie);
         $query->bindParam(':descripcion', $descripcion);
         $query->bindParam(':existencia', $existencia);
+        $query->bindParam(':precio', $precio);
         $request=$query->execute(); 
         return $request;    
     }

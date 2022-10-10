@@ -106,6 +106,7 @@
                                 <th>Especie</th>
                                 <th>Descripción</th>
                                 <th>Existencia</th>
+                                <th>Precio</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
@@ -118,6 +119,7 @@
                                     echo "<td>" . $row['nombre'] . "<div style='visibility: hidden'>" . $row['idEspecie'] . " </div></td>";
                                     echo "<td>" . $row['descripcion'] . "</td>";
                                     echo "<td>" . $row['existencia'] . "</td>";
+                                    echo "<td>" . $row['precio'] . "</td>";
                                     echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
                                     echo "</tr>";
                                 }
@@ -173,6 +175,12 @@
                                 <input class="form-control" type="number" id="Existencia" name="Existencia" placeholder="Existencia" required pattern="[0-9]+" minlength="1" maxlength="11" />
                                 <label for="input"></label>
                             </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Precio</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="number" id="Precio" name="Precio" placeholder="Precio" required pattern="[0-9]+" minlength="1" maxlength="11" />
+                                <label for="input"></label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -223,6 +231,12 @@
                                 <input class="form-control" type="number" id="ExistenciaM" name="ExistenciaM" placeholder="Cantidad en existencia de la planta" required pattern="[0-9]+" minlength="1" maxlength="11" />
                                 <label for="input"></label>
                             </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Precio</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="number" id="PrecioM" name="PrecioM" placeholder="Precio" required pattern="[0-9]+" minlength="1" maxlength="11" />
+                                <label for="input"></label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -249,6 +263,7 @@
             document.getElementById('idEspecieM').value=elementosTD[1].textContent.match(/(\d+)/g);
             document.getElementById('DescripcionM').value=elementosTD[2].textContent;
             document.getElementById('ExistenciaM').value=elementosTD[3].textContent;
+            document.getElementById('PrecioM').value=elementosTD[4].textContent;
             }
 
     </script>
@@ -259,7 +274,8 @@
             $idEspecie = $_POST['idEspecie'];
             $descripcion = $_POST['Descripcion'];
             $existencia = $_POST['Existencia'];
-            $resultado = $conexion->insertPlantaForestal($idEspecie, $descripcion, $existencia);
+            $precio = $_POST['Precio'];
+            $resultado = $conexion->insertPlantaForestal($idEspecie, $descripcion, $existencia, $precio);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
@@ -268,7 +284,8 @@
             $idEspecie = $_POST['idEspecieM'];
             $descripcion = $_POST['DescripcionM'];
             $existencia = $_POST['ExistenciaM'];
-            $resultado = $conexion->updatePlantaForestal($idPlanta, $idEspecie, $descripcion, $existencia);
+            $precio = $_POST['PrecioM'];
+            $resultado = $conexion->updatePlantaForestal($idPlanta, $idEspecie, $descripcion, $existencia, $Precio);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
