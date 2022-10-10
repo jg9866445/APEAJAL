@@ -93,7 +93,7 @@
                 <div class="col-lg-8 ">
                     <h2>Responsable</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th> </th>
