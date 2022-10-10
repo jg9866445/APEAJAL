@@ -224,17 +224,13 @@
                                         </select>
                                         <label for="input"></label>
                                     </div>
-                                    <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" type="text" name="nombreInsumos" id="nombreInsumos" disabled />
-                                        <label for="input"></label>
-                                    </div>
+
                                     <label for="staticEmail" class="col-sm-2 col-form-label">Descripcion</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" name="descripcionInsumos" id="descripcionInsumo" disabled />
                                         <label for="input"></label>
                                     </div>
-                                    <label for="staticEmail" class="col-sm-2 col-form-label">Unidad metrica</label>
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Unidad</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" type="text" name="unidadMetrica" id="unidadMetrica" disabled />
                                         <label for="input"></label>
@@ -283,51 +279,7 @@
             </div>
         </div>
     </div>
-    <script>
-        /* Initialization of datatable */
-        $(document).ready( function () {
-            var table = $('#table_id').DataTable();
-        });
-        function getProveedores(){
-            $.ajax({
-                url: "/src/php/SistemaProduccion/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Busqueda":"CompraInsumosDatosProveedores",
-                    "idProveedor":document.getElementById("idProvedor").value
-                },
-                success: function(respuesta){
-                    respuesta=JSON.parse(respuesta);
-                    document.getElementById("nombreProveedor").value=respuesta[0]['nombre'];
-                    document.getElementById("domicilioProveedor").value=respuesta[0]['domicilio'];
-                    document.getElementById("telefonoProveedor").value=respuesta[0]['telefono'];
-                    document.getElementById("celularProveedor").value=respuesta[0]['contacto'];
-                    console.log(respuesta);
-                }
-            })   
-        }
-    function getInsumos(){
-            $.ajax({
-                url: "/src/php/SistemaProduccion/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Busqueda":"CompraInsumosDatosInsumos",
-                    "idInsumo":document.getElementById("idInsumo").value
-                },
-                success: function(respuesta){
-                    respuesta=JSON.parse(respuesta);
-                    document.getElementById("nombreInsumos").value=respuesta[0]['nombre'];
-                    document.getElementById("descripcionInsumo").value=respuesta[0]['descripcion'];
-                    document.getElementById("unidadMetrica").value=respuesta[0]['unidadMetrica'];
-                    console.log(respuesta);
-                }
-            })   
-        }
-            $('#cantidad,#costo').bind('blur', function() {
-                document.getElementById("total").value=document.getElementById("costo").value * document.getElementById("cantidad").value;
-            })
-    
-    </script>
+
         <?php
         if (isset($_POST)){
             if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
