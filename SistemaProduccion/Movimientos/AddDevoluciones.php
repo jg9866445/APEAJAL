@@ -1,7 +1,3 @@
-<?php
-    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
-    $conexion = new Movimientos();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
 </head>
+
 <body>
     <div>
         <nav class="navbar logo">
@@ -44,9 +41,9 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -62,6 +59,7 @@
                 </div>
             </div>
         </nav>
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -74,55 +72,23 @@
 
                 </div>
                 <div class="col-lg-7 ">
+                    <h1 style="text-align:center">Vales de salida de insumos</h1>
                 </div>
                 <div class="col-lg-2">
-                    <a class="btn active bottom" href="/SistemaProduccion/Movimientos/AddComprasInsumos.php">Nuevo Registro</a>
                     <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
                 </div>
             </div>
         </div>
 
-        
-        
+
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-1 ">
 
                 </div>
+
                 <div class="col-lg-8 ">
-                    <h2>Compra de insumos</h2>
-                    <br>
-                    <table id="table_id" class="table table-responsive table-hover">
-                        <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>factura</th>
-                                <th>fecha</th>
-                                <th>Nombre de provedor</th>
-                                <th>Nombre de insumo</th>
-                                <th>cantidad</th>
-                                <th>costo</th>
-                                <th>total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                $resultado = $conexion->getAllComprasInsumos();
-                                    foreach ($resultado as $row) {
-                                        echo "<tr>";
-                                        echo "<td>" . $row['idOrdenCompra'] . "</td>";
-                                        echo "<td>" . $row['factura'] . "</td>";
-                                        echo "<td>" . $row['fecha'] . "</td>";
-                                        echo "<td>" . $row['proveedores'] . "</td>";
-                                        echo "<td>" . $row['insumos'] . "</td>";
-                                        echo "<td>" . $row['cantidad'] . "</td>";
-                                        echo "<td>" . $row['costo'] . "</td>";
-                                        echo "<td>" . $row['total'] . "</td>";
-                                        echo "</tr>";
-                                    }
-                            ?>
-                        </tbody>
-                    </table>
+
                 </div>
 
                 <div class="col-lg-2">
@@ -132,17 +98,9 @@
         </div>
 
 
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 </body>
-
 </html>
-
-
-
-
-
-
