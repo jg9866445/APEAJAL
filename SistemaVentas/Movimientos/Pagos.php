@@ -1,9 +1,3 @@
-<?php
-
-include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Movimiento.php");
-$conexion = new Movimientos();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +76,6 @@ $conexion = new Movimientos();
                     <h1 style="text-align:center">Pagos de plantas forestales</h1>
                 </div>
                 <div class="col-lg-2">
-                    <!--<button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo</button>-->
                 </div>
             </div>
         </div>
@@ -92,11 +85,11 @@ $conexion = new Movimientos();
     <div class="container botton">
             <div class="row">
                 <div class="col-md-3">
+                    <label for="staticEmail" class="from-label">ID Pago</label>
+                    <input class="form-control" type="text" id="idPago" name="idPago"  disabled/>
                 </div>
 
                 <div class="col-md-6">
-                    fecha
-                    <input class="form-control" type="date" id="fecha" name="fecha" />
                 </div>
             </div>
         </div>
@@ -209,78 +202,6 @@ $conexion = new Movimientos();
             </div>
         </div>
     </form>
-
-    <script>
-        function getSolicitudesPlantas(){
-            $.ajax({
-                url: "/src/php/SistemaVentas/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Busqueda":"SolicitudPlantas",
-                    "idSolicitud":document.getElementById("idSolicitud").value
-                },
-                success: function(respuesta){
-                    console.log(respuesta);
-                    respuesta=JSON.parse(respuesta);
-                    document.getElementById("NombreCliente").value=respuesta[0]['razonSocial'];
-                    document.getElementById("Planta").value=respuesta[0]['nombre'];
-                    document.getElementById("Descripcion").value=respuesta[0]['descripcion'];
-                }
-            })   
-        }
-    </script>
-    <?php
-if (isset($_POST)){
-    if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
-        $idPago=$conexion->getNextPago();
-        $idPago=$idPago[0][0];
-        $idSolicitud = $_POST['idSolicitud'];
-        $fecha = $_POST['fecha'];
-        $conceptoGeneral = $_POST['conceptoGeneral'];
-        $Importe = $_POST['Importe'];
-        $CantidadSurtida = $_POST['CantidadSurtida'];
-        $idPago=strval($idPago);
-        if(isset($_FILES))
-        {
-            GuardarArchivo($idPago);
-        }
-        $resultado = $conexion->insertPagos($idSolicitud,$fecha,$conceptoGeneral,$Importe,$CantidadSurtida);
-
-        /*
-
-        unset($_POST);
-        unset($_FILES);
-        ob_start();
-        echo("<meta http-equiv='refresh' content='1'>");
-        */
-    }
-}
-        function GuardarArchivo($nombre){
-            $nombre=$nombre.".pdf";
-            $carpetaDestino=$_SERVER['DOCUMENT_ROOT']."/src/PDF/Comprobantes/";
-            if(isset($_FILES["file"]))
-                {
-                    if($_FILES["file"]["type"]=="application/pdf")
-                    {
-                        if(!file_exists($carpetaDestino)){
-                            mkdir($carpetaDestino, 0777);
-                        }
-                        $origen=$_FILES["file"]["tmp_name"];
-                        $destino=$carpetaDestino.$nombre;
-                        if(move_uploaded_file($origen, $destino))
-                        {
-                        return $nombre;
-                            }else{
-                                log("Error : archivos no movido");
-                            }
-                    }else{
-                        log("Error : archivos no es pdf");
-                    }
-                }else{
-                    var_dump($_FILES);
-                }
-        }
-    ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>    
