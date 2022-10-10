@@ -77,7 +77,6 @@
                 </div>
                 <div class="col-lg-2">
                     <a class="btn active bottom" href="/SistemaProduccion/Movimientos/AddComprasInsumos.php">Nuevo Registro</a>
-                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
                 </div>
             </div>
         </div>
@@ -96,13 +95,10 @@
                         <thead>
                             <tr>
                                 <th>id</th>
+                                <th>Proveedor</th>
+                                <th>Fecha</th>
                                 <th>factura</th>
-                                <th>fecha</th>
-                                <th>Nombre de provedor</th>
-                                <th>Nombre de insumo</th>
-                                <th>cantidad</th>
-                                <th>costo</th>
-                                <th>total</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,9 +111,6 @@
                                         echo "<td>" . $row['fecha'] . "</td>";
                                         echo "<td>" . $row['proveedores'] . "</td>";
                                         echo "<td>" . $row['insumos'] . "</td>";
-                                        echo "<td>" . $row['cantidad'] . "</td>";
-                                        echo "<td>" . $row['costo'] . "</td>";
-                                        echo "<td>" . $row['total'] . "</td>";
                                         echo "</tr>";
                                     }
                             ?>
@@ -133,6 +126,11 @@
 
 
     </div>
+    <script>
+        $(document).ready( function () {
+            var table = $('#table_id').DataTable();
+        });
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>

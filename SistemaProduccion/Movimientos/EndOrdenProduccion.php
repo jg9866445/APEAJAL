@@ -77,15 +77,11 @@
                 <div class="col-lg-8 card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
-                            <label for="staticEmail" class="form-label">id Devolución</label>
-                            <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center"> Nuevo Devolución</h3>
+                            <h3 class="text-center"> Terminar Orden de produccion</h3>
                         </div>
                         <div class="col-md-3">
-                            <label for="staticEmail" class="form-label">Fecha</label>
-                            <input class="form-control" type="date" name="domicilioProveedor" id="domicilioProveedor" disabled />
                         </div>
                     </div>
                 </div>
@@ -93,85 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
 
-                </div>
-
-                <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">Vale de Devolución</div>
-                    <div class="card-body">
-                            <div class="row g-3">
-                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
-                                    <?php
-                                        $resultado = $conexion->getAllProveedores();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-12">Responsable</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Puesto</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-12">Insumo</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Categoria</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Unidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">existencias</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">cantidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                            </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2">
-
-                </div>
-            </div>
-        </div>
         <br>
         <div class="container">
             <div class="row">
@@ -181,7 +99,7 @@
 
                 <div class="col-lg-8 ">
                         <div class="card">
-                        <div class="card-header">Planta</div>
+                        <div class="card-header">Orden de produccion</div>
                         <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
@@ -197,34 +115,20 @@
                             </div>
                             <div class="row g-3">
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <label for="staticEmail" class="form-label">Responsable</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
+                                    <label for="staticEmail" class="form-label">Planta</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">existencias</label>
+                                    <label for="staticEmail" class="form-label">Fecha de orden</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">precio</label>
+                                    <label for="staticEmail" class="form-label">Descripcion</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                </div>
-                                <div class="col-md-3">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Costo</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Cantidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" />
                                 </div>
                             </div>
                     </div>
@@ -249,39 +153,42 @@
                         <div class="card-header">Datos</div>
                         <div class="card-body">
                             <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Fecha aproximada de termino</label>
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Cantidad lograda</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor"/>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">cantidad esperada</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor"/>
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">fecha real de termino</label>
+                                    <input class="form-control" type="date" name="telefonoProveedor" id="telefonoProveedor"/>
                                 </div>
                             </div>
                             <br>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-primary btn-xs btn-block" >Guardar Orden</button>
-                                </div>
-                            </div>
-                </div>
-                                    </div>
+                        </div>
                     </div>
                 </div>
-<br>
                 <div class="col-lg-2">
 
                 </div>
             </div>
         </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 ">
+                    <h1> </h1>
+                </div>
+
+                <div class="col-lg-5 ">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Terminar orden</button>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

@@ -1,3 +1,7 @@
+<?php
+    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
+    $conexion = new Movimientos();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,30 +69,126 @@
         </nav>
     </div>
 
-    <div>
-        <div class="container botton">
+    
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
+                </div>
+                <div class="col-lg-8 card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label for="staticEmail" class="form-label">id Vale de salida</label>
+                            <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="text-center"> Nuevo vale de salida</h3>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="staticEmail" class="form-label">Fecha</label>
+                            <input class="form-control" type="date" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 ">
+                </div>
+            </div>
+        </div>
+        <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
 
                 </div>
-                <div class="col-lg-7 ">
-                    <h1 style="text-align:center">Vales de salida de insumos</h1>
+
+                <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">Responsable</div>
+                    <div class="card-body">
+                            <div class="row g-3">
+                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
+                                <option disabled selected>Escoja una opcion</option>
+                                    <?php
+                                        $resultado = $conexion->getAllProveedores();
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <label for="input"></label>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Puesto</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
                 </div>
+
                 <div class="col-lg-2">
-                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
+
                 </div>
             </div>
         </div>
-
-
+        <br>
         <div class="container">
             <div class="row">
-                <div class="col-lg-1 ">
+                <div class="col-lg-2 ">
 
                 </div>
 
                 <div class="col-lg-8 ">
-
+                        <div class="card">
+                        <div class="card-header">Planta</div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
+                                <option disabled selected>Escoja una opcion</option>
+                                    <?php
+                                        $resultado = $conexion->getAllProveedores();
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <label for="input"></label>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">descripcion</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">existencias</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">precio</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Cantidad</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" />
+                                </div>
+                            </div>
+                    </div>
+                    </div>
                 </div>
 
                 <div class="col-lg-2">
@@ -96,8 +196,25 @@
                 </div>
             </div>
         </div>
+        <br>
 
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 ">
+                    <h1> </h1>
+                </div>
 
+                <div class="col-lg-5 ">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Guardar Vale de salida</button>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        </div>
+    <br>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>

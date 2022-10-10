@@ -76,16 +76,16 @@ class Movimientos {
     }
 
     public function getAllPlantasForestales(){
-        $sql = "Select pf.idPlanta,e.nombre from plantaForestal as pf INNER JOIN especie as e = e.idEspecie = pf.idEspecie";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
+       // $sql = "Select pf.idPlanta,e.nombre from plantaForestal as pf INNER JOIN especie as e = e.idEspecie = pf.idEspecie";
+       // $query = $this->connect->prepare($sql);
+        //$query -> execute(); 
+        //$results = $query -> fetchAll(); 
+     //   return $results;
     }
 
 
     function getAllOrdenProduccion(){
-        $sql = "Select op.idOrden,r.nombre as 'Responsable',r.puesto,e.nombre as 'Planta',pf.descripcion,op.fechaOrden,op.fechaAproxTermino,op.descripcion as 'detalleOrden',op.cantidadEsperada,op.cantidadLograda,op.fechaRealTermino,op.estado from ordenProduccion as op INNER JOIN responsable as r on op.idResponsable = r.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta = op.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie;";
+        $sql = "Select * FROM ordenProduccion";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 

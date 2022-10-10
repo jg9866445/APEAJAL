@@ -72,10 +72,9 @@
 
                 </div>
                 <div class="col-lg-7 ">
-                    <h1 style="text-align:center">Vales de salida de insumos</h1>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
+                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddValesSalida.php">Nuevo regristro</a>
                 </div>
             </div>
         </div>
@@ -83,30 +82,25 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-1 ">
+                <div class="col-lg-2 ">
 
                 </div>
 
                 <div class="col-lg-8 ">
                     <h2>Vale de salida</h2>
                     <br>
-                    <table class="table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th> </th>
                                 <th>Fecha</th>
-                                <th>Clasificación</th>
+                                <th>Responsable</th>
                                 <th>Insumo</th>
                                 <th>Cantidad</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -123,71 +117,14 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Vale de salida</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form>
-                        <div class="modal-body">
-                            <div class="mb-3 row">
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Fecha</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="date" />
-                                    <label for="input"></label>
-                                </div>    
-                            </div>
+        <script>
+        /* Initialization of datatable */
+        $(document).ready( function () {
+            var table = $('#table_id').DataTable();
+        });
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Clasificación</label>
-                            <div class="col-sm-10">
-                                <select class="form-select" name="idVale" id="idVale" required>
-                                    <option disabled selected>Escoja una opcion</option>
-                                    <option value="1"></option>
-                                    <option value="2"></option>
-                                </select>
-                                <label for="input"></label>
-                            </div>
+        </script>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Insumo</label>
-                            <div class="col-sm-10">
-                                <select class="form-select" name="idInsumo" id="idInsumo" required>
-                                    <option disabled selected>Escoja una opcion</option>
-                                    <option value="1"></option>
-                                    <option value="2"></option>
-                                </select>
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="number" id="Cantidad" name="Cantidad" placeholder="Cantidad de insumo a regresar" required pattern="[0-9,.]+" minlength="3" maxlength="255" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Nombre" name="Nombre" placeholder="Nombre del Insumo" required pattern="[A-Za-z ().,]+" minlength="3" maxlength="255" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del insumo" required pattern="[A-Za-z ().,]+" minlength="3" maxlength="255" />
-                                <label for="input"></label>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                        </div>              
-                    </form>
-                </div>
-            </div>
-        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
