@@ -399,7 +399,7 @@
             unset($_POST);
             unset($_FILES);
             ob_start();
-            //echo("<meta http-equiv='refresh' content='1'>");
+            echo("<meta http-equiv='refresh' content='1'>");
         }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
             $idCliente = $_POST['idClienteM'];
             $RazonSocial = $_POST['RazonSocialM'];

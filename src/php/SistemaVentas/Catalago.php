@@ -84,7 +84,7 @@ class Catalago {
         return $query->rowCount(); 
     }
 
-    function insertResponsable($idResponsable, $nombre, $puesto){
+    function insertResponsable($nombre, $puesto){
         $sql = "INSERT INTO responsable ( nombre, puesto) VALUES ( :nombre, :puesto)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':nombre', $nombre);
