@@ -75,4 +75,85 @@ class Movimientos {
         $query->bindParam(':costo', $costo);
         $query->execute();
     }
+
+    public function getSolicitudesPlantas()
+    {
+        $sql = "Select idSolicitud from solicitudes";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    public function getSolicitudPlantasIn($idSolicitud)
+    {
+        $sql = "SELECT c.razonSocial,e.nombre,pf.descripcion FROM solicitudes as s INNER JOIN detalleSolicitud as ds on s.idSolicitud=ds.idSolicitud INNER JOIN clientes as c ON s.idCliente = c.idCliente INNER JOIN plantaForestal as pf ON pf.idPlanta = ds.idPlanta INNER JOIN especie as e ON e.idEspecie=pf.idEspecie WHERE s.idSolicitud = :idSolicitud ";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSolicitud', $idSolicitud);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    function getNextPago(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'pagos'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function insertPagos($idSolicitud,$fecha,$conceptoGeneral,$Importe,$CantidadSurtida){
+        $sql="INSERT INTO pagos( idSolicitud, fecha, conceptoGeneral, importe) VALUES (:idSolicitud,:fecha,:conceptoGeneral,:Importe)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSolicitud', $idSolicitud);
+        $query->bindParam(':fecha', $fecha);
+        $query->bindParam(':conceptoGeneral', $conceptoGeneral);
+        $query->bindParam(':Importe', $Importe);
+        $query->execute();
+
+        $sql="SELECT idCliente FROM solicitudes WHERE idSolicitud= :idSolicitud";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSolicitud', $idSolicitud);
+        $query->execute();
+
+        $request=$query->fetchAll();
+        $idCliente=$request[0]['idCliente'];
+
+        $sql="SELECT saldo FROM clientes WHERE idCliente= :idCliente";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idCliente', $idCliente);
+        $query->execute();
+
+        $request=$query->fetchAll();
+        $saldo=$request[0]['saldo']-$Importe;
+
+        $sql="UPDATE clientes SET saldo=:saldo WHERE idCliente=:idCliente";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':saldo', $saldo);
+        $query->bindParam(':idCliente', $idCliente);
+        $query->execute();
+
+        $sql="SELECT idSalida FROM salidas WHERE idSolicitud= :idSolicitud";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSolicitud', $idSolicitud);
+        $query->execute();
+
+        $request=$query->fetchAll();
+        $idSalida=$request[0]['idSalida'];
+
+        $sql="SELECT saldo FROM detalleSalida WHERE idSalida= :idSalida";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSalida', $idSalida);
+        $query->execute();
+
+        $request=$query->fetchAll();
+        $saldo=$request[0]['saldo']-$Importe;
+
+        $sql="UPDATE detalleSalida SET saldo=:saldo WHERE idSalida=:idSalida";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':saldo', $saldo);
+        $query->bindParam(':idSalida', $idSalida);
+        $query->execute();
+    }
+    
+
 }

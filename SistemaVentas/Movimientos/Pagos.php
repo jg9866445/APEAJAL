@@ -1,4 +1,10 @@
-<!DOCTYPE.php>
+<?php
+
+include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Movimiento.php");
+$conexion = new Movimientos();
+
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,6 +17,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -32,7 +39,6 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Predios.php">Predios</a></li>
                             </ul>
                         </li>
 
@@ -42,6 +48,7 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pagos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Predios.php">Predios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -75,57 +82,205 @@
                     <h1 style="text-align:center">Pagos de plantas forestales</h1>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo</button>
+                    <!--<button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo</button>-->
                 </div>
             </div>
         </div>
+    
+    <form action="/SistemaVentas/Movimientos/Pagos.php" method="POST" enctype="multipart/form-data"   >
+    <input type="hidden" name="categoria" value="Agregar">
+    <div class="container botton">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
 
-        <div>
+                <div class="col-md-6">
+                    fecha
+                    <input class="form-control" type="date" id="fecha" name="fecha" />
+                </div>
+            </div>
+        </div>
         <div class="container botton">
             <div class="row">
-                <div class="col-lg-2 ">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Solicitud</label>
-                    <div class="col-sm-10">
-                        <select class="form-select" name="idSolicitud" id="idSolicitud" required>                                            <option disabled selected>Elija una opción</option>                                            
-                            <option value="1"></option>
-                            <option value="2"></option>
-                        </select>
-                        <label for="input"></label>
-                    </div>
+                <div class="col-md-3">
                 </div>
 
-                <div class="col-lg-7 ">
-                    
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Cliente</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" id="NombreCliente" name="NombreCliente" placeholder="Nombre del cliente" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                        <label for="input"></label>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Datos de solicitud
+                        </div>
+                        <div class="card-body">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Solicitud</label>
+                            <select class="form-select" name="idSolicitud" id="idSolicitud" required onchange="getSolicitudesPlantas()">                                            
+                                <option disabled selected>Elija una opción</option>                                            
+                                <?php
+                                    $resultado = $conexion->getSolicitudesPlantas();
+                                    foreach ($resultado as $row) {
+                                        echo "<option value=".$row['idSolicitud'].">". $row['idSolicitud']."</option>";
+                                    }
+                                ?>
+                            </select>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="from-label">Cliente</label>
+                                    <input class="form-control" type="text" id="NombreCliente" name="NombreCliente"  disabled/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="from-label">Planta</label>
+                                    <input class="form-control" type="text" id="Planta" name="Planta"  required disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="from-label">Descripción</label>
+                                    <input class="form-control" type="text" id="Descripcion" name="Descripcion"  required disabled />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                <label for="staticEmail" class="from-label">Cantidad surtida</label>
+                                <input class="form-control" type="number" id="CantidadSurtida" name="CantidadSurtida" placeholder="Cantidad Surtidas" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                <label for="input"></label>
+                                </div>
+                                <div class="col-6">
+                                </div>
+                                <div class="col-3">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Planta</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" id="Planta" name="Planta" placeholder="Nombre de la planta" required pattern="[A-Za-z1-9 ]+" minlength="3" maxlength="13" />
-                        <label for="input"></label>
-                    </div>
-
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion de la planta" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                        <label for="input"></label>
-                    </div>
-                </div>
-
-                <div class="col-lg-2">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Cantidad surtida</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="number" id="CantidadSurtida" name="CantidadSurtida" placeholder="Cantidad de plantas Surtidas" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                        <label for="input"></label>
-                    </div>
-                    
-                    
                 </div>
             </div>
         </div>
+        
+        <div class="container botton">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Datos de pago
+                        </div>
+                        <div class="card-body">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Archivo comprovante</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="file" id="file" name="file" />
+                                    <label for="input"></label>
+                                </div>
+                            <br>
+                            <div class="row g-3">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Concepto general</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" id="conceptoGeneral" name="conceptoGeneral" placeholder="Consepto General del pago" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
+                                    <label for="input"></label>
+                                </div>
+
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Importe</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="number" id="Importe" name="Importe" placeholder="Importe a pagar" required pattern="[0-9,.]+" minlength="3" maxlength="13" />
+                                    <label for="input"></label>                            
+                                    <br>
+                            <div class="row">
+                                <div class="col-3">
+                                </div>
+                                <div class="col-6">
+                                </div>
+                                <div class="col-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-6">
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Grabar</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function getSolicitudesPlantas(){
+            $.ajax({
+                url: "/src/php/SistemaVentas/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Busqueda":"SolicitudPlantas",
+                    "idSolicitud":document.getElementById("idSolicitud").value
+                },
+                success: function(respuesta){
+                    console.log(respuesta);
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("NombreCliente").value=respuesta[0]['razonSocial'];
+                    document.getElementById("Planta").value=respuesta[0]['nombre'];
+                    document.getElementById("Descripcion").value=respuesta[0]['descripcion'];
+                }
+            })   
+        }
+    </script>
+    <?php
+if (isset($_POST)){
+    if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
+        $idPago=$conexion->getNextPago();
+        $idPago=$idPago[0][0];
+        $idSolicitud = $_POST['idSolicitud'];
+        $fecha = $_POST['fecha'];
+        $conceptoGeneral = $_POST['conceptoGeneral'];
+        $Importe = $_POST['Importe'];
+        $CantidadSurtida = $_POST['CantidadSurtida'];
+        $idPago=strval($idPago);
+        if(isset($_FILES))
+        {
+            GuardarArchivo($idPago);
+        }
+        $resultado = $conexion->insertPagos($idSolicitud,$fecha,$conceptoGeneral,$Importe,$CantidadSurtida);
+
+        /*
+
+        unset($_POST);
+        unset($_FILES);
+        ob_start();
+        echo("<meta http-equiv='refresh' content='1'>");
+        */
+    }
+}
+        function GuardarArchivo($nombre){
+            $nombre=$nombre.".pdf";
+            $carpetaDestino=$_SERVER['DOCUMENT_ROOT']."/src/PDF/Comprobantes/";
+            if(isset($_FILES["file"]))
+                {
+                    if($_FILES["file"]["type"]=="application/pdf")
+                    {
+                        if(!file_exists($carpetaDestino)){
+                            mkdir($carpetaDestino, 0777);
+                        }
+                        $origen=$_FILES["file"]["tmp_name"];
+                        $destino=$carpetaDestino.$nombre;
+                        if(move_uploaded_file($origen, $destino))
+                        {
+                        return $nombre;
+                            }else{
+                                log("Error : archivos no movido");
+                            }
+                    }else{
+                        log("Error : archivos no es pdf");
+                    }
+                }else{
+                    var_dump($_FILES);
+                }
+        }
+    ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>    

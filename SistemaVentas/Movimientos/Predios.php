@@ -39,7 +39,7 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Predios.php">Predios</a></li>
+                                
                             </ul>
                         </li>
 
@@ -49,6 +49,7 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pagos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Predios.php">Predios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -102,7 +103,7 @@
                                 <th>Latitud</th>
                                 <th>Longitud</th>
                                 <th>Registro SADER</th>
-                                <th>Modificar</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -118,7 +119,6 @@
                                     echo "<td>" . $row['latitud'] . "</td>";
                                     echo "<td>" . $row['longitud'] . "</td>";
                                     echo "<td>" . $row['RegistroSADER'] . "</td>";
-                                    echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
                                     echo "</tr>";
                                 }
                             ?>
@@ -213,86 +213,6 @@
         </div>
     </div>
 
-    <!-- Modal Modificar-->
-    <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modificar datos de la planta</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="/SistemaVentas/Categoria/Predios.php" method="POST" >
-                <input type="hidden" name="categoria" value="Modificar">
-                <input type="hidden" name="idPredio" id="idPredio">
-                    <div class="modal-body">
-                        <div class="mb-3 row">
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre del cliente</label>
-                            <div class="col-sm-10">
-                                <select class="form-select" name="idClienteM" id="idClienteM" required>
-                                    <option disabled selected>Elija una opción</option>
-                                    <?php
-                                        $resultado = $conexion->getClient();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idCliente'].">". $row['razonSocial']."</option>";
-                                        }
-                                    ?>
-                                </select>
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Municipio </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="MunicipioM" name="MunicipioM" placeholder="Municipio donde se ubica el predio" required pattern="[A-Za-z ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Extensión </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="ExtensionM" name="ExtensionM" placeholder="Extension " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Uso de predio</label>
-                            <div class="col-sm-10">
-                                <select class="form-select" name="usoPredioM" id="usoPredioM" required>
-                                    <option disabled selected>Elija una opción</option>
-                                    <option value="1">agrícola</option>
-                                    <option value="2">pecuario</option>
-                                    <option value="3">forestal</option>
-                                    <option value="4">urbano</option>
-                                </select>
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Latitud </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="LatitudM" name="LatitudM" placeholder="Latitud " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Longitud </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="LongitudM" name="LongitudM" placeholder="Longitud " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Registro SADER</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RegistroSaderM" name="RegistroSaderM" placeholder="Registro SADER" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <script>
 
         $(document).ready( function () {
@@ -324,19 +244,6 @@
             $latitud = $_POST['Latitud'];
             $RegistroSADER = $_POST['RegistroSader'];
             $resultado = $conexion->insertPredios($idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud, $RegistroSADER);
-            unset($_POST);
-            ob_start();
-            echo("<meta http-equiv='refresh' content='1'>");
-        }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
-            $idPredio = $_POST["idPredio"];
-            $idCliente = $_POST['idClienteM'];
-            $municipio = $_POST['MunicipioM'];
-            $extencion = $_POST['ExtensionM'];
-            $usoPredio = $_POST['usoPredioM'];
-            $longitud = $_POST['LongitudM'];
-            $latitud = $_POST['LatitudM'];
-            $RegistroSADER = $_POST['RegistroSaderM'];
-            $resultado = $conexion->updatePredios($idPredio, $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud, $RegistroSADER);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");

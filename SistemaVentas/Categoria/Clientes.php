@@ -93,8 +93,6 @@
 
         <div class="container">
             <div class="row">
-
-
                 <div class="col-lg-8 ">
                     <h2 style="text-align:center">Clientes</h2>
                     <br>
@@ -132,7 +130,7 @@
                                         echo "<td>" . $row['celular'] . "</td>";
                                         echo "<td>" . $row['tipoCliente'] . "</td>";
                                         echo "<td>" . $row['domicilioFiscal'] . "</td>";
-                                        echo "<td><a href=/src/PDF/ActaSituacionFiscal/". $row['idCliente'].".pdf>Descargar</a></td>";
+                                        echo "<td><a href=/src/PDF/ConstanciaFiscal/". $row['idCliente'].".pdf>Descargar</a></td>";
                                         echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
                                         echo "</tr>";
                                     }

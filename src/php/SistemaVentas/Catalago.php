@@ -93,8 +93,8 @@ class Catalago {
         return $request;
     }
 
-    function insertClientes( $razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $saldo, $domicilioFiscal){
-        $sql = "INSERT INTO clientes( razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, saldo, domicilioFiscal) VALUES ( :razonSocial, :RFC, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :saldo, :domicilioFiscal)";
+    function insertClientes($razonSocial, $RFC, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $saldo, $domicilioFiscal){
+        $sql = "INSERT INTO clientes(razonSocial, RFC, domicilio, ciudad, estado, email, telefono, celular, tipoCliente, saldo, domicilioFiscal) VALUES ( :razonSocial, :RFC, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :saldo, :domicilioFiscal)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":razonSocial",$razonSocial);
         $query->bindParam(":RFC",$RFC);
