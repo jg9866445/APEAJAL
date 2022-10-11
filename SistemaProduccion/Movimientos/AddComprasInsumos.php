@@ -102,11 +102,11 @@
 
                 <div class="col-lg-8">
                 <div class="card">
-                    <div class="card-header">Provedores</div>
+                    <div class="card-header">Proveedores</div>
                     <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
+                                <option disabled selected>Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllProveedores();
                                         foreach ($resultado as $row) {
@@ -155,7 +155,16 @@
                         <div class="card">
                         <div class="card-header">Factura</div>
                         <div class="card-body">
-                            <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                            <label for="staticEmail" class="form-label">Numero de factura</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Factura física</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -177,7 +186,7 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
+                                <option disabled selected>Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllProveedores();
                                         foreach ($resultado as $row) {
@@ -193,16 +202,16 @@
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
+                                    <label for="staticEmail" class="form-label">Descripción</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
                                 </div>
                                 <!--TODO:Agregar clasifiacion-->
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">existencias</label>
+                                    <label for="staticEmail" class="form-label">Existencias</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">precio</label>
+                                    <label for="staticEmail" class="form-label">Precio</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
                                 </div>
                             </div>
@@ -251,13 +260,13 @@
 
                 <div class="col-lg-8 ">
                     <div class="card">
-                        <div class="card-header">detalles</div>
+                        <div class="card-header">Detalles</div>
                         <div class="card-body">
                         <table  id="mytable" class="table table-bordered table-hover ">
                             <tr>
                                 <th>Nombre</th>
-                                <th>descripcion</th>
-                                <th>existencias</th>
+                                <th>Descripción</th>
+                                <th>Existencias</th>
                                 <th>Cantidad</th>
                                 <th>Costo</th>
                                 <th>Eliminar</th>

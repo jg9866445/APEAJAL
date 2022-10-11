@@ -105,7 +105,7 @@
                     <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
+                                <option disabled selected>Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllProveedores();
                                         foreach ($resultado as $row) {
@@ -143,11 +143,11 @@
 
                 <div class="col-lg-8 ">
                         <div class="card">
-                        <div class="card-header">Planta</div>
+                        <div class="card-header">Insumo</div>
                         <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
+                                <option disabled selected>Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllProveedores();
                                         foreach ($resultado as $row) {
@@ -163,18 +163,19 @@
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
+                                    <label for="staticEmail" class="form-label">Categorías</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">existencias</label>
+                                    <label for="staticEmail" class="form-label">Descripción</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">precio</label>
+                                    <label for="staticEmail" class="form-label">Existencias</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
                                 </div>
                             </div>
+                            <br>
                             <div class="row g-3">
                                 <div class="col-md-3">
                                 </div>
@@ -206,7 +207,7 @@
 
                 <div class="col-lg-5 ">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Guardar Vale de salida</button>
+                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Guardar vale de salida</button>
                     </div>
                 </div>
                 <div class="col-lg-2">

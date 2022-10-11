@@ -94,10 +94,10 @@
                     <table id="table_id" class="table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
+                                <th></th>
                                 <th>Proveedor</th>
                                 <th>Fecha</th>
-                                <th>factura</th>
+                                <th>Factura</th>
                                 <th>Total</th>
                             </tr>
                         </thead>

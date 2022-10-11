@@ -79,7 +79,7 @@
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center"> Terminar Orden de produccion</h3>
+                            <h3 class="text-center"> Terminar orden de producción</h3>
                         </div>
                         <div class="col-md-3">
                         </div>
@@ -99,36 +99,78 @@
 
                 <div class="col-lg-8 ">
                         <div class="card">
-                        <div class="card-header">Orden de produccion</div>
+                        <div class="card-header">Orden de producción</div>
                         <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
+                                <option disabled selected>Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllProveedores();
                                         foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                            //echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
                                         }
                                     ?>
                                 </select>
-                                <label for="input"></label>
                             </div>
+
+                            <hr>                            
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-12">Responsable</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Puesto</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                </div>
+                            </div>
+                            <hr>
+                            <br>    
+                            <div class="row g-3">
+                                <div class="col-md-12">Planta</div>
+                            </div>
+                            <br>
                             <div class="row g-3">
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Responsable</label>
+                                    <label for="staticEmail" class="form-label">Nombre</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Planta</label>
+                                    <label for="staticEmail" class="form-label">Categoría</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
                                 </div>
                                 <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Descripción</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Existencias</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <div class="row g-3">
+                                <div class="col-md-12">Orden de producción</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Fecha de orden</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Descripcion</label>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Descripción</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Cantidad esperada</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                             </div>
                     </div>
@@ -153,13 +195,17 @@
                         <div class="card-header">Datos</div>
                         <div class="card-body">
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Fecha real de termino</label>
+                                    <input class="form-control" type="date" name="telefonoProveedor" id="telefonoProveedor"/>
+                                </div>
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Cantidad lograda</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">fecha real de termino</label>
-                                    <input class="form-control" type="date" name="telefonoProveedor" id="telefonoProveedor"/>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Costo de producción</label>
+                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
                                 </div>
                             </div>
                             <br>

@@ -73,7 +73,7 @@
                 <div class="col-lg-7 ">
                 </div>
                 <div class="col-lg-2">
-                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddDevoluciones.php">Nuevo regristro</a>
+                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddDevoluciones.php">Nuevo registró</a>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
                                 <th>Vale salida</th>
                                 <th>Responsable</th>
                                 <th>Nombre insumo</th>
-                                <th>Clasificacion</th>
+                                <th>Clasificación</th>
                                 <th>Cantidad de salida</th>
                                 <th>Cantidad devuelta</th>
                             </tr>

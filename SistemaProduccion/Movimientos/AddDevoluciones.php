@@ -1,6 +1,6 @@
 <?php
-    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
-    $conexion = new Movimientos();
+include_once($_SERVER['DOCUMENT_ROOT'] . "/src/php/SistemaProduccion/Movimientos.php");
+$conexion = new Movimientos();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8">
+    </script>
 </head>
 
 <body>
@@ -44,10 +45,10 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item"href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
+                                <li><a class="dropdown-item"href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
+                                <li><a class="dropdown-item"href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
+                                <li><a class="dropdown-item"href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución deinsumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -81,11 +82,11 @@
                             <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center"> Nuevo Devolución</h3>
+                            <h3 class="text-center"> Nuevo devolución</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
-                            <input class="form-control" type="date" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                            <input class="form-control" type="date" name="domicilioProveedor" id="domicilioProveedor" />
                         </div>
                     </div>
                 </div>
@@ -100,17 +101,17 @@
                 </div>
 
                 <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">Vale de Devolución</div>
-                    <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">Vale de devolución</div>
+                        <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
+                                    <option disabled selected>Escoja una opción</option>
                                     <?php
-                                        $resultado = $conexion->getAllProveedores();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
-                                        }
+                                    $resultado = $conexion->getAllProveedores();
+                                    foreach ($resultado as $row) {
+                                        //echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                    }
                                     ?>
                                 </select>
                             </div>
@@ -126,7 +127,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Puesto</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
                                 </div>
                             </div>
                             <hr>
@@ -140,94 +141,30 @@
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Categoria</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <label for="staticEmail" class="form-label">Categoría</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <label for="staticEmail" class="form-label">Descripción</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
                                 </div>
                             </div>
                             <br>
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Unidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">existencias</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <label for="staticEmail" class="form-label">Existencias</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">cantidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                            </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2">
-
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-
-                </div>
-
-                <div class="col-lg-8 ">
-                        <div class="card">
-                        <div class="card-header">Planta</div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
-                                    <?php
-                                        $resultado = $conexion->getAllProveedores();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
-                                        }
-                                    ?>
-                                </select>
-                                <label for="input"></label>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">existencias</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">precio</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                </div>
-                                <div class="col-md-3">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Costo</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
-                                </div>
-                                <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Cantidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" />
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
                                 </div>
                             </div>
-                    </div>
+                        </div>
                     </div>
                 </div>
 
@@ -236,7 +173,7 @@
                 </div>
             </div>
         </div>
-        <br>
+<br/>
 
         <div class="container">
             <div class="row">
@@ -250,16 +187,12 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Fecha aproximada de termino</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor"/>
+                                    <label for="staticEmail" class="form-label">Cantidad devuelta</label>
+                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">cantidad esperada</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor"/>
                                 </div>
                             </div>
                             <br>
@@ -269,23 +202,53 @@
                                 <div class="col-md-4">
                                 </div>
                                 <div class="col-md-4">
-                                    <button type="button" class="btn btn-primary btn-xs btn-block" >Guardar Orden</button>
                                 </div>
                             </div>
-                </div>
-                                    </div>
+                        </div>
                     </div>
                 </div>
-<br>
-                <div class="col-lg-2">
+            </div>
+            <div class="col-lg-2">
 
-                </div>
             </div>
         </div>
+<br/>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
+
+                </div>
+
+                <div class="col-lg-8 ">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                        <button type="button" class="btn btn-primary btn-xs btn-block">Guardar devolución</button>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+    </div>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 </body>
+
 </html>

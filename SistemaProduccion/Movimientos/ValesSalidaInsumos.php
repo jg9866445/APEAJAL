@@ -74,7 +74,7 @@
                 <div class="col-lg-7 ">
                 </div>
                 <div class="col-lg-2">
-                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddValesSalida.php">Nuevo regristro</a>
+                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddValesSalida.php">Nuevo registro</a>
                 </div>
             </div>
         </div>
