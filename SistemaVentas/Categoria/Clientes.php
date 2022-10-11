@@ -102,14 +102,13 @@
                                 <th>  </th>
                                 <th>Razón social</th>
                                 <th>RFC</th>
-                                <th>Domicilio</th>
+                                <th>Domicilio Fiscal</th>
                                 <th>Ciudad</th>
                                 <th>Estado</th>
                                 <th>Correo</th>
                                 <th>Teléfono</th>
                                 <th>Celular</th>
                                 <th>Tipo de cliente</th>
-                                <th>Domicilio Fiscal</th>
                                 <th>Constancia de Situacion Fiscal</th>
                                 <th>Modificar</th>
                             </tr>
@@ -122,14 +121,13 @@
                                         echo "<td>" . $row['idCliente'] . "</td>";
                                         echo "<td>" . $row['razonSocial'] . "</td>";
                                         echo "<td>" . $row['RFC'] . "</td>";
-                                        echo "<td>" . $row['domicilio'] . "</td>";
+                                        echo "<td>" . $row['domicilioFiscal'] . "</td>";
                                         echo "<td>" . $row['ciudad'] . "</td>";
                                         echo "<td>" . $row['estado'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td>" . $row['telefono'] . "</td>";
                                         echo "<td>" . $row['celular'] . "</td>";
                                         echo "<td>" . $row['tipoCliente'] . "</td>";
-                                        echo "<td>" . $row['domicilioFiscal'] . "</td>";
                                         echo "<td><a href=/src/PDF/ConstanciaFiscal/". $row['idCliente'].".pdf>Descargar</a></td>";
                                         echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
                                         echo "</tr>";
@@ -173,9 +171,9 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="domicilio" name="domicilio" placeholder="domicilio" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20" />
+                                <input class="form-control" type="text" id="domicilio" name="domicilio" placeholder="domicilio" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"   />
                                 <label for="input"></label>
                             </div>
 
@@ -224,12 +222,6 @@
                                 <input class="form-control" type="file" id="file" name="file"  accept="application/pdf"  required/>
                                 <label for="input"></label>
                             </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio Fiscal</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="domicilioFiscal" name="domicilioFiscal" placeholder="domicilio Fiscal " required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"   />
-                                <label for="input"></label>
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -267,7 +259,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="domicilioM" name="domicilioM" placeholder="domicilio" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"  />
                                 <label for="input"></label>
@@ -318,12 +310,6 @@
                                 <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" />
                                 <label for="input"></label>
                             </div>
-                            
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio Fiscal</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="domicilioFiscalM" name="domicilioFiscalM" placeholder="domicilio Fiscal " required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"  />
-                                <label for="input"></label>
-                            </div>
                         </div>
                     </div>
 
@@ -349,14 +335,13 @@
             document.getElementById("idClienteM").value=elementosTD[0].textContent;
             document.getElementById("RazonSocialM").value=elementosTD[1].textContent;
             document.getElementById("RFCM").value=elementosTD[2].textContent;
-            document.getElementById("domicilioM").value=elementosTD[3].textContent;
+            document.getElementById('domicilioFiscalM').value=elementosTD[3].textContent;
             document.getElementById('CiudadM').value=elementosTD[4].textContent;
             document.getElementById('EstadoM').value=elementosTD[5].textContent;
             document.getElementById('emailM').value=elementosTD[6].textContent;
             document.getElementById('TelefonoM').value=elementosTD[7].textContent;
             document.getElementById('CelularM').value=elementosTD[8].textContent;
             document.getElementById('idTipoClienteM').value=elementosTD[9].textContent;
-            document.getElementById('domicilioFiscalM').value=elementosTD[10].textContent;
             }
 
             function getUltimoInsert(){
@@ -382,20 +367,19 @@
             $idCliente = $_POST['idCliente'];   
             $RazonSocial = $_POST['RazonSocial'];
             $RFC = $_POST['RFC'];
-            $domicilio = $_POST['domicilio'];
+            $domicilioFiscal = $_POST['domicilioFiscal'];
             $Ciudad = $_POST['Ciudad'];
             $Estado = $_POST['Estado'];
             $email = $_POST['email'];
             $Telefono = $_POST['Telefono'];
             $Celular = $_POST['Celular'];
             $idTipoCliente = $_POST['idTipoCliente'];
-            $domicilioFiscal = $_POST['domicilioFiscal'];
             $saldo=0;
             if(isset($_FILES))
             {
                 GuardarArchivo($idCliente);
             }
-            $resultado = $conexion->insertClientes($RazonSocial,$RFC,$domicilio,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente, $saldo, $domicilioFiscal);
+            $resultado = $conexion->insertClientes($RazonSocial,$RFC,$domicilioFiscal,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente, $saldo);
             unset($_POST);
             unset($_FILES);
             ob_start();
@@ -404,19 +388,18 @@
             $idCliente = $_POST['idClienteM'];
             $RazonSocial = $_POST['RazonSocialM'];
             $RFC = $_POST['RFCM'];
-            $domicilio = $_POST['domicilioM'];
+            $domicilioFiscal = $_POST['domicilioFiscalM'];
             $Ciudad = $_POST['CiudadM'];
             $Estado = $_POST['EstadoM'];
             $email = $_POST['emailM'];
             $Telefono = $_POST['TelefonoM'];
             $Celular = $_POST['CelularM'];
             $idTipoCliente = $_POST['idTipoClienteM'];
-            $domicilioFiscal = $_POST['domicilioFiscalM'];
             if(!isset($_FILES))
             {
                 GuardarArchivo($idCliente);
             }
-            $resultado = $conexion->updateClientes($idCliente,$RazonSocial,$RFC,$domicilio,$Ciudad,$Estado,$email,$Telefono,$Celular,$idTipoCliente,$domicilioFiscal);
+            $resultado = $conexion->updateClientes($idCliente,$RazonSocial,$RFC,$domicilioFiscal,$Ciudad,$Estado,$email,$Telefono,$Celular,$idTipoCliente);
             unset($_POST);
             unset($_FILES);
             ob_start();

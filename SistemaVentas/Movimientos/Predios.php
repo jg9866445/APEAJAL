@@ -102,8 +102,6 @@
                                 <th>Uso de predio</th>
                                 <th>Latitud</th>
                                 <th>Longitud</th>
-                                <th>Registro SADER</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
@@ -118,7 +116,6 @@
                                     echo "<td>" . $row['usoPredio'] . "</td>";
                                     echo "<td>" . $row['latitud'] . "</td>";
                                     echo "<td>" . $row['longitud'] . "</td>";
-                                    echo "<td>" . $row['RegistroSADER'] . "</td>";
                                     echo "</tr>";
                                 }
                             ?>
@@ -196,12 +193,6 @@
                                 <input class="form-control" type="text" id="Longitud" name="Longitud" placeholder="Longitud " required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Registro SADER</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RegistroSader" name="RegistroSader" placeholder="Registro SADER" required pattern="[A-Za-z0-9 ]+" minlength="3" maxlength="40" />
-                                <label for="input"></label>
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -228,7 +219,6 @@
             document.getElementById('usoPredioM').value=elementosTD[4].textContent;
             document.getElementById('LatitudM').value=elementosTD[5].textContent;
             document.getElementById('LongitudM').value=elementosTD[6].textContent;
-            ocument.getElementById('RegistroSaderM').value=elementosTD[7].textContent;
             }
 
     </script>
@@ -242,8 +232,7 @@
             $usoPredio = $_POST['usoPredio'];
             $longitud = $_POST['Longitud'];
             $latitud = $_POST['Latitud'];
-            $RegistroSADER = $_POST['RegistroSader'];
-            $resultado = $conexion->insertPredios($idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud, $RegistroSADER);
+            $resultado = $conexion->insertPredios($idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
