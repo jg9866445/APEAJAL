@@ -24,7 +24,7 @@ class Catalago {
     {
         unset($this->connect);
     }
-    
+    //funcion para buscar el ultimo id y
     function getNextIdProveedor(){
         $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'proveedor'";
         $query = $this->connect->prepare($sql);
