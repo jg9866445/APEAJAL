@@ -210,7 +210,7 @@
 
     </script>
     
-</body>
+</body> 
     <?php
     if (isset($_POST)){
         if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){

@@ -72,13 +72,13 @@
         <div class="container botton">
             <div class="row">
                 <div class="col-lg-4 ">
-                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/EndOrdenProduccion.php">Terminar Orden</a>
+                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/EndOrdenProduccion.php">Terminar orden</a>
                 </div>
                 <div class="col-lg-6 ">
 
                 </div>
                 <div class="col-lg-2">
-                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddOrdenProduccion.php">Nuevo regristro</a>
+                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddOrdenProduccion.php">Nuevo registró</a>
                 </div>
             </div>
         </div>
@@ -90,14 +90,14 @@
                 </div>
 
                 <div class="col-lg-8 ">
-                    <h2>Orden Produccion</h2>
+                    <h2>Orden producción</h2>
                     <br>
                     <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
                                 <th></th>
                                 <th>Responsable</th>
-                                <th>Descripcion</th>
+                                <th>Descripción</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>

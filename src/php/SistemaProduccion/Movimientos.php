@@ -25,13 +25,6 @@ class Movimientos {
         unset($this->connect);
     }
 
-    public function getAllComprasInsumos(){
-        $sql = "SELECT fc.idOrdenCompra,fc.factura,fc.fecha,p.nombre as 'proveedores',i.nombre as 'insumos',dfc.cantidad,dfc.costo,fc.total from  facturaCompras as fc INNER JOIN proveedor as p on fc.idProveedor= p.idProveedor INNER JOIN detalleFacturaCompra as dfc on fc.idOrdenCompra = dfc.idOrdenCompra INNER JOIN insumo as i on i.idInsumo = dfc.idInsumo";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
 
     public function getAllProveedores() {
         $sql = "SELECT * from proveedor";
@@ -48,8 +41,24 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
+
+    public function getAllResponsables() {
+        $sql = "SELECT * from proveedor";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllPlanta(){
+        $sql = "SELECT pf.idPlanta,e.nombre FROM plantaForestal as pf INNER JOIN especie as e on pf.idEspecie = e.idEspecie";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
     
-    public function getProveedores($idProveedor) {
+    public function getProveedore($idProveedor) {
         $sql = "SELECT * from  proveedor WHERE idProveedor=:idProveedor";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idProveedor', $idProveedor);
@@ -58,8 +67,8 @@ class Movimientos {
         return $results;
     }
 
-    public function getInsumos($idInsumo){
-        $sql = "SELECT * FROM insumo WHERE idInsumo=:idInsumo";
+    public function getInsumo($idInsumo){
+        $sql = "SELECT i.nombre,i.existencias,i.unidadMetrica,c.concepto from  insumo as i INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE i.idInsumo=:idInsumo";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idInsumo', $idInsumo);
         $query -> execute(); 
@@ -67,20 +76,38 @@ class Movimientos {
         return $results;
     }
 
-    public function getAllResponsables(){
-        $sql = "SELECT * FROM responsable";
+    public function getResponsable($idResponsable) {
+        $sql = "SELECT * from  responsable WHERE idResponsable=:idResponsable";
         $query = $this->connect->prepare($sql);
+        $query->bindParam(':idResponsable', $idResponsable);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    public function getAllPlantasForestales(){
-       // $sql = "Select pf.idPlanta,e.nombre from plantaForestal as pf INNER JOIN especie as e = e.idEspecie = pf.idEspecie";
-       // $query = $this->connect->prepare($sql);
-        //$query -> execute(); 
-        //$results = $query -> fetchAll(); 
-     //   return $results;
+    public function getPlanta($idPlanta){
+        $sql = "SELECT pf.idPlanta,pf.descripcion,pf.existencia,e.nombre FROM plantaForestal as pf INNER JOIN especie as e on pf.idEspecie = e.idEspecie WHERE idPlanta=:idPlanta";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPlanta', $idPlanta);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
+
+
+
+
+
+
+
+public function getAllComprasInsumos(){
+        $sql = "SELECT fc.idOrdenCompra,fc.factura,fc.fecha,p.nombre as 'proveedores',i.nombre as 'insumos',dfc.cantidad,dfc.costo,fc.total from  facturaCompras as fc INNER JOIN proveedor as p on fc.idProveedor= p.idProveedor INNER JOIN detalleFacturaCompra as dfc on fc.idOrdenCompra = dfc.idOrdenCompra INNER JOIN insumo as i on i.idInsumo = dfc.idInsumo";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
     }
 
 

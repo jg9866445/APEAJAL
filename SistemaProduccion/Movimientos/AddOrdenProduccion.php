@@ -81,11 +81,11 @@
                             <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center"> Nueva orden de produccion</h3>
+                            <h3 class="text-center"> Nueva orden de producción</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
-                            <input class="form-control" type="date" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                            <input class="form-control" type="date" name="domicilioProveedor" id="domicilioProveedor" />
                         </div>
                     </div>
                 </div>
@@ -103,18 +103,20 @@
                 <div class="card">
                     <div class="card-header">Responsable</div>
                     <div class="card-body">
+                        <div class="col-md-5">
                             <div class="row g-3">
-                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
+                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getAllResponsables()">
+                                <option disabled selected>Escoja una opción</option>
                                     <?php
-                                        $resultado = $conexion->getAllProveedores();
+                                        $resultado = $conexion->getAllResponsables();
                                         foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                           // echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
                                         }
                                     ?>
                                 </select>
                                 <label for="input"></label>
                             </div>
+                        </div>
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Nombre</label>
@@ -143,46 +145,45 @@
 
                 <div class="col-lg-8 ">
                         <div class="card">
-                        <div class="card-header">Planta</div>
+                        <div class="card-header">Insumo</div>
                         <div class="card-body">
                             <div class="row g-3">
-                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
-                                    <?php
-                                        $resultado = $conexion->getAllProveedores();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
-                                        }
-                                    ?>
-                                </select>
-                                <label for="input"></label>
+                                <div class="col-md-5">
+                                    <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getAllInsumos()">
+                                    <option disabled selected>Escoja una opción</option>
+                                        <?php
+                                            $resultado = $conexion->getAllInsumos();
+                                            foreach ($resultado as $row) {
+                                                //echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
+                            <br/>
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Nombre</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
+                                    <label for="staticEmail" class="form-label">Descripción</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">existencias</label>
+                                    <label for="staticEmail" class="form-label">Categorías</label>
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">precio</label>
+                                    <label for="staticEmail" class="form-label">Existencias</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
                                 </div>
                             </div>
+                            <br/>
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                 </div>
-                                <div class="col-md-3">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Costo</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
+                                <div class="col-md-5">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Cantidad</label>
@@ -216,11 +217,11 @@
                                     <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
+                                    <label for="staticEmail" class="form-label">Descripción</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor"/>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">cantidad esperada</label>
+                                    <label for="staticEmail" class="form-label">Cantidad esperada</label>
                                     <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor"/>
                                 </div>
                             </div>
@@ -244,7 +245,7 @@
 
                 <div class="col-lg-5 ">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Guardar Orden</button>
+                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Guardar orden</button>
                     </div>
                 </div>
                 <div class="col-lg-2">

@@ -78,14 +78,14 @@
                     <div class="row g-3">
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">id Orden de compra</label>
-                            <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                            <input class="form-control" type="text" name="idOrden" id="idOrden" disabled />
                         </div>
                         <div class="col-md-6">
                             <h3 class="text-center"> Nuevo compra de insumos</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
-                            <input class="form-control" type="date" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                            <input class="form-control" type="date" name="FechaOrden" id="FechaOrden" />
                         </div>
                     </div>
                 </div>
@@ -102,11 +102,11 @@
 
                 <div class="col-lg-8">
                 <div class="card">
-                    <div class="card-header">Provedores</div>
+                    <div class="card-header">Proveedores</div>
                     <div class="card-body">
                             <div class="row g-3">
-                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
+                                <select class="form-select" name="idProveedor" id="idProveedor" required onchange="getProveedore()">
+                                <option disabled selected>Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllProveedores();
                                         foreach ($resultado as $row) {
@@ -119,19 +119,19 @@
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                    <input class="form-control" type="text" name="NombreProveedor" id="NombreProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Domicilio</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <input class="form-control" type="text" name="DomicilioProveedor" id="DomicilioProveedor" disabled/>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Contacto</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                    <input class="form-control" type="text" name="ContactoProveedor" id="ContactoProveedor" disabled />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Email</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <input class="form-control" type="text" name="EmailProveedor" id="EmailProveedor" disabled/>
                                 </div>
                             </div>
                     </div>
@@ -155,7 +155,16 @@
                         <div class="card">
                         <div class="card-header">Factura</div>
                         <div class="card-body">
-                            <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" />
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                            <label for="staticEmail" class="form-label">Numero de factura</label>
+                                    <input class="form-control" type="text" name="Factura" id="Factura"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Factura física</label>
+                                    <input class="form-control" type="file" name="FacturaFisica" id="FacturaFisica"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -173,15 +182,15 @@
 
                 <div class="col-lg-8 ">
                         <div class="card">
-                        <div class="card-header">Planta</div>
+                        <div class="card-header">Insumo</div>
                         <div class="card-body">
                             <div class="row g-3">
-                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
-                                <option disabled selected>Escoja una opcion</option>
+                                <select class="form-select" name="idInsumo" id="idInsumo" required onchange="getInsumo()">
+                                <option disabled selected value="-20">Escoja una opción</option>
                                     <?php
-                                        $resultado = $conexion->getAllProveedores();
+                                        $resultado = $conexion->getAllInsumos();
                                         foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                            echo "<option value=".$row['idInsumo'].">". $row['nombre']."</option>";
                                         }
                                     ?>
                                 </select>
@@ -190,20 +199,19 @@
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                    <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">descripcion</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
-                                </div>
-                                <!--TODO:Agregar clasifiacion-->
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">existencias</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                    <label for="staticEmail" class="form-label">Clasificacion</label>
+                                    <input class="form-control" type="text" name="ClasificacionInsumo" id="ClasificacionInsumo" disabled/>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">precio</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <label for="staticEmail" class="form-label">Existencias</label>
+                                    <input class="form-control" type="text" name="ExistenciasInsumo" id="ExistenciasInsumo" disabled/>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Unidad</label>
+                                    <input class="form-control" type="text" name="unidadMetricaInsumo" id="unidadMetricaInsumo" disabled/>
                                 </div>
                             </div>
                             <br>
@@ -214,11 +222,11 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Costo</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" />
+                                    <input class="form-control" type="text" name="CostoInsumo" id="CostoInsumo" />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Cantidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" />
+                                    <input class="form-control" type="text" name="CantidadInsumo" id="CantidadInsumo" />
                                 </div>
                             </div>
                             <br>
@@ -230,7 +238,7 @@
                                 <div class="col-md-3">
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Agregar</button>
+                                    <button id='adicionar' type="button" class="btn btn-primary btn-xs btn-block text-center"  >Agregar</button>
                                 </div>
                             </div>
                     </div>
@@ -251,17 +259,24 @@
 
                 <div class="col-lg-8 ">
                     <div class="card">
-                        <div class="card-header">detalles</div>
+                        <div class="card-header">Detalles</div>
                         <div class="card-body">
-                        <table  id="mytable" class="table table-bordered table-hover ">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>descripcion</th>
-                                <th>existencias</th>
-                                <th>Cantidad</th>
-                                <th>Costo</th>
-                                <th>Eliminar</th>
-                            </tr>
+                        <table  id="mytable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>id Insumo</th>
+                                    <th>Nombre</th>
+                                    <th>Clasificacion</th>
+                                    <th>Existencias</th>
+                                    <th>Unidad</th>
+                                    <th>Costo</th>
+                                    <th>Cantidad</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -284,7 +299,7 @@
                     <div class="card">
                         <div class="card-header">Total</div>
                         <div class="card-body">
-                            <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" />
+                            <input class="form-control" type="text" name="total" id="total"  value="0" readonly />
                         </div>
                     </div>
                 </div>
@@ -304,7 +319,7 @@
 
                 <div class="col-lg-4 ">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Guardar compra de insumos</button>
+                        <button type="button" id="regristar" class="btn btn-primary btn-xs btn-block text-center" >Guardar compra de insumos</button>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -313,6 +328,151 @@
             </div>
         </div>
     <br>
+    
+    <script>
+        //se genera un escucha para que espere cualquier clic configurado
+    $(document).ready(function() {
+        //se obtiene el valor de total y lo combierte en un entero con base 10
+        var total=parseInt(document.getElementById("total").value,10);
+        //se inicializa el contador de los renglones
+        var i = 1;
+        //espera el clic de boton agregar
+        $('#adicionar').click(function() {
+        //obtiene el valor de el id y lo asigna a variable
+        var idInsumo = document.getElementById("idInsumo").value;
+        var NombreInsumo = document.getElementById("NombreInsumo").value;
+        var ClasificacionInsumo = document.getElementById("ClasificacionInsumo").value;
+        var ExistenciasInsumo = document.getElementById("ExistenciasInsumo").value;
+        var unidadMetricaInsumo = document.getElementById("unidadMetricaInsumo").value;
+        var CostoInsumo = parseInt(document.getElementById("CostoInsumo").value,10);
+        var CantidadInsumo = parseInt(document.getElementById("CantidadInsumo").value,10);
+       //preparas la nueva fila
+        var fila = 
+            '<tr id="row' + i + '" >'+
+                '<td id="idPlanta">' + idInsumo + '</td>'+
+                '<td>' + NombreInsumo + '</td>'+
+                '<td>' + ClasificacionInsumo + '</td>'+
+                '<td>' + ExistenciasInsumo + '</td>'+
+                '<td>' + unidadMetricaInsumo + '</td>'+
+                '<td id="Costo">' + CostoInsumo + '</td>'+
+                '<td id="Cantidad">' + CantidadInsumo + '</td>'+
+                '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
+            '</tr>'; 
+
+        i++;
+        //agregas la nueva fila con los datos
+        $('#mytable tbody:first').append(fila);
+        //limpiar datos
+        document.getElementById("idInsumo").value=-20;
+        document.getElementById("NombreInsumo").value="";
+        document.getElementById("ClasificacionInsumo").value="";
+        document.getElementById("ExistenciasInsumo").value="";
+        document.getElementById("unidadMetricaInsumo").value="";
+        document.getElementById("CostoInsumo").value="";
+        document.getElementById("CantidadInsumo").value="";
+
+        total=parseInt(total+(CostoInsumo*CantidadInsumo),10);
+        document.getElementById('total').value=total;
+        
+        });
+  
+        $(document).on('click', '.btn_remove', function() {
+            total=parseInt(document.getElementById('total').value,10);
+
+            var button_id = $(this).attr("id");
+
+            Cantidad=$('#row'+button_id).find("#Cantidad")[0].textContent;
+            Costo=$('#row'+button_id).find("#Costo")[0].textContent;
+
+            $('#row' + button_id).remove();
+
+
+            total=parseInt(total-(Cantidad*Costo),10);
+            document.getElementById('total').value=total;
+            
+        });
+
+        $('#regristar').click(function() {
+            var datos=[];
+            var FechaOrden = document.getElementById("FechaOrden").value;
+            var idProveedor = document.getElementById("idProveedor").value;
+            var Factura = document.getElementById("Factura").value;
+            var inputFile = document.querySelector("#FacturaFisica");
+            var total = document.getElementById("total").value;
+
+            var table = $("#mytable tbody");
+            table.find('tr').each(function (i, el) {
+                var $tds = $(this).find('td');
+                Insumo = $tds.eq(0).text();
+                Costo = $tds.eq(5).text();
+                Cantidad = $tds.eq(6).text();
+                dato={"idInsumo":Insumo, "Costo":Costo, "Cantidad":Cantidad};
+                datos.push(dato);
+            });
+
+            const formData = new FormData();
+            
+            formData.append("Metodo", "insertCompraInsumo");
+            formData.append("datosCompra", JSON.stringify({"FechaOrden":FechaOrden, "idProveedor":idProveedor, "factura":Factura,"total":total})    ); 
+            formData.append("detalles", JSON.stringify(datos)); 
+            formData.append ("archivo", inputFile.files[0]);
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(respuesta){
+                    console.log(respuesta);
+                }
+            }) 
+            return false;
+
+        });
+
+
+    });
+
+
+        function getInsumo(){
+            var idInsumo = $("#idInsumo").val();
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getInsumo',
+                    "idInsumo": idInsumo
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("NombreInsumo").value=respuesta[0].nombre;
+                    document.getElementById("ClasificacionInsumo").value=respuesta[0].concepto;
+                    document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
+                    document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidadMetrica;
+                }
+            })     
+        }
+        
+        function getProveedore(){
+            var idProveedor = $("#idProveedor").val();
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getProveedore',
+                    "idProveedor": idProveedor
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("NombreProveedor").value=respuesta[0].nombre;
+                    document.getElementById("DomicilioProveedor").value=respuesta[0].domicilio + " " + respuesta[0].ciudad;
+                    document.getElementById("ContactoProveedor").value=respuesta[0].contacto;
+                    document.getElementById("EmailProveedor").value=respuesta[0].email;
+                }
+            })     
+        }
+
+    </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
