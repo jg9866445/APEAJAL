@@ -27,7 +27,7 @@ class Movimientos {
 
     public function getResponsable($idResponsable)
     {
-        $sql = "SELECT * FROM responsable where idResponsable = $idResponsable";
+        $sql = "SELECT * FROM responsable where idResponsable = :idResponsable";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idResponsable', $idResponsable);
         $query -> execute(); 
@@ -37,7 +37,7 @@ class Movimientos {
 
     public function getClientes($idCliente)
     {
-        $sql = "SELECT * FROM clientes where idCliente = $idCliente";
+        $sql = "SELECT * FROM clientes where idCliente = :idCliente";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idCliente', $idCliente);
         $query -> execute(); 
@@ -47,7 +47,7 @@ class Movimientos {
 
     public function getPredios($idPredio)
     {
-        $sql = "SELECT * FROM predios where idPredio = $idPredio";
+        $sql = "SELECT * FROM predios where idPredio = :idPredio";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idPredio', $idPredio);
         $query -> execute(); 
@@ -57,7 +57,7 @@ class Movimientos {
 
     public function getPlantasForestal($idPlanta)
     {
-        $sql = "SELECT e.nombre,p.descripcion,p.precio  from  plantaForestal as p INNER JOIN especie as e on p.idEspecie = e.idEspecie";
+        $sql = "SELECT e.nombre,p.descripcion,p.precio  from  plantaForestal as p INNER JOIN especie as e on p.idEspecie = e.idEspecie where p.idPlanta = :idPlanta";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idPlanta', $idPlanta);
         $query -> execute(); 
@@ -150,6 +150,30 @@ class Movimientos {
         return $request;
     }
 
+    public function insertSolicitud($idCliente,$fecha,$estado,$idResponsable){
+        $sql="INSERT INTO solicitudes(idCliente, fecha, estado, idResponsable) VALUES ( :idCliente, :fecha, :estado, :idResponsable)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idCliente', $idCliente);
+        $query->bindParam(':fecha', $fecha);
+        $query->bindParam(':estado', $estado);
+        $query->bindParam(':idResponsable', $idResponsable);
+        $query->execute();
+        $idOrdenCompra=$this->connect->lastInsertId();
+        return $idOrdenCompra;
+    }
+    
+    public function insertDetallesSolicitud($idSolicitud,$detalles){
+        foreach ($detalles as $value) {
+            $sql="INSERT INTO detalleSolicitud(idSolicitud, idPredio, idPlanta, cantidadSolicitada, precio) VALUES (:idSolicitud, :idPredio, :idPlanta, :cantidadSolicitada,:precio)";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idSolicitud', $idSolicitud);
+            $query->bindParam(':idPredio', $value->predio);
+            $query->bindParam(':idPlanta', $value->planta);
+            $query->bindParam(':cantidadSolicitada', $value->Cantidad);
+            $query->bindParam(':precio', $value->precio);
+            $query->execute();
+        }        
+    }
     /*public function getPlantasForestal(){
         $sql = "SELECT * FROM plantaForestal";
         $query = $this->connect->prepare($sql);

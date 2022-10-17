@@ -104,8 +104,8 @@
                                 <th>Clasificación</th>
                                 <th>Unidad</th>
                                 <th>Existencia</th>
-                                <th>Mínimo</th>
                                 <th>Máximo</th>
+                                <th>Mínimo</th>
                                 <th>Costo</th>
                                 <th>Modificar</th>
                             </tr>

@@ -26,6 +26,8 @@ class Movimientos {
     }
 
 
+//Funciones de get 
+
     public function getAllProveedores() {
         $sql = "SELECT * from proveedor";
         $query = $this->connect->prepare($sql);
@@ -57,7 +59,25 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
+
+    public function getAllComprasInsumos(){
+        $sql = "SELECT fc.idOrdenCompra,p.nombre,fc.factura,fc.fecha, fc.total  from  facturaCompra as fc INNER JOIN proveedor as p on fc.idProveedor= p.idProveedor";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    function getAllOrdenProduccion(){
+        $sql = "Select * FROM ordenProduccion";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
     
+    //funciones de get individual
+
     public function getProveedore($idProveedor) {
         $sql = "SELECT * from  proveedor WHERE idProveedor=:idProveedor";
         $query = $this->connect->prepare($sql);
@@ -94,34 +114,10 @@ class Movimientos {
         return $results;
     }
 
+//INSERT a base de datos
 
-
-
-
-
-
-
-
-public function getAllComprasInsumos(){
-        $sql = "SELECT fc.idOrdenCompra,fc.factura,fc.fecha,p.nombre as 'proveedores',i.nombre as 'insumos',dfc.cantidad,dfc.costo,fc.total from  facturaCompras as fc INNER JOIN proveedor as p on fc.idProveedor= p.idProveedor INNER JOIN detalleFacturaCompra as dfc on fc.idOrdenCompra = dfc.idOrdenCompra INNER JOIN insumo as i on i.idInsumo = dfc.idInsumo";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-
-    function getAllOrdenProduccion(){
-        $sql = "Select * FROM ordenProduccion";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-
-    public function insertCompraInsumos($fechaCompraInsumos,$idProveedor,$idInsumo,$cantidad,$costo,$factura,$total){
-        $sql="INSERT INTO facturaCompras(idProveedor, factura, fecha, total) VALUES ( :idProveedor, :factura, :fecha, :total)";
+    public function insertCompraInsumos($fechaCompraInsumos,$idProveedor,$factura,$total){
+        $sql="INSERT INTO facturaCompra(idProveedor, factura, fecha, total) VALUES ( :idProveedor, :factura, :fecha, :total)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idProveedor', $idProveedor);
         $query->bindParam(':factura', $factura);
@@ -129,30 +125,69 @@ public function getAllComprasInsumos(){
         $query->bindParam(':total', $total);
         $query->execute();
         $idOrdenCompra=$this->connect->lastInsertId();
+        return $idOrdenCompra;
+    }
+    
+    public function insertDetalleCompra($idCompra,$detalles){
+        foreach ($detalles as $value) {
+            $sql="INSERT INTO detalleFacturaCompra(idOrdenCompra, idInsumo, cantidad, costo) VALUES (:idOrdenCompra, :idInsumo, :cantidad, :costo)";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idOrdenCompra', $idCompra);
+            $query->bindParam(':idInsumo', $value->idInsumo);
+            $query->bindParam(':cantidad', $value->Cantidad);
+            $query->bindParam(':costo', $value->Costo);
+            $query->execute();
 
-        $sql="INSERT INTO detalleFacturaCompra(idOrdenCompra, idInsumo, cantidad, costo) VALUES (:idOrdenCompra, :idInsumo, :cantidad, :costo)";
+            $sql="SELECT existencias FROM insumo WHERE idInsumo= :idInsumo";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idInsumo', $value->idInsumo );
+            $query->execute();
+
+            $request=$query->fetchAll();
+            $existencias=$request[0]['existencias']+$value->Cantidad;
+            
+            $sql="UPDATE insumo SET existencias=:existencias WHERE idInsumo= :idInsumo";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':existencias', $existencias);
+            $query->bindParam(':idInsumo', $value->idInsumo);
+            $query->execute();
+        }        
+    }
+
+
+//FUNCIOANES AUXILARES
+    function GuardarArchivo($ubicacion,$nombre,$files){
+        $nombre=$nombre.".pdf";
+        $carpetaDestino=$ubicacion;
+        if(isset($files["file"]))
+            {
+                if($files["file"]["type"]=="application/pdf")
+                {
+                    if(!file_exists($carpetaDestino)){
+                        mkdir($carpetaDestino, 0777);
+                    }
+                    $origen=$files["file"]["tmp_name"];
+                    $destino=$carpetaDestino.$nombre;
+                    if(move_uploaded_file($origen, $destino))
+                    {
+                    }else{
+                            echo("Error : archivos no movido");
+                        }
+                }else{
+                    echo("Error : archivos no es pdf");
+                }
+            }else{
+                echo("Error : archivos no encotrados");
+            }
+    }
+
+
+        function getNextIdCompra(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'facturaCompra'";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':idOrdenCompra', $idOrdenCompra);
-        $query->bindParam(':idInsumo', $idInsumo);
-        $query->bindParam(':cantidad', $cantidad);
-        $query->bindParam(':costo', $costo);
-        $query->execute();
-
-        $sql="SELECT existencias FROM insumo WHERE idInsumo= :idInsumo";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idInsumo', $idInsumo);
-        $query->execute();
-
-        $request=$query->fetchAll();
-        $existencias=$request[0]['existencias']+$cantidad;
-
-        $sql="UPDATE insumo SET existencias=:existencias WHERE idInsumo= :idInsumo";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':existencias', $existencias);
-        $query->bindParam(':idInsumo', $idInsumo);
-        $query->execute();
-
-        return $request;
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
     }
 
 

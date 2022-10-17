@@ -1,7 +1,3 @@
-<?php
-    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
-    $conexion = new Movimientos();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +12,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+    
 </head>
 <body>
     <div>
@@ -96,24 +95,12 @@
                             <tr>
                                 <th></th>
                                 <th>Proveedor</th>
-                                <th>Fecha</th>
                                 <th>Factura</th>
+                                <th>Fecha</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                $resultado = $conexion->getAllComprasInsumos();
-                                    foreach ($resultado as $row) {
-                                        echo "<tr>";
-                                        echo "<td>" . $row['idOrdenCompra'] . "</td>";
-                                        echo "<td>" . $row['factura'] . "</td>";
-                                        echo "<td>" . $row['fecha'] . "</td>";
-                                        echo "<td>" . $row['proveedores'] . "</td>";
-                                        echo "<td>" . $row['insumos'] . "</td>";
-                                        echo "</tr>";
-                                    }
-                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -127,8 +114,47 @@
 
     </div>
     <script>
+        let table = $('#table_id').DataTable({
+            paging: false,
+            searching: false,
+            info: false,
+            columns: [
+                    { title: "", data: "idOrdenCompra" },
+                    { title: "Nombre", data: "nombre" },
+                    { title: "Factura", data: "factura" },
+                    { title: "Fecha", data: "fecha" },
+                    { title: "Total", data: "total" }
+            ]
+        });
+
         $(document).ready( function () {
-            var table = $('#table_id').DataTable();
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getAllComprasInsumos',
+                },
+                beforeSend: function() {
+                    Swal.fire({
+                        html: '<h5>Cargando...</h5>',
+                        showConfirmButton: false,
+                        onRender: function() {
+                            $('.swal2-content').prepend(sweet_loader);
+                        }
+                    });
+                },
+                success: function(respuesta){
+                    table.rows().remove();
+                    table.rows.add(JSON.parse(respuesta)).draw();
+                },complete: function() {
+                    Swal.close();
+                }
+            })     
+
+
+
+
+
         });
     </script>
     

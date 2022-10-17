@@ -448,7 +448,9 @@
         $('#regristar').click(function() {
             var datos=[];
             var Fecha = document.getElementById("fecha").value;
-            var Cantidad = document.getElementById("cantidadSolicitada").value;
+            var idCliente = document.getElementById("idCliente").value;
+            var idResponsable = document.getElementById("idResponsable").value;
+            var estado="Pendiente";
 
             var table = $("#mytable tbody");
             table.find('tr').each(function (i, el) {
@@ -463,7 +465,7 @@
             const formData = new FormData();
             
             formData.append("Metodo", "insertSolicitudPlantas");
-            formData.append("datosSolicud", JSON.stringify({"FechaSolicitud":Fecha, "Cantidad":Cantidad})    ); 
+            formData.append("datosSolicud", JSON.stringify({"FechaSolicitud":Fecha, "idCliente":idCliente, "idResponsable":idResponsable, "estado":estado}) ); 
             formData.append("detalles", JSON.stringify(datos)); 
             $.ajax({
                 url: "/src/php/SistemaVentas/SubMovimientos.php",

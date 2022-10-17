@@ -16,11 +16,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
 </head>
 
-<body>
+<body onload="getNextIdCompra();">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -86,6 +90,7 @@
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
                             <input class="form-control" type="date" name="FechaOrden" id="FechaOrden" />
+                            <label for="input"></label>
                         </div>
                     </div>
                 </div>
@@ -157,8 +162,9 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-md-6">
-                            <label for="staticEmail" class="form-label">Numero de factura</label>
+                                    <label for="staticEmail" class="form-label">Numero de factura</label>
                                     <input class="form-control" type="text" name="Factura" id="Factura"/>
+                                    <label for="input"></label>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Factura física</label>
@@ -173,7 +179,7 @@
                 </div>
             </div>
         </div>
-<br>
+        <br>
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
@@ -332,6 +338,7 @@
     <script>
         //se genera un escucha para que espere cualquier clic configurado
     $(document).ready(function() {
+        
         //se obtiene el valor de total y lo combierte en un entero con base 10
         var total=parseInt(document.getElementById("total").value,10);
         //se inicializa el contador de los renglones
@@ -422,8 +429,19 @@
                 data: formData,
                 processData: false,
                 contentType: false,
+                beforeSend: function() {
+                    Swal.fire({
+                        html: '<h5>Cargando...</h5>',
+                        showConfirmButton: false,
+                        onRender: function() {
+                            $('.swal2-content').prepend(sweet_loader);
+                        }
+                    });
+                },
                 success: function(respuesta){
-                    console.log(respuesta);
+                     window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.php"
+                },complete: function() {
+                    Swal.close();
                 }
             }) 
             return false;
@@ -443,12 +461,23 @@
                     "Metodo":'getInsumo',
                     "idInsumo": idInsumo
                 },
+                beforeSend: function() {
+                    Swal.fire({
+                        html: '<h5>Cargando...</h5>',
+                        showConfirmButton: false,
+                        onRender: function() {
+                            $('.swal2-content').prepend(sweet_loader);
+                        }
+                    });
+                },
                 success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
                     document.getElementById("NombreInsumo").value=respuesta[0].nombre;
                     document.getElementById("ClasificacionInsumo").value=respuesta[0].concepto;
                     document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
                     document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidadMetrica;
+                },complete: function() {
+                    Swal.close();
                 }
             })     
         }
@@ -462,12 +491,50 @@
                     "Metodo":'getProveedore',
                     "idProveedor": idProveedor
                 },
+                beforeSend: function() {
+                    Swal.fire({
+                        html: '<h5>Cargando...</h5>',
+                        showConfirmButton: false,
+                        onRender: function() {
+                            $('.swal2-content').prepend(sweet_loader);
+                        }
+                    });
+                },
                 success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
                     document.getElementById("NombreProveedor").value=respuesta[0].nombre;
                     document.getElementById("DomicilioProveedor").value=respuesta[0].domicilio + " " + respuesta[0].ciudad;
                     document.getElementById("ContactoProveedor").value=respuesta[0].contacto;
                     document.getElementById("EmailProveedor").value=respuesta[0].email;
+                },complete: function() {
+                    Swal.close();
+                }
+            })     
+        }
+
+        function getNextIdCompra(){
+            console.log("getNextIdCompra");
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getNextIdCompra',
+                },
+                beforeSend: function() {
+                    Swal.fire({
+                        html: '<h5>Cargando...</h5>',
+                        showConfirmButton: false,
+                        onRender: function() {
+                            $('.swal2-content').prepend(sweet_loader);
+                        }
+                    });
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    console.log(respuesta);
+                    document.getElementById("idOrden").value=respuesta[0].AUTO_INCREMENT;
+                },complete: function() {
+                    Swal.close();
                 }
             })     
         }

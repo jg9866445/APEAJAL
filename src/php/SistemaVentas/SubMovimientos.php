@@ -39,6 +39,13 @@ if(isset($_POST['Metodo'])){
             echo json_encode($resultado);
         break;
 
+        case 'insertSolicitudPlantas':
+            $datosSolicud= json_decode($_POST['datosSolicud']);
+            $detalles= json_decode($_POST['detalles']);
+            $conexion = New Movimientos();
+            $idSolicitud=$conexion->insertSolicitud($datosSolicud->idCliente,$datosSolicud->FechaSolicitud,$datosSolicud->estado,$datosSolicud->idResponsable);
+            $conexion->insertDetallesSolicitud($idSolicitud,$detalles);
+        break;
         default:
             echo "Error";
         break;
