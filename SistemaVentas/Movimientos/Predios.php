@@ -1,6 +1,6 @@
 <?php
-    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Catalago.php");
-    $conexion = new Catalago();
+    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Movimiento.php");
+    $conexion = new Movimientos();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,18 +46,20 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pagos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.php">Predios</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Venta.php">Venta de plantas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pago de plantas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitud pendientes atender</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitudes por entregar</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendientesPago.php">Reporte de solicitud pendientes de pago</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de plantas en existencias</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de existencias en almacén virtual</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de existencias en almacén físico</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasDonacionPeriodo.php">Reporte de plantas en donación por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/VentasPeriodo.php">Reporte de ventas por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/VentasClientes.php">Reporte de ventas por clientes</a></li>
@@ -106,7 +108,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $resultado = $conexion->getPredios();    
+                                $resultado = $conexion->getAllPredios();    
                                 foreach ($resultado as $row) {
                                     echo "<tr>";
                                     echo "<td>" . $row['idPredio'] . "</td>";
@@ -140,7 +142,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo predio</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/SistemaVentas/Categoria/Predios.php" method="POST">
+                <form action="/SistemaVentas/Movimientos/Predios.php" method="POST">
                 <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
@@ -150,7 +152,7 @@
                                 <select class="form-select" name="idCliente" id="idCliente" required>
                                     <option disabled selected>Elija una opción</option>
                                     <?php
-                                        $resultado = $conexion->getClient();
+                                        $resultado = $conexion->getAllClientes();
                                         foreach ($resultado as $row) {
                                             echo "<option value=".$row['idCliente'].">". $row['razonSocial']."</option>";
                                         }
@@ -174,10 +176,10 @@
                             <div class="col-sm-10">
                                 <select class="form-select" name="usoPredio" id="usoPredio" required>
                                     <option disabled selected>Elija una opción</option>
-                                    <option value="1">agrícola</option>
-                                    <option value="2">pecuario</option>
-                                    <option value="3">forestal</option>
-                                    <option value="4">urbano</option>
+                                    <option value="agricola">agricola</option>
+                                    <option value="pecuario">pecuario</option>
+                                    <option value="forestal">forestal</option>
+                                    <option value="urbano">urbano</option>
                                 </select>
                                 <label for="input"></label>
                             </div>

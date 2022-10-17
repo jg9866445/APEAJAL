@@ -39,25 +39,27 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
+                                
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pagos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.php">Predios</a></li>
-
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Venta.php">Venta de plantas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pago de plantas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitud pendientes atender</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitudes por entregar</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendientesPago.php">Reporte de solicitud pendientes de pago</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de plantas en existencias</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de existencias en almacén virtual</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de existencias en almacén físico</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasDonacionPeriodo.php">Reporte de plantas en donación por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/VentasPeriodo.php">Reporte de ventas por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/VentasClientes.php">Reporte de ventas por clientes</a></li>
@@ -67,7 +69,6 @@
                 </div>
             </div>
         </nav>
-
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -93,6 +94,9 @@
 
         <div class="container">
             <div class="row">
+                <div class="col-lg-1">
+
+                </div>
                 <div class="col-lg-8 ">
                     <h2 style="text-align:center">Clientes</h2>
                     <br>
@@ -102,12 +106,9 @@
                                 <th>  </th>
                                 <th>Razón social</th>
                                 <th>RFC</th>
-                                <th>Domicilio Fiscal</th>
-                                <th>Ciudad</th>
-                                <th>Estado</th>
+                                <th>Domicilio</th>
                                 <th>Correo</th>
                                 <th>Teléfono</th>
-                                <th>Celular</th>
                                 <th>Tipo de cliente</th>
                                 <th>Constancia de Situacion Fiscal</th>
                                 <th>Modificar</th>
@@ -121,12 +122,9 @@
                                         echo "<td>" . $row['idCliente'] . "</td>";
                                         echo "<td>" . $row['razonSocial'] . "</td>";
                                         echo "<td>" . $row['RFC'] . "</td>";
-                                        echo "<td>" . $row['domicilioFiscal'] . "</td>";
-                                        echo "<td>" . $row['ciudad'] . "</td>";
-                                        echo "<td>" . $row['estado'] . "</td>";
+                                        echo "<td>" . $row['domicilio'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td>" . $row['telefono'] . "</td>";
-                                        echo "<td>" . $row['celular'] . "</td>";
                                         echo "<td>" . $row['tipoCliente'] . "</td>";
                                         echo "<td><a href=/src/PDF/ConstanciaFiscal/". $row['idCliente'].".pdf>Descargar</a></td>";
                                         echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
@@ -171,6 +169,12 @@
                                 <label for="input"></label>
                             </div>
 
+                            <label for="staticEmail" class="col-sm-2 col-form-label">CURP</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="CURP" name="CURP" placeholder="CURP" required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="15" />
+                                <label for="input"></label>
+                            </div>
+
                             <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="domicilio" name="domicilio" placeholder="domicilio" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"   />
@@ -189,7 +193,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electrónico</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico " required/>
                                 <label for="input"></label>
@@ -259,6 +263,12 @@
                                 <label for="input"></label>
                             </div>
 
+                            <label for="staticEmail" class="col-sm-2 col-form-label">CURP</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="CURPM" name="CURPM" placeholder="CURP" required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="15" />
+                                <label for="input"></label>
+                            </div>
+
                             <label for="staticEmail" class="col-sm-2 col-form-label">Domicilio</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="domicilioM" name="domicilioM" placeholder="domicilio" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"  />
@@ -277,7 +287,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electronico</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electrónico</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico" required/>
                                 <label for="input"></label>
@@ -335,13 +345,14 @@
             document.getElementById("idClienteM").value=elementosTD[0].textContent;
             document.getElementById("RazonSocialM").value=elementosTD[1].textContent;
             document.getElementById("RFCM").value=elementosTD[2].textContent;
-            document.getElementById('domicilioFiscalM').value=elementosTD[3].textContent;
-            document.getElementById('CiudadM').value=elementosTD[4].textContent;
-            document.getElementById('EstadoM').value=elementosTD[5].textContent;
-            document.getElementById('emailM').value=elementosTD[6].textContent;
-            document.getElementById('TelefonoM').value=elementosTD[7].textContent;
-            document.getElementById('CelularM').value=elementosTD[8].textContent;
-            document.getElementById('idTipoClienteM').value=elementosTD[9].textContent;
+            document.getElementById("CURPM").value=elementosTD[3].textContent;
+            document.getElementById('domicilioM').value=elementosTD[4].textContent;
+            document.getElementById('CiudadM').value=elementosTD[5].textContent;
+            document.getElementById('EstadoM').value=elementosTD[6].textContent;
+            document.getElementById('emailM').value=elementosTD[7].textContent;
+            document.getElementById('TelefonoM').value=elementosTD[8].textContent;
+            document.getElementById('CelularM').value=elementosTD[9].textContent;
+            document.getElementById('idTipoClienteM').value=elementosTD[10].textContent;
             }
 
             function getUltimoInsert(){
@@ -367,7 +378,8 @@
             $idCliente = $_POST['idCliente'];   
             $RazonSocial = $_POST['RazonSocial'];
             $RFC = $_POST['RFC'];
-            $domicilioFiscal = $_POST['domicilioFiscal'];
+            $CURP = $_POST['CURP'];
+            $domicilio = $_POST['domicilio'];
             $Ciudad = $_POST['Ciudad'];
             $Estado = $_POST['Estado'];
             $email = $_POST['email'];
@@ -379,7 +391,7 @@
             {
                 GuardarArchivo($idCliente);
             }
-            $resultado = $conexion->insertClientes($RazonSocial,$RFC,$domicilioFiscal,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente, $saldo);
+            $resultado = $conexion->insertClientes($RazonSocial,$RFC,$CURP,$domicilio,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente, $saldo);
             unset($_POST);
             unset($_FILES);
             ob_start();
@@ -388,7 +400,8 @@
             $idCliente = $_POST['idClienteM'];
             $RazonSocial = $_POST['RazonSocialM'];
             $RFC = $_POST['RFCM'];
-            $domicilioFiscal = $_POST['domicilioFiscalM'];
+            $CURP = $_POST['CURPM'];
+            $domicilio = $_POST['domicilioM'];
             $Ciudad = $_POST['CiudadM'];
             $Estado = $_POST['EstadoM'];
             $email = $_POST['emailM'];
@@ -399,7 +412,7 @@
             {
                 GuardarArchivo($idCliente);
             }
-            $resultado = $conexion->updateClientes($idCliente,$RazonSocial,$RFC,$domicilioFiscal,$Ciudad,$Estado,$email,$Telefono,$Celular,$idTipoCliente);
+            $resultado = $conexion->updateClientes($idCliente,$RazonSocial,$RFC,$CURP,$domicilio,$Ciudad,$Estado,$email,$Telefono,$Celular,$idTipoCliente);
             unset($_POST);
             unset($_FILES);
             ob_start();

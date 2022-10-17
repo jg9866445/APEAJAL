@@ -94,19 +94,19 @@ class Catalago {
         return $request;
     }
 
-    function insertClientes($razonSocial, $RFC, $domicilioFiscal, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente, $saldo){
-        $sql = "INSERT INTO clientes(razonSocial, RFC, domicilioFiscal, ciudad, estado, email, telefono, celular, tipoCliente, saldo) VALUES ( :razonSocial, :RFC, :domicilioFiscal, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente, :saldo)";
+    function insertClientes($razonSocial, $RFC, $CURP, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente){
+        $sql = "INSERT INTO clientes(razonSocial, RFC, CURP, domicilio, ciudad, estado, email, telefono, celular, tipoCliente) VALUES ( :razonSocial, :RFC, :CURP, :domicilio, :ciudad, :estado, :email, :telefono, :celular, :tipoCliente)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":razonSocial",$razonSocial);
         $query->bindParam(":RFC",$RFC);
-        $query->bindParam(":domicilioFiscal",$domicilioFiscal);
+        $query->bindParam(":CURP",$CURP);
+        $query->bindParam(":domicilio",$domicilio);
         $query->bindParam(":ciudad",$ciudad);
         $query->bindParam(":estado",$estado);
         $query->bindParam(":email",$email);
         $query->bindParam(":telefono",$telefono);
         $query->bindParam(":celular",$celular);
         $query->bindParam(":tipoCliente",$tipoCliente);
-        $query->bindParam(":saldo",$saldo);
         $request=$query->execute(); 
         return $request;
     }
@@ -156,13 +156,14 @@ class Catalago {
         return $request;    
     }
     
-    function updateClientes($idCliente, $razonSocial, $RFC, $domicilioFiscal, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente){
-        $sql = "UPDATE clientes SET razonSocial=:razonSocial, RFC=:RFC, domicilioFiscal=:domicilioFiscal, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente where idCliente=:idCliente";
+    function updateClientes($idCliente, $razonSocial, $RFC, $CURP, $domicilio, $ciudad, $estado, $email, $telefono, $celular, $tipoCliente){
+        $sql = "UPDATE clientes SET razonSocial=:razonSocial, RFC=:RFC, CURP=:CURP, domicilio=:domicilio, ciudad=:ciudad, estado=:estado, email=:email, telefono=:telefono, celular=:celular, tipoCliente=:tipoCliente where idCliente=:idCliente";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":idCliente",$idCliente);
         $query->bindParam(":razonSocial",$razonSocial);
         $query->bindParam(":RFC",$RFC);
-        $query->bindParam(":domicilioFiscal",$domicilioFiscal);
+        $query->bindParam(":CURP",$CURP);
+        $query->bindParam(":domicilio",$domicilio);
         $query->bindParam(":ciudad",$ciudad);
         $query->bindParam(":estado",$estado);
         $query->bindParam(":email",$email);
