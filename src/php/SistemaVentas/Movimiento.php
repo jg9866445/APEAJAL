@@ -65,6 +65,16 @@ class Movimientos {
         return $results;
     }
 
+    public function getSolicitud($idSolicitud)
+    {
+        $sql = "SELECT c.razonSocial, c.domicilio, c.RFC, c.telefono, s.fecha, s.estado, r.nombre, r.puesto  from  solicitudes as s INNER JOIN clientes as c on s.idCliente = c.idCliente INNER JOIN responsable as r on s.idRespondable = r.idRespondable";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSolicitud', $idSolicitud);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
     //consulta completa
 
     public function getAllResponsable() {

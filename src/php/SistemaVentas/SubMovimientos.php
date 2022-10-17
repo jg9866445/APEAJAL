@@ -32,6 +32,13 @@ if(isset($_POST['Metodo'])){
             echo json_encode($resultado);
         break;
 
+        case 'getSolicitud':
+            $idSolicitud = $_POST['idSolicitud'];
+            $conexion = new Movimientos();
+            $resultado = $conexion->getSolicitud($idSolicitud);
+            echo json_encode($resultado);
+        break;
+
         default:
             echo "Error";
         break;
