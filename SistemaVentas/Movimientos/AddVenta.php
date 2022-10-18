@@ -354,10 +354,10 @@
                                                 <th>Latitud</th>
                                                 <th>Longitud</th>
                                                 <th>Planta</th>
-                                                <th>Especie</th>
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
                                                 <th>Cantidad</th>
+                                                <th>Modificar</th>
                                                 <th>Eliminar</th>
                                             </tr>
                                         </thead>
@@ -433,7 +433,7 @@
                 '<td>' + extencion + '</td>'+
                 '<td>' + latitud + '</td>'+
                 '<td>' + longitud + '</td>'+
-                '<td>' + idPlanta + '</td>'+
+                '<td id="idPlanta">' + idPlanta + '</td>'+
                 '<td>' + especie + '</td>'+
                 '<td>' + nombre + '</td>'+
                 '<td id="precioPlanta">' + precio + '</td>'+
@@ -472,6 +472,19 @@
 
             total=parseInt(total-(precio*cantidadSolicitada),10);
             document.getElementById('total').value=total;
+        });
+
+        $(document).on('click', '.btn_update', function() {
+            var button_id = $(this).attr("id");
+
+            document.getElementById("idPredio").value=$('#row'+button_id).find("#idPredio")[0].textContent;
+            document.getElementById("idPlanta").value=$('#row'+button_id).find("#idPlanta")[0].textContent;
+            document.getElementById("cantidadSolicitada").value=$('#row'+button_id).find("#cantidadSolicitada")[0].textContent;
+
+            getPredios();
+            getPlantasForestal();
+
+            $('#row' + button_id).remove();
         });
 
         $('#regristar').click(function() {
@@ -537,10 +550,59 @@
                 },
                 success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
-                    document.getElementById("NombreSolicitud").value=respuesta[0].nombre;
+                    document.getElementById("fechaSolicitud").value=respuesta[0].fecha;
+                    document.getElementById("estado").value=respuesta[0].estado;
+                    document.getElementById("razonSocial").value=respuesta[0].razonSocial;
+                    document.getElementById("domicilio").value=respuesta[0].domicilio;
+                    document.getElementById("rfc").value=respuesta[0].RFC;
+                    document.getElementById("telefono").value=respuesta[0].telefono;
+                    document.getElementById("nombreResponsable").value=respuesta[0].nombre;
+                    document.getElementById("puesto").value=respuesta[0].puesto;
+                    document.getElementById("total").value=respuesta[0].total;
+                    
+                    getDetallesSolicitud(idSolicitud);
                 }
             })  
         }
+
+        function getDetallesSolicitud(idSolicitud){
+            $.ajax({
+                url: "/src/php/SistemaVentas/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getDetallesSolicitud',
+                    "idSolicitud": idSolicitud
+                },success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+
+                    $.each(respuesta,function(index, value){
+                        console.log('My array has at position ' + index + ', this value: ' + value);
+                
+
+                    var i = 1;
+
+                        var fila = 
+                        '<tr id="row' + i + '" >'+
+                            '<td id="idPredio">' + value.idPredio + '</td>'+
+                            '<td>' + value.municipio + '</td>'+
+                            '<td>' + value.extencion + '</td>'+
+                            '<td>' + value.latitud + '</td>'+
+                            '<td>' + value.longitud + '</td>'+
+                            '<td id="idPlanta">' + value.idPlanta + '</td>'+
+                            '<td>' + value.nombre + '</td>'+
+                            '<td id="precioPlanta">' + value.precio + '</td>'+
+                            '<td id="cantidadSolicitada">' + value.cantidadSolicitada + '</td>'+
+                            '<td><button type="button" name="remove" id="' + i + '" class="btn btn-success btn_update">Modificar</button></td>'+
+                            '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
+                        '</tr>'; 
+                        i++;
+                        $('#mytable tbody:first').append(fila);
+                    });
+                }
+            
+            })  
+        }
+
 
         function getPredios(){
             var idPredio = $("#idPredio").val();

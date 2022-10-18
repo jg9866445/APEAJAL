@@ -39,6 +39,20 @@ if(isset($_POST['Metodo'])){
             echo json_encode($resultado);
         break;
 
+        case 'getPagoPlanta':
+            $idResponsable = $_POST['idPago'];
+            $conexion = new Movimientos();
+            $resultado = $conexion->getPagoPlanta($idPago);
+            echo json_encode($resultado);
+        break;
+
+        case 'getDetallesSolicitud':
+            $idSolicitud = $_POST['idSolicitud'];
+            $conexion = new Movimientos();
+            $resultado = $conexion->getDetallesSolicitud($idSolicitud);
+            echo json_encode($resultado);
+        break;
+
         case 'insertSolicitudPlantas':
             $datosSolicud= json_decode($_POST['datosSolicud']);
             $detalles= json_decode($_POST['detalles']);
@@ -51,3 +65,4 @@ if(isset($_POST['Metodo'])){
         break;
     }
 }
+//getDetallesSolicitud
