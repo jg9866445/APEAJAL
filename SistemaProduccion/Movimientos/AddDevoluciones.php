@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/src/php/SistemaProduccion/Movimientos.php");
-$conexion = new Movimientos();
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/src/php/SistemaProduccion/Movimientos.php");
+    $conexion = new Movimientos();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,7 @@ $conexion = new Movimientos();
     </script>
 </head>
 
-<body>
+<body onload="nextIdDevoluciones()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -79,14 +79,14 @@ $conexion = new Movimientos();
                     <div class="row g-3">
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">id Devolución</label>
-                            <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                            <input class="form-control" type="text" name="idDevolucion" id="idDevolucion" disabled />
                         </div>
                         <div class="col-md-6">
                             <h3 class="text-center"> Nuevo devolución</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
-                            <input class="form-control" type="date" name="domicilioProveedor" id="domicilioProveedor" />
+                            <input class="form-control" type="date" name="FechaDevolucion" id="FechaDevolucion" />
                         </div>
                     </div>
                 </div>
@@ -102,13 +102,13 @@ $conexion = new Movimientos();
 
                 <div class="col-lg-8">
                     <div class="card">
-                        <div class="card-header">Vale de devolución</div>
+                        <div class="card-header">Vale de salida</div>
                         <div class="card-body">
                             <div class="row g-3">
-                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
+                                <select class="form-select" name="idSalida" id="idSalida" required onchange="getSalidas()">
                                     <option disabled selected>Escoja una opción</option>
                                     <?php
-                                    $resultado = $conexion->getAllProveedores();
+                                    $resultado = $conexion->getAllSalidas();
                                     foreach ($resultado as $row) {
                                         //echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
                                     }
@@ -123,11 +123,11 @@ $conexion = new Movimientos();
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                    <input class="form-control" type="text" name="NombreResponsable" id="NombreResponsable" disabled />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Puesto</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
+                                    <input class="form-control" type="text" name="PuestoResponsable" id="PuestoResponsable" disabled />
                                 </div>
                             </div>
                             <hr>
@@ -138,30 +138,30 @@ $conexion = new Movimientos();
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                    <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Categoría</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
+                                    <input class="form-control" type="text" name="CategoríaInsumo" id="CategoriaInsumo" disabled />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
+                                    <input class="form-control" type="text" name="DescripciónInsumo" id="DescripciónInsumo" disabled />
                                 </div>
                             </div>
                             <br>
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Unidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
+                                    <input class="form-control" type="text" name="UnidadInsumos" id="UnidadInsumos" disabled />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Existencias</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
+                                    <input class="form-control" type="text" name="ExistenciaInsumos" id="ExistenciaInsumos" disabled />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Cantidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled />
+                                    <input class="form-control" type="text" name="CantidadInsumos" id="CantidadInsumos" disabled />
                                 </div>
                             </div>
                         </div>
@@ -173,7 +173,7 @@ $conexion = new Movimientos();
                 </div>
             </div>
         </div>
-<br/>
+        <br/>
 
         <div class="container">
             <div class="row">
@@ -190,7 +190,7 @@ $conexion = new Movimientos();
                                 </div>
                                 <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Cantidad devuelta</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" />
+                                    <input class="form-control" type="text" name="CantidadDevuelta" id="CantidadDevuelta" />
                                 </div>
                                 <div class="col-md-4">
                                 </div>
@@ -212,7 +212,7 @@ $conexion = new Movimientos();
 
             </div>
         </div>
-<br/>
+        <br/>
 
         <div class="container">
             <div class="row">
@@ -228,7 +228,7 @@ $conexion = new Movimientos();
                                 <div class="col-md-4">
                                 </div>
                                 <div class="col-md-4">
-                                        <button type="button" class="btn btn-primary btn-xs btn-block">Guardar devolución</button>
+                                        <button type="button" class="btn btn-primary btn-xs btn-block" id="Guardar">Guardar devolución</button>
                                 </div>
                                 <div class="col-md-4">
                                 </div>

@@ -1,4 +1,6 @@
 <?php
+//TODO:VALE de salida tiene que llevar orden de salida???
+
 require_once($_SERVER['DOCUMENT_ROOT']."/src/php/connectividad.php");
 
 class Movimientos {
@@ -25,9 +27,7 @@ class Movimientos {
         unset($this->connect);
     }
 
-
-//Funciones de get 
-
+    //funciones para llenar select
     public function getAllProveedores() {
         $sql = "SELECT * from proveedor";
         $query = $this->connect->prepare($sql);
@@ -45,7 +45,7 @@ class Movimientos {
     }
 
     public function getAllResponsables() {
-        $sql = "SELECT * from proveedor";
+        $sql = "SELECT * from responsable";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -60,6 +60,16 @@ class Movimientos {
         return $results;
     }
 
+    public function getAllSalidas(){
+        $sql = "SELECT * from valeSalida";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    //Tablas de inicios
+
     public function getAllComprasInsumos(){
         $sql = "SELECT fc.idOrdenCompra,p.nombre,fc.factura,fc.fecha, fc.total  from  facturaCompra as fc INNER JOIN proveedor as p on fc.idProveedor= p.idProveedor";
         $query = $this->connect->prepare($sql);
@@ -68,14 +78,30 @@ class Movimientos {
         return $results;
     }
 
-    function getAllOrdenProduccion(){
-        $sql = "Select * FROM ordenProduccion";
+    public function getAllOrdenProduccion(){
+        $sql = "SELECT op.idOrden, r.nombre,e.nombre,op.fechaOrden,op.descripcion,op.estado FROM ordenProduccion as op INNER JOIN responsable as r on r.idResponsable= op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta = op.idPlanta INNER JOIN especie as e on pf.idEspecie = e.idEspecie ";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
     
+    public function getAllValeSalida(){
+        $sql = "SELECT vs.fecha, r.nombre as responsable ,i.nombre as insumo,c.concepto as clasificacion, vs.cantidad from valeSalida as vs INNER JOIN responsable as r on r.idResponsable = vs.idResponsable INNER JOIN insumo as i  on i.idInsumo =vs.idInsumo INNER join clasificacion as c ON c.idClasificacion = i.idClasificacion";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllDevoluciones() {
+        $sql = "SELECT d.fecha, r.nombre as responsable , i.nombre as insumo , c.concepto as clasificacion,vs.cantidad as salida,d.cantidad as devolucion FROM devolucion as d INNER JOIN valeSalida as vs on vs.idVale = d.idVale INNER JOIN responsable as r on r.idResponsable = vs.idResponsable INNER JOIN insumo as i on i.idInsumo = vs.idInsumo  INNER JOIN clasificacion as c on c.idClasificacion = i.idClasificacion";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
     //funciones de get individual
 
     public function getProveedore($idProveedor) {
@@ -88,7 +114,7 @@ class Movimientos {
     }
 
     public function getInsumo($idInsumo){
-        $sql = "SELECT i.nombre,i.existencias,i.unidadMetrica,c.concepto from  insumo as i INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE i.idInsumo=:idInsumo";
+        $sql = "SELECT i.nombre,i.existencias,i.unidadMetrica,c.concepto,i.maximo,i.minimo from  insumo as i INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE i.idInsumo=:idInsumo";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idInsumo', $idInsumo);
         $query -> execute(); 
@@ -114,8 +140,16 @@ class Movimientos {
         return $results;
     }
 
-//INSERT a base de datos
+    public function getValeSalida($idVale){
+        $sql = "SELECT vs.fecha, r.nombre as responsable,r.puesto,i.nombre as insumo, i.descripcion,i.unidadMetrica,i.existencias,vs.cantidad FROM valeSalida AS vs INNER JOIN responsable as r on r.idResponsable = vs.idResponsable INNER JOIN insumo as i on i.idInsumo = vs.idInsumo INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE vs.idVale = :idVale";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idVale', $idVale);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
+    //INSERT AQUI SE INSERTA TODO
     public function insertCompraInsumos($fechaCompraInsumos,$idProveedor,$factura,$total){
         $sql="INSERT INTO facturaCompra(idProveedor, factura, fecha, total) VALUES ( :idProveedor, :factura, :fecha, :total)";
         $query = $this->connect->prepare($sql);
@@ -153,36 +187,47 @@ class Movimientos {
             $query->execute();
         }        
     }
-
-
-//FUNCIOANES AUXILARES
-    function GuardarArchivo($ubicacion,$nombre,$files){
-        $nombre=$nombre.".pdf";
-        $carpetaDestino=$ubicacion;
-        if(isset($files["file"]))
-            {
-                if($files["file"]["type"]=="application/pdf")
-                {
-                    if(!file_exists($carpetaDestino)){
-                        mkdir($carpetaDestino, 0777);
-                    }
-                    $origen=$files["file"]["tmp_name"];
-                    $destino=$carpetaDestino.$nombre;
-                    if(move_uploaded_file($origen, $destino))
-                    {
-                    }else{
-                            echo("Error : archivos no movido");
-                        }
-                }else{
-                    echo("Error : archivos no es pdf");
-                }
-            }else{
-                echo("Error : archivos no encotrados");
-            }
+    
+    public function insertOrdenProduccion($idOrden, $idResponsable, $idPlanta, $fechaOrden, $fechaAproxTermino, $descripcion, $cantidadEsperada, $estado){
+        $sql="INSERT INTO ordenProduccion(idOrden, idResponsable, idPlanta, fechaOrden, fechaAproxTermino, descripcion, cantidadEsperada, estado) VALUES (idOrden, idResponsable, idPlanta, fechaOrden, fechaAproxTermino, descripcion, cantidadEsperada, estado)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idOrden', $idOrden);
+        $query->bindParam(':idResponsable', $idResponsable);
+        $query->bindParam(':idPlanta', $idPlanta);
+        $query->bindParam(':fechaOrden', $fechaOrden);
+        $query->bindParam(':fechaAproxTermino', $fechaAproxTermino);
+        $query->bindParam(':descripcion', $descripcion);
+        $query->bindParam(':cantidadEsperada', $cantidadEsperada);
+        $query->bindParam(':estado', $estado);
+        $query->execute();
+        $idOrdenCompra=$this->connect->lastInsertId();
+        return $idOrdenCompra;
     }
 
+    public function InsertValeSalida($idVale, $idInsumo, $idResponsable, $fecha, $cantidad){
+        $sql="INSERT INTO valeSalida(idVale, idInsumo, idResponsable, fecha, cantidad) VALUES (idVale, idInsumo, idResponsable, fecha, cantidad)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idVale', $idVale);
+        $query->bindParam(':idInsumo', $idInsumo);
+        $query->bindParam(':idResponsable', $idResponsable);
+        $query->bindParam(':fecha', $fecha);
+        $query->bindParam(':cantidad', $cantidad);
+        $query->execute();
+    }
 
-        function getNextIdCompra(){
+    public function insertDevolucion($idDevolucion, $idVale, $idInsumo, $fecha, $cantidad){
+        $sql="INSERT INTO devolucion(idDevolucion, idVale, idInsumo, fecha, cantidad) VALUES (idDevolucion, idVale, idInsumo, fecha, cantidad)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idDevolucion', $idDevolucion);
+        $query->bindParam(':idVale', $idVale);
+        $query->bindParam(':idInsumo', $idInsumo);
+        $query->bindParam(':fecha', $fecha);
+        $query->bindParam(':cantidad', $cantidad);
+        $query->execute();
+    }
+
+    //NEXT IDS
+    function getNextIdCompra(){
         $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'facturaCompra'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -190,7 +235,28 @@ class Movimientos {
         return $results;
     }
 
+    function getNextidSalida(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'valeSalida'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
+    function getNextidOrdenProduccion(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'ordenProduccion'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
-//INSUMO SE AUMENTA 
+    function getNextidDevolucion(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'devolucion'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
 }

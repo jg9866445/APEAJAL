@@ -25,6 +25,123 @@ class Movimientos {
         unset($this->connect);
     }
 
+    //Get para llenar los select
+    public function getAllClientes(){
+        $sql = "SELECT * from  clientes";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllResponsable() {
+        $sql = "SELECT * from responsable";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    
+    public function getAllPlantas()
+    {
+        $sql = "SELECT p.*,e.nombre FROM plantaForestal as p INNER JOIN especie as e ON e.idEspecie=p.idEspecie;";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
+    //Aqui va los get para tablas 
+    public function getAllPredios() {
+        $sql = "SELECT * from predios as p inner join clientes as c on p.idCliente = c.idCliente";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllSolicitud() {
+        $sql = "Select s.idSolicitud, s.fecha,c.razonSocial,s.estado, s.total  FROM solicitudes as s INNER JOIN clientes as c on c.idCliente = s.idCliente INNER JOIN responsable as r on r.idResponsable = s.idResponsable";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllVentas()
+    {
+        $sql = "SELECT v.idVenta, v.fechaVenta, v.idSolicitud , r.nombre , v.total FROM ventas as v INNER JOIN responsable as r on r.idResponsable=v.idResponsable";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllPagos()
+    {
+        $sql = "SELECT p.idPago,p.fecha,p.idVenta,p.idResponsable,p.conceptoGeneral,p.importe from pagos as p  INNER JOIN responsable as r on r.idResponsable= p.idResponsable";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
+
+
+
+
+
+
+
+
+//SELECT dv.saldo -(SELECT SUM(ds.cantidadSurtida) from salidas as s INNER JOIN pagos as p on s.idPago= p.idPago INNER JOIN ventas as v on v.idVenta = p.idVenta INNER JOIN detalleSalida as ds on ds.idSalida = s.idSalida WHERE ds.idPlanta = 1 and v.idVenta = 1 and ds.) from pagos as p INNER JOIN ventas as v on p.idVenta = v.idVenta INNER JOIN detalleVenta as dv on dv.idVenta = v.idVenta;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function getResponsable($idResponsable)
     {
         $sql = "SELECT * FROM responsable where idResponsable = :idResponsable";
@@ -96,45 +213,13 @@ class Movimientos {
     
     //consulta completa
 
-    public function getAllResponsable() {
-        $sql = "SELECT * from responsable";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
 
-    public function getAllClientes(){
-        $sql = "SELECT * from  clientes";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
 
-    public function getAllPredios() {
-        $sql = "SELECT * from predios as p INNER JOIN clientes as c ON c.idCliente= p.idCliente;";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
 
-    public function getAllPlanta(){
-        $sql = "SELECT p.*,e.nombre FROM plantaForestal as p INNER JOIN especie as e ON e.idEspecie=p.idEspecie;";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
 
-    public function getAllSolicitud() {
-        $sql = "SELECT * from solicitudes";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
+
+
+
 
     public function getSolicitudPlantas()
     {

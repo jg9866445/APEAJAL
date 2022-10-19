@@ -6,9 +6,7 @@ class Catalago {
     var $db;
     var $connect;
 
-
-    function __construct()
-    {        
+    function __construct(){        
         try {
             $this->db = new DB_Connect();
 
@@ -20,11 +18,10 @@ class Catalago {
         }
     }
     
-    public function close() 
-    {
+    public function close() {
         unset($this->connect);
     }
-    //funcion para buscar el ultimo id y
+    //Proximos id
     function getNextIdProveedor(){
         $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'proveedor'";
         $query = $this->connect->prepare($sql);
@@ -32,7 +29,8 @@ class Catalago {
         $results = $query -> fetchAll(); 
         return $results;
     }
-
+    
+    //Obtener todos los regristros
     public function getAllClasificaciones(){
         $sql = "SELECT * FROM clasificacion";
         $query = $this->connect->prepare($sql);
@@ -57,7 +55,6 @@ class Catalago {
         return $results;
     }
     
-
     public function getAllResponsable(){
         $sql = "SELECT * FROM responsable";
         $query = $this->connect->prepare($sql);
@@ -66,6 +63,7 @@ class Catalago {
         return $results;
     }
 
+    //Insertar a la base de datos
     public function insertClasificacion($concepto, $descripcion){
         $sql="INSERT INTO clasificacion (concepto, descripcion) VALUES (:concepto,:descripcion)";
         $query = $this->connect->prepare($sql);
@@ -88,9 +86,9 @@ class Catalago {
         $query->bindParam(':costoPromedio', $costoPromedio);
         $request=$query->execute(); 
         return $request;
-        }
-
-    function insertProveedor( $nombre, $contacto, $domicilio, $ciudad, $telefono, $email){
+    }
+    
+    public function insertProveedor( $nombre, $contacto, $domicilio, $ciudad, $telefono, $email){
         $sql = "INSERT INTO proveedor (nombre, contacto, domicilio, ciudad, telefono, email) VALUES ( :nombre, :contacto, :domicilio, :ciudad, :telefono, :email)";
         $query = $this->connect->prepare    ($sql);
         $query->bindParam(':nombre', $nombre);
@@ -112,6 +110,7 @@ class Catalago {
         return $request;
     }
 
+    //Actualizar regristros
     function updateInsumos($idInsumo, $idClasificacion, $nombre, $descripcion, $unidadMetrica, $existencias, $maximo, $minimo, $costoPromedio){
         $sql = "UPDATE insumo SET idClasificacion=:idClasificacion, nombre=:nombre, descripcion=:descripcion, unidadMetrica=:unidadMetrica, existencias=:existencias, maximo=:maximo, minimo=:minimo, costoPromedio=:costoPromedio where idInsumo=:idInsumo";
         $query = $this->connect->prepare($sql);

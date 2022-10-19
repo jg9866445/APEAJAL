@@ -60,6 +60,20 @@ if(isset($_POST['Metodo'])){
             $idSolicitud=$conexion->insertSolicitud($datosSolicud->idCliente,$datosSolicud->FechaSolicitud,$datosSolicud->estado,$datosSolicud->idResponsable);
             $conexion->insertDetallesSolicitud($idSolicitud,$detalles);
         break;
+
+        case 'getAllInsumos':
+            $conexion = New Movimientos();
+            $resultado = $conexion->getAllInsumos();
+            echo json_encode($resultado);
+        break;
+        
+        case 'getAllProveedores':
+            $conexion = New Movimientos();
+            $resultado = $conexion->getAllProveedores();
+            echo json_encode($resultado);
+        break;
+        
+
         default:
             echo "Error";
         break;

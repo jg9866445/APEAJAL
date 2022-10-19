@@ -18,7 +18,7 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
     
 </head>
-<body>
+<body onload="createTable()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -92,13 +92,6 @@
                     <br>
                     <table id="table_id" class="table table-responsive table-hover">
                         <thead>
-                            <tr>
-                                <th></th>
-                                <th>Proveedor</th>
-                                <th>Factura</th>
-                                <th>Fecha</th>
-                                <th>Total</th>
-                            </tr>
                         </thead>
                         <tbody>
                         </tbody>
@@ -120,14 +113,14 @@
             info: false,
             columns: [
                     { title: "", data: "idOrdenCompra" },
-                    { title: "Nombre", data: "nombre" },
+                    { title: "proveedor", data: "nombre" },
                     { title: "Factura", data: "factura" },
                     { title: "Fecha", data: "fecha" },
                     { title: "Total", data: "total" }
             ]
         });
 
-        $(document).ready( function () {
+        function createTable(){
             $.ajax({
                 url: "/src/php/SistemaProduccion/SubMovimientos.php",
                 method: "POST",
@@ -150,12 +143,7 @@
                     Swal.close();
                 }
             })     
-
-
-
-
-
-        });
+        };
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

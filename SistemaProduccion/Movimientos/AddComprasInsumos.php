@@ -1,3 +1,8 @@
+<!--TODO:FALTA VALIDACION POR CAMBIO DE FORMA DE ENVIO DE INFORMACION DE BUTTTON TYPE SUBMIT A JS-->
+<!--TODO:Falta cambiar todo el php por script con el fin de poder cambiar todos los archivos a html-->
+<!--TODO:Factura fisica no guarda correctametne verificar el porque-->
+<!--TODO:Insumo nombre de select creo que esta mal verificar-->
+
 <?php
     include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
     $conexion = new Movimientos();
@@ -228,11 +233,11 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Costo</label>
-                                    <input class="form-control" type="text" name="CostoInsumo" id="CostoInsumo" />
+                                    <input class="form-control" type="number" name="CostoInsumo" id="CostoInsumo" />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Cantidad</label>
-                                    <input class="form-control" type="text" name="CantidadInsumo" id="CantidadInsumo" />
+                                    <input class="form-control" type="number" name="CantidadInsumo" id="CantidadInsumo"/>
                                 </div>
                             </div>
                             <br>
@@ -244,7 +249,7 @@
                                 <div class="col-md-3">
                                 </div>
                                 <div class="col-md-3">
-                                    <button id='adicionar' type="button" class="btn btn-primary btn-xs btn-block text-center"  >Agregar</button>
+                                    <button id='adicionar' type="button" class="btn btn-primary btn-xs btn-block text-center" disabled>Agregar</button>
                                 </div>
                             </div>
                     </div>
@@ -336,7 +341,6 @@
     <br>
     
     <script>
-        //se genera un escucha para que espere cualquier clic configurado
     $(document).ready(function() {
         
         //se obtiene el valor de total y lo combierte en un entero con base 10
@@ -346,40 +350,41 @@
         //espera el clic de boton agregar
         $('#adicionar').click(function() {
         //obtiene el valor de el id y lo asigna a variable
-        var idInsumo = document.getElementById("idInsumo").value;
-        var NombreInsumo = document.getElementById("NombreInsumo").value;
-        var ClasificacionInsumo = document.getElementById("ClasificacionInsumo").value;
-        var ExistenciasInsumo = document.getElementById("ExistenciasInsumo").value;
-        var unidadMetricaInsumo = document.getElementById("unidadMetricaInsumo").value;
-        var CostoInsumo = parseInt(document.getElementById("CostoInsumo").value,10);
-        var CantidadInsumo = parseInt(document.getElementById("CantidadInsumo").value,10);
-       //preparas la nueva fila
-        var fila = 
-            '<tr id="row' + i + '" >'+
-                '<td id="idPlanta">' + idInsumo + '</td>'+
-                '<td>' + NombreInsumo + '</td>'+
-                '<td>' + ClasificacionInsumo + '</td>'+
-                '<td>' + ExistenciasInsumo + '</td>'+
-                '<td>' + unidadMetricaInsumo + '</td>'+
-                '<td id="Costo">' + CostoInsumo + '</td>'+
-                '<td id="Cantidad">' + CantidadInsumo + '</td>'+
-                '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
-            '</tr>'; 
+            var idInsumo = document.getElementById("idInsumo").value;
+            var NombreInsumo = document.getElementById("NombreInsumo").value;
+            var ClasificacionInsumo = document.getElementById("ClasificacionInsumo").value;
+            var ExistenciasInsumo = document.getElementById("ExistenciasInsumo").value;
+            var unidadMetricaInsumo = document.getElementById("unidadMetricaInsumo").value;
+            var CostoInsumo = parseInt(document.getElementById("CostoInsumo").value,10);
+            var CantidadInsumo = parseInt(document.getElementById("CantidadInsumo").value,10);
+            //preparas la nueva fila
+            var fila = 
+                '<tr id="row' + i + '" >'+
+                    '<td id="idPlanta">' + idInsumo + '</td>'+
+                    '<td>' + NombreInsumo + '</td>'+
+                    '<td>' + ClasificacionInsumo + '</td>'+
+                    '<td>' + ExistenciasInsumo + '</td>'+
+                    '<td>' + unidadMetricaInsumo + '</td>'+
+                    '<td id="Costo">' + CostoInsumo + '</td>'+
+                    '<td id="Cantidad">' + CantidadInsumo + '</td>'+
+                    '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
+                '</tr>'; 
 
-        i++;
-        //agregas la nueva fila con los datos
-        $('#mytable tbody:first').append(fila);
-        //limpiar datos
-        document.getElementById("idInsumo").value=-20;
-        document.getElementById("NombreInsumo").value="";
-        document.getElementById("ClasificacionInsumo").value="";
-        document.getElementById("ExistenciasInsumo").value="";
-        document.getElementById("unidadMetricaInsumo").value="";
-        document.getElementById("CostoInsumo").value="";
-        document.getElementById("CantidadInsumo").value="";
+            i++;
+            //agregas la nueva fila con los datos
+            $('#mytable tbody:first').append(fila);
+            // limpiar datos
+            document.getElementById("idInsumo").value=-20;
+            document.getElementById("NombreInsumo").value="";
+            document.getElementById("ClasificacionInsumo").value="";
+            document.getElementById("ExistenciasInsumo").value="";
+            document.getElementById("unidadMetricaInsumo").value="";
+            document.getElementById("CostoInsumo").value="";
+            document.getElementById("CantidadInsumo").value="";
 
-        total=parseInt(total+(CostoInsumo*CantidadInsumo),10);
-        document.getElementById('total').value=total;
+            total=parseInt(total+(CostoInsumo*CantidadInsumo),10);
+            document.getElementById('total').value=total;
+            document.getElementById("adicionar").setAttribute('disabled');
         
         });
   
@@ -451,95 +456,109 @@
 
     });
 
+    function iniciar(){
+        //idProveedor
+        //idInsumo
+    }
 
-        function getInsumo(){
-            var idInsumo = $("#idInsumo").val();
-            $.ajax({
-                url: "/src/php/SistemaProduccion/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Metodo":'getInsumo',
-                    "idInsumo": idInsumo
-                },
-                beforeSend: function() {
-                    Swal.fire({
-                        html: '<h5>Cargando...</h5>',
-                        showConfirmButton: false,
-                        onRender: function() {
-                            $('.swal2-content').prepend(sweet_loader);
-                        }
-                    });
-                },
-                success: function(respuesta){
-                    respuesta=JSON.parse(respuesta);
-                    document.getElementById("NombreInsumo").value=respuesta[0].nombre;
-                    document.getElementById("ClasificacionInsumo").value=respuesta[0].concepto;
-                    document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
-                    document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidadMetrica;
-                },complete: function() {
-                    Swal.close();
-                }
-            })     
-        }
+    function getNextIdCompra(){
+        console.log("getNextIdCompra");
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getNextIdCompra',
+            },
+            beforeSend: function() {
+                Swal.fire({
+                    html: '<h5>Cargando...</h5>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    onRender: function() {
+                        $('.swal2-content').prepend(sweet_loader);
+                    }
+                });
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                console.log(respuesta);
+                document.getElementById("idOrden").value=respuesta[0].AUTO_INCREMENT;
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
+
+
+
+    function getInsumo(){
+        var idInsumo = $("#idInsumo").val();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getInsumo',
+                "idInsumo": idInsumo
+            },
+            beforeSend: function() {
+                Swal.fire({
+                    html: '<h5>Cargando...</h5>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    onRender: function() {
+                        $('.swal2-content').prepend(sweet_loader);
+                    }
+                });
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                console.log(respuesta);
+                document.getElementById("NombreInsumo").value=respuesta[0].nombre;
+                document.getElementById("ClasificacionInsumo").value=respuesta[0].concepto;
+                document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
+                document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidadMetrica;
+                document.getElementById("CantidadInsumo").setAttribute("max",respuesta[0].maximo-respuesta[0].existencias);
+                document.getElementById("CantidadInsumo").setAttribute("min",respuesta[0].minimo);
+                document.getElementById("adicionar").removeAttribute('disabled');
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
         
-        function getProveedore(){
-            var idProveedor = $("#idProveedor").val();
-            $.ajax({
-                url: "/src/php/SistemaProduccion/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Metodo":'getProveedore',
-                    "idProveedor": idProveedor
-                },
-                beforeSend: function() {
-                    Swal.fire({
-                        html: '<h5>Cargando...</h5>',
-                        showConfirmButton: false,
-                        onRender: function() {
-                            $('.swal2-content').prepend(sweet_loader);
-                        }
-                    });
-                },
-                success: function(respuesta){
-                    respuesta=JSON.parse(respuesta);
-                    document.getElementById("NombreProveedor").value=respuesta[0].nombre;
-                    document.getElementById("DomicilioProveedor").value=respuesta[0].domicilio + " " + respuesta[0].ciudad;
-                    document.getElementById("ContactoProveedor").value=respuesta[0].contacto;
-                    document.getElementById("EmailProveedor").value=respuesta[0].email;
-                },complete: function() {
-                    Swal.close();
-                }
-            })     
-        }
+    function getProveedore(){
+        var idProveedor = $("#idProveedor").val();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getProveedore',
+                "idProveedor": idProveedor
+            },
+            beforeSend: function() {
+                Swal.fire({
+                    html: '<h5>Cargando...</h5>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    onRender: function() {
+                        $('.swal2-content').prepend(sweet_loader);
+                    }
+                });
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("NombreProveedor").value=respuesta[0].nombre;
+                document.getElementById("DomicilioProveedor").value=respuesta[0].domicilio + " " + respuesta[0].ciudad;
+                document.getElementById("ContactoProveedor").value=respuesta[0].contacto;
+                document.getElementById("EmailProveedor").value=respuesta[0].email;
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
 
-        function getNextIdCompra(){
-            console.log("getNextIdCompra");
-            $.ajax({
-                url: "/src/php/SistemaProduccion/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Metodo":'getNextIdCompra',
-                },
-                beforeSend: function() {
-                    Swal.fire({
-                        html: '<h5>Cargando...</h5>',
-                        showConfirmButton: false,
-                        onRender: function() {
-                            $('.swal2-content').prepend(sweet_loader);
-                        }
-                    });
-                },
-                success: function(respuesta){
-                    respuesta=JSON.parse(respuesta);
-                    console.log(respuesta);
-                    document.getElementById("idOrden").value=respuesta[0].AUTO_INCREMENT;
-                },complete: function() {
-                    Swal.close();
-                }
-            })     
-        }
-
-    </script>
+    
+</script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>

@@ -16,11 +16,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
-<body>
+<body onload="getNextidSalida()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -78,14 +81,14 @@
                     <div class="row g-3">
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">id Vale de salida</label>
-                            <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                            <input class="form-control" type="text" name="idValeSalida" id="idValeSalida" disabled />
                         </div>
                         <div class="col-md-6">
                             <h3 class="text-center"> Nuevo vale de salida</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
-                            <input class="form-control" type="date" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                            <input class="form-control" type="date" name="Fecha" id="Fecha" />
                         </div>
                     </div>
                 </div>
@@ -104,12 +107,12 @@
                     <div class="card-header">Responsable</div>
                     <div class="card-body">
                             <div class="row g-3">
-                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
+                                <select class="form-select" name="idResponsable" id="idResponsable" required onchange="getResponsable()">
                                 <option disabled selected>Escoja una opción</option>
                                     <?php
-                                        $resultado = $conexion->getAllProveedores();
+                                        $resultado = $conexion->getAllResponsables();
                                         foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                            echo "<option value=".$row['idResponsable'].">". $row['nombre']."</option>";
                                         }
                                     ?>
                                 </select>
@@ -118,11 +121,11 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                    <input class="form-control" type="text" name="NombreResponsable" id="NombreResponsable" disabled />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Puesto</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <input class="form-control" type="text" name="PuestoResponable" id="PuestoResponable" disabled/>
                                 </div>
                             </div>
                     </div>
@@ -146,12 +149,12 @@
                         <div class="card-header">Insumo</div>
                         <div class="card-body">
                             <div class="row g-3">
-                                <select class="form-select" name="idProvedor" id="idProvedor" required onchange="getProveedores()">
+                                <select class="form-select" name="idInsumo" id="idInsumo" required onchange="getInsumo()">
                                 <option disabled selected>Escoja una opción</option>
                                     <?php
-                                        $resultado = $conexion->getAllProveedores();
+                                        $resultado = $conexion->getAllInsumos();
                                         foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                            echo "<option value=".$row['idInsumo'].">". $row['nombre']."</option>";
                                         }
                                     ?>
                                 </select>
@@ -160,19 +163,19 @@
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                    <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Categorías</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <input class="form-control" type="text" name="CategoriasInsumo" id="CategoriasInsumo" disabled/>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="domicilioProveedor" id="domicilioProveedor" disabled />
+                                    <input class="form-control" type="text" name="DescripcionInsumo" id="DescripcionInsumo" disabled />
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Existencias</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" disabled/>
+                                    <input class="form-control" type="text" name="ExistenciasInsumo" id="ExistenciasInsumo" disabled/>
                                 </div>
                             </div>
                             <br>
@@ -185,7 +188,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Cantidad</label>
-                                    <input class="form-control" type="text" name="telefonoProveedor" id="telefonoProveedor" />
+                                    <input class="form-control" type="text" name="CantidadSalida" id="CantidadSalida" />
                                 </div>
                             </div>
                     </div>
@@ -207,7 +210,7 @@
 
                 <div class="col-lg-5 ">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Guardar vale de salida</button>
+                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="Guardar" >Guardar vale de salida</button>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -216,6 +219,151 @@
             </div>
         </div>
     <br>
+
+    <script>
+    $(document).ready(function() {
+        $('#regristar').click(function() {
+            var datos=[];
+            var idResponsable = document.getElementById("idResponsable").value;
+            var idInsumo = document.getElementById("idInsumo").value;
+            var CantidadSalida = document.getElementById("CantidadSalida").value;
+
+            const formData = new FormData();
+            
+            formData.append("Metodo", "insertCompraInsumo");
+            formData.append("datosCompra", 
+                JSON.stringify(
+                    {
+                        "idResponsable":FechaOrden, 
+                        "idInsumo":idProveedor, 
+                        "CantidadSalida":Factura,
+                        "total":total
+                    })    
+                ); 
+
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    Swal.fire({
+                        html: '<h5>Cargando...</h5>',
+                        showConfirmButton: false,
+                        onRender: function() {
+                            $('.swal2-content').prepend(sweet_loader);
+                        }
+                    });
+                },
+                success: function(respuesta){
+                     window.location.href = "/SistemaProduccion/Movimientos/ValeSalidaInsumos.php"
+                },complete: function() {
+                    Swal.close();
+                }
+            }) 
+            return false;
+
+        });
+    });
+
+    function getNextidSalida(){
+        document.getElementById('Fecha').valueAsDate = new Date();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getNextidSalida',
+            },
+            beforeSend: function() {
+                Swal.fire({
+                    html: '<h5>Cargando...</h5>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    onRender: function() {
+                        $('.swal2-content').prepend(sweet_loader);
+                    }
+                });
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("idValeSalida").value=respuesta[0].AUTO_INCREMENT;
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
+
+    function getInsumo(){
+        var idInsumo = $("#idInsumo").val();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getInsumo',
+                "idInsumo": idInsumo
+            },
+            beforeSend: function() {
+                Swal.fire({
+                    html: '<h5>Cargando...</h5>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    onRender: function() {
+                        $('.swal2-content').prepend(sweet_loader);
+                    }
+                });
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("NombreInsumo").value=respuesta[0].nombre;
+                document.getElementById("CategoriasInsumo").value=respuesta[0].concepto;
+                document.getElementById("DescripcionInsumo").value=respuesta[0].existencias;
+                document.getElementById("ExistenciasInsumo").value=respuesta[0].unidadMetrica;
+                document.getElementById("CantidadSalida").setAttribute("max",respuesta[0].maximo-respuesta[0].existencias);
+                document.getElementById("CantidadSalida").setAttribute("min",respuesta[0].minimo);
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
+    function getResponsable(){
+        var idResponsable = $("#idResponsable").val();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getResponsable',
+                "idResponsable": idResponsable
+            },
+            beforeSend: function() {
+                Swal.fire({
+                    html: '<h5>Cargando...</h5>',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    onRender: function() {
+                        $('.swal2-content').prepend(sweet_loader);
+                    }
+                });
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                console.log(respuesta[0].nombre);
+                document.getElementById("NombreResponsable").value=respuesta[0].nombre;
+                document.getElementById("PuestoResponable").value=respuesta[0].puesto;
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
+
+
+    function insertValeVenta(){
+
+    }
+
+
+
+    </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
