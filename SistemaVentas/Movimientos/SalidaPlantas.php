@@ -1,7 +1,14 @@
+<?php
+
+include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Movimiento.php");
+$conexion = new Movimientos();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
@@ -14,6 +21,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
 </head>
+
 <body>
     <div>
         <nav class="navbar logo">
@@ -21,6 +29,7 @@
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
         </nav>
+
         <nav class="navbar navbar-expand-lg menu">
             <div class="container-fluid">
                 <div class="navbar-nav " id="navbarCenteredExample">
@@ -62,296 +71,75 @@
                 </div>
             </div>
         </nav>
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
     </div>
 
-    <div class="container botton">
-        <div class="row">
-            <div class="col-lg-2 ">
+    <div>
+        <div class="container botton">
+            <div class="row">
+                <div class="col-lg-2 ">
+                </div>
+                <div class="col-lg-7 ">
+                    <h1 style="text-align:center">Salida de Plantas forestales</h1>
+                </div>
+                <div class="col-lg-2">
+                    <a class="btn active bottom" href="/SistemaVentas/Movimientos/AddSalida.php">Nueva Salida</a>
+                </div>
             </div>
-            <div class="col-lg-7 ">
-                <h1 style="text-align:center">Salidas de Plantas forestales</h1>
-            </div>
-            <div class="col-lg-2">
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1 ">
+                </div>
+
+                <div class="col-lg-8 ">
+                    <h2>Salidas</h2>
+                    <br>
+                    <table id="table_id" class="display table table-responsive table-hover">
+                        <thead>
+                            <tr>
+                                <th>  </th>
+                                <th>idPago</th>
+                                <th>idResponsable</th>
+                                <th>fechaEntrega</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $resultado = $conexion->getSalidaPlanta();
+                                    foreach ($resultado as $row) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['idSalida'] . "</td>";
+                                        echo "<td>" . $row['idPago'] . "</td>";
+                                        echo "<td>" . $row['idResponsable'] . "</td>";
+                                        echo "<td>" . $row['fechaEntrega'] . "</td>";
+                                        echo "</tr>";
+                                    }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-lg-2">
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-                </div>
-                <div class="col-lg-6 card-body">
-                    <div class="row g-3">
-                        <div class="col-md-3">
-                            <label for="staticEmail" class="form-label">id Pago</label>
-                            <input class="form-control" type="text" name="idPago" id="idPago" disabled />
-                        </div>
-                        <div class="col-md-6">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 ">
-                </div>
-            </div>
-        </div>
+    <script>
+    $(document).ready( function () {
+        var table = $('#table_id').DataTable();
+    });
+    </script>
 
-    <form>
-        <div class="container">
-            <div class="row">
-            <div class="col-lg-2 ">
-            </div>
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">Datos solicitud</div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-5">
-                                    <label for="staticEmail" class="col-sm-3 col-form-label">Solicitud</label>
-                                    <select class="form-select" name="idSolicitud" id="idSolicitud">
-                                        <option disabled selected>Escoja una opcion</option>
-                                    </select>
-                                    <label for="input"></label>
-                                </div>
-                                <div class="col-md-7">
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">id Solicitud</label>
-                                    <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled />
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Fecha de solicitud</label>
-                                    <input class="form-control" type="date" name="Fecha" id="Fecha" disabled/>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Estado de solicitud</label>
-                                    <input class="form-control" type="text" name="estado" id="estado" disabled />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="col-lg-2">
-            </div>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="container">
-            <div class="row">
-            <div class="col-lg-2 ">
-            </div>
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">Datos Clientes</div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Razon social</label>
-                                    <input class="form-control" type="text" name="idCliente" id="nombre" disabled />
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">RFC</label>
-                                    <input class="form-control" type="text" name="rfc" id="rfc" disabled/>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="col-sm-6 col-form-label">Tipo cliente</label>
-                                    <select class="form-select" name="idSolicitud" id="idSolicitud">
-                                        <option disabled selected>Escoja una opcion</option>
-                                        <option value="Donación">Donación</option>
-                                        <option value="Venta">Venta</option>
-                                    </select>
-                                    <label for="input"></label>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Domicilio</label>
-                                    <input class="form-control" type="text" name="domicilio" id="domicilio" disabled />
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-5">
-                                    <label for="staticEmail" class="form-label">Saldo de cliente</label>
-                                    <input class="form-control" type="number" name="saldoCliente" id="saldoCliente" disabled/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="col-lg-2">
-            </div>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="container">
-            <div class="row">
-            <div class="col-lg-2 ">
-            </div>
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">Datos Responsable</div>
-                    <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="col-sm-5 col-form-label">Solicitud</label>
-                                    <select class="form-select" name="idSolicitud" id="idSolicitud">
-                                        <option disabled selected>Escoja una opcion</option>
-                                    </select>
-                                    <label for="input"></label>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-5">
-                                    <label for="staticEmail" class="form-label">Nombre responsable</label>
-                                    <input class="form-control" type="text" name="nombreResponsable" id="nombreResponsable" disabled />
-                                </div>
-                                <div class="col-md-3">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Fecha de registro de salida</label>
-                                    <input class="form-control" type="date" name="fechaRegistroSal" id="FechaRegistroSal"/>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Fecha entrega</label>
-                                    <input class="form-control" type="date" name="fechaEntrega" id="fechaEntrega"/>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Estado Salida</label>
-                                    <input class="form-control" type="text" name="estadoSalida" id="estadoSalida"/>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-            </div>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-header">Datos de planta</div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="col-sm-4 col-form-label">planta</label>
-                                    <select class="form-select" name="idPlanta" id="idPlanta">
-                                        <option disabled selected>Escoja una opcion</option>
-                                    </select>
-                                    <label for="input"></label>
-                                </div>
-                                <div class="col-md-8">
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Nombre responsable</label>
-                                    <input class="form-control" type="text" name="nombreResponsable" id="nombreResponsable" disabled />
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="descripcion" id="descripcion"/>
-                                </div>
-                                <div class="col-md-4">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                </div>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
-                    <div class="card-header">Detalle de pago</div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <table id="table_id" class="display table table-responsive table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>id Salida</th>
-                                            <th>id Planta</th>
-                                            <th>Descripción</th>
-                                            <th>Especie</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
-                                            <th>Importe</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 ">
-                </div>
-            </div>
-        </div>
-
-        <br>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        </div>
-    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
-    </body>
+</body>
+
 </html>
