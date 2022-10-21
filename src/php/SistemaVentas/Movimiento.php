@@ -25,7 +25,6 @@ class Movimientos {
         unset($this->connect);
     }
 
-    //Get para llenar los select
     public function getAllClientes(){
         $sql = "SELECT * from  clientes";
         $query = $this->connect->prepare($sql);
@@ -61,13 +60,7 @@ class Movimientos {
         return $results;
     }
 
-    public function getAllSolicitud() {
-        $sql = "Select s.idSolicitud, s.fecha,c.razonSocial,s.estado, s.total  FROM solicitudes as s INNER JOIN clientes as c on c.idCliente = s.idCliente INNER JOIN responsable as r on r.idResponsable = s.idResponsable";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
+
 
     public function getAllVentas()
     {
@@ -87,6 +80,14 @@ class Movimientos {
         return $results;
     }
 
+   public function getAllSolicitud()
+    {
+        $sql = "Select s.idSolicitud,s.fecha, r.nombre, c.razonSocial,c.RFC,c.CURP,c.tipoCliente from solicitudes as s INNER JOIN clientes as c on c.idCliente = s.idCliente INNER JOIN responsable as r on r.idResponsable = s.idResponsable;";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
 
 
@@ -96,7 +97,6 @@ class Movimientos {
 
 
 
-//SELECT dv.saldo -(SELECT SUM(ds.cantidadSurtida) from salidas as s INNER JOIN pagos as p on s.idPago= p.idPago INNER JOIN ventas as v on v.idVenta = p.idVenta INNER JOIN detalleSalida as ds on ds.idSalida = s.idSalida WHERE ds.idPlanta = 1 and v.idVenta = 1 and ds.) from pagos as p INNER JOIN ventas as v on p.idVenta = v.idVenta INNER JOIN detalleVenta as dv on dv.idVenta = v.idVenta;
 
 
 
@@ -161,7 +161,7 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
-
+    //TODO:Ok error en esta funcion no tengo el tiempo para solocinar que funcione segun el cliente que esta selecionado porqueu es fucion de dos tablas
     public function getPredios($idPredio)
     {
         $sql = "SELECT * FROM predios where idPredio = :idPredio";
@@ -210,8 +210,6 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
-    
-    //consulta completa
 
 
 
@@ -221,14 +219,7 @@ class Movimientos {
 
 
 
-    public function getSolicitudPlantas()
-    {
-        $sql = "Select s.idSolicitud,s.fecha, r.nombre, c.razonSocial,c.RFC,c.CURP,c.tipoCliente,p.municipio,p.usoPredio,e.nombre,pf.descripcion,ds.cantidadSolicitada from solicitudes as s INNER JOIN clientes as c on c.idCliente = s.idCliente INNER Join predios as p on p.idCliente=s.idCliente INNER JOIN detalleSolicitud as ds on ds.idSolicitud = s.idSolicitud INNER JOIN plantaForestal as pf on pf.idPlanta = ds.idPlanta INNER JOIN especie as e on e.idEspecie = pf.idEspecie INNER JOIN responsable as r on r.idResponsable = s.idResponsable";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
+ 
 
     public function getVentaPlanta()
     {
@@ -246,8 +237,6 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
-
-    //inserts 
 
     public function insertPredios( $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud){
         $sql = "INSERT INTO predios( idCliente, municipio, extencion, usoPredio, longitud, latitud) VALUES ( :idCliente, :municipio, :extencion, :usoPredio, :longitud, :latitud)";
@@ -286,6 +275,33 @@ class Movimientos {
             $query->execute();
         }        
     }
+
+
+    //NEXT IDS
+    function getNextidSolicitudPlantas(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'solicitudes'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    function getNextidVenta(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'solicitudes'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
+
+
+
+    //TODO:PORFAVOR ANALIZA BIEN ESTE CODIGO PARA VER QUE PUEDES Y QUE NO ELINAR Y dejarlo mucho mas entendible
+    //TODO:SELECT DEBAJO DE ESTa liena es importete no BORRES 
+    //SELECT dv.saldo -(SELECT SUM(ds.cantidadSurtida) from salidas as s INNER JOIN pagos as p on s.idPago= p.idPago INNER JOIN ventas as v on v.idVenta = p.idVenta INNER JOIN detalleSalida as ds on ds.idSalida = s.idSalida WHERE ds.idPlanta = 1 and v.idVenta = 1 and ds.) from pagos as p INNER JOIN ventas as v on p.idVenta = v.idVenta INNER JOIN detalleVenta as dv on dv.idVenta = v.idVenta;
+
     /*public function getPlantasForestal(){
         $sql = "SELECT * FROM plantaForestal";
         $query = $this->connect->prepare($sql);

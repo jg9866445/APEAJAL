@@ -20,7 +20,7 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
 </head>
 
-<body>
+<body onload="getNextidSolicitudPlantas()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -283,7 +283,7 @@
                                             <select class="form-select" name="idPlanta" id="idPlanta" required onchange="getPlantasForestal()">
                                                 <option disabled selected value="-20">Elija una opción</option>
                                                     <?php 
-                                                        $resultado = $conexion->getAllPlanta();
+                                                        $resultado = $conexion->getAllPlantas();
                                                         foreach ($resultado as $row) {
                                                         echo "<option value=".$row['idPlanta'].">". $row['nombre']."</option>";
                                                         }
@@ -474,7 +474,7 @@
                 processData: false,
                 contentType: false,
                 success: function(respuesta){
-                    console.log(respuesta);
+                    window.location.href = "/SistemaVentas/Movimientos/SolicitudPlantas.php"
                 }
             }) 
             return false;
@@ -560,6 +560,28 @@
                 }
             })     
         }
+
+    function getNextidSolicitudPlantas(){
+        $.ajax({
+            url: "/src/php/SistemaVentas/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getNextidSolicitudPlantas',
+            },
+            beforeSend: function() {
+
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("idSolicitud").value=respuesta[0].AUTO_INCREMENT;
+                var now = new Date();
+                var dateString = moment(now).format('YYYY-MM-DD');
+                document.getElementById("Fecha").value=dateString;
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
 
     </script>
 

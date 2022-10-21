@@ -1,6 +1,4 @@
 <?php
-//TODO:VALE de salida tiene que llevar orden de salida???
-
 require_once($_SERVER['DOCUMENT_ROOT']."/src/php/connectividad.php");
 
 class Movimientos {
@@ -79,7 +77,7 @@ class Movimientos {
     }
 
     public function getAllOrdenProduccion(){
-        $sql = "SELECT op.idOrden, r.nombre,e.nombre,op.fechaOrden,op.descripcion,op.estado FROM ordenProduccion as op INNER JOIN responsable as r on r.idResponsable= op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta = op.idPlanta INNER JOIN especie as e on pf.idEspecie = e.idEspecie ";
+        $sql = "SELECT * FROM ordenProduccion WHERE estado <> 'Terminado' AND  estado <> 'Cancelado'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -149,6 +147,19 @@ class Movimientos {
         return $results;
     }
 
+    public function getOrdenProduccion($idOrden){
+        $sql = "Select r.nombre as responsable,r.puesto,e.nombre as planta,pf.descripcion,pf.existencia,op.fechaAproxTermino,op.descripcion as descripcionOrden,op.cantidadEsperada from ordenProduccion as op  INNER JOIN responsable as r on r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON op.idPlanta=pf.idPlanta INNER JOIN especie as e on e.idEspecie= pf.idEspecie WHERE op.idOrden=:idOrden";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idOrden', $idOrden);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
+
+    
+
     //INSERT AQUI SE INSERTA TODO
     public function insertCompraInsumos($fechaCompraInsumos,$idProveedor,$factura,$total){
         $sql="INSERT INTO facturaCompra(idProveedor, factura, fecha, total) VALUES ( :idProveedor, :factura, :fecha, :total)";
@@ -161,7 +172,7 @@ class Movimientos {
         $idOrdenCompra=$this->connect->lastInsertId();
         return $idOrdenCompra;
     }
-    
+    //TODO:Dejate de mamdas cabron y haslo normal cuando pase todo esto
     public function insertDetalleCompra($idCompra,$detalles){
         foreach ($detalles as $value) {
             $sql="INSERT INTO detalleFacturaCompra(idOrdenCompra, idInsumo, cantidad, costo) VALUES (:idOrdenCompra, :idInsumo, :cantidad, :costo)";
@@ -188,21 +199,55 @@ class Movimientos {
         }        
     }
     
-    public function insertOrdenProduccion($idOrden, $idResponsable, $idPlanta, $fechaOrden, $fechaAproxTermino, $descripcion, $cantidadEsperada, $estado){
-        $sql="INSERT INTO ordenProduccion(idOrden, idResponsable, idPlanta, fechaOrden, fechaAproxTermino, descripcion, cantidadEsperada, estado) VALUES (idOrden, idResponsable, idPlanta, fechaOrden, fechaAproxTermino, descripcion, cantidadEsperada, estado)";
+    public function insertOrdenProduccion( $idResponsable, $idPlanta, $fechaOrden, $fechaAproxTermino, $descripcion, $cantidadEsperada){
+        $sql="INSERT INTO ordenProduccion(idResponsable, idPlanta, fechaOrden, fechaAproxTermino, descripcion, cantidadEsperada, estado) VALUES ( :idResponsable, :idPlanta, :fechaOrden, :fechaAproxTermino, :descripcion, :cantidadEsperada)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':idOrden', $idOrden);
         $query->bindParam(':idResponsable', $idResponsable);
         $query->bindParam(':idPlanta', $idPlanta);
         $query->bindParam(':fechaOrden', $fechaOrden);
         $query->bindParam(':fechaAproxTermino', $fechaAproxTermino);
         $query->bindParam(':descripcion', $descripcion);
         $query->bindParam(':cantidadEsperada', $cantidadEsperada);
-        $query->bindParam(':estado', $estado);
+        $query->bindParam(':estado', "Pendiente");
         $query->execute();
         $idOrdenCompra=$this->connect->lastInsertId();
         return $idOrdenCompra;
     }
+
+    public function cancelarOrdenProduccion($idOrdenProduccion){
+        $sql="UPDATE ordenProduccion SET estado=:estado WHERE  idOrden=:idOrdenProduccion";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idResponsable', $idOrdenProduccion);
+        $query->bindParam(':estado', "Cancelado");
+        $query->execute();
+    }
+
+    public function TerminarOrdenProduccion($idOrdenProduccion,$fechaReal,$CantidadLograda,$CostoProduccion){
+        $sql="UPDATE ordenProduccion SET cantidadLograda=:CantidadLograda,fechaRealTermino=:fechaReal,estado=:estado WHERE  idOrden=:idOrdenProduccion";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idOrdenProduccion', $idOrdenProduccion);
+        $query->bindParam(':fechaReal', $fechaReal);
+        $query->bindParam(':CantidadLograda', $CantidadLograda);
+        $query->bindParam(':estado', "Terminado");
+
+        $query->execute();
+
+        $sql="SELECT pf.existencia from ordenProduccion as op INNER JOIN plantaForestal as pf  on op.idPlanta=pf.idPlanta WHERE op.idOrden=:idOrden";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idOrdenProduccion', $idOrdenProduccion );
+        $query->execute();
+
+        $request=$query->fetchAll();
+        $existencias=$request[0]['existencias']+$CantidadLograda;
+            
+        $sql="UPDATE plantaForestal SET existencia WHERE idOrden=:idOrden";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':existencias', $existencias);
+        $query->bindParam(':idOrden', $idOrdenProduccion);
+         $query->execute();
+    }
+
+
 
     public function InsertValeSalida($idVale, $idInsumo, $idResponsable, $fecha, $cantidad){
         $sql="INSERT INTO valeSalida(idVale, idInsumo, idResponsable, fecha, cantidad) VALUES (idVale, idInsumo, idResponsable, fecha, cantidad)";

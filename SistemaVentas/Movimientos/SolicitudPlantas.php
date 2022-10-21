@@ -86,7 +86,7 @@
                 <h1 style="text-align:center">Solicitud de Plantas forestales</h1>
                 </div>
                 <div class="col-lg-2">
-                <a class="btn active bottom" href="/SistemaVentas/Movimientos/AddSolicitudPlantas.php">Nueva Solicitud</a>
+                <a class="btn active bottom" href="/SistemaVentas/Movimientos/SolicitudPlantasAdd.php">Nueva Solicitud</a>
                 </div>
             </div>
         </div>
@@ -114,11 +114,12 @@
                         </thead>
                         <tbody>
                             <?php
-                                $resultado = $conexion->getSolicitudPlantas();
+                                $resultado = $conexion->getAllSolicitud();
                                     foreach ($resultado as $row) {
                                         echo "<tr>";
                                         echo "<td>" . $row['idSolicitud'] . "</td>";
                                         echo "<td>" . $row['fecha'] . "</td>";
+                                        echo "<td>" . $row['nombre'] . "</td>";
                                         echo "<td>" . $row['razonSocial'] . "</td>";
                                         echo "<td>" . $row['RFC'] . "</td>";
                                         echo "<td>" . $row['CURP'] . "</td>";

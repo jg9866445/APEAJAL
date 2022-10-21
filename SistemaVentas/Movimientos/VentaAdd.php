@@ -288,7 +288,7 @@
                                             <select class="form-select" name="idPlanta" id="idPlanta" required onchange="getPlantasForestal()">
                                                 <option disabled selected value="-20">Elija una opción</option>
                                                     <?php 
-                                                        $resultado = $conexion->getAllPlanta();
+                                                        $resultado = $conexion->getAllPlantas();
                                                         foreach ($resultado as $row) {
                                                         echo "<option value=".$row['idPlanta'].">". $row['nombre']."</option>";
                                                         }
@@ -405,6 +405,7 @@
                 </div>
             </div>
         </div>
+//        getNextidVenta
 
         <script>
         //se genera un escucha para que espere cualquier clic configurado

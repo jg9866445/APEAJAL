@@ -1,6 +1,8 @@
 <?php
     include_once($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
     $conexion = new Movimientos();
+
+    //TODO:Validacion cuando la orden este terminada no puede ser cancelada y cuando este cancelada no puede ser terminada
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,13 +74,12 @@
         <div class="container botton">
             <div class="row">
                 <div class="col-lg-4 ">
-                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/EndOrdenProduccion.php">Terminar orden</a>
                 </div>
                 <div class="col-lg-6 ">
 
                 </div>
                 <div class="col-lg-2">
-                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddOrdenProduccion.php">Nuevo registró</a>
+                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/OrdenProduccionAdd.php">Nuevo registró</a>
                 </div>
             </div>
         </div>
@@ -97,8 +98,11 @@
                             <tr>
                                 <th></th>
                                 <th>Responsable</th>
+                                <th>Especie</th>
                                 <th>Descripción</th>
                                 <th>Estado</th>
+                                <th>Terminar</th>
+                                <th>Cancelar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -107,9 +111,12 @@
                                     foreach ($resultado as $row) {
                                         echo "<tr>";
                                         echo "<td>" . $row['idOrden'] . "</td>";
-                                        echo "<td>" . $row['Responsable'] . "</td>";
+                                        echo "<td>" . $row['responsable'] . "</td>";
+                                        echo "<td>" . $row['especie'] . "</td>";
                                         echo "<td>" . $row['descripcion'] . "</td>";
                                         echo "<td>" . $row['estado'] . "</td>";
+                                        echo "<td><a  href=/SistemaProduccion/Movimientos/OrdenProduccionEnd.php?id=".$row['idOrden']." class='btn btn-primary'><i class='bi bi-nut'></i> </a></td>";
+                                        echo "<td><a  href=/SistemaProduccion/Movimientos/OrdenProduccionCancelar.php?id=".$row['idOrden']." class='btn btn-primary'><i class='bi bi-x-circle-fill'></i> </a></td>";
                                         echo "</tr>";
                                     }
                             ?>
@@ -123,13 +130,12 @@
             </div>
         </div>
 
-
-
         <script>
         /* Initialization of datatable */
         $(document).ready( function () {
             var table = $('#table_id').DataTable();
         });
+        
 
         </script>
 

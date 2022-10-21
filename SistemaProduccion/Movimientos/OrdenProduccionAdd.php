@@ -20,6 +20,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 </head>
 
@@ -108,8 +111,8 @@
                     <div class="card-body">
                         <div class="col-md-5">
                             <div class="row g-3">
-                                <select class="form-select" name="idResponsable" id="idResponsable" required onchange="getAllResponsables()">
-                                <option disabled selected>Escoja una opción</option>
+                                <select class="form-select" name="idResponsable" id="idResponsable" required onchange="getResponsable()">
+                                <option disabled selected value="-21">Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllResponsables();
                                         foreach ($resultado as $row) {
@@ -148,16 +151,16 @@
 
                 <div class="col-lg-8 ">
                         <div class="card">
-                        <div class="card-header">Insumo</div>
+                        <div class="card-header">Plantas</div>
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-md-5">
-                                    <select class="form-select" name="idInsumo" id="idInsumo" required onchange="getAllInsumos()">
-                                    <option disabled selected>Escoja una opción</option>
+                                    <select class="form-select" name="idPlanta" id="idPlanta" required onchange="getPlanta()">
+                                    <option disabled selected value="-21">Escoja una opción</option>
                                         <?php
-                                            $resultado = $conexion->getAllInsumos();
+                                            $resultado = $conexion->getAllPlanta();
                                             foreach ($resultado as $row) {
-                                                echo "<option value=".$row['idInsumo'].">". $row['nombre']."</option>";
+                                                echo "<option value=".$row['idPlanta'].">". $row['nombre']."</option>";
                                             }
                                         ?>
                                     </select>
@@ -165,21 +168,17 @@
                             </div>
                             <br/>
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
+                                    <input class="form-control" type="text" name="NombrePlanta" id="NombrePlanta" disabled />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="DescripcionInsumo" id="DescripcionInsumo" disabled/>
+                                    <input class="form-control" type="text" name="DescripcionPlanta" id="DescripcionPlanta" disabled/>
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Categoría</label>
-                                    <input class="form-control" type="text" name="CategoriaInsumo" id="CategoriaInsumo" disabled />
-                                </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Existencias</label>
-                                    <input class="form-control" type="text" name="ExistenciaInsumo" id="ExistenciaInsumo" disabled/>
+                                    <input class="form-control" type="text" name="ExistenciaPlanta" id="ExistenciaPlanta" disabled/>
                                 </div>
                             </div>
                             <br/>
@@ -238,7 +237,7 @@
 
                 <div class="col-lg-5 ">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="GuardarOP" >Guardar orden</button>
+                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="regristar" >Guardar orden</button>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -249,6 +248,45 @@
     <br>
 
     <script>
+    $(document).ready(function() {
+         $('#regristar').click(function() {
+            var idResponsable = document.getElementById("idResponsable").value;
+            var idPlanta = document.getElementById("idPlanta").value;
+            var fechaOrden = document.getElementById("Fecha").value;
+            var fechaAproxTermino = document.getElementById("FechaAproximadaTermino").value;
+            var descripcion = document.getElementById("DescripcionOrden").value;
+            var cantidadEsperada = document.getElementById("CantidadEsperada").value;
+            var estado = "Pendiente";
+
+            const formData = new FormData();
+
+            formData.append("Metodo", "insertOrdenProduccion");
+            formData.append("datosOrdenProduccion", JSON.stringify({"idResponsable":idResponsable,"idPlanta":idPlanta,"fechaOrden":fechaOrden,"fechaAproxTermino":fechaAproxTermino,"descripcion":descripcion,"cantidadEsperada":cantidadEsperada})); 
+            var estado=validacionSend();
+            if(estado.estado){
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    alert('<h5>Espere</h5><br/><p>Guardando datos</p>')
+                },
+                success: function(respuesta){
+                    alert("<h5>Listo</h5><br/><p>Datos guardados</p>")
+                    window.location.href = "/SistemaProduccion/Movimientos/OrdenProduccion.php"
+                },complete: function() {
+                    Swal.close();
+                }
+            }) 
+            }else{
+                alert(estado.texto,true,true);
+            }
+            return false;
+
+        });
+    });
     function getNextidOrdenProduccion(){
         $.ajax({
             url: "/src/php/SistemaProduccion/SubMovimientos.php",
@@ -257,30 +295,114 @@
                 "Metodo":'getNextidOrdenProduccion',
             },
             beforeSend: function() {
-                Swal.fire({
-                    html: '<h5>Cargando...</h5>',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    onRender: function() {
-                        $('.swal2-content').prepend(sweet_loader);
-                    }
-                });
+                alert("<h5>Espere cargando</h5>");
             },
             success: function(respuesta){
-                console.log(respuesta);
                 respuesta=JSON.parse(respuesta);
-                console.log(respuesta);
                 document.getElementById("idOrden").value=respuesta[0].AUTO_INCREMENT;
-                document.getElementById("Fecha").value=new Date();  
+                var now = new Date();
+                var dateString = moment(now).format('YYYY-MM-DD');
+                document.getElementById("Fecha").value=dateString;
             },complete: function() {
                 Swal.close();
             }
         })     
     }
+
+    function getResponsable(){
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getResponsable',
+                "idResponsable":document.getElementById("idResponsable").value
+            },
+            beforeSend: function() {
+                alert("<h5>Espere cargando</h5><p>Cargando Responsables</p>");
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                console.log(respuesta);
+                document.getElementById("NombreResponsable").value=respuesta[0].nombre;
+                document.getElementById("PuestoResponsable").value=respuesta[0].puesto;
+
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
+
+    function getPlanta(){
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getPlanta',
+                "idPlanta":document.getElementById("idPlanta").value
+            },
+            beforeSend: function() {
+                alert("<h5>Espere cargando</h5><p>Cargando</p>");
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                                console.log(respuesta);
+
+                document.getElementById("NombrePlanta").value=respuesta[0].nombre;
+                document.getElementById("DescripcionPlanta").value=respuesta[0].descripcion;
+                document.getElementById("ExistenciaPlanta").value=respuesta[0].existencia;
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
+
+    function validacionSend(){
+        var validacion=true
+        var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
+        
+        var idResponsable = (document.getElementById("idResponsable").value);
+        var idPlanta = (document.getElementById("idPlanta").value);
+        var fechaAproxTermino = (document.getElementById("FechaAproximadaTermino").value).length;
+        var descripcion = (document.getElementById("DescripcionOrden").value).length;
+        var cantidadEsperada = (document.getElementById("CantidadEsperada").value).length;
+
+        alert(idPlanta);
+        alert(idResponsable);
+        if(idResponsable=='-21'){
+            error=error+"<p>Elegir un responsable</p><br>";
+            validacion=false;
+        }
+        if(idPlanta=='-21'){
+            error=error+"<p>Elegir una planta</p><br>";
+            validacion=false;
+        }
+        if(fechaAproxTermino==0){
+            error=error+"<p>Agregar fecha de termino</p><br>";
+            validacion=false;
+        }
+        if(descripcion==0){
+            error=error+"<p>Agregar descripcion</p><br>";
+            validacion=false;
+        }
+        if(cantidadEsperada==0){
+            error=error+"<p>Agregar cantidad esperada</p>";
+            validacion=false;
+        }
+        return Validacion={"estado":validacion,"texto":error};        
+    }
+     
+    
+    function alert(mensaje,botton=false,eliminar=false){
+        Swal.fire({
+            html: mensaje,
+            showConfirmButton: botton,
+            allowOutsideClick: eliminar,
+            onRender: function() {
+                $('.swal2-content').prepend(sweet_loader);
+            }
+        });
+    }
+
     </script>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
 </body>
 </html>

@@ -1,7 +1,4 @@
-<!--TODO:FALTA VALIDACION POR CAMBIO DE FORMA DE ENVIO DE INFORMACION DE BUTTTON TYPE SUBMIT A JS-->
 <!--TODO:Falta cambiar todo el php por script con el fin de poder cambiar todos los archivos a html-->
-<!--TODO:Factura fisica no guarda correctametne verificar el porque-->
-<!--TODO:Insumo nombre de select creo que esta mal verificar-->
 
 <?php
     include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
@@ -18,6 +15,7 @@
     <link href="/src/css/menu.css" rel="stylesheet">
     <link href="/src/css/navbar.css" rel="stylesheet">
     <link href="/src/css/movimientos.css" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
@@ -25,7 +23,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     
 </head>
 
@@ -65,7 +65,10 @@
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodo.php">Reporte de devoluciones por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminada.php">Reporte de órdenes de producción Terminadas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -76,6 +79,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
+        
     </div>
 
     
@@ -435,7 +439,7 @@
             formData.append("Metodo", "insertCompraInsumos");
             formData.append("datosCompra", JSON.stringify({"FechaOrden":FechaOrden, "idProveedor":idProveedor, "factura":Factura,"total":total})    ); 
             formData.append("detalles", JSON.stringify(datos)); 
-            formData.append ("archivo", inputFile.files[0]);
+            formData.append ("file", inputFile.files[0]);
             var estado=validacionSend();
             if(estado.estado){
             $.ajax({
@@ -448,7 +452,8 @@
                     alert('<h5>Espere</h5><br/><p>Guardando datos</p>',false,false)
                 },
                 success: function(respuesta){
-                     window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.php"
+                    alert("<h5>Listo</h5><br/><p>Datos guardados</p>")
+                    window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.php"
                 },complete: function() {
                     Swal.close();
                 }
@@ -549,27 +554,19 @@
         if(idProveedor=='-20'){
             error=error+"<p>Elegir un proveedor</p><br>";
             validacion=false;
-            console.log("Error: idProveedor" + idProveedor);
         }
         if(contfactura<=0){
             error=error+"<p>Inserte el Numero de factura</p><br>";
             validacion=false;
-            console.log("Error: contfactura" + contfactura);
-
         }
         if(facturaFisica==0){
             error=error+"<p>Agregar un archivo que contenga la factura en formato pdf</p><br>";
             validacion=false;
-            console.log("Error: facturaFisica" + facturaFisica);
-
         }
         if(insumos<=0){
             error=error+"<p>Agregar minimo un insumo a la compra</p>";
             validacion=false;
-            console.log("Error: insumos" + insumos);
-
         }
-        console.log(contfactura)
         return Validacion={"estado":validacion,"texto":error};        
     }
 
@@ -603,9 +600,7 @@
     
 </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
 
 
 </body>
