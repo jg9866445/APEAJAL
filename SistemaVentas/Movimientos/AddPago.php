@@ -327,6 +327,47 @@
             })     
         }
 
+
+        $(document).ready(function() {
+        $('#regristar').click(function() {
+            var idResponsable = document.getElementById("idResponsable").value;
+            var idVenta = document.getElementById("idVenta").value;
+            var fecha = document.getElementById("fecha").value;
+            var conceptoGeneral = document.getElementById("conceptoGeneral").value;
+            var importe = document.getElementById("importe").value;
+            var inputFile = document.querySelector("#FacturaFisica");
+
+            const formData = new FormData();
+
+            formData.append("Metodo", "insertPagos");
+            formData.append("datosPago",JSON.stringify({"idResponsable":idResponsable,"idVenta":idVenta,"fecha":fecha,"conceptoGeneral":conceptoGeneral,"importe":importe})); 
+            formData.append ("file", inputFile.files[0]);
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    Swal.fire({
+                        html: '<h5>Cargando...</h5>',
+                        showConfirmButton: false,
+                        onRender: function() {
+                            $('.swal2-content').prepend(sweet_loader);
+                        }
+                    });
+                },
+                success: function(respuesta){
+                     window.location.href = "/SistemaProduccion/Movimientos/ValeSalidaInsumos.php"
+                },complete: function() {
+                    Swal.close();
+                }
+            }) 
+            return false;
+
+        });
+    });
+
         
         </script>
 

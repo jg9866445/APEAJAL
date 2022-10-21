@@ -107,6 +107,7 @@
                         </thead>
                         <tbody>
                             <?php
+                            
                                 $resultado = $conexion->getAllOrdenProduccion();
                                     foreach ($resultado as $row) {
                                         echo "<tr>";

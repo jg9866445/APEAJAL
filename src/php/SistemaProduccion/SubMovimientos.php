@@ -175,7 +175,7 @@ class SubMovimientos
                     case 'InsertValeSalida':
                         $datosValesSalidas= json_decode($_POST['datosValesSalidas']);
                         $conexion = New Movimientos();
-                        $idCompra=$conexion->InsertValeSalida($datosValesSalidas->idVale,$datosValesSalidas->idInsumo,$datosValesSalidas->idResponsable,$datosValesSalidas->fecha,$datosValesSalidas->cantidad);
+                        $idCompra=$conexion->InsertValeSalida($datosValesSalidas->idInsumo,$datosValesSalidas->idResponsable,$datosValesSalidas->Fecha,$datosValesSalidas->cantidad);
                     break;
                     case 'insertDevolucion':
                         $datosDevoluciones= json_decode($_POST['datosDevoluciones']);
@@ -190,7 +190,7 @@ class SubMovimientos
                 }
             }
         }catch (Exception $e){
-                save("subMovimientos","API",$e);
+                save($e);
         }
     }
 
@@ -209,14 +209,14 @@ class SubMovimientos
                     if(move_uploaded_file($origen, $destino))
                     {
                     }else{
-                            save("SubMovimientos","GuardarArchivo","Archivo no movido");
+                            save("Archivo no movido");
                         }
                 }else{
-                        save("SubMovimientos","GuardarArchivo","Archivo no es pdf");
+                        save("Archivo no es pdf");
 
                 }
             }else{
-                    save("SubMovimientos","GuardarArchivo","Archivo no encotrado");
+                    save("Archivo no encotrado");
             }
     }
 }

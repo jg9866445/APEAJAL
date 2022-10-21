@@ -25,7 +25,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 
-<body>
+<body onload="getOrdenProduccion()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -85,6 +85,7 @@
                         </div>
                         <div class="col-md-6">
                             <h3 class="text-center"> Terminar orden de producción</h3>
+                            <input type="hidden" id="idOrden" value="<?php echo $_GET['id'] ?>">
                         </div>
                         <div class="col-md-3">
                         </div>
@@ -106,25 +107,6 @@
                         <div class="card">
                         <div class="card-header">Orden de producción</div>
                         <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-12">Orden de produccion</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-5">
-
-                                    <select class="form-select" name="idOrden" id="idOrden" required onchange="getOrdenProduccion()">
-                                    <option disabled selected value="-21">Escoja una opción</option>
-                                        <?php
-                                            $resultado = $conexion->getAllOrdenProduccion();
-                                            foreach ($resultado as $row) {
-                                                echo "<option value=".$row['idOrden'].">". $row['descripcion']."</option>";
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <hr>
                             <br>   
                             <div class="row g-3">
                                 <div class="col-md-12">Responsable</div>
@@ -233,7 +215,7 @@
 
                 <div class="col-lg-5 ">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" >Terminar orden</button>
+                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="regristar" >Terminar orden</button>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -309,17 +291,12 @@
         var validacion=true
         var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
         
-        var idOrden = (document.getElementById("idOrden").value);
         var fechaReal = (document.getElementById("fechaReal").value).length;
         var CantidadLograda = (document.getElementById("CantidadLograda").value).length;
         var CostoProduccion = (document.getElementById("CostoProduccion").value).length;
 
-        if(idOrden=='-21'){
-            error=error+"<p>Elegir una orden</p><br>";
-            validacion=false;
-        }
         if(fechaReal==0){
-            error=error+"<p>Elegir una fecha</p><br>";
+            error=error+"<p>Elegir una fecha de terminacion real</p><br>";
             validacion=false;
         }
         if(CantidadLograda==0){

@@ -170,65 +170,6 @@
                                 </div>
                             </div>
                             <br>
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-12">Orden de producción</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-12">Responsable</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="NombreResponsable" id="NombreResponsable" disabled />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Puesto</label>
-                                    <input class="form-control" type="text" name="PuestoResponsable" id="PuestoResponsable" disabled/>
-                                </div>
-                            </div>
-                            <hr>
-                            <br>    
-                            <div class="row g-3">
-                                <div class="col-md-12">Planta</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="NombrePlanta" id="NombrePlanta" disabled />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="DescripcionPlanta" id="DescripcionPlanta" disabled />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Existencias</label>
-                                    <input class="form-control" type="text" name="ExistenciaPlanta" id="ExistenciaPlanta" disabled/>
-                                </div>
-                            </div>
-                            <br>
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-12">Orden de producción</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Fecha de aproximadaTermino</label>
-                                    <input class="form-control" type="text" name="FechaAproxTermino" id="FechaAproxTermino" disabled />
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="DecripcionOrden" id="DecripcionOrden" disabled/>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Cantidad esperada</label>
-                                    <input class="form-control" type="text" name="CantidaEspera" id="CantidaEspera" disabled />
-                                </div>
-                        </div>
                     </div>
                 </div>
 

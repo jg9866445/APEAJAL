@@ -93,6 +93,22 @@ class SubMovimientos
                         $idSolicitud=$conexion->insertSolicitud($datosSolicud->idCliente,$datosSolicud->FechaSolicitud,$datosSolicud->estado,$datosSolicud->idResponsable);
                         $conexion->insertDetallesSolicitud($idSolicitud,$detalles);
                     break;
+                    
+                    case 'insertVentaPlanta':
+                        $datosVenta= json_decode($_POST['datosVenta']);
+                        $detalles= json_decode($_POST['detalles']);
+                        $conexion = New Movimientos();
+                        $idVenta=$conexion->insertVentaPlanta($datosVenta->idSolicitud,$datosVenta->idResponsable,$datosVenta->fechaVenta,$datosVenta->total);
+                        $conexion->insertDetallesVenta($idVenta,$detalles);
+                    break;
+                    
+                    case 'insertPagos':
+                        $datosPago= json_decode($_POST['datosPago']);
+                        $conexion = New Movimientos();
+                        $idPago=$conexion->insertVentaPlanta($datosPago->idResponsable,$datosPago->idVenta,$datosPago->fecha,$datosPago->conceptoGeneral,$datosPago->importe);
+                        $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/FacturasCompras/",$idPago);
+                    break;
+                    
 
                     case 'getAllInsumos':
                         $conexion = New Movimientos();

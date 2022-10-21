@@ -20,6 +20,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 </head>
 
@@ -161,19 +164,15 @@
                                 <label for="input"></label>
                             </div>
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Nombre</label>
                                     <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Categorías</label>
                                     <input class="form-control" type="text" name="CategoriasInsumo" id="CategoriasInsumo" disabled/>
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="DescripcionInsumo" id="DescripcionInsumo" disabled />
-                                </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Existencias</label>
                                     <input class="form-control" type="text" name="ExistenciasInsumo" id="ExistenciasInsumo" disabled/>
                                 </div>
@@ -210,7 +209,7 @@
 
                 <div class="col-lg-5 ">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="Guardar" >Guardar vale de salida</button>
+                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="regristar" >Guardar vale de salida</button>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -227,19 +226,12 @@
             var idResponsable = document.getElementById("idResponsable").value;
             var idInsumo = document.getElementById("idInsumo").value;
             var CantidadSalida = document.getElementById("CantidadSalida").value;
+            var Fecha = document.getElementById("Fecha").value;
 
             const formData = new FormData();
             
-            formData.append("Metodo", "insertCompraInsumo");
-            formData.append("datosCompra", 
-                JSON.stringify(
-                    {
-                        "idResponsable":FechaOrden, 
-                        "idInsumo":idProveedor, 
-                        "CantidadSalida":Factura,
-                        "total":total
-                    })    
-                ); 
+            formData.append("Metodo", "InsertValeSalida");
+            formData.append("datosValesSalidas",JSON.stringify({"idInsumo":idInsumo,"idResponsable":idResponsable,"Fecha":Fecha,"cantidad":CantidadSalida})); 
 
             $.ajax({
                 url: "/src/php/SistemaProduccion/SubMovimientos.php",
@@ -257,7 +249,7 @@
                     });
                 },
                 success: function(respuesta){
-                     window.location.href = "/SistemaProduccion/Movimientos/ValeSalidaInsumos.php"
+                     window.location.href = "/SistemaProduccion/Movimientos/ValesSalidaInsumos.php"
                 },complete: function() {
                     Swal.close();
                 }
@@ -288,6 +280,9 @@
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("idValeSalida").value=respuesta[0].AUTO_INCREMENT;
+                var now = new Date();
+                var dateString = moment(now).format('YYYY-MM-DD');
+                document.getElementById("Fecha").value=dateString;
             },complete: function() {
                 Swal.close();
             }
@@ -317,10 +312,7 @@
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("NombreInsumo").value=respuesta[0].nombre;
                 document.getElementById("CategoriasInsumo").value=respuesta[0].concepto;
-                document.getElementById("DescripcionInsumo").value=respuesta[0].existencias;
-                document.getElementById("ExistenciasInsumo").value=respuesta[0].unidadMetrica;
-                document.getElementById("CantidadSalida").setAttribute("max",respuesta[0].maximo-respuesta[0].existencias);
-                document.getElementById("CantidadSalida").setAttribute("min",respuesta[0].minimo);
+                document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
             },complete: function() {
                 Swal.close();
             }
@@ -357,10 +349,29 @@
     }
 
 
-    function insertValeVenta(){
+    function validacionSend(){
+        var validacion=true
+        var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
+        
+        var idResponsable = (document.getElementById("idResponsable").value);
+        var idInsumo = (document.getElementById("idInsumo").value);
+        var CantidadSalida = (document.getElementById("CantidadSalida").value).length;
 
+        if(idResponsable=='-21'){
+            error=error+"<p>Elegir un responsable</p><br>";
+            validacion=false;
+        }
+        if(idInsumo=='-21'){
+            error=error+"<p>Elegir un insumo</p><br>";
+            validacion=false;
+        }
+        if(CantidadSalida==0){
+            error=error+"<p>Agrega la cantida</p><br>";
+            validacion=false;
+        }
+        return Validacion={"estado":validacion,"texto":error};        
     }
-
+     
 
 
     </script>

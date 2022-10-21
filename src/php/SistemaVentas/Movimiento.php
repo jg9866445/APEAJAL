@@ -304,7 +304,46 @@ class Movimientos {
             $query->execute();
         }        
     }
+    
+    public function insertVentaPlanta($idSolicitud,$idResponsable,$fechaVenta,$total){
+        $sql="INSERT INTO ventas(idSolicitud, idResponsable, fechaVenta, total) VALUES ( :idSolicitud, :idResponsable, :fechaVenta, :total)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSolicitud', $idSolicitud);
+        $query->bindParam(':idResponsable', $idResponsable);
+        $query->bindParam(':fechaVenta', $fechaVenta);
+        $query->bindParam(':total', $total);
+        $query->execute();
+        $idOrdenCompra=$this->connect->lastInsertId();
+        return $idOrdenCompra;
+    }
 
+    public function insertDetallesVenta($idVenta,$detalles){
+        foreach ($detalles as $value) {
+            $sql="INSERT INTO detalleVenta(idVenta, idPredio, idPlanta, cantidadSolicitada, precio) VALUES (:idVenta, :idPredio, :idPlanta, :cantidadSolicitada,:precio)";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idVenta', $idVenta);
+            $query->bindParam(':idPredio', $value->predio);
+            $query->bindParam(':idPlanta', $value->planta);
+            $query->bindParam(':precio', $value->precio);
+            $query->bindParam(':cantidadSolicitada', $value->Cantidad);
+            $query->execute();
+        }        
+    }
+
+
+
+    public function insertPagos($idResponsable, $idVenta, $fecha, $conceptoGeneral, $importe){
+        $sql="INSERT INTO pagos(idResponsable, idVenta, fecha, conceptoGeneral, importe) VALUES (:idResponsable,:idVenta,:fecha,:conceptoGeneral,:importe)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idResponsable', $idResponsable);
+        $query->bindParam(':idVenta', $idVenta);
+        $query->bindParam(':fecha', $fecha);
+        $query->bindParam(':conceptoGeneral', $conceptoGeneral);
+        $query->bindParam(':importe', $importe);
+        $query->execute();
+        $idPago=$this->connect->lastInsertId();
+        return $idPago;
+    }
 
     //NEXT IDS
     function getNextidSolicitudPlantas(){
@@ -316,7 +355,7 @@ class Movimientos {
     }
 
     function getNextidVenta(){
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'solicitudes'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'ventas'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 

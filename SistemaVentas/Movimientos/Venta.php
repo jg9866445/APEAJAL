@@ -86,7 +86,7 @@ $conexion = new Movimientos();
         <h1 style="text-align:center">Venta de Plantas forestales</h1>
         </div>
         <div class="col-lg-2">
-        <a class="btn active bottom" href="/SistemaVentas/Movimientos/AddVenta.php">Nueva Venta</a>
+        <a class="btn active bottom" href="/SistemaVentas/Movimientos/VentaAdd.php">Nueva Venta</a>
         </div>
     </div>
 </div>

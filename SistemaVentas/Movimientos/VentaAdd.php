@@ -17,11 +17,16 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
             <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         </head>
 
-    <body>
+    <body onload="getNextidVenta()">
         <div>
             <nav class="navbar logo">
                 <a class="navbar-brand">
@@ -415,7 +420,6 @@
                 </div>
             </div>
         </div>
-//        getNextidVenta
 
         <script>
         //se genera un escucha para que espere cualquier clic configurado
@@ -448,6 +452,7 @@
                 '<td>' + especie + '</td>'+
                 '<td id="precioPlanta">' + precio + '</td>'+
                 '<td id="cantidadSolicitada">' + cantidadSolicitada + '</td>'+
+                '<td><button type="button" name="remove" id="' + i + '" class="btn btn-success btn_update">Modificar</button></td>'+
                 '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
             '</tr>'; 
 
@@ -498,9 +503,12 @@
         });
 
         $('#regristar').click(function() {
+            var idSolicitud =document.getElementById("idSolicitud").value;
+            var idResponsable= document.getElementById("idResponsable").value;
+            var fechaVenta= document.getElementById("fechaVenta").value;
+            var total   = document.getElementById("total").value;
+
             var datos=[];
-            var Fecha = document.getElementById("fecha").value;
-            var Cantidad = document.getElementById("cantidadSolicitada").value;
 
             var table = $("#mytable tbody");
             table.find('tr').each(function (i, el) {
@@ -514,8 +522,8 @@
             });
             const formData = new FormData();
             
-            formData.append("Metodo", "insertSolicitudPlantas");
-            formData.append("datosSolicud", JSON.stringify({"FechaSolicitud":Fecha, "Cantidad":Cantidad})    ); 
+            formData.append("Metodo", "insertVentaPlanta");
+            formData.append("datosVenta", JSON.stringify({"idSolicitud":idSolicitud, "idResponsable":idResponsable,"fechaVenta":fechaVenta,"total":total})    ); 
             formData.append("detalles", JSON.stringify(datos)); 
             $.ajax({
                 url: "/src/php/SistemaVentas/SubMovimientos.php",
@@ -524,7 +532,7 @@
                 processData: false,
                 contentType: false,
                 success: function(respuesta){
-                    console.log(respuesta);
+                    window.location.href = "/SistemaVentas/Movimientos/Venta.php"
                 }
             }) 
             return false;
@@ -585,7 +593,7 @@
                     "idSolicitud": idSolicitud
                 },success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
-
+                    var total=0;
                     $.each(respuesta,function(index, value){
                         console.log('My array has at position ' + index + ', this value: ' + value);
                 
@@ -607,6 +615,8 @@
                             '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
                         '</tr>'; 
                         i++;
+                        total=total+(value.precio*value.cantidadSolicitada)
+                        document.getElementById("total").value=total;
                         $('#mytable tbody:first').append(fila);
                     });
                 }
@@ -652,6 +662,30 @@
                 }
             })     
         }
+
+
+        
+    function getNextidVenta(){
+        $.ajax({
+            url: "/src/php/SistemaVentas/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getNextidVenta',
+            },
+            beforeSend: function() {
+
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("idVenta").value=respuesta[0].AUTO_INCREMENT;
+                var now = new Date();
+                var dateString = moment(now).format('YYYY-MM-DD');
+                document.getElementById("fechaVenta").value=dateString;
+            },complete: function() {
+                Swal.close();
+            }
+        })     
+    }
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
