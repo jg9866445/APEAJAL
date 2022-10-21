@@ -114,7 +114,7 @@ class Movimientos {
     }
 
     public function getInsumo($idInsumo){
-        $sql = "SELECT i.nombre,i.existencias,i.unidadMetrica,c.concepto,i.maximo,i.minimo from  insumo as i INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE i.idInsumo=:idInsumo";
+        $sql = "SELECT i.nombre,i.existencias,i.unidad,c.concepto,i.maximo,i.minimo,i.costoPromedio      from  insumo as i INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE i.idInsumo=:idInsumo";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idInsumo', $idInsumo);
         $query -> execute(); 

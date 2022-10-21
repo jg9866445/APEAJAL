@@ -86,7 +86,7 @@
                 <div class="col-lg-8 card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
-                            <label for="staticEmail" class="form-label">id Orden de compra</label>
+                            <label for="staticEmail" class="form-label">Numero de compra</label>
                             <input class="form-control" type="text" name="idOrden" id="idOrden" disabled />
                         </div>
                         <div class="col-md-6">
@@ -116,11 +116,11 @@
                     <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idProveedor" id="idProveedor" required onchange="getProveedore()">
-                                <option disabled selected>Escoja una opción</option>
+                                <option disabled selected value="-20">Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllProveedores();
                                         foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor'].">". $row['nombre']."</option>";
+                                            echo "<option value=".$row['idProveedor']." id=".$row['idProveedor'].">". $row['nombre']."</option>";
                                         }
                                     ?>
                                 </select>
@@ -201,7 +201,7 @@
                                     <?php
                                         $resultado = $conexion->getAllInsumos();
                                         foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idInsumo'].">". $row['nombre']."</option>";
+                                            echo "<option value=".$row['idInsumo']." id=Opcion".$row['idInsumo'].">". $row['nombre']."</option>";
                                         }
                                     ?>
                                 </select>
@@ -351,6 +351,7 @@
         $('#adicionar').click(function() {
         //obtiene el valor de el id y lo asigna a variable
             var idInsumo = document.getElementById("idInsumo").value;
+            document.getElementById("Opcion"+idInsumo).setAttribute('disabled',""); 
             var NombreInsumo = document.getElementById("NombreInsumo").value;
             var ClasificacionInsumo = document.getElementById("ClasificacionInsumo").value;
             var ExistenciasInsumo = document.getElementById("ExistenciasInsumo").value;
@@ -360,7 +361,7 @@
             //preparas la nueva fila
             var fila = 
                 '<tr id="row' + i + '" >'+
-                    '<td id="idPlanta">' + idInsumo + '</td>'+
+                    '<td id="idInsumo">' + idInsumo + '</td>'+
                     '<td>' + NombreInsumo + '</td>'+
                     '<td>' + ClasificacionInsumo + '</td>'+
                     '<td>' + ExistenciasInsumo + '</td>'+
@@ -369,22 +370,27 @@
                     '<td id="Cantidad">' + CantidadInsumo + '</td>'+
                     '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
                 '</tr>'; 
+            var addTable=validacionAddTable();
+            if(addTable.estado){
+                i++;
+                //agregas la nueva fila con los datos
+                $('#mytable tbody:first').append(fila);
+                // limpiar datos
+                document.getElementById("idInsumo").value=-20;
+                document.getElementById("NombreInsumo").value="";
+                document.getElementById("ClasificacionInsumo").value="";
+                document.getElementById("ExistenciasInsumo").value="";
+                document.getElementById("unidadMetricaInsumo").value="";
+                document.getElementById("CostoInsumo").value="";
+                document.getElementById("CantidadInsumo").value="";
 
-            i++;
-            //agregas la nueva fila con los datos
-            $('#mytable tbody:first').append(fila);
-            // limpiar datos
-            document.getElementById("idInsumo").value=-20;
-            document.getElementById("NombreInsumo").value="";
-            document.getElementById("ClasificacionInsumo").value="";
-            document.getElementById("ExistenciasInsumo").value="";
-            document.getElementById("unidadMetricaInsumo").value="";
-            document.getElementById("CostoInsumo").value="";
-            document.getElementById("CantidadInsumo").value="";
+                total=parseInt(total+(CostoInsumo*CantidadInsumo),10);
+                document.getElementById('total').value=total;
+                document.getElementById("adicionar").setAttribute('disabled',"");
+            }else{
+                    alert(addTable.texto,true,true);
+            }
 
-            total=parseInt(total+(CostoInsumo*CantidadInsumo),10);
-            document.getElementById('total').value=total;
-            document.getElementById("adicionar").setAttribute('disabled');
         
         });
   
@@ -393,6 +399,7 @@
 
             var button_id = $(this).attr("id");
 
+            idInsumo=$('#row'+button_id).find("#idInsumo")[0].textContent;
             Cantidad=$('#row'+button_id).find("#Cantidad")[0].textContent;
             Costo=$('#row'+button_id).find("#Costo")[0].textContent;
 
@@ -401,7 +408,8 @@
 
             total=parseInt(total-(Cantidad*Costo),10);
             document.getElementById('total').value=total;
-            
+            document.getElementById("Opcion"+idInsumo).removeAttribute('disabled'); 
+
         });
 
         $('#regristar').click(function() {
@@ -424,10 +432,12 @@
 
             const formData = new FormData();
             
-            formData.append("Metodo", "insertCompraInsumo");
+            formData.append("Metodo", "insertCompraInsumos");
             formData.append("datosCompra", JSON.stringify({"FechaOrden":FechaOrden, "idProveedor":idProveedor, "factura":Factura,"total":total})    ); 
             formData.append("detalles", JSON.stringify(datos)); 
             formData.append ("archivo", inputFile.files[0]);
+            var estado=validacionSend();
+            if(estado.estado){
             $.ajax({
                 url: "/src/php/SistemaProduccion/SubMovimientos.php",
                 method: "POST",
@@ -435,13 +445,7 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function() {
-                    Swal.fire({
-                        html: '<h5>Cargando...</h5>',
-                        showConfirmButton: false,
-                        onRender: function() {
-                            $('.swal2-content').prepend(sweet_loader);
-                        }
-                    });
+                    alert('<h5>Espere</h5><br/><p>Guardando datos</p>',false,false)
                 },
                 success: function(respuesta){
                      window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.php"
@@ -449,6 +453,9 @@
                     Swal.close();
                 }
             }) 
+            }else{
+                alert(estado.texto,true,true);
+            }
             return false;
 
         });
@@ -456,13 +463,7 @@
 
     });
 
-    function iniciar(){
-        //idProveedor
-        //idInsumo
-    }
-
     function getNextIdCompra(){
-        console.log("getNextIdCompra");
         $.ajax({
             url: "/src/php/SistemaProduccion/SubMovimientos.php",
             method: "POST",
@@ -470,19 +471,14 @@
                 "Metodo":'getNextIdCompra',
             },
             beforeSend: function() {
-                Swal.fire({
-                    html: '<h5>Cargando...</h5>',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    onRender: function() {
-                        $('.swal2-content').prepend(sweet_loader);
-                    }
-                });
+                alert('<h5>Espere cargando</h5>',false,false)
             },
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
-                console.log(respuesta);
                 document.getElementById("idOrden").value=respuesta[0].AUTO_INCREMENT;
+                var now = new Date();
+                var dateString = moment(now).format('YYYY-MM-DD');
+                document.getElementById("FechaOrden").value=dateString;
             },complete: function() {
                 Swal.close();
             }
@@ -501,24 +497,15 @@
                 "idInsumo": idInsumo
             },
             beforeSend: function() {
-                Swal.fire({
-                    html: '<h5>Cargando...</h5>',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    onRender: function() {
-                        $('.swal2-content').prepend(sweet_loader);
-                    }
-                });
+                alert('<h5>Espere cargando</h5><br/><p>Datos del insumo</p>',false,false)
             },
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
-                console.log(respuesta);
                 document.getElementById("NombreInsumo").value=respuesta[0].nombre;
                 document.getElementById("ClasificacionInsumo").value=respuesta[0].concepto;
                 document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
-                document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidadMetrica;
-                document.getElementById("CantidadInsumo").setAttribute("max",respuesta[0].maximo-respuesta[0].existencias);
-                document.getElementById("CantidadInsumo").setAttribute("min",respuesta[0].minimo);
+                document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidad;
+                document.getElementById("CostoInsumo").value=respuesta[0].costoPromedio;
                 document.getElementById("adicionar").removeAttribute('disabled');
             },complete: function() {
                 Swal.close();
@@ -536,14 +523,7 @@
                 "idProveedor": idProveedor
             },
             beforeSend: function() {
-                Swal.fire({
-                    html: '<h5>Cargando...</h5>',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    onRender: function() {
-                        $('.swal2-content').prepend(sweet_loader);
-                    }
-                });
+                alert('<h5>Espere cargando</h5><br/><p>Datos del provedor</p>',false,false)
             },
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
@@ -557,11 +537,76 @@
         })     
     }
 
+
+    function validacionSend(){
+        var validacion=true
+        var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
+        var idProveedor= document.getElementById("idProveedor").value;
+        var contfactura=(document.getElementById("Factura").value).length;
+        var facturaFisica = document.querySelector('#FacturaFisica').files.length
+        var insumos=$("#mytable tbody").find('tr').length; 
+
+        if(idProveedor=='-20'){
+            error=error+"<p>Elegir un proveedor</p><br>";
+            validacion=false;
+            console.log("Error: idProveedor" + idProveedor);
+        }
+        if(contfactura<=0){
+            error=error+"<p>Inserte el Numero de factura</p><br>";
+            validacion=false;
+            console.log("Error: contfactura" + contfactura);
+
+        }
+        if(facturaFisica==0){
+            error=error+"<p>Agregar un archivo que contenga la factura en formato pdf</p><br>";
+            validacion=false;
+            console.log("Error: facturaFisica" + facturaFisica);
+
+        }
+        if(insumos<=0){
+            error=error+"<p>Agregar minimo un insumo a la compra</p>";
+            validacion=false;
+            console.log("Error: insumos" + insumos);
+
+        }
+        console.log(contfactura)
+        return Validacion={"estado":validacion,"texto":error};        
+    }
+
+    function validacionAddTable(){
+        var validacion=true
+        var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
+        CostoInsumo=document.getElementById("CostoInsumo").value;
+        CantidadInsumo=document.getElementById("CantidadInsumo").value;
+        if(CantidadInsumo.length==0){
+            error=error+"<p>Agregar cantidad de insumo</p><br>";
+            validacion=false;
+        }
+        if(CostoInsumo.length == 0 ){
+            error=error+"<p>Agregar el costo del insumo</p><br>";
+            validacion=false;
+        }
+        return Validacion={"estado":validacion,"texto":error};
+    }
+
+    function alert(mensaje,botton,eliminar){
+        Swal.fire({
+            html: mensaje,
+            showConfirmButton: botton,
+            allowOutsideClick: eliminar,
+            onRender: function() {
+                $('.swal2-content').prepend(sweet_loader);
+            }
+        });
+    }
+
     
 </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
 
 </body>
 </html>

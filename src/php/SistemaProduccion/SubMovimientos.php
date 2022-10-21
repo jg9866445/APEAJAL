@@ -20,7 +20,7 @@ class SubMovimientos
     }
 
     function API(){
-        if(isset($_POST['action'])){
+        if(isset($_POST['Metodo'])){
             switch ($_POST['Metodo']) {
                 case 'getNextIdCompra':
                     $conexion = new Movimientos();
@@ -142,7 +142,7 @@ class SubMovimientos
                     $conexion = New Movimientos();
                     $idCompra=$conexion->insertCompraInsumos($datosCompra->FechaOrden,$datosCompra->idProveedor,$datosCompra->factura,$datosCompra->total);
                     $conexion->insertDetalleCompra($idCompra,$detalles);
-                    $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/FacturasCompras/",$idCompra,$_FILES);
+                    $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/FacturasCompras/",$idCompra);
                 break;
 
                 case 'insertOrdenProduccion':
@@ -170,17 +170,17 @@ class SubMovimientos
         }
     }
 
-    function GuardarArchivo($ubicacion,$nombre,$files){
+    function GuardarArchivo($ubicacion,$nombre){
         $nombre=$nombre.".pdf";
         $carpetaDestino=$ubicacion;
-        if(isset($files["file"]))
+        if(isset($_FILES["file"]))
             {
-                if($files["file"]["type"]=="application/pdf")
+                if($_FILES["file"]["type"]=="application/pdf")
                 {
                     if(!file_exists($carpetaDestino)){
                         mkdir($carpetaDestino, 0777);
                     }
-                    $origen=$files["file"]["tmp_name"];
+                    $origen=$_FILES["file"]["tmp_name"];
                     $destino=$carpetaDestino.$nombre;
                     if(move_uploaded_file($origen, $destino))
                     {
