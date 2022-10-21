@@ -116,7 +116,7 @@ $conexion = new Movimientos();
                             foreach ($resultado as $row) {
                                 echo "<tr>";
                                 echo "<td>" . $row['idVenta'] . "</td>";
-                                echo "<td>" . $row['fecha'] . "</td>";
+                                echo "<td>" . $row['fechaVenta'] . "</td>";
                                 echo "<td>" . $row['idSolicitud'] . "</td>";
                                 echo "<td>" . $row['nombre'] . "</td>";
                                 echo "<td>" . $row['total'] . "</td>";

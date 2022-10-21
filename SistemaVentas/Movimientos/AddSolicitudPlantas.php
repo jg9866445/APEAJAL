@@ -137,6 +137,10 @@
                                         <label for="staticEmail" class="form-label">Nombre</label>
                                         <input class="form-control" type="text" name="NombreResponsable" id="NombreResponsable" disabled/>
                                     </div>
+                                    <div class="col-md-4">
+                                        <label for="staticEmail" class="form-label">Puesto</label>
+                                        <input class="form-control" type="text" name="puesto" id="puesto" disabled/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -169,11 +173,15 @@
                                             </select>
                                         <label for="input"></label>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
+                                        <label for="staticEmail" class="form-label">IdCliente</label>
+                                        <input class="form-control" type="text" name="idCliente" id="idCliente" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
                                         <label for="staticEmail" class="form-label">Razón social</label>
                                         <input class="form-control" type="text" name="razonSocial" id="razonSocial" disabled/>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label for="staticEmail" class="form-label">Domicilio</label>
                                         <input class="form-control" type="text" name="domicilio" id="domicilio" disabled/>
                                     </div>
@@ -283,7 +291,7 @@
                                             <select class="form-select" name="idPlanta" id="idPlanta" required onchange="getPlantasForestal()">
                                                 <option disabled selected value="-20">Elija una opción</option>
                                                     <?php 
-                                                        $resultado = $conexion->getAllPlanta();
+                                                        $resultado = $conexion->getAllPlantas();
                                                         foreach ($resultado as $row) {
                                                         echo "<option value=".$row['idPlanta'].">". $row['nombre']."</option>";
                                                         }
@@ -497,6 +505,7 @@
                 success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
                     document.getElementById("NombreResponsable").value=respuesta[0].nombre;
+                    document.getElementById("puesto").value=respuesta[0].puesto;
                 }
             })     
         }

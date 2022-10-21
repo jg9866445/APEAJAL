@@ -137,6 +137,10 @@
                                         <label for="staticEmail" class="form-label">Nombre</label>
                                         <input class="form-control" type="text" name="NombreResponsable" id="NombreResponsable" disabled/>
                                     </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Puesto</label>
+                                        <input class="form-control" type="text" name="puesto" id="puesto" disabled/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -318,6 +322,7 @@
                 success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
                     document.getElementById("NombreResponsable").value=respuesta[0].nombre;
+                    document.getElementById("puesto").value=respuesta[0].puesto;
                 }
             })     
         }
