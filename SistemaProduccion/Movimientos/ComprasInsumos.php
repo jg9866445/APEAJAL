@@ -28,7 +28,7 @@
             </a>
         </nav>
 
- <nav class="navbar navbar-expand-lg menu">
+         <nav class="navbar navbar-expand-lg menu">
             <div class="container-fluid">
                 <div class="navbar-nav " id="navbarCenteredExample">
                     <ul class="navbar-nav">
@@ -56,9 +56,9 @@
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodo.php">Reporte de devoluciones por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminada.php">Reporte de órdenes de producción Terminadas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
                             </ul>
                         </li>

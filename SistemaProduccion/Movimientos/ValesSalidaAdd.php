@@ -62,7 +62,10 @@
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -111,7 +114,7 @@
                     <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idResponsable" id="idResponsable" required onchange="getResponsable()">
-                                <option disabled selected>Escoja una opción</option>
+                                <option disabled selected value="-21">Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllResponsables();
                                         foreach ($resultado as $row) {
@@ -153,7 +156,7 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idInsumo" id="idInsumo" required onchange="getInsumo()">
-                                <option disabled selected>Escoja una opción</option>
+                                <option disabled selected value="-21">Escoja una opción</option>
                                     <?php
                                         $resultado = $conexion->getAllInsumos();
                                         foreach ($resultado as $row) {
@@ -169,7 +172,7 @@
                                     <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Categorías</label>
+                                    <label for="staticEmail" class="form-label">Clasificacion   </label>
                                     <input class="form-control" type="text" name="CategoriasInsumo" id="CategoriasInsumo" disabled/>
                                 </div>
                                 <div class="col-md-4">
@@ -190,6 +193,9 @@
                                     <input class="form-control" type="text" name="CantidadSalida" id="CantidadSalida" />
                                 </div>
                             </div>
+
+
+                            
                     </div>
                     </div>
                 </div>
@@ -200,7 +206,93 @@
             </div>
         </div>
         <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
 
+                </div>
+
+                <div class="col-lg-8 ">
+                        <div class="card">
+                        <div class="card-header">Ordenes de producción</div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <select class="form-select" name="idOrden" id="idOrden" required onchange="getOrdenesProduccion()">
+                                <option disabled selected value="-21">Escoja una opción</option>
+                                    <?php
+                                        $resultado = $conexion->getAllOrdenProduccion();
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idOrden'].">". $row['descripcion']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <label for="input"></label>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-12">Responsable</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="NombreResponsableOrden" id="NombreResponsableOrden" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Puesto</label>
+                                    <input class="form-control" type="text" name="PuestoResponsable" id="PuestoResponsable" disabled/>
+                                </div>
+                            </div>
+                            <hr>
+                            <br>    
+                            <div class="row g-3">
+                                <div class="col-md-12">Planta</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="NombrePlanta" id="NombrePlanta" disabled />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Descripción</label>
+                                    <input class="form-control" type="text" name="DescripcionPlanta" id="DescripcionPlanta" disabled />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Existencias</label>
+                                    <input class="form-control" type="text" name="ExistenciaPlanta" id="ExistenciaPlanta" disabled/>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <div class="row g-3">
+                                <div class="col-md-12">Orden de producción</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Fecha de aproximadaTermino</label>
+                                    <input class="form-control" type="text" name="FechaAproxTermino" id="FechaAproxTermino" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Descripción</label>
+                                    <input class="form-control" type="text" name="DecripcionOrden" id="DecripcionOrden" disabled/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Cantidad esperada</label>
+                                    <input class="form-control" type="text" name="CantidaEspera" id="CantidaEspera" disabled />
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        </div>
+        <br/>
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 ">
@@ -225,14 +317,16 @@
             var datos=[];
             var idResponsable = document.getElementById("idResponsable").value;
             var idInsumo = document.getElementById("idInsumo").value;
+            var idOrden = document.getElementById("idOrden").value;
             var CantidadSalida = document.getElementById("CantidadSalida").value;
             var Fecha = document.getElementById("Fecha").value;
 
             const formData = new FormData();
             
             formData.append("Metodo", "InsertValeSalida");
-            formData.append("datosValesSalidas",JSON.stringify({"idInsumo":idInsumo,"idResponsable":idResponsable,"Fecha":Fecha,"cantidad":CantidadSalida})); 
-
+            formData.append("datosValesSalidas",JSON.stringify({"idInsumo":idInsumo,"idOrden":idOrden,"idResponsable":idResponsable,"Fecha":Fecha,"cantidad":CantidadSalida})); 
+            var estado=validacionSend();
+            if(estado.estado){
             $.ajax({
                 url: "/src/php/SistemaProduccion/SubMovimientos.php",
                 method: "POST",
@@ -240,13 +334,8 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function() {
-                    Swal.fire({
-                        html: '<h5>Cargando...</h5>',
-                        showConfirmButton: false,
-                        onRender: function() {
-                            $('.swal2-content').prepend(sweet_loader);
-                        }
-                    });
+                    alert("<h5>Espere</h5><p>Insertando</p>");
+
                 },
                 success: function(respuesta){
                      window.location.href = "/SistemaProduccion/Movimientos/ValesSalidaInsumos.php"
@@ -254,6 +343,9 @@
                     Swal.close();
                 }
             }) 
+            }else{
+                alert(estado.texto,true,true);
+            }
             return false;
 
         });
@@ -268,14 +360,8 @@
                 "Metodo":'getNextidSalida',
             },
             beforeSend: function() {
-                Swal.fire({
-                    html: '<h5>Cargando...</h5>',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    onRender: function() {
-                        $('.swal2-content').prepend(sweet_loader);
-                    }
-                });
+                alert("<h5>Espere cargando</h5>");
+
             },
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
@@ -299,14 +385,8 @@
                 "idInsumo": idInsumo
             },
             beforeSend: function() {
-                Swal.fire({
-                    html: '<h5>Cargando...</h5>',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    onRender: function() {
-                        $('.swal2-content').prepend(sweet_loader);
-                    }
-                });
+                alert("<h5>Espere cargando</h5><p>Insumos</p>");
+
             },
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
@@ -328,24 +408,44 @@
                 "idResponsable": idResponsable
             },
             beforeSend: function() {
-                Swal.fire({
-                    html: '<h5>Cargando...</h5>',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    onRender: function() {
-                        $('.swal2-content').prepend(sweet_loader);
-                    }
-                });
+                alert("<h5>Espere cargando</h5><p>Responsables</p>");
             },
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
-                console.log(respuesta[0].nombre);
                 document.getElementById("NombreResponsable").value=respuesta[0].nombre;
                 document.getElementById("PuestoResponable").value=respuesta[0].puesto;
             },complete: function() {
                 Swal.close();
             }
         })     
+    }
+       function getOrdenesProduccion(){
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getOrdenProduccion',
+                "idOrdenProduccion":document.getElementById("idOrden").value,
+            },
+            beforeSend: function() {
+                alert("<h5>Espere cargando</h5><p>datos de la orden</p>")
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("NombreResponsableOrden").value=respuesta[0].responsable;
+                document.getElementById("PuestoResponsable").value=respuesta[0].puesto;
+                document.getElementById("NombrePlanta").value=respuesta[0].planta;
+                document.getElementById("DescripcionPlanta").value=respuesta[0].fechaAproxTermino;
+                document.getElementById("ExistenciaPlanta").value=respuesta[0].existencia;
+                document.getElementById("FechaAproxTermino").value=respuesta[0].descripcionOrden;
+                document.getElementById("DecripcionOrden").value=respuesta[0].descripcion;
+                document.getElementById("CantidaEspera").value=respuesta[0].cantidadEsperada;
+
+            },complete: function() {
+                Swal.close();
+            }
+        });   
+        return false;  
     }
 
 
@@ -372,7 +472,16 @@
         return Validacion={"estado":validacion,"texto":error};        
     }
      
-
+    function alert(mensaje,botton=false,eliminar=false){
+        Swal.fire({
+            html: mensaje,
+            showConfirmButton: botton,
+            allowOutsideClick: eliminar,
+            onRender: function() {
+                $('.swal2-content').prepend(sweet_loader);
+            }
+        });
+    }
 
     </script>
 

@@ -62,7 +62,10 @@
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -237,13 +240,14 @@
             },
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
+                console.log(respuesta);
                 document.getElementById("NombreResponsable").value=respuesta[0].responsable;
                 document.getElementById("PuestoResponsable").value=respuesta[0].puesto;
                 document.getElementById("NombrePlanta").value=respuesta[0].planta;
-                document.getElementById("DescripcionPlanta").value=respuesta[0].fechaAproxTermino;
+                document.getElementById("DescripcionPlanta").value=respuesta[0].descripcion;
                 document.getElementById("ExistenciaPlanta").value=respuesta[0].existencia;
-                document.getElementById("FechaAproxTermino").value=respuesta[0].descripcionOrden;
-                document.getElementById("DecripcionOrden").value=respuesta[0].descripcion;
+                document.getElementById("FechaAproxTermino").value=respuesta[0].fechaAproxTermino;
+                document.getElementById("DecripcionOrden").value=respuesta[0].descripcionOrden;
                 document.getElementById("CantidaEspera").value=respuesta[0].cantidadEsperada;
 
             },complete: function() {

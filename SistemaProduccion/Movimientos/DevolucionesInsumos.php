@@ -1,3 +1,7 @@
+<?php
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/src/php/SistemaProduccion/Movimientos.php");
+    $conexion = new Movimientos();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,8 +46,8 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
                             </ul>
                         </li>
@@ -53,7 +57,10 @@
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -73,7 +80,7 @@
                 <div class="col-lg-7 ">
                 </div>
                 <div class="col-lg-2">
-                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddDevoluciones.php">Nuevo registró</a>
+                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/DevolucionesAdd.php">Nuevo registró</a>
                 </div>
             </div>
         </div>
@@ -92,7 +99,7 @@
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Vale salida</th>
+                                <th>Fecha</th>
                                 <th>Responsable</th>
                                 <th>Nombre insumo</th>
                                 <th>Clasificación</th>
@@ -101,19 +108,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <?php
+                            
+                                $resultado = $conexion->getAllDevoluciones();
+                                    foreach ($resultado as $row) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['idDevolucion'] . "</td>";
+                                        echo "<td>" . $row['fecha'] . "</td>";
+                                        echo "<td>" . $row['responsable'] . "</td>";
+                                        echo "<td>" . $row['insumo'] . "</td>";
+                                        echo "<td>" . $row['clasificacion'] . "</td>";
+                                        echo "<td>" . $row['salida'] . "</td>";
+                                        echo "<td>" . $row['devolucion'] . "</td>";
+                                        echo "</tr>";
+                                    }
+                            ?>
                         </tbody>
                     </table>
                 </div>
-
+					
                 <div class="col-lg-2">
 
                 </div>

@@ -1,3 +1,7 @@
+<?php
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/src/php/SistemaProduccion/Movimientos.php");
+    $conexion = new Movimientos();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +56,10 @@
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -74,7 +81,7 @@
                 <div class="col-lg-7 ">
                 </div>
                 <div class="col-lg-2">
-                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/AddValesSalida.php">Nuevo registro</a>
+                    <a class="bottom btn active" href="/SistemaProduccion/Movimientos/ValesSalidaAdd.php">Nuevo registro</a>
                 </div>
             </div>
         </div>
@@ -100,17 +107,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <?php
+                                $resultado = $conexion->getAllSalidas();
+                                    foreach ($resultado as $row) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['idVale'] . "</td>";
+                                        echo "<td>" . $row['fecha'] . "</td>";
+                                        echo "<td>" . $row['responsable'] . "</td>";
+                                        echo "<td>" . $row['insumo'] . "</td>";
+                                        echo "<td>" . $row['cantidad'] . "</td>";
+                                        echo "</tr>";
+                                    }
+                            ?>
                         </tbody>
                     </table>
                 </div>
-
                 <div class="col-lg-2">
 
                 </div>
@@ -122,6 +133,7 @@
         $(document).ready( function () {
             var table = $('#table_id').DataTable();
         });
+        
 
         </script>
 

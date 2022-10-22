@@ -47,8 +47,8 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compras de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vales de salida de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
                             </ul>
                         </li>
@@ -58,7 +58,10 @@
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -116,8 +119,13 @@
                                         echo "<td>" . $row['especie'] . "</td>";
                                         echo "<td>" . $row['descripcion'] . "</td>";
                                         echo "<td>" . $row['estado'] . "</td>";
+                                        if($row['estado']=='Pendiente'){
                                         echo "<td><a  href=/SistemaProduccion/Movimientos/OrdenProduccionEnd.php?id=".$row['idOrden']." class='btn btn-primary'><i class='bi bi-nut'></i> </a></td>";
                                         echo "<td><a  href=/SistemaProduccion/Movimientos/OrdenProduccionCancelar.php?id=".$row['idOrden']." class='btn btn-primary'><i class='bi bi-x-circle-fill'></i> </a></td>";
+                                        }else{
+                                        echo "<td><a class='btn btn-primary disabled'><i class='bi bi-nut'></i> </a></td>";
+                                        echo "<td><a class='btn btn-primary disabled'><i class='bi bi-x-circle-fill'></i> </a></td>";                                            
+                                        }
                                         echo "</tr>";
                                     }
                             ?>

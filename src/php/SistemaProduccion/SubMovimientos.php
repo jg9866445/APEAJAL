@@ -90,18 +90,18 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
 
-                    case 'getAllValeSalida':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getAllValeSalida();
-                        echo json_encode($resultado);
-                    break;
-
                     case 'getAllDevoluciones':
                         $conexion = new Movimientos();
                         $resultado = $conexion->getAllDevoluciones();
                         echo json_encode($resultado);
                     break;
 
+                    case 'getAllValeSalida':
+                        $idValeSalida = $_POST['idValeSalida'];
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getValeSalida($idValeSalida);
+                        echo json_encode($resultado);
+                    break;
 
                     case 'getProveedore':
                         $idProveedor = $_POST['idProveedor'];
@@ -134,12 +134,12 @@ class SubMovimientos
                     case 'getOrdenProduccion':
                         $idOrdenProduccion = $_POST['idOrdenProduccion'];
                         $conexion = new Movimientos();
-                        $resultado = $conexion->getOrdenProduccion($idOrdenProduccion);
+                        $resultado = $conexion->getOrdenesProduccion($idOrdenProduccion);
                         echo json_encode($resultado);
                     break;
 
                     case 'getValeSalida':
-                        $idVale = $_POST['idVale'];
+                        $idVale = $_POST['idValeSalida'];
                         $conexion = new Movimientos();
                         $resultado = $conexion->getValeSalida($idVale);
                         echo json_encode($resultado);
@@ -175,13 +175,15 @@ class SubMovimientos
                     case 'InsertValeSalida':
                         $datosValesSalidas= json_decode($_POST['datosValesSalidas']);
                         $conexion = New Movimientos();
-                        $idCompra=$conexion->InsertValeSalida($datosValesSalidas->idInsumo,$datosValesSalidas->idResponsable,$datosValesSalidas->Fecha,$datosValesSalidas->cantidad);
+                        $idCompra=$conexion->InsertValeSalida($datosValesSalidas->idInsumo,$datosValesSalidas->idOrden,$datosValesSalidas->idResponsable,$datosValesSalidas->Fecha,$datosValesSalidas->cantidad);
                     break;
                     case 'insertDevolucion':
                         $datosDevoluciones= json_decode($_POST['datosDevoluciones']);
                         $conexion = New Movimientos();
-                        $idCompra=$conexion->insertDevolucion($datosDevoluciones->idDevolucion,$datosDevoluciones->idVale,$datosDevoluciones->idInsumo,$datosDevoluciones->fecha,$datosDevoluciones->cantidad);
+                        $idCompra=$conexion->insertDevolucion($datosDevoluciones->idValeSalida,$datosDevoluciones->idInsumo,$datosDevoluciones->FechaDevolucion,$datosDevoluciones->CantidadDevuelta);
                     break;
+
+
 
                     default:
                         echo "Metodo No encontrado";

@@ -40,7 +40,7 @@ class Catalago {
     }
 
     public function getAllInsumos() {
-        $sql = "SELECT i.idInsumo,c.idClasificacion, c.concepto , i.nombre, i.descripcion,i.unidadMetrica,i.existencias,i.maximo,i.minimo,i.costoPromedio FROM insumo as i INNER JOIN clasificacion as c ON i.idClasificacion = c.idClasificacion;";
+        $sql = "SELECT i.idInsumo,c.idClasificacion, c.concepto , i.nombre, i.descripcion,i.unidad,i.existencias,i.maximo,i.minimo,i.costoPromedio FROM insumo as i INNER JOIN clasificacion as c ON i.idClasificacion = c.idClasificacion;";
         $query = $this->connect->prepare($sql);
         $query->execute(); 
         $results = $query -> fetchAll(); 
@@ -74,7 +74,7 @@ class Catalago {
     }
 
     public function insertInsumos( $idClasificacion, $nombre, $descripcion, $unidadMetrica, $existencias, $maximo, $minimo, $costoPromedio) {
-        $sql = "INSERT INTO insumo (idClasificacion, nombre, descripcion, unidadMetrica, existencias, maximo, minimo, costoPromedio) VALUES (:idClasificacion, :nombre, :descripcion, :unidadMetrica, :existencias, :maximo, :minimo, :costoPromedio)";
+        $sql = "INSERT INTO insumo (idClasificacion, nombre, descripcion, unidad, existencias, maximo, minimo, costoPromedio) VALUES (:idClasificacion, :nombre, :descripcion, :unidadMetrica, :existencias, :maximo, :minimo, :costoPromedio)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idClasificacion', $idClasificacion);
         $query->bindParam(':nombre', $nombre);
@@ -112,7 +112,7 @@ class Catalago {
 
     //Actualizar regristros
     function updateInsumos($idInsumo, $idClasificacion, $nombre, $descripcion, $unidadMetrica, $existencias, $maximo, $minimo, $costoPromedio){
-        $sql = "UPDATE insumo SET idClasificacion=:idClasificacion, nombre=:nombre, descripcion=:descripcion, unidadMetrica=:unidadMetrica, existencias=:existencias, maximo=:maximo, minimo=:minimo, costoPromedio=:costoPromedio where idInsumo=:idInsumo";
+        $sql = "UPDATE insumo SET idClasificacion=:idClasificacion, nombre=:nombre, descripcion=:descripcion, unidad=:unidadMetrica, existencias=:existencias, maximo=:maximo, minimo=:minimo, costoPromedio=:costoPromedio where idInsumo=:idInsumo";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idInsumo', $idInsumo);
         $query->bindParam(':idClasificacion', $idClasificacion);

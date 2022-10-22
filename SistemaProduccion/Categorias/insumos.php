@@ -58,7 +58,10 @@
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -119,7 +122,7 @@
                                         echo "<td>" . $row['concepto'] . "</td>";
                                         echo "<td>" . $row['descripcion'] . "</td>";
                                         echo "<td>" . $row['nombre'] . " <div style='visibility: hidden'>" . $row['idClasificacion'] . " </div></td>";
-                                        echo "<td>" . $row['unidadMetrica'] . "</td>";
+                                        echo "<td>" . $row['unidad'] . "</td>";
                                         echo "<td>" . $row['existencias'] . "</td>";
                                         echo "<td>" . $row['maximo'] . "</td>";
                                         echo "<td>" . $row['minimo'] . "</td>";
@@ -183,6 +186,8 @@
                                         <option selected value="Gramos">Gramos</option>
                                         <option selected value="Centrimetros">Centímetros</option>
                                         <option selected value="Metros">Metros</option>
+                                        <option selected value="Litros">Litros</option>
+                                        <option selected value="Mililitros">Mililitros</option>
                                         <option selected value="Pieza">Pieza</option>
                                     </select>
 
@@ -268,6 +273,8 @@
                                         <option selected value="Gramos">Gramos</option>
                                         <option selected value="Centrimetros">Centrimetros</option>
                                         <option selected value="Metros">Metros</option>
+                                        <option selected value="Litros">Litros</option>
+                                        <option selected value="Mililitros">Mililitros</option>
                                         <option selected value="Pieza">Pieza</option>
                                     </select>
                                         <label for="input"></label>

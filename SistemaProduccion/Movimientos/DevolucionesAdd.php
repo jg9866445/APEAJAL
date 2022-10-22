@@ -1,5 +1,5 @@
 <?php
-    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/src/php/SistemaProduccion/Movimientos.php");
     $conexion = new Movimientos();
 ?>
 <!DOCTYPE html>
@@ -23,9 +23,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    </script>
 </head>
 
-<body onload="getOrdenProduccion()">
+<body onload="nextIdDevoluciones()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -85,12 +86,15 @@
                 <div class="col-lg-8 card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
+                            <label for="staticEmail" class="form-label">id Devolución</label>
+                            <input class="form-control" type="text" name="idDevolucion" id="idDevolucion" disabled />
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center"> Terminar orden de producción</h3>
-                            <input type="hidden" id="idOrden" value="<?php echo $_GET['id'] ?>">
+                            <h3 class="text-center"> Nuevo devolución</h3>
                         </div>
                         <div class="col-md-3">
+                            <label for="staticEmail" class="form-label">Fecha</label>
+                            <input class="form-control" type="date" name="FechaDevolucion" id="FechaDevolucion" />
                         </div>
                     </div>
                 </div>
@@ -98,31 +102,46 @@
                 </div>
             </div>
         </div>
-
-        <br>
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
 
                 </div>
 
-                <div class="col-lg-8 ">
-                        <div class="card">
-                        <div class="card-header">Orden de producción</div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">Vale de salida</div>
                         <div class="card-body">
-                            <br>   
                             <div class="row g-3">
-                                <div class="col-md-12">Responsable</div>
+                                <select class="form-select" name="idValeSalida" id="idValeSalida" required onchange="getSalidas()">
+                                    <option disabled selected value="-21">Escoja una opción</option>
+                                    <?php
+                                    $resultado = $conexion->getAllSalidas();
+                                    foreach ($resultado as $row) {
+                                        echo "<option value=".$row['idVale'].">". $row['idVale']."</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-12">Oreden de producción</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-12">Responsable </div>
                             </div>
                             <br>
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="NombreResponsable" id="NombreResponsable" disabled />
+                                    <input class="form-control" type="text" name="NombreResponsableOrden" id="NombreResponsableOrden" disabled />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Puesto</label>
-                                    <input class="form-control" type="text" name="PuestoResponsable" id="PuestoResponsable" disabled/>
+                                    <input class="form-control" type="text" name="PuestoResponsableOrden" id="PuestoResponsableOrden" disabled/>
                                 </div>
                             </div>
                             <hr>
@@ -132,15 +151,15 @@
                             </div>
                             <br>
                             <div class="row g-3">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Nombre</label>
                                     <input class="form-control" type="text" name="NombrePlanta" id="NombrePlanta" disabled />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Descripción</label>
                                     <input class="form-control" type="text" name="DescripcionPlanta" id="DescripcionPlanta" disabled />
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Existencias</label>
                                     <input class="form-control" type="text" name="ExistenciaPlanta" id="ExistenciaPlanta" disabled/>
                                 </div>
@@ -153,7 +172,7 @@
                             <br>
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Fecha de aproximadaTermino</label>
+                                    <label for="staticEmail" class="form-label">Fecha de aproximada termino</label>
                                     <input class="form-control" type="text" name="FechaAproxTermino" id="FechaAproxTermino" disabled />
                                 </div>
                                 <div class="col-md-4">
@@ -165,7 +184,70 @@
                                     <input class="form-control" type="text" name="CantidaEspera" id="CantidaEspera" disabled />
                                 </div>
                             </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-12">Responsable</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="NombreResponsable" id="NombreResponsable" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Puesto</label>
+                                    <input class="form-control" type="text" name="PuestoResponsable" id="PuestoResponsable" disabled />
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-12">Insumos</div>
+                                <input type="hidden" name="idInsumo" id="idInsumo"/>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Clasificacion</label>
+                                    <input class="form-control" type="text" name="CategoriaInsumo" id="CategoriaInsumo" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Descripción</label>
+                                    <input class="form-control" type="text" name="DescripciónInsumo" id="DescripciónInsumo" disabled />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Unidad</label>
+                                    <input class="form-control" type="text" name="UnidadInsumos" id="UnidadInsumos" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Existencias</label>
+                                    <input class="form-control" type="text" name="ExistenciaInsumos" id="ExistenciaInsumos" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Precio</label>
+                                    <input class="form-control" type="text" name="PrecioInsumo" id="PrecioInsumo" disabled />
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-12">Cantidad de insumo retirado</div>
+                                <input class="form-control" type="text" name="CantidadRetirada" id="CantidadRetirada" disabled/>
+                            </div>
+                        </div>
                     </div>
+                </div>
                     </div>
                 </div>
 
@@ -174,7 +256,7 @@
                 </div>
             </div>
         </div>
-        <br>
+        <br/>
 
         <div class="container">
             <div class="row">
@@ -188,57 +270,74 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Fecha real de termino</label>
-                                    <input class="form-control" type="date" name="fechaReal" id="fechaReal"/>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Cantidad lograda</label>
-                                    <input class="form-control" type="text" name="CantidadLograda" id="CantidadLograda" />
+                                    <label for="staticEmail" class="form-label">Cantidad devuelta</label>
+                                    <input class="form-control" type="text" name="CantidadDevuelta" id="CantidadDevuelta" />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Costo de producción</label>
-                                    <input class="form-control" type="text" name="CostoProduccion" id="CostoProduccion" />
                                 </div>
                             </div>
                             <br>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2">
+            </div>
+            <div class="col-lg-2">
 
-                </div>
             </div>
         </div>
-        
+        <br/>
+
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 ">
-                    <h1> </h1>
+                <div class="col-lg-2 ">
+
                 </div>
 
-                <div class="col-lg-5 ">
-                    <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="regristar" >Terminar orden</button>
+                <div class="col-lg-8 ">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                        <button type="button" class="btn btn-primary btn-xs btn-block" id="regristar">Guardar devolución</button>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-2">
+            </div>
+            <br>
+            <div class="col-lg-2">
 
-                </div>
             </div>
         </div>
     </div>
-        <script>
+    <script >
     $(document).ready(function() {
-         $('#regristar').click(function() {
-            var idOrden = document.getElementById("idOrden").value;
-            var fechaReal = document.getElementById("fechaReal").value;
-            var CantidadLograda = document.getElementById("CantidadLograda").value;
-            var CostoProduccion = document.getElementById("CostoProduccion").value;
+        $('#regristar').click(function() {
+            var FechaDevolucion = document.getElementById("FechaDevolucion").value;
+            var idValeSalida = document.getElementById("idValeSalida").value;
+            var CantidadDevuelta = document.getElementById("CantidadDevuelta").value;
+            var idInsumo = document.getElementById("idInsumo").value;
 
             const formData = new FormData();
-
-            formData.append("Metodo", "TerminarOrdenProduccion");
-            formData.append("datosOrdenProduccion", JSON.stringify({"idOrdenProduccion":idOrden,"fechaReal":fechaReal,"CantidadLograda":CantidadLograda,"CostoProduccion":CostoProduccion})); 
+            
+            formData.append("Metodo", "insertDevolucion");
+            formData.append("datosDevoluciones",JSON.stringify({"FechaDevolucion":FechaDevolucion,"idValeSalida":idValeSalida,"CantidadDevuelta":CantidadDevuelta,"idInsumo":idInsumo})); 
             var estado=validacionSend();
             if(estado.estado){
             $.ajax({
@@ -248,11 +347,11 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function() {
-                    alert('<h5>Espere</h5><br/><p>Guardando datos</p>')
+                    alert("<h5>Espere</h5><p>Insertando</p>");
+
                 },
                 success: function(respuesta){
-                    alert("<h5>Listo</h5><br/><p>Datos guardados</p>")
-                    window.location.href = "/SistemaProduccion/Movimientos/OrdenProduccion.php"
+                     //window.location.href = "/SistemaProduccion/Movimientos/DevolucionesInsumos.php"
                 },complete: function() {
                     Swal.close();
                 }
@@ -264,56 +363,95 @@
 
         });
     });
-    function getOrdenProduccion(){
+
+    function getSalidas(){
         $.ajax({
             url: "/src/php/SistemaProduccion/SubMovimientos.php",
             method: "POST",
             data: {
-                "Metodo":'getOrdenProduccion',
-                "idOrdenProduccion":document.getElementById("idOrden").value
+                "Metodo":'getValeSalida',
+                "idValeSalida":document.getElementById("idValeSalida").value,
             },
             beforeSend: function() {
-                alert("<h5>Espere cargando</h5><p>Datos de la orden</p>");
+                alert("<h5>Espere cargando</h5><p>datos de la orden</p>")
             },
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
-                document.getElementById("NombreResponsable").value=respuesta[0].responsable;
-                document.getElementById("PuestoResponsable").value=respuesta[0].puesto;
-                document.getElementById("NombrePlanta").value=respuesta[0].planta;
-                document.getElementById("DescripcionPlanta").value=respuesta[0].descripcion;
-                document.getElementById("ExistenciaPlanta").value=respuesta[0].existencia;
-                document.getElementById("FechaAproxTermino").value=respuesta[0].fechaAproxTermino;
-                document.getElementById("DecripcionOrden").value=respuesta[0].descripcionOrden;
-                document.getElementById("CantidaEspera").value=respuesta[0].cantidadEsperada;
+                console.log(respuesta);
+                document.getElementById("NombreResponsable").value=respuesta[0].NombreResponsable;
+                document.getElementById("PuestoResponsable").value=respuesta[0].PuestoResponsable;
+                document.getElementById("idInsumo").value=respuesta[0].idInsumo;
+                document.getElementById("NombreInsumo").value=respuesta[0].NombreInsumo;
+                document.getElementById("CategoriaInsumo").value=respuesta[0].CategoriaInsumo;
+                document.getElementById("DescripciónInsumo").value=respuesta[0].DescripcionInsumo;
+                document.getElementById("UnidadInsumos").value=respuesta[0].UnidadInsumos;
+                document.getElementById("ExistenciaInsumos").value=respuesta[0].ExistenciaInsumos;
+                document.getElementById("PrecioInsumo").value=respuesta[0].Precio;
+                document.getElementById("NombreResponsableOrden").value=respuesta[0].NombreResponsableOrden;
+                document.getElementById("PuestoResponsableOrden").value=respuesta[0].PuestoResponsableOrden;
+                document.getElementById("NombrePlanta").value=respuesta[0].NombrePlanta;
+                document.getElementById("DescripcionPlanta").value=respuesta[0].DescripcionPlanta;
+                document.getElementById("ExistenciaPlanta").value=respuesta[0].ExistenciaPlanta;
+                document.getElementById("FechaAproxTermino").value=respuesta[0].FechaAproxTermino;
+                document.getElementById("DecripcionOrden").value=respuesta[0].DecripcionOrden;
+                document.getElementById("CantidaEspera").value=respuesta[0].CantidaEspera;
+                document.getElementById("CantidadRetirada").value=respuesta[0].CantidadRetirada;
+                
+            },complete: function() {
+                Swal.close();
+            }
+        });   
+        return false;  
+    }
+    
+    function nextIdDevoluciones(){
+        document.getElementById('FechaDevolucion').valueAsDate = new Date();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getNextidDevolucion',
+            },
+            beforeSend: function() {
+                alert("<h5>Espere cargando</h5>");
+
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("idDevolucion").value=respuesta[0].AUTO_INCREMENT;
+                var now = new Date();
+                var dateString = moment(now).format('YYYY-MM-DD');
+                document.getElementById("FechaDevolucion").value=dateString;
             },complete: function() {
                 Swal.close();
             }
         })     
     }
-       function validacionSend(){
+    
+    function validacionSend(){
         var validacion=true
         var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
         
-        var fechaReal = (document.getElementById("fechaReal").value).length;
-        var CantidadLograda = (document.getElementById("CantidadLograda").value).length;
-        var CostoProduccion = (document.getElementById("CostoProduccion").value).length;
+        var FechaDevolucion = (document.getElementById("FechaDevolucion").value).length;
+        var idValeSalida = (document.getElementById("idValeSalida").value);
+        var CantidadSalida = (document.getElementById("CantidadDevuelta").value).length;
 
-        if(fechaReal==0){
-            error=error+"<p>Elegir una fecha de terminacion real</p><br>";
+        if(idValeSalida=='-21'){
+            error=error+"<p>Elegir un vale de salida</p><br>";
             validacion=false;
         }
-        if(CantidadLograda==0){
-            error=error+"<p>Insertar la cantidad lograda</p><br>";
+        if(FechaDevolucion==0){
+            error=error+"<p>Inserte una fecha</p><br>";
             validacion=false;
         }
-        if(CostoProduccion==0){
-            error=error+"<p>Inserta el costo</p><br>";
+        if(CantidadSalida==0){
+            error=error+"<p>Agrega la cantida</p><br>";
             validacion=false;
         }
         return Validacion={"estado":validacion,"texto":error};        
     }
      
-    
+
     function alert(mensaje,botton=false,eliminar=false){
         Swal.fire({
             html: mensaje,
@@ -324,12 +462,19 @@
             }
         });
     }
-
     </script>
 
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 </body>
+
 </html>
+
+
+
+
+
+
+
