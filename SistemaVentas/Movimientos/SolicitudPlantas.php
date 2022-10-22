@@ -110,6 +110,7 @@
                                 <th>RFC</th>
                                 <th>CURP</th>
                                 <th>Tipo cliente</th>
+                                <th>Cancelar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -124,6 +125,7 @@
                                         echo "<td>" . $row['RFC'] . "</td>";
                                         echo "<td>" . $row['CURP'] . "</td>";
                                         echo "<td>" . $row['tipoCliente'] . "</td>";
+                                        echo "<td><a  href=/SistemaVentas/Movimientos/SolicitudPlantasCancelar.php?id=".$row['idSolicitud']." class='btn btn-primary'><i class='bi bi-x-circle-fill'></i> </a></td>";
                                         echo "</tr>";
                                     }
                             ?>

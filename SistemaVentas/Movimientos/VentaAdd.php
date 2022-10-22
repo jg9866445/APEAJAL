@@ -425,6 +425,7 @@
         //se genera un escucha para que espere cualquier clic configurado
         $(document).ready(function() {
         var total=parseInt(document.getElementById("total").value,10);
+        console.log(total);
         //se inicializa el contador de los renglones
         var i = 1;
         //espera el clic de boton agregar
