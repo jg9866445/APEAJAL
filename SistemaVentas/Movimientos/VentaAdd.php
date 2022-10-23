@@ -419,11 +419,13 @@
             var i=0;
         //se genera un escucha para que espere cualquier clic configurado
         $(document).ready(function() {
-        var total=parseInt(document.getElementById("total").value,10);
-        console.log(total);
-        //se inicializa el contador de los renglones
+                    //se inicializa el contador de los renglones
         //espera el clic de boton agregar
         $('#adicionar').click(function() {
+            var total=parseInt(document.getElementById("total").value,10);
+
+            console.log(total);
+
         //obtiene el valor de el id y lo asigna a variable
         var idPredio = document.getElementById("idPredio").value;
         var idPlanta = document.getElementById("idPlanta").value;

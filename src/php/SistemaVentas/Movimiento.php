@@ -201,6 +201,16 @@ class Movimientos {
         return $results;
     }
 
+    public function getAllPago()
+    {
+        $sql = "SELECT p.idPago,p.fecha,p.conceptoGeneral,p.importe,r.nombre as nombreResponsable,r.puesto,p.idVenta,s.idCliente   from pagos as p INNER JOIN responsable as r ON r.idResponsable=p.idResponsable  INNER JOIN ventas as v on v.idVenta = p.idVenta INNER JOIN solicitudes as s on s.idSolicitud= v.idSolicitud";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPago', $idPago);
+        $query -> execute();         
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
     public function getSalidaPlanta()
     {
         $sql = "Select * from salidas";

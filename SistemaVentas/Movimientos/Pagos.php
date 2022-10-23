@@ -114,7 +114,7 @@ $conexion = new Movimientos();
                 </thead>
                 <tbody>
                     <?php
-                        $resultado = $conexion->getPagoPlanta();
+                        $resultado = $conexion->getAllPago();
                             foreach ($resultado as $row) {
                                 echo "<tr>";
                                 echo "<td>" . $row['idPago'] . "</td>";
