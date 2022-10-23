@@ -484,6 +484,7 @@
         });
 
         $(document).on('click', '.btn_update', function() {
+            total=parseInt(document.getElementById('total').value,10);
             var button_id = $(this).attr("id");
 
             document.getElementById("idPredio").value=$('#row'+button_id).find("#idPredio")[0].textContent;
@@ -493,7 +494,13 @@
             getPredios();
             getPlantasForestal();
 
+            cantidadSolicitada=$('#row'+button_id).find("#cantidadSolicitada")[0].textContent;
+            precio=$('#row'+button_id).find("#precioPlanta")[0].textContent;
+
             $('#row' + button_id).remove();
+
+            total=parseInt(total-(precio*cantidadSolicitada),10);
+            document.getElementById('total').value=total;
         });
 
         $('#regristar').click(function() {
