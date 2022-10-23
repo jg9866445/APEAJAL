@@ -212,14 +212,21 @@ class Movimientos {
 
     public function getAllPagos()
     {
-        $sql = "SELECT p.idPago from pagos as p INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s on s.idSolicitud=v.idSolicitud WHERE s.estado = 'Pagado' or s.estado ='Entregando'";
+        $sql = "SELECT p.* from pagos as p INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s on s.idSolicitud=v.idSolicitud";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 	
-	
+	public function getAllPagosSelect()
+    {
+        $sql = "SELECT p.idPago from pagos as p INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s on s.idSolicitud=v.idSolicitud WHERE s.estado = 'Pagado' or s.estado ='Entregando'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 	
 
     public function insertSalidaPlantas($idPago,$idResponsable,$fechaEntrega){

@@ -215,7 +215,7 @@
                                     <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Clasificacion</label>
+                                    <label for="staticEmail" class="form-label">Clasificación</label>
                                     <input class="form-control" type="text" name="CategoriaInsumo" id="CategoriaInsumo" disabled />
                                 </div>
                                 <div class="col-md-4">
@@ -242,9 +242,14 @@
                             <hr>
                             <br>
                             <div class="row g-3">
-                                <div class="col-md-12">Cantidad de insumo retirado</div>
-                                <input class="form-control" type="text" name="CantidadRetirada" id="CantidadRetirada" disabled/>
-                            </div>
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Cantidad de insumo retirado</label>
+                                    <input class="form-control" type="text" name="CantidadRetirada" id="CantidadRetirada" disabled/>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -308,12 +313,15 @@
                         <div class="card-body">
 
                             <div class="row g-3">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                 </div>
-                                <div class="col-md-4">
-                                        <button type="button" class="btn btn-primary btn-xs btn-block" id="regristar">Guardar devolución</button>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-primary btn-xs btn-block" id="regristar">Guardar devolución</button>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-primary btn-xs btn-block" id="Cancelar">Cancelar devolución</button>
+                                </div>
+                                <div class="col-md-3">
                                 </div>
                             </div>
                         </div>
@@ -361,6 +369,10 @@
             }
             return false;
 
+        });
+
+        $('#Cancelar').click(function() {
+            window.location.href = "/SistemaProduccion/Movimientos/DevolucionesInsumos.php"
         });
     });
 

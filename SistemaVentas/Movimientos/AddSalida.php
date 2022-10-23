@@ -165,7 +165,7 @@
                                             <select class="form-select" name="idPago" id="idPago" required onchange="getPagoPlanta()">
                                                 <option disabled selected>Elija una opción</option>
                                                     <?php 
-                                                        $resultado = $conexion->getAllPagos();
+                                                        $resultado = $conexion->getAllPagosSelect();
                                                         foreach ($resultado as $row) {
                                                         echo "<option value=".$row['idPago'].">". $row['idPago']."</option>";
                                                         }
@@ -218,6 +218,7 @@
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
                                                 <th>Cantidad</th>
+                                                <th>Importe</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -359,7 +360,8 @@
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
                                                 <th>Surtir</th>
-                                                <th>Elimianr</th>
+                                                <th>Importe</th>
+                                                <th>Eliminar</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -421,6 +423,7 @@
                 '<td>' + especie + '</td>'+
                 '<td id="precioPlanta">' + precio + '</td>'+
                 '<td id="cantidadSurtida">' + cantidadSurtida + '</td>'+
+                '<td >' + precio*cantidadSurtida + '</td>'+
                 '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
             '</tr>'; 
 
@@ -535,6 +538,7 @@
                             '<td>' + value.nombre + '</td>'+
                             '<td id="precioPlanta">' + value.precio + '</td>'+
                             '<td id="cantidadSolicitada">' + value.cantidadSolicitada + '</td>'+
+                            '<td>' + value.precio * value.cantidadSolicitada + '</td>'+
                         '</tr>'; 
                         $('#mytable tbody:first').append(fila);
                         i++;

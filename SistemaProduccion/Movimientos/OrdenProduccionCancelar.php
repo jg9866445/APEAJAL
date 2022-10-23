@@ -178,24 +178,17 @@
         <br>
 
         <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-
+            <div class="row ">
+                <div class="col-lg-3 ">
                 </div>
 
-                <div class="col-lg-8 ">
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="cancelar">Cancelar Orden</button>
-                                </div>
-                                <div class="col-md-4">
-                                </div>
-                            </div>
-                            <br>
+                <div class="col-lg-3">
+                        <button type="button" id="regristar" class="btn btn-primary btn-xs btn-block text-center" >Cancelar compra de insumos</button>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
+                        <button type="button" id="Cancelar" class="btn btn-primary btn-xs btn-block text-center" >Salir de cancelacion</button>
+                </div>
+                <div class="col-lg-3">
 
                 </div>
             </div>
@@ -204,7 +197,7 @@
     <script>
 
     $(document).ready(function() {
-        $('#cancelar').click(function() {
+        $('#regristar').click(function() {
                 const formData = new FormData();
 
                 formData.append("Metodo", "cancelarOrdenProduccion");
@@ -225,6 +218,9 @@
                     Swal.close();
                 }
             }) 
+        });
+        $('#Cancelar').click(function() {
+            window.location.href = "/SistemaProduccion/Movimientos/OrdenProduccion.php"
         });
     });
     function getOrden(){

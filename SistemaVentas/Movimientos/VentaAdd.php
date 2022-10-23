@@ -366,6 +366,7 @@
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
                                                 <th>Cantidad</th>
+                                                <th>Importe</th>
                                                 <th>Modificar</th>
                                                 <th>Eliminar</th>
                                             </tr>
@@ -447,6 +448,7 @@
                 '<td>' + especie + '</td>'+
                 '<td id="precioPlanta">' + precio + '</td>'+
                 '<td id="cantidadSolicitada">' + cantidadSolicitada + '</td>'+
+                '<td >' + precio*cantidadSolicitada + '</td>'+
                 '<td><button type="button" name="remove" id="' + i + '" class="btn btn-success btn_update">Modificar</button></td>'+
                 '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
             '</tr>'; 
@@ -612,6 +614,7 @@
                             '<td>' + value.nombre + '</td>'+
                             '<td id="precioPlanta">' + value.precio + '</td>'+
                             '<td id="cantidadSolicitada">' + value.cantidadSolicitada + '</td>'+
+                            '<td >' + value.precio*value.cantidadSolicitada + '</td>'+
                             '<td><button type="button" name="remove" id="' + i + '" class="btn btn-success btn_update">Modificar</button></td>'+
                             '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
                         '</tr>'; 

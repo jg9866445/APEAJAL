@@ -234,16 +234,17 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 ">
+                <div class="col-lg-3 ">
                     <h1> </h1>
                 </div>
 
-                <div class="col-lg-5 ">
-                    <div class="card-body">
+                <div class="col-lg-3 ">
                         <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="regristar" >Guardar orden</button>
-                    </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3 ">
+                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="Cancelar" >Cancelar orden</button>
+                </div>
+                <div class="col-lg-3">
 
                 </div>
             </div>
@@ -288,6 +289,9 @@
             }
             return false;
 
+        });
+        $('#Cancelar').click(function() {
+            window.location.href = "/SistemaProduccion/Movimientos/OrdenProduccion.php"
         });
     });
     function getNextidOrdenProduccion(){

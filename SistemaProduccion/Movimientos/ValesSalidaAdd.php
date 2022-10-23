@@ -102,6 +102,93 @@
                 </div>
             </div>
         </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
+
+                </div>
+
+                <div class="col-lg-8 ">
+                        <div class="card">
+                        <div class="card-header">Ordenes de producción</div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <select class="form-select" name="idOrden" id="idOrden" required onchange="getOrdenesProduccion()">
+                                <option disabled selected value="-21">Escoja una opción</option>
+                                    <?php
+                                        $resultado = $conexion->getAllOrdenProduccion();
+                                        foreach ($resultado as $row) {
+                                            echo "<option value=".$row['idOrden'].">". $row['descripcion']."</option>";
+                                        }
+                                    ?>
+                                </select>
+                                <label for="input"></label>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-12">Responsable</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="NombreResponsableOrden" id="NombreResponsableOrden" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="staticEmail" class="form-label">Puesto</label>
+                                    <input class="form-control" type="text" name="PuestoResponsable" id="PuestoResponsable" disabled/>
+                                </div>
+                            </div>
+                            <hr>
+                            <br>    
+                            <div class="row g-3">
+                                <div class="col-md-12">Planta</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="NombrePlanta" id="NombrePlanta" disabled />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Descripción</label>
+                                    <input class="form-control" type="text" name="DescripcionPlanta" id="DescripcionPlanta" disabled />
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Existencias</label>
+                                    <input class="form-control" type="text" name="ExistenciaPlanta" id="ExistenciaPlanta" disabled/>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <div class="row g-3">
+                                <div class="col-md-12">Orden de producción</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Fecha de aproximada Termino</label>
+                                    <input class="form-control" type="text" name="FechaAproxTermino" id="FechaAproxTermino" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Descripción</label>
+                                    <input class="form-control" type="text" name="DecripcionOrden" id="DecripcionOrden" disabled/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Cantidad esperada</label>
+                                    <input class="form-control" type="text" name="CantidaEspera" id="CantidaEspera" disabled />
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
@@ -172,7 +259,7 @@
                                     <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Clasificacion   </label>
+                                    <label for="staticEmail" class="form-label">Clasificación   </label>
                                     <input class="form-control" type="text" name="CategoriasInsumo" id="CategoriasInsumo" disabled/>
                                 </div>
                                 <div class="col-md-4">
@@ -197,93 +284,6 @@
 
                             
                     </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2">
-
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-
-                </div>
-
-                <div class="col-lg-8 ">
-                        <div class="card">
-                        <div class="card-header">Ordenes de producción</div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <select class="form-select" name="idOrden" id="idOrden" required onchange="getOrdenesProduccion()">
-                                <option disabled selected value="-21">Escoja una opción</option>
-                                    <?php
-                                        $resultado = $conexion->getAllOrdenProduccion();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idOrden'].">". $row['descripcion']."</option>";
-                                        }
-                                    ?>
-                                </select>
-                                <label for="input"></label>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-12">Responsable</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="NombreResponsableOrden" id="NombreResponsableOrden" disabled />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Puesto</label>
-                                    <input class="form-control" type="text" name="PuestoResponsable" id="PuestoResponsable" disabled/>
-                                </div>
-                            </div>
-                            <hr>
-                            <br>    
-                            <div class="row g-3">
-                                <div class="col-md-12">Planta</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="NombrePlanta" id="NombrePlanta" disabled />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="DescripcionPlanta" id="DescripcionPlanta" disabled />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Existencias</label>
-                                    <input class="form-control" type="text" name="ExistenciaPlanta" id="ExistenciaPlanta" disabled/>
-                                </div>
-                            </div>
-                            <br>
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-12">Orden de producción</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Fecha de aproximadaTermino</label>
-                                    <input class="form-control" type="text" name="FechaAproxTermino" id="FechaAproxTermino" disabled />
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="DecripcionOrden" id="DecripcionOrden" disabled/>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Cantidad esperada</label>
-                                    <input class="form-control" type="text" name="CantidaEspera" id="CantidaEspera" disabled />
-                                </div>
-                            </div>
-                            <br>
-                        </div>
                     </div>
                 </div>
 
@@ -348,6 +348,10 @@
             }
             return false;
 
+        });
+        
+        $('#Cancelar').click(function() {
+                window.location.href = "/SistemaProduccion/Movimientos/ValesSalidaInsumos.php"
         });
     });
 

@@ -236,6 +236,7 @@
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
                                                 <th>Cantidad</th>
+                                                <th>Importe</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -410,6 +411,7 @@
                             '<td>' + value.nombre + '</td>'+
                             '<td id="precioPlanta">' + value.precio + '</td>'+
                             '<td id="cantidadSolicitada">' + value.cantidadSolicitada + '</td>'+
+                            '<td >' + value.precio*value.cantidadSolicitada + '</td>'+
                         '</tr>'; 
                         $('#mytable tbody:first').append(fila);
                         i++;

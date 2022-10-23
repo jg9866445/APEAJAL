@@ -173,17 +173,23 @@ class Movimientos {
             $query->bindParam(':costo', $value->Costo);
             $query->execute();
 
-            $sql="SELECT existencias FROM insumo WHERE idInsumo= :idInsumo";
+            $sql="SELECT existencias, costoPromedio FROM insumo WHERE idInsumo= :idInsumo";
             $query = $this->connect->prepare($sql);
             $query->bindParam(':idInsumo', $value->idInsumo );
             $query->execute();
 
             $request=$query->fetchAll();
-            $existencias=$request[0]['existencias']+$value->Cantidad;
+            $existenciasnow=$request[0]['existencias'];
+            $costonow=$request[0]['costoPromedio'];
+                    
+            $costoPromedionew=(($existenciasnow*$costonow)+($value->Cantidad*$value->Costo))/($existenciasnow+$value->Cantidad);
+
+            $existenciasnew=$request[0]['existencias']+$value->Cantidad;
             
-            $sql="UPDATE insumo SET existencias=:existencias WHERE idInsumo= :idInsumo";
+            $sql="UPDATE insumo SET existencias=:existencias,costoPromedio=:costoPromedio WHERE idInsumo= :idInsumo";
             $query = $this->connect->prepare($sql);
-            $query->bindParam(':existencias', $existencias);
+            $query->bindParam(':existencias', $existenciasnew);
+            $query->bindParam(':costoPromedio', $costoPromedionew);
             $query->bindParam(':idInsumo', $value->idInsumo);
             $query->execute();
         }        
@@ -233,7 +239,7 @@ class Movimientos {
         $query = $this->connect->prepare($sql);
         $query->bindParam(':existencia', $existencias);
         $query->bindParam(':idPlanta', $idPlanta);
-         $query->execute();
+        $query->execute();
     }
 
     public function InsertValeSalida( $idInsumo,$idOrden, $idResponsable, $fecha, $cantidad){

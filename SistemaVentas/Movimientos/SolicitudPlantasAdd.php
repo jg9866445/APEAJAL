@@ -357,6 +357,7 @@
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
                                                 <th>Cantidad</th>
+                                                <th>Importe</th>
                                                 <th>Eliminar</th>
                                             </tr>
                                         </thead>
@@ -434,6 +435,7 @@
                 '<td>' + nombre + '</td>'+
                 '<td id="precio">' + precio + '</td>'+
                 '<td id="cantidadSolicitada">' + cantidadSolicitada + '</td>'+
+                '<td >' + precio*cantidadSolicitada + '</td>'+
                 '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
             '</tr>'; 
         

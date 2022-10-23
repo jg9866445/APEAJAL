@@ -90,11 +90,11 @@
                 <div class="col-lg-8 card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
-                            <label for="staticEmail" class="form-label">Numero de compra</label>
+                            <label for="staticEmail" class="form-label">Número de compra</label>
                             <input class="form-control" type="text" name="idOrden" id="idOrden" disabled />
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center"> Nuevo compra de insumos</h3>
+                            <h3 class="text-center"> Nueva compra de insumos</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
@@ -171,7 +171,7 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Numero de factura</label>
+                                    <label for="staticEmail" class="form-label">Número de factura</label>
                                     <input class="form-control" type="text" name="Factura" id="Factura"/>
                                     <label for="input"></label>
                                 </div>
@@ -212,47 +212,49 @@
                                 <label for="input"></label>
                             </div>
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Nombre</label>
                                     <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Clasificacion</label>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Clasificación</label>
                                     <input class="form-control" type="text" name="ClasificacionInsumo" id="ClasificacionInsumo" disabled/>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Existencias</label>
                                     <input class="form-control" type="text" name="ExistenciasInsumo" id="ExistenciasInsumo" disabled/>
                                 </div>
-                                <div class="col-md-3">
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Unidad</label>
-                                    <input class="form-control" type="text" name="unidadMetricaInsumo" id="unidadMetricaInsumo" disabled/>
+                                    <input class="form-control" type="text" name="unidadMetricaInsumo" id="unidadMetricaInsumo" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Costo Promedio</label>
+                                    <input class="form-control" type="text" name="CostoPromedio" id="CostoPromedio" disabled/>
                                 </div>
                             </div>
                             <br>
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                 </div>
-                                <div class="col-md-3">
-                                </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Costo</label>
                                     <input class="form-control" type="number" name="CostoInsumo" id="CostoInsumo" />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Cantidad</label>
                                     <input class="form-control" type="number" name="CantidadInsumo" id="CantidadInsumo"/>
                                 </div>
                             </div>
                             <br>
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                 </div>
-                                <div class="col-md-3">
-                                </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <button id='adicionar' type="button" class="btn btn-primary btn-xs btn-block text-center" disabled>Agregar</button>
                                 </div>
                             </div>
@@ -281,11 +283,12 @@
                                 <tr>
                                     <th>id Insumo</th>
                                     <th>Nombre</th>
-                                    <th>Clasificacion</th>
+                                    <th>Clasificación</th>
                                     <th>Existencias</th>
                                     <th>Unidad</th>
                                     <th>Costo</th>
                                     <th>Cantidad</th>
+                                    <th>Importe</th>
                                     <th>Eliminar</th>
                                 </tr>
                             </thead>
@@ -306,11 +309,11 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-4 ">
                     <h1> </h1>
                 </div>
 
-                <div class="col-lg-8 ">
+                <div class="col-lg-4 ">
                     <div class="card">
                         <div class="card-header">Total</div>
                         <div class="card-body">
@@ -318,7 +321,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
 
                 </div>
             </div>
@@ -327,17 +330,17 @@
         <br>
 
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 ">
-                    <h1> </h1>
+            <div class="row ">
+                <div class="col-lg-3 ">
                 </div>
 
-                <div class="col-lg-4 ">
-                    <div class="card-body">
+                <div class="col-lg-3">
                         <button type="button" id="regristar" class="btn btn-primary btn-xs btn-block text-center" >Guardar compra de insumos</button>
-                    </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
+                        <button type="button" id="Cancelar" class="btn btn-primary btn-xs btn-block text-center" >Cancelar compra de insumos</button>
+                </div>
+                <div class="col-lg-3">
 
                 </div>
             </div>
@@ -373,6 +376,7 @@
                     '<td>' + unidadMetricaInsumo + '</td>'+
                     '<td id="Costo">' + CostoInsumo + '</td>'+
                     '<td id="Cantidad">' + CantidadInsumo + '</td>'+
+                    '<td >' + CostoInsumo*CantidadInsumo + '</td>'+
                     '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
                 '</tr>'; 
             var addTable=validacionAddTable();
@@ -387,6 +391,7 @@
                 document.getElementById("ExistenciasInsumo").value="";
                 document.getElementById("unidadMetricaInsumo").value="";
                 document.getElementById("CostoInsumo").value="";
+                document.getElementById("CostoPromedio").value="";
                 document.getElementById("CantidadInsumo").value="";
 
                 total=parseInt(total+(CostoInsumo*CantidadInsumo),10);
@@ -415,6 +420,10 @@
             document.getElementById('total').value=total;
             document.getElementById("Opcion"+idInsumo).removeAttribute('disabled'); 
 
+        });
+        
+        $('#Cancelar').click(function() {
+                window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.php"
         });
 
         $('#regristar').click(function() {
@@ -511,7 +520,7 @@
                 document.getElementById("ClasificacionInsumo").value=respuesta[0].concepto;
                 document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
                 document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidad;
-                document.getElementById("CostoInsumo").value=respuesta[0].costoPromedio;
+                document.getElementById("CostoPromedio").value=respuesta[0].costoPromedio;
                 document.getElementById("adicionar").removeAttribute('disabled');
             },complete: function() {
                 Swal.close();

@@ -211,17 +211,17 @@
         </div>
         
         <div class="container">
-            <div class="row">
-                <div class="col-lg-5 ">
-                    <h1> </h1>
+            <div class="row ">
+                <div class="col-lg-3 ">
                 </div>
 
-                <div class="col-lg-5 ">
-                    <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="regristar" >Terminar orden</button>
-                    </div>
+                <div class="col-lg-3">
+                        <button type="button" id="regristar" class="btn btn-primary btn-xs btn-block text-center" >Terminar Orden de produccion</button>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
+                        <button type="button" id="Cancelar" class="btn btn-primary btn-xs btn-block text-center" >Cancelar</button>
+                </div>
+                <div class="col-lg-3">
 
                 </div>
             </div>
@@ -263,6 +263,11 @@
             return false;
 
         });
+
+        $('#Cancelar').click(function() {
+            window.location.href = "/SistemaProduccion/Movimientos/OrdenProduccion.php"
+        });
+        
     });
     function getOrdenProduccion(){
         $.ajax({

@@ -101,7 +101,7 @@
                             <tr>
                                 <th></th>
                                 <th>Proveedor</th>
-                                <th>Numero de factura</th>
+                                <th>Número de factura</th>
                                 <th>Factura</th>
                                 <th>Fecha</th>
                                 <th>Total</th>
