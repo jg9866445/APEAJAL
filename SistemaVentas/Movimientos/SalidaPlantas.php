@@ -82,7 +82,7 @@ $conexion = new Movimientos();
             <div class="row">
                 <div class="col-lg-2 ">
                 </div>
-                <div class="col-lg-7 ">
+                <div class="col-lg-8 ">
                     <h1 style="text-align:center">Salida de Plantas forestales</h1>
                 </div>
                 <div class="col-lg-2">
@@ -93,7 +93,7 @@ $conexion = new Movimientos();
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-1 ">
+                <div class="col-lg-2 ">
                 </div>
 
                 <div class="col-lg-8 ">
@@ -134,6 +134,8 @@ $conexion = new Movimientos();
     $(document).ready( function () {
         var table = $('#table_id').DataTable();
     });
+
+    
     </script>
 
 

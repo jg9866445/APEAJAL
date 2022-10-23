@@ -191,18 +191,125 @@ class Movimientos {
         return $results;
     }
     
-    public function getPagoPlanta()
+    public function getPagoPlanta($idPago)
     {
-        $sql = "SELECT * from pagos";
+        $sql = "SELECT p.fecha as fechaPago,p.conceptoGeneral,p.importe,r.nombre as nombreResponsable,r.puesto,p.idVenta,s.idCliente from pagos as p INNER JOIN responsable as r ON r.idResponsable=p.idResponsable  INNER JOIN ventas as v on v.idVenta = p.idVenta INNER JOIN solicitudes as s on s.idSolicitud= v.idSolicitud WHERE p.idPago = :idPago";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPago', $idPago);
+        $query -> execute();         
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getSalidaPlanta()
+    {
+        $sql = "Select * from salidas";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
+    public function getAllPagos()
+    {
+        $sql = "SELECT p.idPago from pagos as p";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+	
+	
+	
 
+    public function insertSalidaPlantas($idPago,$idResponsable,$fechaEntrega){
+        $sql="INSERT INTO salidas(idPago, idResponsable, fechaEntrega) VALUES ( :idPago, :idResponsable,:fechaEntrega)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPago', $idPago);
+        $query->bindParam(':idResponsable', $idResponsable);
+        $query->bindParam(':fechaEntrega', $fechaEntrega);
+        $query->execute();
+        $idSalida=$this->connect->lastInsertId();
+        $salidas = ["idSalida" => $idSalida,"idPago" => $idPago];
+        return $salidas;
+    }
 
+    
+    public function insertDetalleSalidas($idSalida,$detalles){
+        foreach ($detalles as $value) {
+            $sql="INSERT INTO detalleSalida(idSalida, idPredio, idPlanta, cantidadSurtida) VALUES (:idSalida, :idPredio, :idPlanta, :cantidadSurtida)";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idSalida', $idSalida);
+            $query->bindParam(':idPredio', $value->predio);
+            $query->bindParam(':idPlanta', $value->planta);
+            $query->bindParam(':cantidadSurtida', $value->Cantidad);
+            $query->execute();
+        } 
+    }
 
+    public function insertSalidaEstado($idPago){
+        
+        $sql="SELECT dv.idPredio,dv.idPlanta,dv.cantidadSolicitada from  pagos as p  INNER JOIN ventas as v ON p.idVenta = v.idVenta INNER JOIN detalleVenta as dv on dv.idVenta = v.idVenta where p.idPago =:idPago ORDER BY dv.idPredio,dv.idPlanta;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPago', $idPago);
+        $query->execute();
+        $detallesVenta=$query->fetchAll();
+        
+        $sql="SELECT idPredio,idPlanta,SUM(cantidadSurtida) as cantidadSurtida FROM salidas as s INNER JOIN detalleSalida as ds on ds.idSalida= s.idSalida WHERE s.idPago = :idPago GROUP BY ds.idPredio,ds.idPlanta ORDER BY ds.idPredio,ds.idPlanta;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPago', $idPago);
+        $query->execute();
+        $detallesSalidas=$query->fetchAll();
+        
+        $totalVentas=count($detallesVenta);
+        $totalSalidas=count($detallesSalidas);
+        $VentaNoTerminada=false;
+        
+        if( $totalVentas == $totalSalidas){
+            for ($i = 0; $i <= $totalVentas; $i++) {
+                if($detallesVenta[$i]['idPredio']==$detallesSalidas[$i]['idPredio']){
+                    if($detallesVenta[$i]['idPlanta']==$detallesSalidas[$i]['idPlanta']){
+                        if($detallesVenta[$i]['cantidadSolicitada']==$detallesSalidas[$i]['cantidadSurtida']){
+                                    $VentaNoTerminada=true;
+                        }else{
+                                    $VentaNoTerminada=false;
+                            break;
+                        }
+                    }else{
+                                $VentaNoTerminada=false;
+
+                        break;
+                    }
+                }else{
+                            $VentaNoTerminada=false;
+
+                    break;
+                }
+                    
+            }
+
+        }
+        $sql="Select v.idSolicitud FROM pagos as p INNER JOIN ventas as v ON v.idVenta= p.idVenta WHERE p.idPago=:idPago";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPago', $idPago);
+        $query->execute();
+        $request=$query->fetchAll();
+        $idSolicitud=$request[0]['idSolicitud'];
+
+        if($VentaNoTerminada){
+            $sql="UPDATE solicitudes SET estado='Entregado' WHERE  idSolicitud=:idSolicitud";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idSolicitud', $idSolicitud);
+            $query->execute();
+        }else{
+            $sql="UPDATE solicitudes SET estado='Entregando' WHERE  idSolicitud=:idSolicitud";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idSolicitud', $idSolicitud);
+            $query->execute();        
+        }
+
+    }
+    
 
     public function cancelarSolicitud($idSolicitud){
         $sql="UPDATE solicitudes SET estado='Cancelado' WHERE  idSolicitud=:idSolicitud";
@@ -332,6 +439,15 @@ class Movimientos {
         return $results;
     }
 
+    function getNextidSalida(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'salidas'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
 
 
 
@@ -341,22 +457,8 @@ class Movimientos {
 
 /*
 
-     public function getSalidaPlanta()
-    {
-        $sql = "Select * from salidas";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
+getAllPagos
 
-    public function getAllPagos()
-    {
-        $sql = "SELECT p.idPago,p.fecha,p.idVenta,p.idResponsable,p.conceptoGeneral,p.importe from pagos as p  INNER JOIN responsable as r on r.idResponsable= p.idResponsable";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
+
 */
 }

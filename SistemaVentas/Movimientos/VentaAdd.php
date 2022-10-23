@@ -714,7 +714,6 @@
                 var dateString = moment(now).format('YYYY-MM-DD');
                 document.getElementById("fechaVenta").value=dateString;
             },complete: function() {
-                Swal.close();
             }
         })     
     }
