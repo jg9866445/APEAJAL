@@ -315,21 +315,21 @@
                                         <label for="staticEmail" class="form-label">Especie</label>
                                         <input class="form-control" type="text" name="especiePlanta" id="especiePlanta" disabled/>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Nombre</label>
-                                        <input class="form-control" type="text" name="nombrePlanta" id="nombrePlanta" disabled/>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Precio</label>
+                                        <input class="form-control" type="number" name="precioPlanta" id="precioPlanta" disabled/>
                                     </div>
                                 </div>
                                 <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Precio</label>
-                                        <input class="form-control" type="number" name="precioPlanta" id="precioPlanta" disabled/>
+                                    <div class="col-md-5">
+                                        <label for="staticEmail" class="form-label">Descripción</label>
+                                        <input class="form-control" type="text" name="nombrePlanta" id="nombrePlanta" disabled/>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="staticEmail" class="form-label">Cantidad surtida</label>
                                         <input class="form-control" type="number" name="cantidadSurtida" id="cantidadSurtida"/>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                     </div>
                                     <div class="col-md-3">
                                         <button id='adicionar' type="button" class="btn btn-primary btn-xs btn-block text-center"  >Agregar</button>
