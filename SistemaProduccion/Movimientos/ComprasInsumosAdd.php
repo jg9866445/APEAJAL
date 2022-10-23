@@ -353,6 +353,7 @@
         var i = 1;
         //espera el clic de boton agregar
         $('#adicionar').click(function() {
+            total=parseInt(document.getElementById('total').value,10);
         //obtiene el valor de el id y lo asigna a variable
             var idInsumo = document.getElementById("idInsumo").value;
             document.getElementById("Opcion"+idInsumo).setAttribute('disabled',""); 

@@ -351,7 +351,7 @@
 
                 },
                 success: function(respuesta){
-                     //window.location.href = "/SistemaProduccion/Movimientos/DevolucionesInsumos.php"
+                    window.location.href = "/SistemaProduccion/Movimientos/DevolucionesInsumos.php"
                 },complete: function() {
                     Swal.close();
                 }

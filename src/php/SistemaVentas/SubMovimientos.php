@@ -29,14 +29,19 @@ class SubMovimientos
                         $resultado = $conexion->getNextidSolicitudPlantas();
                         echo json_encode($resultado);
                     break;
+                    
                     case 'getNextidVenta':
                         $conexion = new Movimientos();
                         $resultado = $conexion->getNextidVenta();
                         echo json_encode($resultado);
                     break;
 
-        
-                    
+                    case 'getNextidPago':
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getNextidPago();
+                        echo json_encode($resultado);
+                    break;
+
                     case 'getResponsable':
                         $idResponsable = $_POST['idResponsable'];
                         $conexion = new Movimientos();
@@ -58,6 +63,13 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
 
+                    case 'getPredioForCliente':
+                        $idCliente = $_POST['idCliente'];
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getPredioForCliente($idCliente);
+                        echo json_encode($resultado);
+                    break;
+
                     case 'getPlanta':
                         $idPlanta = $_POST['idPlanta'];
                         $conexion = new Movimientos();
@@ -71,45 +83,14 @@ class SubMovimientos
                         $resultado = $conexion->getSolicitud($idSolicitud);
                         echo json_encode($resultado);
                     break;
-
-                    case 'getPagoPlanta':
-                        $idPago = $_POST['idPago'];
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getPagoPlanta($idPago);
-                        echo json_encode($resultado);
-                    break;
-
+                    
                     case 'getDetallesSolicitud':
                         $idSolicitud = $_POST['idSolicitud'];
                         $conexion = new Movimientos();
                         $resultado = $conexion->getDetallesSolicitud($idSolicitud);
                         echo json_encode($resultado);
                     break;
-
-                    case 'insertSolicitudPlantas':
-                        $datosSolicud= json_decode($_POST['datosSolicud']);
-                        $detalles= json_decode($_POST['detalles']);
-                        $conexion = New Movimientos();
-                        $idSolicitud=$conexion->insertSolicitud($datosSolicud->idCliente,$datosSolicud->FechaSolicitud,$datosSolicud->estado,$datosSolicud->idResponsable);
-                        $conexion->insertDetallesSolicitud($idSolicitud,$detalles);
-                    break;
                     
-                    case 'insertVentaPlanta':
-                        $datosVenta= json_decode($_POST['datosVenta']);
-                        $detalles= json_decode($_POST['detalles']);
-                        $conexion = New Movimientos();
-                        $idVenta=$conexion->insertVentaPlanta($datosVenta->idSolicitud,$datosVenta->idResponsable,$datosVenta->fechaVenta,$datosVenta->total);
-                        $conexion->insertDetallesVenta($idVenta,$detalles);
-                    break;
-                    
-                    case 'insertPagos':
-                        $datosPago= json_decode($_POST['datosPago']);
-                        $conexion = New Movimientos();
-                        $idPago=$conexion->insertVentaPlanta($datosPago->idResponsable,$datosPago->idVenta,$datosPago->fecha,$datosPago->conceptoGeneral,$datosPago->importe);
-                        $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/FacturasCompras/",$idPago);
-                    break;
-                    
-
                     case 'getAllInsumos':
                         $conexion = New Movimientos();
                         $resultado = $conexion->getAllInsumos();
@@ -121,6 +102,52 @@ class SubMovimientos
                         $resultado = $conexion->getAllProveedores();
                         echo json_encode($resultado);
                     break;
+
+                    case 'insertSolicitudPlantas':
+                        $datosSolicud= json_decode($_POST['datosSolicud']);
+                        $detalles= json_decode($_POST['detalles']);
+                        $conexion = New Movimientos();
+                        $idSolicitud=$conexion->insertSolicitud($datosSolicud->idCliente,$datosSolicud->FechaSolicitud,$datosSolicud->total,$datosSolicud->idResponsable);
+                        $conexion->insertDetallesSolicitud($idSolicitud,$detalles);
+                    break;
+                    
+                    case 'insertVentaPlanta':
+                        $datosVenta= json_decode($_POST['datosVenta']);
+                        $detalles= json_decode($_POST['detalles']);
+                        $conexion = New Movimientos();
+                        $idVenta=$conexion->insertVentaPlanta($datosVenta->idSolicitud,$datosVenta->idResponsable,$datosVenta->fechaVenta,$datosVenta->total);
+                        $conexion->insertDetallesVenta($idVenta,$detalles);
+                    break;
+
+
+
+                    ///AQUI TODAVIA NO
+
+                    case 'getPagoPlanta':
+                        $idPago = $_POST['idPago'];
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getPagoPlanta($idPago);
+                        echo json_encode($resultado);
+                    break;
+
+
+
+
+                    
+                    case 'insertPagos':
+                        $datosPago= json_decode($_POST['datosPago']);
+                        $conexion = New Movimientos();
+                        $idPago=$conexion->insertVentaPlanta($datosPago->idResponsable,$datosPago->idVenta,$datosPago->fecha,$datosPago->conceptoGeneral,$datosPago->importe);
+                        $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/FacturasCompras/",$idPago);
+                    break;
+
+                    case 'cancelarSolicitud':
+                        $DatoSolicitud= json_decode($_POST['DatoSolicitud']);
+                        $conexion = New Movimientos();
+                        $conexion->cancelarSolicitud($DatoSolicitud->idSolicitud);
+                    break;                    
+
+
                     
 
                     default:
@@ -129,7 +156,7 @@ class SubMovimientos
                 }
             }
         }catch (Exception $e){
-                save("subMovimientos","API",$e);
+                save(var_dump($e));
         }
     }
 

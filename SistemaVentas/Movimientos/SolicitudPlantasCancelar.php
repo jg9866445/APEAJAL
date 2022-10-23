@@ -22,7 +22,7 @@
 
 </head>
 
-<body onload="getNextidSolicitudPlantas()">
+<body onload="getSolicitud()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -98,7 +98,7 @@
                     <div class="row g-3">
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">id Solicitud</label>
-                            <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled />
+                            <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled value="<?php echo $_GET['id']?>" />
                         </div>
                         <div class="col-md-6">
                         </div>
@@ -201,66 +201,8 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="card">
-                        <div class="card-header">Datos de Predio</div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Municipio</label>
-                                        <input class="form-control" type="text" name="municipio" id="municipio" disabled/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Extencion</label>
-                                        <input class="form-control" type="text" name="extencion" id="extencion" disabled/>
-                                    </div>
-                                </div>
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Uso de predio</label>
-                                        <input class="form-control" type="text" name="usoPredio" id="usoPredio" disabled/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Latitud</label>
-                                        <input class="form-control" type="number" name="latitud" id="latitud" disabled/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Longitud</label>
-                                        <input class="form-control" type="number" name="longitud" id="longitud" disabled/>
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
                         <div class="card-header">Datos de Planta</div>
                             <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Especie</label>
-                                        <input class="form-control" type="text" name="especiePlanta" id="especiePlanta" disabled/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Descripción</label>
-                                        <input class="form-control" type="text" name="nombrePlanta" id="nombrePlanta" disabled/>
-                                    </div>
-                                </div>
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Precio</label>
-                                        <input class="form-control" type="number" name="precioPlanta" id="precioPlanta" disabled/>
-                                    </div>
-                                </div>
-                                <hr>
                                 <table  id="mytable" class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -312,7 +254,7 @@
                     const formData = new FormData();
 
                     formData.append("Metodo", "cancelarSolicitud");
-                    formData.append("datosSolicud", JSON.stringify({"idOrdenProduccion":document.getElementById("idSolicitud").value})); 
+                    formData.append("datosSolicud", JSON.stringify({"idSolicitud":document.getElementById("idSolicitud").value})); 
         
                     $.ajax({
                     url: "/src/php/SistemaProduccion/SubMovimientos.php",
@@ -321,58 +263,101 @@
                     processData: false,
                     contentType: false,
                     beforeSend: function() {
-                        alert('<h5>Espere</h5><br/><p>Cancelando Orden de produccion</p>')
                     },
                     success: function(respuesta){
                         window.location.href = "/SistemaProduccion/Movimientos/OrdenProduccion.php"
                     },complete: function() {
-                        Swal.close();
                     }
                 }) 
             });
         });
-        function getOrden(){
+        function getSolicitud(){
             $.ajax({
-                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                url: "/src/php/SistemaVentas/SubMovimientos.php",
                 method: "POST",
                 data: {
-                    "Metodo":'getOrdenProduccion',
-                    "idOrdenProduccion":document.getElementById("idOrden").value,
+                    "Metodo":'getSolicitud',
+                    "idSolicitud":document.getElementById("idSolicitud").value,
                 },
                 beforeSend: function() {
-                    alert("<h5>Espere cargando</h5><p>datos de la orden</p>")
                 },
                 success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
-                    document.getElementById("NombreResponsable").value=respuesta[0].responsable;
-                    document.getElementById("PuestoResponsable").value=respuesta[0].puesto;
-                    document.getElementById("NombrePlanta").value=respuesta[0].planta;
-                    document.getElementById("DescripcionPlanta").value=respuesta[0].fechaAproxTermino;
-                    document.getElementById("ExistenciaPlanta").value=respuesta[0].existencia;
-                    document.getElementById("FechaAproxTermino").value=respuesta[0].descripcionOrden;
-                    document.getElementById("DecripcionOrden").value=respuesta[0].descripcion;
-                    document.getElementById("CantidaEspera").value=respuesta[0].cantidadEsperada;
+                    document.getElementById("NombreResponsable").value=respuesta[0].nombre;
+                    document.getElementById("puesto").value=respuesta[0].puesto;
+                    document.getElementById("razonSocial").value=respuesta[0].razonSocial;
+                    document.getElementById("domicilio").value=respuesta[0].domicilio;
+                    document.getElementById("rfc").value=respuesta[0].RFC;
+                    document.getElementById("curp").value=respuesta[0].curp;
+                    document.getElementById("telefono").value=respuesta[0].telefono;
+                    document.getElementById("celular").value=respuesta[0].celular;
+                    document.getElementById("tipoCliente").value=respuesta[0].tipoCliente
+                    
+                    getDetallesSolicitud(document.getElementById("idSolicitud").value);
 
                 },complete: function() {
-                    Swal.close();
                 }
             });   
             return false;  
         }
+       function getDetallesSolicitud(idSolicitud){
+            $.ajax({
+                url: "/src/php/SistemaVentas/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getDetallesSolicitud',
+                    "idSolicitud": idSolicitud
+                },success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    var total=0;
+                    $.each(respuesta,function(index, value){            
+                    var i = 1;
 
-        function alert(mensaje,botton=false,eliminar=false){
-            Swal.fire({
-                html: mensaje,
-                showConfirmButton: botton,
-                allowOutsideClick: eliminar,
-                onRender: function() {
-                    $('.swal2-content').prepend(sweet_loader);
+                        var fila = 
+                        '<tr id="row' + i + '" >'+
+                            '<td id="idPredio">' + value.idPredio + '</td>'+
+                            '<td>' + value.municipio + '</td>'+
+                            '<td>' + value.extencion + '</td>'+
+                            '<td>' + value.latitud + '</td>'+
+                            '<td>' + value.longitud + '</td>'+
+                            '<td id="idPlanta">' + value.idPlanta + '</td>'+
+                            '<td>' + value.nombre + '</td>'+
+                            '<td>' + value.descripcion + '</td>'+
+                            '<td id="precioPlanta">' + value.precio + '</td>'+
+                            '<td id="cantidadSolicitada">' + value.cantidadSolicitada + '</td>'+
+                        '</tr>'; 
+                        i++;
+                        $('#mytable tbody:first').append(fila);
+                    });
                 }
-            });
+            
+            })  
         }
+
+        $(document).ready(function() {
+            $('#cancelar').click(function() {
+                    const formData = new FormData();
+
+                    formData.append("Metodo", "cancelarSolicitud");
+                    formData.append("DatoSolicitud", JSON.stringify({"idSolicitud":document.getElementById("idSolicitud").value})); 
+        
+                    $.ajax({
+                    url: "/src/php/SistemaVentas/SubMovimientos.php",
+                    method: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function() {
+                    },
+                    success: function(respuesta){
+                        window.location.href = "/SistemaVentas/Movimientos/SolicitudPlantas.php"
+                    },complete: function() {
+                    }
+                }) 
+            });
+        });
+
         </script>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>

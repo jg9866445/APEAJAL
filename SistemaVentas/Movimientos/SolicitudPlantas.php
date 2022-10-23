@@ -82,7 +82,7 @@
             <div class="row">
                 <div class="col-lg-2 ">
                 </div>
-                <div class="col-lg-7 ">
+                <div class="col-lg-8 ">
                 <h1 style="text-align:center">Solicitud de Plantas forestales</h1>
                 </div>
                 <div class="col-lg-2">
@@ -93,7 +93,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-1 ">
+                <div class="col-lg-2 ">
 
                 </div>
 
@@ -110,6 +110,7 @@
                                 <th>RFC</th>
                                 <th>CURP</th>
                                 <th>Tipo cliente</th>
+                                <th>Estado</th>
                                 <th>Cancelar</th>
                             </tr>
                         </thead>
@@ -125,6 +126,7 @@
                                         echo "<td>" . $row['RFC'] . "</td>";
                                         echo "<td>" . $row['CURP'] . "</td>";
                                         echo "<td>" . $row['tipoCliente'] . "</td>";
+                                        echo "<td>" . $row['estado'] . "</td>";
                                         echo "<td><a  href=/SistemaVentas/Movimientos/SolicitudPlantasCancelar.php?id=".$row['idSolicitud']." class='btn btn-primary'><i class='bi bi-x-circle-fill'></i> </a></td>";
                                         echo "</tr>";
                                     }

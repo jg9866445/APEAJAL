@@ -80,7 +80,7 @@
     <div>
         <div class="container botton">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-3 ">
 
                 </div>
                 <div class="col-lg-7 ">
@@ -234,12 +234,6 @@
                                         <label for="staticEmail" class="col-sm-5 col-form-label">Predio</label>
                                             <select class="form-select" name="idPredio" id="idPredio" required onchange="getPredios()">
                                                 <option disabled selected>Elija una opción</option>
-                                                    <?php 
-                                                        $resultado = $conexion->getAllPredios();
-                                                        foreach ($resultado as $row) {
-                                                        echo "<option value=".$row['idPredio'].">". $row['idPredio']."</option>";
-                                                        }
-                                                    ?>
                                             </select>
                                         <label for="input"></label>
                                     </div>
@@ -339,9 +333,9 @@
         <br>
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-1 ">
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-10">
                     <div class="card">
                         <div class="card-header">Detalle</div>
                             <div class="card-body">
@@ -376,14 +370,30 @@
         <br>
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4 ">
+                    <h1> </h1>
                 </div>
+
                 <div class="col-lg-3 ">
+                    <label for="staticEmail" class="col-sm-5 col-form-label">Total a pagar</label>
+                    <input class="form-control" type="text" name="total" id="total"  value="0" readonly />
+                </div>
+                <div class="col-lg-4">
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                </div>
+                <div class="col-lg-2 ">
                     <div class="card-body">
                         <button type="button" id="regristar" class="btn btn-primary btn-xs btn-block text-center" >Guardar solicitud</button>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                 </div>
             </div>
         </div>
@@ -395,7 +405,7 @@
         var i = 1;
         //espera el clic de boton agregar
         $('#adicionar').click(function() {
-        //obtiene el valor de el id y lo asigna a variable
+        total=parseInt(document.getElementById('total').value,10);
         var idPredio = document.getElementById("idPredio").value;
         var idPlanta = document.getElementById("idPlanta").value;
         var municipio = document.getElementById("municipio").value;
@@ -432,20 +442,27 @@
         document.getElementById("extencion").value="";
         document.getElementById("latitud").value="";
         document.getElementById("longitud").value="";
+        document.getElementById("usoPredio").value=""
         document.getElementById("especiePlanta").value="";
         document.getElementById("nombrePlanta").value="";
         document.getElementById("precioPlanta").value="";
         document.getElementById("cantidadSolicitada").value="";
 
+        total=parseInt(total+(precio*cantidadSolicitada),10);
+            document.getElementById('total').value=total;
+
         });
   
         $(document).on('click', '.btn_remove', function() {
+            total=parseInt(document.getElementById('total').value,10);
             var button_id = $(this).attr("id");
 
             cantidadSolicitada=$('#row'+button_id).find("#cantidadSolicitada")[0].textContent;
             precio=$('#row'+button_id).find("#precio")[0].textContent;
-
             $('#row' + button_id).remove();
+            total=parseInt(total-(precio*cantidadSolicitada),10);
+            document.getElementById('total').value=total;
+
         });
 
         $('#regristar').click(function() {
@@ -453,7 +470,7 @@
             var Fecha = document.getElementById("fecha").value;
             var idCliente = document.getElementById("idCliente").value;
             var idResponsable = document.getElementById("idResponsable").value;
-            var estado="Pendiente";
+            var total = document.getElementById("total").value;
 
             var table = $("#mytable tbody");
             table.find('tr').each(function (i, el) {
@@ -468,7 +485,7 @@
             const formData = new FormData();
             
             formData.append("Metodo", "insertSolicitudPlantas");
-            formData.append("datosSolicud", JSON.stringify({"FechaSolicitud":Fecha, "idCliente":idCliente, "idResponsable":idResponsable, "estado":estado}) ); 
+            formData.append("datosSolicud", JSON.stringify({"FechaSolicitud":Fecha, "idCliente":idCliente, "idResponsable":idResponsable, "total":total}) ); 
             formData.append("detalles", JSON.stringify(datos)); 
             $.ajax({
                 url: "/src/php/SistemaVentas/SubMovimientos.php",
@@ -520,9 +537,42 @@
                     document.getElementById("telefono").value=respuesta[0].telefono;
                     document.getElementById("celular").value=respuesta[0].celular;
                     document.getElementById("tipoCliente").value=respuesta[0].tipoCliente;
+                    getPredioForCliente(idCliente);
                 }
             })     
         }
+
+        function getPredioForCliente(idCliente){
+            $.ajax({
+                url: "/src/php/SistemaVentas/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getPredioForCliente',
+                    "idCliente": idCliente
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    var select = document.getElementById("idPredio");
+                    for (let i = select.options.length; i >= 1; i--) {
+                        select.remove(i);
+                    }
+                    if(respuesta.length!=0){
+
+                        respuesta.forEach(element => 
+                                            {
+                                                var opcion=document.createElement("option");
+                                                opcion.value=element.idPredio;
+                                                opcion.text=element.idPredio;
+                                                select.appendChild(opcion);
+                                            }
+                        );  
+                    }else{
+                        alert("Este cliente no tiene predios");
+                    }
+                }
+            })     
+        }
+
 
         function getPredios(){
             var idPredio = $("#idPredio").val();

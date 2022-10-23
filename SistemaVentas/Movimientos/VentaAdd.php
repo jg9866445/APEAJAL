@@ -171,7 +171,7 @@
                                             <select class="form-select" name="idSolicitud" id="idSolicitud" required onchange="getSolicitud()">
                                                 <option disabled selected>Elija una opción</option>
                                                     <?php 
-                                                        $resultado = $conexion->getAllSolicitud();
+                                                        $resultado = $conexion->getAllSolicitudPendientes();
                                                         foreach ($resultado as $row) {
                                                         echo "<option value=".$row['idSolicitud'].">". $row['idSolicitud']."</option>";
                                                         }
@@ -247,13 +247,7 @@
                                     <div class="col-md-4">
                                         <label for="staticEmail" class="col-sm-5 col-form-label">Predio</label>
                                             <select class="form-select" name="idPredio" id="idPredio" required onchange="getPredios()">
-                                                <option disabled selected>Elija una opción</option>
-                                                    <?php 
-                                                        $resultado = $conexion->getAllPredios();
-                                                        foreach ($resultado as $row) {
-                                                        echo "<option value=".$row['idPredio'].">". $row['idPredio']."</option>";
-                                                        }
-                                                    ?>
+                                                <option disabled selected value="-21">Elija una opción</option>
                                             </select>
                                         <label for="input"></label>
                                     </div>
@@ -353,9 +347,9 @@
         <br>
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-1 ">
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-10">
                     <div class="card">
                         <div class="card-header">Detalle</div>
                             <div class="card-body">
@@ -422,12 +416,12 @@
         </div>
 
         <script>
+            var i=0;
         //se genera un escucha para que espere cualquier clic configurado
         $(document).ready(function() {
         var total=parseInt(document.getElementById("total").value,10);
         console.log(total);
         //se inicializa el contador de los renglones
-        var i = 1;
         //espera el clic de boton agregar
         $('#adicionar').click(function() {
         //obtiene el valor de el id y lo asigna a variable
@@ -457,7 +451,6 @@
                 '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
             '</tr>'; 
 
-        i++;
         //agregas la nueva fila con los datos
         $('#mytable tbody:first').append(fila);
         //limpiar datos
@@ -474,7 +467,7 @@
 
         total=parseInt(total+(precio*cantidadSolicitada),10);
         document.getElementById('total').value=total;
-
+        i++;
         });
         
         $(document).on('click', '.btn_remove', function() {
@@ -570,6 +563,7 @@
                 },
                 success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
+                    document.getElementById("idCliente").value=respuesta[0].idCliente;
                     document.getElementById("fechaSolicitud").value=respuesta[0].fecha;
                     document.getElementById("estado").value=respuesta[0].estado;
                     document.getElementById("razonSocial").value=respuesta[0].razonSocial;
@@ -578,9 +572,8 @@
                     document.getElementById("telefono").value=respuesta[0].telefono;
                     document.getElementById("nombreResponsable").value=respuesta[0].nombre;
                     document.getElementById("puestoRes").value=respuesta[0].puesto;
-                    document.getElementById("total").value=respuesta[0].total;
-                    
                     getDetallesSolicitud(idSolicitud);
+                    getPredioForCliente(respuesta[0].idCliente);
                 }
             })  
         }
@@ -594,14 +587,14 @@
                     "idSolicitud": idSolicitud
                 },success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
-                    var total=0;
-                    $.each(respuesta,function(index, value){
-                        console.log('My array has at position ' + index + ', this value: ' + value);
-                
-
-                    var i = 1;
-
-                        var fila = 
+                    total=document.getElementById("total").value=0;
+                    
+                    var table = $("#mytable tbody");                    
+                    table.find('tr').each(function (i, el) {
+                        document.getElementById(el.id).remove();
+                    });
+                    $.each(respuesta,function(index, value){      
+                        var fila =
                         '<tr id="row' + i + '" >'+
                             '<td id="idPredio">' + value.idPredio + '</td>'+
                             '<td>' + value.municipio + '</td>'+
@@ -615,16 +608,47 @@
                             '<td><button type="button" name="remove" id="' + i + '" class="btn btn-success btn_update">Modificar</button></td>'+
                             '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
                         '</tr>'; 
-                        i++;
-                        total=total+(value.precio*value.cantidadSolicitada)
-                        document.getElementById("total").value=total;
+                        total=parseInt(total+(value.precio*value.cantidadSolicitada),10);
+
                         $('#mytable tbody:first').append(fila);
+                        i++;
                     });
+                    document.getElementById("total").value=total;
                 }
             
             })  
         }
 
+        function getPredioForCliente(idCliente){
+            $.ajax({
+                url: "/src/php/SistemaVentas/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getPredioForCliente',
+                    "idCliente": idCliente
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    var select = document.getElementById("idPredio");
+                    for (let i = select.options.length; i >= 1; i--) {
+                        select.remove(i);
+                    }
+                    if(respuesta.length!=0){
+
+                        respuesta.forEach(element => 
+                                            {
+                                                var opcion=document.createElement("option");
+                                                opcion.value=element.idPredio;
+                                                opcion.text=element.idPredio;
+                                                select.appendChild(opcion);
+                                            }
+                        );  
+                    }else{
+                        alert("Este cliente no tiene predios");
+                    }
+                }
+            })     
+        }
 
         function getPredios(){
             var idPredio = $("#idPredio").val();

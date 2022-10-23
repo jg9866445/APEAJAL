@@ -20,7 +20,7 @@
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
     </head>
 
-    <body>
+    <body onload="getNextidPago()">
         <div>
             <nav class="navbar logo">
                 <a class="navbar-brand">
@@ -343,24 +343,16 @@
             formData.append("datosPago",JSON.stringify({"idResponsable":idResponsable,"idVenta":idVenta,"fecha":fecha,"conceptoGeneral":conceptoGeneral,"importe":importe})); 
             formData.append ("file", inputFile.files[0]);
             $.ajax({
-                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                url: "/src/php/SistemaVentas/SubMovimientos.php",
                 method: "POST",
                 data: formData,
                 processData: false,
                 contentType: false,
                 beforeSend: function() {
-                    Swal.fire({
-                        html: '<h5>Cargando...</h5>',
-                        showConfirmButton: false,
-                        onRender: function() {
-                            $('.swal2-content').prepend(sweet_loader);
-                        }
-                    });
                 },
                 success: function(respuesta){
-                     window.location.href = "/SistemaProduccion/Movimientos/ValeSalidaInsumos.php"
+                     window.location.href = "/SistemaVentas/Movimientos/Pagos.php.php"
                 },complete: function() {
-                    Swal.close();
                 }
             }) 
             return false;
@@ -368,6 +360,81 @@
         });
     });
 
+        function getVenta(){
+            var idVenta = $("#idVenta").val();
+            $.ajax({
+                url: "/src/php/SistemaVentas/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getSolicitud',
+                    "idVenta": idVenta
+                },
+                success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("fechaSolicitud").value=respuesta[0].idCliente;
+                    document.getElementById("idSolicitud").value=respuesta[0].fecha;
+                    document.getElementById("estado").value=respuesta[0].estado;
+                    document.getElementById("nombreResponsable").value=respuesta[0].razonSocial;
+                    document.getElementById("puesto").value=respuesta[0].domicilio;
+                    getDetallesSolicitud(idSolicitud);
+                }
+            })  
+        }
+            function getDetallesVentas(idVenta){
+            $.ajax({
+                url: "/src/php/SistemaVentas/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getDetallesVentas',
+                    "idVenta": idVenta
+                },success: function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    
+                    var table = $("#mytable tbody");                    
+                    table.find('tr').each(function (i, el) {
+                        document.getElementById(el.id).remove();
+                    });
+                    $.each(respuesta,function(index, value){      
+                        var fila =
+                        '<tr id="row' + i + '" >'+
+                            '<td id="idPredio">' + value.idPredio + '</td>'+
+                            '<td>' + value.municipio + '</td>'+
+                            '<td>' + value.extencion + '</td>'+
+                            '<td>' + value.latitud + '</td>'+
+                            '<td>' + value.longitud + '</td>'+
+                            '<td id="idPlanta">' + value.idPlanta + '</td>'+
+                            '<td>' + value.nombre + '</td>'+
+                            '<td id="precioPlanta">' + value.precio + '</td>'+
+                            '<td id="cantidadSolicitada">' + value.cantidadSolicitada + '</td>'+
+                        '</tr>'; 
+                        $('#mytable tbody:first').append(fila);
+                        i++;
+                    });
+                }
+            
+            })  
+        }
+       
+    function getNextidPago(){
+        $.ajax({
+            url: "/src/php/SistemaVentas/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getNextidPago',
+            },
+            beforeSend: function() {
+
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("idPago").value=respuesta[0].AUTO_INCREMENT;
+                var now = new Date();
+                var dateString = moment(now).format('YYYY-MM-DD');
+                document.getElementById("fechaPago").value=dateString;
+            },complete: function() {
+            }
+        })     
+    }
         
         </script>
 

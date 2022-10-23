@@ -269,6 +269,20 @@ class Movimientos {
         $query->bindParam(':fecha', $fecha);
         $query->bindParam(':cantidad', $cantidad);
         $query->execute();
+
+        $sql="SELECT existencias FROM insumo WHERE idInsumo= :idInsumo";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idInsumo', $idInsumo );
+        $query->execute();
+
+        $request=$query->fetchAll();
+        $existencias=$request[0]['existencias']+$cantidad;
+            
+        $sql="UPDATE insumo SET existencias=:existencias WHERE idInsumo= :idInsumo";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':existencias', $existencias);
+        $query->bindParam(':idInsumo', $idInsumo);
+        $query->execute();
     }
 
     //NEXT IDS
