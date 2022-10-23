@@ -91,6 +91,20 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
                     
+                    case 'getVentas':
+                        $idVenta = $_POST['idVenta'];
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getVentas($idVenta);
+                        echo json_encode($resultado);
+                    break;
+                    
+                    case 'getDetallesVentas': 
+                        $idVenta = $_POST['idVenta'];
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getDetallesVentas($idVenta);
+                        echo json_encode($resultado);
+                    break;
+                    
                     case 'getAllInsumos':
                         $conexion = New Movimientos();
                         $resultado = $conexion->getAllInsumos();
@@ -117,28 +131,19 @@ class SubMovimientos
                         $conexion = New Movimientos();
                         $idVenta=$conexion->insertVentaPlanta($datosVenta->idSolicitud,$datosVenta->idResponsable,$datosVenta->fechaVenta,$datosVenta->total);
                         $conexion->insertDetallesVenta($idVenta,$detalles);
-                    break;
-
-
-
-                    ///AQUI TODAVIA NO
-
+                    break;/*
                     case 'getPagoPlanta':
                         $idPago = $_POST['idPago'];
                         $conexion = new Movimientos();
                         $resultado = $conexion->getPagoPlanta($idPago);
                         echo json_encode($resultado);
                     break;
-
-
-
-
-                    
+*/
                     case 'insertPagos':
                         $datosPago= json_decode($_POST['datosPago']);
                         $conexion = New Movimientos();
-                        $idPago=$conexion->insertVentaPlanta($datosPago->idResponsable,$datosPago->idVenta,$datosPago->fecha,$datosPago->conceptoGeneral,$datosPago->importe);
-                        $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/FacturasCompras/",$idPago);
+                        $idPago=$conexion->insertPagos($datosPago->idResponsable,$datosPago->idVenta,$datosPago->fecha,$datosPago->conceptoGeneral,$datosPago->importe);
+                        $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/ComprobantePago/",$idPago);
                     break;
 
                     case 'cancelarSolicitud':

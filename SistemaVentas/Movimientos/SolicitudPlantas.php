@@ -2,6 +2,7 @@
 
         include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Movimiento.php");
         $conexion = new Movimientos();
+        //NOTA LAS SOlocitudes con estado difrente a pendiente no se pueden cancelar 
     ?>
 
 <!DOCTYPE html>

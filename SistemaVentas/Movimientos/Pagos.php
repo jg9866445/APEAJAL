@@ -87,7 +87,7 @@ $conexion = new Movimientos();
             <h1 style="text-align:center">Pago de Plantas forestales</h1>
             </div>
             <div class="col-lg-2">
-            <a class="btn active bottom" href="/SistemaVentas/Movimientos/AddPago.php">Nuevo Pago</a>
+            <a class="btn active bottom" href="/SistemaVentas/Movimientos/PagoAdd.php">Nuevo Pago</a>
             </div>
         </div>
     </div>

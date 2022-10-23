@@ -51,7 +51,6 @@ class Movimientos {
         return $results;
     }
     
-
     public function getResponsable($idResponsable)
     {
         $sql = "SELECT * FROM responsable where idResponsable = :idResponsable";
@@ -62,6 +61,55 @@ class Movimientos {
         return $results;
     }
 
+    public function getPredios($idPredio)
+    {
+        $sql = "SELECT * FROM predios where idPredio = :idPredio";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPredio', $idPredio);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+ 
+    public function getPredioForCliente($idCliente)
+    {
+        $sql = "SELECT * FROM predios where idCliente = :idCliente";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idCliente', $idCliente);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getPlantasForestal($idPlanta)
+    {
+        $sql = "SELECT e.nombre,p.descripcion,p.precio  from  plantaForestal as p INNER JOIN especie as e on p.idEspecie = e.idEspecie where p.idPlanta = :idPlanta";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPlanta', $idPlanta);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getSolicitud($idSolicitud)
+    {
+        $sql = "SELECT c.idCliente, c.razonSocial, c.domicilio,c.celular, c.RFC, c.telefono,c.tipoCliente, s.fecha, s.estado,s.total, r.nombre, r.puesto  from  solicitudes as s INNER JOIN clientes as c on s.idCliente = c.idCliente INNER JOIN responsable as r on s.idResponsable = r.idResponsable where s.idSolicitud = :idSolicitud";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSolicitud', $idSolicitud);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getDetallesSolicitud($idSolicitud)
+    {
+        $sql = "Select p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.precio, ds.cantidadSolicitada FROM detalleSolicitud as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE idSolicitud= :idSolicitud";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSolicitud', $idSolicitud);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
     public function getAllPlantas()
     {
@@ -107,115 +155,42 @@ class Movimientos {
         return $results;
     }
 
-
-
-
-
-
-
-
-
-
-
-    public function getAllPagos()
+    public function getVentaPlanta()
     {
-        $sql = "SELECT p.idPago,p.fecha,p.idVenta,p.idResponsable,p.conceptoGeneral,p.importe from pagos as p  INNER JOIN responsable as r on r.idResponsable= p.idResponsable";
+        $sql = "Select v.idVenta, v.fechaVenta, s.idSolicitud, r.nombre, v.total from ventas as v INNER JOIN responsable as r on v.idResponsable = r.idResponsable INNER Join solicitudes as s on v.idSolicitud = s.idSolicitud";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //TODO:Ok error en esta funcion no tengo el tiempo para solocinar que funcione segun el cliente que esta selecionado porqueu es fucion de dos tablas
-    public function getPredios($idPredio)
-    {
-        $sql = "SELECT * FROM predios where idPredio = :idPredio";
+    public function getAllVenta(){
+        $sql = "SELECT v.idVenta,v.fechaVenta, s.idSolicitud, s.estado, r.nombre, r.puesto FROM ventas as v INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud INNER JOIN responsable as r ON r.idResponsable = v.idResponsable WHERE s.estado = 'Atendido'";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':idPredio', $idPredio);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
     
-    public function getPredioForCliente($idCliente)
-    {
-        $sql = "SELECT * FROM predios where idCliente = :idCliente";
+    public function getVentas($idVenta){
+        $sql = "SELECT v.idVenta,v.fechaVenta, s.idSolicitud, s.estado, r.nombre, r.puesto,v.total FROM ventas as v INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud INNER JOIN responsable as r ON r.idResponsable = v.idResponsable WHERE v.idVenta = :idVenta";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':idCliente', $idCliente);
+        $query->bindParam(':idVenta', $idVenta);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    public function getPlantasForestal($idPlanta)
+    public function getDetallesVentas($idVenta)
     {
-        $sql = "SELECT e.nombre,p.descripcion,p.precio  from  plantaForestal as p INNER JOIN especie as e on p.idEspecie = e.idEspecie where p.idPlanta = :idPlanta";
+        $sql = "Select p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.precio, ds.cantidadSolicitada FROM detalleVenta as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE idVenta= :idVenta";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':idPlanta', $idPlanta);
+        $query->bindParam(':idVenta', $idVenta);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
-
-    public function getSolicitud($idSolicitud)
-    {
-        $sql = "SELECT c.idCliente, c.razonSocial, c.domicilio,c.celular, c.RFC, c.telefono,c.tipoCliente, s.fecha, s.estado,s.total, r.nombre, r.puesto  from  solicitudes as s INNER JOIN clientes as c on s.idCliente = c.idCliente INNER JOIN responsable as r on s.idResponsable = r.idResponsable where s.idSolicitud = :idSolicitud";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idSolicitud', $idSolicitud);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getDetallesSolicitud($idSolicitud)
-    {
-        $sql = "Select p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.precio, ds.cantidadSolicitada FROM detalleSolicitud as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE idSolicitud= :idSolicitud";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idSolicitud', $idSolicitud);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
+    
     public function getPagoPlanta()
     {
         $sql = "SELECT * from pagos";
@@ -226,46 +201,14 @@ class Movimientos {
     }
 
 
+
+
+
     public function cancelarSolicitud($idSolicitud){
         $sql="UPDATE solicitudes SET estado='Cancelado' WHERE  idSolicitud=:idSolicitud";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idSolicitud', $idSolicitud);
         $query->execute();
-    }
-
-
-
-
-
-
-
-
- 
-
-    public function getVentaPlanta()
-    {
-        $sql = "Select v.idVenta, v.fechaVenta, s.idSolicitud, r.nombre, v.total from ventas as v INNER JOIN responsable as r on v.idResponsable = r.idResponsable INNER Join solicitudes as s on v.idSolicitud = s.idSolicitud";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getSalidaPlanta()
-    {
-        $sql = "Select * from salidas";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllVenta(){
-        $sql = "SELECT v.fechaVenta, s.idSolicitud, s.estado, r.nombre, r.puesto FROM ventas as v INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud INNER JOIN responsable as r ON r.idResponsable = v.idResponsable;";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
     }
 
     public function insertPredios( $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud){
@@ -321,10 +264,7 @@ class Movimientos {
         $query->bindParam(':idSolicitud', $idSolicitud);
         $query->execute();
 
-
         return $idVentaPlanta;
-
-
     }
 
     public function insertDetallesVenta($idVenta,$detalles){
@@ -339,9 +279,7 @@ class Movimientos {
             $query->execute();
         }        
     }
-
-
-
+    
     public function insertPagos($idResponsable, $idVenta, $fecha, $conceptoGeneral, $importe){
         $sql="INSERT INTO pagos(idResponsable, idVenta, fecha, conceptoGeneral, importe) VALUES (:idResponsable,:idVenta,:fecha,:conceptoGeneral,:importe)";
         $query = $this->connect->prepare($sql);
@@ -352,6 +290,20 @@ class Movimientos {
         $query->bindParam(':importe', $importe);
         $query->execute();
         $idPago=$this->connect->lastInsertId();
+
+        $sql="SELECT * FROM ventas WHERE idVenta = :idVenta";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idVenta', $idVenta );
+        $query->execute();
+
+        $request=$query->fetchAll();
+        $idSolicitud=$request[0]['idSolicitud'];
+
+        $sql="UPDATE solicitudes SET estado='Pagado' WHERE  idSolicitud=:idSolicitud";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idSolicitud', $idSolicitud);
+        $query->execute();
+
         return $idPago;
     }
 
@@ -387,8 +339,24 @@ class Movimientos {
     //TODO:SELECT DEBAJO DE ESTa liena es importete no BORRES 
     //SELECT dv.saldo -(SELECT SUM(ds.cantidadSurtida) from salidas as s INNER JOIN pagos as p on s.idPago= p.idPago INNER JOIN ventas as v on v.idVenta = p.idVenta INNER JOIN detalleSalida as ds on ds.idSalida = s.idSalida WHERE ds.idPlanta = 1 and v.idVenta = 1 and ds.) from pagos as p INNER JOIN ventas as v on p.idVenta = v.idVenta INNER JOIN detalleVenta as dv on dv.idVenta = v.idVenta;
 
+/*
 
+     public function getSalidaPlanta()
+    {
+        $sql = "Select * from salidas";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
- 
-
+    public function getAllPagos()
+    {
+        $sql = "SELECT p.idPago,p.fecha,p.idVenta,p.idResponsable,p.conceptoGeneral,p.importe from pagos as p  INNER JOIN responsable as r on r.idResponsable= p.idResponsable";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+*/
 }

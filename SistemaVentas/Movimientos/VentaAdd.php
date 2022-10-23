@@ -509,8 +509,8 @@
                 var $tds = $(this).find('td');
                 idPredio = $tds.eq(0).text();
                 idPlanta = $tds.eq(5).text();
-                cantidadSolicitada = $tds.eq(9).text();
-                precio = $tds.eq(8).text();
+                cantidadSolicitada = $tds.eq(8).text();
+                precio = $tds.eq(7).text();
                 dato={"predio":idPredio, "planta":idPlanta, "Cantidad":cantidadSolicitada, "precio":precio};
                 datos.push(dato);
             });

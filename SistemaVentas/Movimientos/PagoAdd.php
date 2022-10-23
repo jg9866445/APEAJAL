@@ -18,6 +18,8 @@
         <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
     </head>
 
     <body onload="getNextidPago()">
@@ -196,11 +198,11 @@
                                 <div class="row g-3">
                                     <div class="col-md-5">
                                         <label for="staticEmail" class="form-label">Nombre responsable</label>
-                                        <input class="form-control" type="text" name="nombreResponsable" id="nombreResponsable" disabled/>
+                                        <input class="form-control" type="text" name="nombreV" id="nombreV" disabled/>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="staticEmail" class="form-label">Puesto</label>
-                                        <input class="form-control" type="text" name="puesto" id="puesto" disabled/>
+                                        <input class="form-control" type="text" name="puestoV" id="puestoV" disabled/>
                                     </div>
                                 </div> 
                             </div>
@@ -332,10 +334,10 @@
         $('#regristar').click(function() {
             var idResponsable = document.getElementById("idResponsable").value;
             var idVenta = document.getElementById("idVenta").value;
-            var fecha = document.getElementById("fecha").value;
+            var fecha = document.getElementById("fechaPago").value;
             var conceptoGeneral = document.getElementById("conceptoGeneral").value;
             var importe = document.getElementById("importe").value;
-            var inputFile = document.querySelector("#FacturaFisica");
+            var inputFile = document.querySelector("#comprobantePago");
 
             const formData = new FormData();
 
@@ -351,7 +353,7 @@
                 beforeSend: function() {
                 },
                 success: function(respuesta){
-                     window.location.href = "/SistemaVentas/Movimientos/Pagos.php.php"
+                    window.location.href = "/SistemaVentas/Movimientos/Pagos.php"
                 },complete: function() {
                 }
             }) 
@@ -366,17 +368,18 @@
                 url: "/src/php/SistemaVentas/SubMovimientos.php",
                 method: "POST",
                 data: {
-                    "Metodo":'getSolicitud',
+                    "Metodo":'getVentas',
                     "idVenta": idVenta
                 },
                 success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
-                    document.getElementById("fechaSolicitud").value=respuesta[0].idCliente;
-                    document.getElementById("idSolicitud").value=respuesta[0].fecha;
+                    document.getElementById("fechaSolicitud").value=respuesta[0].fechaVenta;
+                    document.getElementById("idSolicitud").value=respuesta[0].idSolicitud;
                     document.getElementById("estado").value=respuesta[0].estado;
-                    document.getElementById("nombreResponsable").value=respuesta[0].razonSocial;
-                    document.getElementById("puesto").value=respuesta[0].domicilio;
-                    getDetallesSolicitud(idSolicitud);
+                    document.getElementById("nombreV").value=respuesta[0].nombre;
+                    document.getElementById("puestoV").value=respuesta[0].puesto;
+                    document.getElementById("importe").value=respuesta[0].total;
+                    getDetallesVentas(idVenta);
                 }
             })  
         }
@@ -389,6 +392,7 @@
                     "idVenta": idVenta
                 },success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
+                    var i=0;
                     
                     var table = $("#mytable tbody");                    
                     table.find('tr').each(function (i, el) {

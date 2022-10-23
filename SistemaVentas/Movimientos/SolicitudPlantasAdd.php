@@ -16,10 +16,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
+    <script src="/src/js/auxliar.js"></script>
 </head>
 
 <body onload="getNextidSolicitudPlantas()">
@@ -125,7 +129,7 @@
                                     <div class="col-md-4">
                                         <label for="staticEmail" class="col-sm-5 col-form-label">Responsable</label>
                                             <select class="form-select" name="idResponsable" id="idResponsable" required onchange="getResponsable()">
-                                                <option disabled selected>Elija una opción</option>
+                                                <option disabled selected value="-21">Elija una opción</option>
                                                     <?php 
                                                         $resultado = $conexion->getAllResponsable();
                                                         foreach ($resultado as $row) {
@@ -165,7 +169,7 @@
                                     <div class="col-md-4">
                                         <label for="staticEmail" class="col-sm-5 col-form-label">Cliente</label>
                                             <select class="form-select" name="idCliente" id="idCliente" required onchange="getClientes()">
-                                                <option disabled selected>Elija una opción</option>
+                                                <option disabled selected  value="-21">Elija una opción</option>
                                                     <?php 
                                                         $resultado = $conexion->getAllClientes();
                                                         foreach ($resultado as $row) {
@@ -233,7 +237,7 @@
                                     <div class="col-md-4">
                                         <label for="staticEmail" class="col-sm-5 col-form-label">Predio</label>
                                             <select class="form-select" name="idPredio" id="idPredio" required onchange="getPredios()">
-                                                <option disabled selected>Elija una opción</option>
+                                                <option disabled selected  value="-21">Elija una opción</option>
                                             </select>
                                         <label for="input"></label>
                                     </div>
@@ -400,7 +404,8 @@
     
         <script>
         //se genera un escucha para que espere cualquier clic configurado
-        $(document).ready(function() {
+
+        $(document).ready(function() {        
         //se inicializa el contador de los renglones
         var i = 1;
         //espera el clic de boton agregar
@@ -431,7 +436,7 @@
                 '<td id="cantidadSolicitada">' + cantidadSolicitada + '</td>'+
                 '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
             '</tr>'; 
-
+        
         i++;
         //agregas la nueva fila con los datos
         $('#mytable tbody:first').append(fila);
@@ -633,6 +638,11 @@
             }
         })     
     }
+
+
+
+
+    
 
     </script>
 
