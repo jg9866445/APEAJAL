@@ -212,7 +212,7 @@ class Movimientos {
 
     public function getAllPagos()
     {
-        $sql = "SELECT p.idPago from pagos as p";
+        $sql = "SELECT p.idPago from pagos as p INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s on s.idSolicitud=v.idSolicitud WHERE s.estado = 'Pagado' or s.estado ='Entregando'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -243,6 +243,20 @@ class Movimientos {
             $query->bindParam(':idPredio', $value->predio);
             $query->bindParam(':idPlanta', $value->planta);
             $query->bindParam(':cantidadSurtida', $value->Cantidad);
+            $query->execute();
+
+            $sql="SELECT existencia  from  plantaForestal as pf  WHERE idPlanta=:idPlanta";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idPlanta', $value->planta );
+            $query->execute();
+
+            $request=$query->fetchAll();
+            $existencias=$request[0]['existencia']-$value->Cantidad;
+
+            $sql="UPDATE plantaForestal SET existencia=:existencia WHERE idPlanta=:idPlanta";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':existencia', $existencias);
+            $query->bindParam(':idPlanta', $value->planta);
             $query->execute();
         } 
     }
