@@ -20,6 +20,8 @@ $conexion = new Movimientos();
 <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -139,6 +141,7 @@ $conexion = new Movimientos();
 <script>
 $(document).ready( function () {
     var table = $('#table_id').DataTable();
+    scrollX: true;
 });
 </script>
 
