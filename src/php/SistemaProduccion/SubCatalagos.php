@@ -21,11 +21,7 @@ class SubCatalagos
     function API(){
         if(isset($_POST['action'])){
             switch ($_POST['action']) {
-                case 'GetNextProveedor':
-                    $resultado = $this->conexion->getNextIdProveedor();
-                    echo json_encode($resultado);
-                break;
-
+                
                 case 'getAllClasificaciones':
                     $resultado = $this->conexion->getAllClasificaciones();
                     echo json_encode($resultado);

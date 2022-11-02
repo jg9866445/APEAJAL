@@ -115,7 +115,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $resultado = $conexion->getAllInsumos();
+                                $resultado = $conexion->getAllInsumosForTable();
                                     foreach ($resultado as $row) {
                                         echo "<tr>";
                                         echo "<td>" . $row['idInsumo'] . "</td>";
@@ -169,7 +169,7 @@
                                     <select class="form-select" name="idClasificacionM" id="idClasificacionM" required>
                                         <option disabled selected value="">Elija una opción</option>
                                         <?php
-                                            $resultado = $conexion->getAllClasificaciones();
+                                            $resultado = $conexion->getAllClasificacionesForSelect();
                                             foreach ($resultado as $row) {
                                             echo "<option value=".$row['idClasificacion'].">". $row['concepto']."</option>";
                                             }
@@ -255,7 +255,7 @@
                                     <select class="form-select" name="idClasificacion" id="idClasificacion" required>
                                     <option disabled selected value="">Elija una opción</option>
                                     <?php
-                                        $resultado = $conexion->getAllClasificaciones();
+                                        $resultado = $conexion->getAllClasificacionesForSelect();
                                 
                                         foreach ($resultado as $row) {
                                             echo "<option value='".$row['idClasificacion']."'>". $row['concepto']."</option>";

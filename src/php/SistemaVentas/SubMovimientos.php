@@ -110,6 +110,15 @@ class SubMovimientos
                         $resultado = $conexion->getDetallesVentas($idVenta);
                         echo json_encode($resultado);
                     break;
+
+                                        
+                    case 'getDetallesVentasSalidas': 
+                        $idVenta = $_POST['idVenta'];
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getDetallesVentasSalidas($idVenta);
+                        echo json_encode($resultado);
+                    break;
+                    
                     
                     case 'getAllInsumos':
                         $conexion = New Movimientos();

@@ -1,16 +1,38 @@
 
 class auxliar {
-  constructor () { 
-    console.log("Clase creada correctamente");
-  }
-    static validateAll(json){
-        var validacion="Totdo";
-        
-        console.log(JSON.stringify(json));
-        return validacion;
+  
+    constructor () {
+        console.log('HOLA'); 
     }
 
-    static alert(mensaje,botton,eliminar){
+    validateAll(json){
+        //Datos de valicacion
+        //{"valor":"0","typeOf":"Entero","mensaje":"Error"}
+        json.forEach(function(dato) {
+            if(dato.valor.length()>0){                
+                switch(dato.typeOf){
+                    case "":
+
+                    break;
+                    case "":
+
+                    break;
+                    case "":
+
+                    break;
+                    case "":
+
+                    break;
+                    case "":
+
+                    break;
+                }}
+            console.log(numero);
+        })
+        return "Totdo";
+    }
+
+    alert(mensaje,botton,eliminar){
         Swal.fire({
             html: mensaje,
             showConfirmButton: botton,
@@ -20,4 +42,9 @@ class auxliar {
             }
         });
     }
+
+    cerrar(){
+        Swal.close();
+    }
+
 }

@@ -3,10 +3,30 @@
     margin-bottom: 10px;
 }
 
-button.bottom {
+
+/*
+Botones que ocupo
+Nuevo
+Agregar
+Cancelar
+
+
+
+
+*/
+
+
+.btn-button  {
+    color: #fff;
     background-color: #52672E;
-    color: #FFFFFF;
+    border-color: #52672E;
 }
+
+
+
+
+
+/*Puede que no funcione*/
 
 input:placeholder-shown:focus+label::after {
     content: 'Este campo no puede estar vacio';

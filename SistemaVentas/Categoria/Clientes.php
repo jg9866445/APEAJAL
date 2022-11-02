@@ -126,8 +126,8 @@
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td>" . $row['telefono'] . "</td>";
                                         echo "<td>" . $row['tipoCliente'] . "</td>";
-                                        echo "<td><a href=/src/PDF/ConstanciaFiscal/". $row['idCliente'].".pdf>Descargar</a></td>";
-                                        echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
+                                        echo "<td><a class='btn btn-button active' role='button' href=/src/PDF/ConstanciaFiscal/". $row['idCliente'].".pdf>Descargar</a></td>";
+                                        echo "<td><button type='button' class='btn active bottom' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
                                         echo "</tr>";
                                     }
                             ?>
@@ -229,8 +229,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn active bottom">Guardar cambios</button>
                     </div>
                 </form>
             </div>
@@ -324,8 +324,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn active bottom">Guardar cambios</button>
                     </div>
                 </form>
             </div>

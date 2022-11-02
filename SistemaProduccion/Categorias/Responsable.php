@@ -107,7 +107,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $resultado = $conexion->getAllResponsable();
+                                $resultado = $conexion->getAllResponsableForTable();
                                     foreach ($resultado as $row) {
                                         echo "<tr>";
                                         echo "<td>" . $row['idResponsable'] . "</td>";

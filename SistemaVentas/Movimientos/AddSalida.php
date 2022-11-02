@@ -155,7 +155,7 @@
             <div class="row">
                 <div class="col-lg-2 ">
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     <div class="card">
                         <div class="card-header">Datos de Pago</div>
                             <div class="card-body">
@@ -163,7 +163,7 @@
                                     <div class="col-md-3">
                                         <label for="staticEmail" class="col-sm-5 col-form-label">Pago</label>
                                             <select class="form-select" name="idPago" id="idPago" required onchange="getPagoPlanta()">
-                                                <option disabled selected>Elija una opción</option>
+                                                <option disabled selected></option>
                                                     <?php 
                                                         $resultado = $conexion->getAllPagosSelect();
                                                         foreach ($resultado as $row) {
@@ -219,6 +219,7 @@
                                                 <th>Precio</th>
                                                 <th>Cantidad</th>
                                                 <th>Importe</th>
+                                                <th>Surtir</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -229,7 +230,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-1">
                     </div>
                 </div>
             </div>
@@ -247,7 +248,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="staticEmail" class="col-sm-5 col-form-label">Predio</label>
-                                            <select class="form-select" name="idPredios" id="idPredios" required onchange="getPredios()">
+                                            <select class="form-select" name="idPredios" id="idPredios" required onchange="getPredios()" disabled>
                                                 <option disabled selected value="-21">Elija una opción</option>
                                             </select>
                                         <label for="input"></label>
@@ -295,7 +296,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="staticEmail" class="col-sm-5 col-form-label">Planta</label>
-                                            <select class="form-select" name="idPlantas" id="idPlantas" required onchange="getPlantasForestal()">
+                                            <select class="form-select" name="idPlantas" id="idPlantas" required onchange="getPlantasForestal()" disabled>
                                                 <option disabled selected value="-20">Elija una opción</option>
                                                     <?php 
                                                         $resultado = $conexion->getAllPlantas();
@@ -316,15 +317,17 @@
                                     </div>
                                 </div>
                                 <div class="row g-3">
-                                    <div class="col-md-5">
+                                    <div class="col-md-3">
                                         <label for="staticEmail" class="form-label">Descripción</label>
                                         <input class="form-control" type="text" name="nombrePlanta" id="nombrePlanta" disabled/>
                                     </div>
                                     <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Cantidad Solicitada</label>
+                                        <input class="form-control" type="number" name="cantidadSolicitada" id="cantidadSolicitada"/>
+                                    </div>
+                                    <div class="col-md-3">
                                         <label for="staticEmail" class="form-label">Cantidad surtida</label>
                                         <input class="form-control" type="number" name="cantidadSurtida" id="cantidadSurtida"/>
-                                    </div>
-                                    <div class="col-md-1">
                                     </div>
                                     <div class="col-md-3">
                                         <button id='adicionar' type="button" class="btn btn-primary btn-xs btn-block text-center"  >Agregar</button>
@@ -446,6 +449,12 @@
         
         $(document).on('click', '.btn_remove', function() {
             var button_id = $(this).attr("id");
+            document.getElementById("idPredios").value=$('#row'+button_id).find("#idPredio")[0].textContent;
+            document.getElementById("idPredios").text=$('#row'+button_id).find("#idPredio")[0].textContent;
+            document.getElementById("idPlantas").value=$('#row'+button_id).find("#idPlanta")[0].textContent;
+            document.getElementById("cantidadSolicitada").value=$('#row'+button_id).find("#cantidadSolicitada")[0].textContent;
+            getPredios();
+            getPlantasForestal();
             $('#row' + button_id).remove();
 
         });
@@ -507,7 +516,6 @@
                     document.getElementById("idVenta").value=respuesta[0].idVenta;
                     
                     getDetallesVentas(respuesta[0].idVenta);
-                    getPredioForCliente(respuesta[0].idCliente);
                 }
             })  
         }
@@ -516,7 +524,7 @@
                 url: "/src/php/SistemaVentas/SubMovimientos.php",
                 method: "POST",
                 data: {
-                    "Metodo":'getDetallesVentas',
+                    "Metodo":'getDetallesVentasSalidas',
                     "idVenta": idVenta
                 },success: function(respuesta){
                     respuesta=JSON.parse(respuesta);
@@ -539,6 +547,7 @@
                             '<td id="precioPlanta">' + value.precio + '</td>'+
                             '<td id="cantidadSolicitada">' + value.cantidadSolicitada + '</td>'+
                             '<td>' + value.precio * value.cantidadSolicitada + '</td>'+
+                            '<td><button type="button" name="surtir" id="' + i + '" class="btn btn-danger btn_remove">Surtir</button></td>'+
                         '</tr>'; 
                         $('#mytable tbody:first').append(fila);
                         i++;
@@ -548,43 +557,6 @@
             })  
         }
 
-        
-        function getPredioForCliente(idCliente){
-            $.ajax({
-                url: "/src/php/SistemaVentas/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Metodo":'getPredioForCliente',
-                    "idCliente": idCliente
-                },
-                success: function(respuesta){
-                    respuesta=JSON.parse(respuesta);
-                    var select = document.getElementById("idPredios");
-                    for (let i = select.options.length; i >= 1; i--) {
-                        select.remove(i);
-                    }
-                    if(respuesta.length!=0){
-
-                        respuesta.forEach(element => 
-                                            {
-                                                var opcion=document.createElement("option");
-                                                opcion.value=element.idPredio;
-                                                opcion.text=element.idPredio;
-                                                select.appendChild(opcion);
-                                            }
-                        );  
-                        select.value='-21';
-                        document.getElementById("municipio").value="";
-                        document.getElementById("extencion").value="";
-                        document.getElementById("usoPredio").value="";
-                        document.getElementById("latitud").value="";
-                        document.getElementById("longitud").value="";
-                    }else{
-                        alert("Este cliente no tiene predios");
-                    }
-                }
-            })     
-        }
 
         function getPredios(){
             var idPredio =document.getElementById("idPredios").value;

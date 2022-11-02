@@ -21,49 +21,24 @@ class Catalago {
     public function close() {
         unset($this->connect);
     }
-    //Proximos id
-    function getNextIdProveedor(){
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'proveedor'";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-    
-    //Obtener todos los regristros
-    public function getAllClasificaciones(){
-        $sql = "SELECT * FROM clasificacion";
+
+    //Funciones para Calsificacion 
+    public function getAllClasificacionesForTable(){
+        $sql = "SELECT idClasificacion,concepto,descripcion FROM clasificacion";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    public function getAllInsumos() {
-        $sql = "SELECT i.idInsumo,c.idClasificacion, c.concepto , i.nombre, i.descripcion,i.unidad,i.existencias,i.maximo,i.minimo,i.costoPromedio FROM insumo as i INNER JOIN clasificacion as c ON i.idClasificacion = c.idClasificacion;";
-        $query = $this->connect->prepare($sql);
-        $query->execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllProveedores(){
-        $sql = "SELECT * FROM proveedor";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-    
-    public function getAllResponsable(){
-        $sql = "SELECT * FROM responsable";
+    public function getAllClasificacionesForSelect(){
+        $sql = "SELECT idClasificacion,concepto FROM clasificacion";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    //Insertar a la base de datos
     public function insertClasificacion($concepto, $descripcion){
         $sql="INSERT INTO clasificacion (concepto, descripcion) VALUES (:concepto,:descripcion)";
         $query = $this->connect->prepare($sql);
@@ -71,6 +46,16 @@ class Catalago {
         $query->bindParam(':descripcion', $descripcion);
         $request=$query->execute(); 
         return $request;
+    }
+    //Fin de funciones para clasificacion
+
+    //funciones para insumos
+    public function getAllInsumosForTable() {
+        $sql = "SELECT i.idInsumo,c.idClasificacion, c.concepto , i.nombre, i.descripcion,i.unidad,i.existencias,i.maximo,i.minimo,i.costoPromedio FROM insumo as i INNER JOIN clasificacion as c ON i.idClasificacion = c.idClasificacion;";
+        $query = $this->connect->prepare($sql);
+        $query->execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
     }
 
     public function insertInsumos( $idClasificacion, $nombre, $descripcion, $unidadMetrica, $existencias, $maximo, $minimo, $costoPromedio) {
@@ -88,29 +73,6 @@ class Catalago {
         return $request;
     }
     
-    public function insertProveedor( $nombre, $contacto, $domicilio, $ciudad, $telefono, $email){
-        $sql = "INSERT INTO proveedor (nombre, contacto, domicilio, ciudad, telefono, email) VALUES ( :nombre, :contacto, :domicilio, :ciudad, :telefono, :email)";
-        $query = $this->connect->prepare    ($sql);
-        $query->bindParam(':nombre', $nombre);
-        $query->bindParam(':contacto', $contacto);
-        $query->bindParam(':domicilio', $domicilio);
-        $query->bindParam(':ciudad', $ciudad);
-        $query->bindParam(':telefono', $telefono);
-        $query->bindParam(':email', $email);
-        $request=$query->execute(); 
-        return $request;
-    }
-
-    function insertResponsable( $nombre, $puesto){
-        $sql = "INSERT INTO responsable ( nombre, puesto) VALUES ( :nombre, :puesto)";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':nombre', $nombre);
-        $query->bindParam(':puesto', $puesto);
-        $request=$query->execute(); 
-        return $request;
-    }
-
-    //Actualizar regristros
     function updateInsumos($idInsumo, $idClasificacion, $nombre, $descripcion, $unidadMetrica, $existencias, $maximo, $minimo, $costoPromedio){
         $sql = "UPDATE insumo SET idClasificacion=:idClasificacion, nombre=:nombre, descripcion=:descripcion, unidad=:unidadMetrica, existencias=:existencias, maximo=:maximo, minimo=:minimo, costoPromedio=:costoPromedio where idInsumo=:idInsumo";
         $query = $this->connect->prepare($sql);
@@ -126,7 +88,30 @@ class Catalago {
         $request=$query->execute(); 
         return $request;
     }
+    //Fin de funciones para insumos
+
+    //funciones para insumos
+    public function getAllProveedoresForTable(){
+        $sql = "SELECT * FROM proveedor";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
     
+    public function insertProveedor( $nombre, $contacto, $domicilio, $ciudad, $telefono, $email){
+        $sql = "INSERT INTO proveedor (nombre, contacto, domicilio, ciudad, telefono, email) VALUES ( :nombre, :contacto, :domicilio, :ciudad, :telefono, :email)";
+        $query = $this->connect->prepare    ($sql);
+        $query->bindParam(':nombre', $nombre);
+        $query->bindParam(':contacto', $contacto);
+        $query->bindParam(':domicilio', $domicilio);
+        $query->bindParam(':ciudad', $ciudad);
+        $query->bindParam(':telefono', $telefono);
+        $query->bindParam(':email', $email);
+        $request=$query->execute(); 
+        return $request;
+    }
+
     function updateProveedor($idProveedor, $nombre, $contacto, $domicilio, $ciudad, $telefono, $email){
         $sql = "UPDATE proveedor SET nombre=:nombre,contacto=:contacto,domicilio=:domicilio,ciudad=:ciudad,telefono=:telefono,email=:email where idProveedor=:idProveedor";
         $query = $this->connect->prepare($sql);
@@ -140,6 +125,25 @@ class Catalago {
         $request=$query->execute(); 
         return $request;    
     }
+    //Fin de funciones para insumos
+
+    //funciones para insumos
+    public function getAllResponsableForTable(){
+        $sql = "SELECT * FROM responsable";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    function insertResponsable( $nombre, $puesto){
+        $sql = "INSERT INTO responsable ( nombre, puesto) VALUES ( :nombre, :puesto)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':nombre', $nombre);
+        $query->bindParam(':puesto', $puesto);
+        $request=$query->execute(); 
+        return $request;
+    }
 
     function updateResponsable($idResponsable, $nombre, $puesto){
         $sql = "UPDATE responsable SET nombre=:nombre, puesto=:puesto where idResponsable=:idResponsable";
@@ -150,6 +154,12 @@ class Catalago {
         $request=$query->execute(); 
         return $request;
     }
+
+    //Fin de funciones para insumos
+
+
+    
+
 
 
 }

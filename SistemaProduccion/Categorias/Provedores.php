@@ -114,7 +114,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $resultado = $conexion->getAllProveedores();
+                                $resultado = $conexion->getAllProveedoresForTable();
                                     foreach ($resultado as $row) {
                                         echo "<tr>";
                                         echo "<td>" . $row['idProveedor'] . "</td>";

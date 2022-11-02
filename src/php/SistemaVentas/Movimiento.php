@@ -190,6 +190,19 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
+
+        public function getDetallesVentasSalidas($idVenta)
+    {
+        $sql = "Select p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.precio, (ds.cantidadSolicitada-(SELECT ifNull(SUM(dsa.cantidadSurtida),0) FROM pagos as pa INNER JOIN salidas as sa ON sa.idPago=pa.idPago INNER JOIN detalleSalida as dsa ON sa.idSalida=dsa.idSalida WHERE pa.idVenta=:idVenta and p.idPredio = dsa.idPredio and dsa.idPlanta= pf.idPlanta )) as cantidadSolicitada FROM detalleVenta as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE idVenta= :idVenta1;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idVenta', $idVenta);
+        $query->bindParam(':idVenta1', $idVenta);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    //
+
     
     public function getPagoPlanta($idPago)
     {
