@@ -1,33 +1,21 @@
-.container.botton {
-    margin-top: 10px;
-    margin-bottom: 10px;
+ button.btn.insert, button.btn.new, button.btn.cancel{
+    margin-top: 20px;
+    margin-bottom: 15px;
 }
 
-
-/*
-Botones que ocupo
-Nuevo
-Agregar
-Cancelar
-
-
-
-
-*/
-
-
-.btn-button  {
-    color: #fff;
+button.btn.update, button.btn.insert, button.btn.new{
+    color: #FFFFFF;
     background-color: #52672E;
     border-color: #52672E;
 }
 
+button.btn.cancel{
+    color: #FFFFFF;
+    background-color: #672e2e;
+    border-color: #672e2e;
+}
 
-
-
-
-/*Puede que no funcione*/
-
+/*Esta validacion sera completamente temporal y sera para categoria solamente*/
 input:placeholder-shown:focus+label::after {
     content: 'Este campo no puede estar vacio';
     color: red;

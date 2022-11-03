@@ -10,14 +10,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
-    <link href="/src/css/menu.css" rel="stylesheet">
     <link href="/src/css/navbar.css" rel="stylesheet">
     <link href="/src/css/categorias.css" rel="stylesheet">
+    <!--LINKS PARA BOOSTRAP y iconos-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    <!--Links para jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <!--Links para dataTable-->
+    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+
+    
 </head>
 
 <body>
@@ -25,10 +32,10 @@
         <nav class="navbar logo">
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
-            </a>
+            </a>            
         </nav>
 
-         <nav class="navbar navbar-expand-lg menu">
+        <nav class="navbar navbar-expand-lg menu">
             <div class="container-fluid">
                 <div class="navbar-nav " id="navbarCenteredExample">
                     <ul class="navbar-nav">
@@ -53,13 +60,17 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por proveedor en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por Clasificación en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Insumos divididos por Clasificación</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción por estado en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por fecha </a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devolución por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devoluciones por fecha</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción con vales de salida y devoluciones</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -71,9 +82,6 @@
             <div class="linea"></div>
         </nav>
     </div>
-
-
-
     <div>
         <div class="container botton">
             <div class="row">
@@ -84,7 +92,7 @@
 
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn active bottom" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
+                    <button class="btn new" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
                 </div>
             </div>
         </div>
@@ -96,7 +104,7 @@
                 <div class="col-lg-8 ">
                     <h2>Responsable</h2>
                     <br>
-                    <table id="table_id" class="table table-responsive table-hover">
+                    <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
                         <thead>
                             <tr>
                                 <th> </th>
@@ -113,7 +121,7 @@
                                         echo "<td>" . $row['idResponsable'] . "</td>";
                                         echo "<td>" . $row['nombre'] . "</td>";
                                         echo "<td>" . $row['puesto'] . "</td>";
-                                        echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
+                                        echo "<td><button type='button' class='btn update' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
                                         echo "</tr>";
                                     }
                             ?>
@@ -154,8 +162,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn cancel" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn insert">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -189,20 +197,21 @@
                             </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" class="btn cancel" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn insert">Guardar cambios</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script>
         $(document).ready( function () {
-            var table = $('#table_id').DataTable();
-        });
+            var td=$('#table_id').DataTable({
+                    scrollX:true
+                });
+        } );
 
         function update(context){
             var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');

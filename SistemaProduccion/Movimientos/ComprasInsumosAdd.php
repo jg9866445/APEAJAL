@@ -178,7 +178,6 @@
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Número de factura</label>
                                     <input class="form-control" type="text" name="Factura" id="Factura"/>
-                                    <label for="input"></label>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Factura física</label>
