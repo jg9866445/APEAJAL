@@ -1,7 +1,3 @@
-<?php
-    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
-    $conexion = new Movimientos();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,29 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
-    <link href="/src/css/menu.css" rel="stylesheet">
     <link href="/src/css/navbar.css" rel="stylesheet">
     <link href="/src/css/movimientos.css" rel="stylesheet">
-
+    <!--LINKS PARA BOOSTRAP y iconos-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    
+    <!--Links para jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
+    <!--Links para dataTable-->
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
 
+    <!--Links para moment-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>    
+
+    <!-- Links para alert-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
-
-    <script src="/src/js/auxliar.js" type="text/javascript"></script>
+        
+    <!--Links para funciones auxliar-->
+    <script src="/src/js/auxliar.js" ></script>
 </head>
 
-<body onload="getNextidSalida()">
+<body onload="onload()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -57,21 +56,25 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.html">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.html">Vale de salida</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por proveedor en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por Clasificación en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Insumos divididos por Clasificación</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción por estado en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por fecha </a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devolución por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devoluciones por fecha</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción con vales de salida y devoluciones</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -121,16 +124,32 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idOrden" id="idOrden" required onchange="getOrdenesProduccion()">
-                                <option disabled selected value="-21">Escoja una opción</option>
-                                    <?php
-                                        $resultado = $conexion->getAllOrdenProduccion();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idOrden'].">". $row['descripcion']."</option>";
-                                        }
-                                    ?>
+                                <option disabled selected value="-20">Escoja una opción</option>
+
                                 </select>
                                 <label for="input"></label>
                             </div>
+                            <hr>
+                            <div class="row g-3">
+                                <div class="col-md-12">Orden de producción</div>
+                            </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Fecha de aproximada Termino</label>
+                                    <input class="form-control" type="text" name="FechaAproxTermino" id="FechaAproxTermino" disabled />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Descripción</label>
+                                    <input class="form-control" type="text" name="DecripcionOrden" id="DecripcionOrden" disabled/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Cantidad esperada</label>
+                                    <input class="form-control" type="text" name="CantidaEspera" id="CantidaEspera" disabled />
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
                             <div class="row g-3">
                                 <div class="col-md-12">Responsable</div>
                             </div>
@@ -166,26 +185,6 @@
                                 </div>
                             </div>
                             <br>
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-12">Orden de producción</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Fecha de aproximada Termino</label>
-                                    <input class="form-control" type="text" name="FechaAproxTermino" id="FechaAproxTermino" disabled />
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="DecripcionOrden" id="DecripcionOrden" disabled/>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Cantidad esperada</label>
-                                    <input class="form-control" type="text" name="CantidaEspera" id="CantidaEspera" disabled />
-                                </div>
-                            </div>
-                            <br>
                         </div>
                     </div>
                 </div>
@@ -195,6 +194,7 @@
                 </div>
             </div>
         </div>
+        <br>
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
@@ -207,13 +207,8 @@
                     <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idResponsable" id="idResponsable" required onchange="getResponsable()">
-                                <option disabled selected value="-21">Escoja una opción</option>
-                                    <?php
-                                        $resultado = $conexion->getAllResponsables();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idResponsable'].">". $row['nombre']."</option>";
-                                        }
-                                    ?>
+                                <option disabled selected value="-20">Escoja una opción</option>
+
                                 </select>
                                 <label for="input"></label>
                             </div>
@@ -237,6 +232,46 @@
             </div>
         </div>
         <br>
+
+
+                 <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
+
+                </div>
+
+                <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">Clasificacion</div>
+                    <div class="card-body">
+                            <div class="row g-3">
+                                <select class="form-select" name="idClasificacion" id="idClasificacion" required onchange="getClasifiacion()">
+                                <option disabled selected value="-20">Escoja una opción</option>
+                                </select>
+                                <label for="input"></label>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="conceptoClasificacion" id="conceptoClasificacion" disabled />
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">descripcion</label>
+                                    <input class="form-control" type="text" name="descripcionClasificacion" id="descripcionClasificacion" disabled />
+                                </div>
+
+                            </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
@@ -249,13 +284,7 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idInsumo" id="idInsumo" required onchange="getInsumo()">
-                                <option disabled selected value="-21">Escoja una opción</option>
-                                    <?php
-                                        $resultado = $conexion->getAllInsumos();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idInsumo'].">". $row['nombre']."</option>";
-                                        }
-                                    ?>
+                                <option disabled selected value="-20">Escoja una opción</option>
                                 </select>
                                 <label for="input"></label>
                             </div>
@@ -283,7 +312,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="staticEmail" class="form-label">Cantidad</label>
-                                    <input class="form-control" type="text" name="CantidadSalida" id="CantidadSalida" />
+                                    <input class="form-control" type="number" name="CantidadSalida" id="CantidadSalida" />
                                 </div>
                             </div>
 
@@ -307,7 +336,7 @@
 
                 <div class="col-lg-5 ">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary btn-xs btn-block text-center" id="regristar" >Guardar vale de salida</button>
+                        <button type="button" class="btn insert" id="regristar" >Guardar vale de salida</button>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -318,6 +347,8 @@
     <br>
 
     <script>
+    const aux = new auxliar();
+
     $(document).ready(function() {
         $('#regristar').click(function() {
             var datos=[];
@@ -331,8 +362,16 @@
             
             formData.append("Metodo", "InsertValeSalida");
             formData.append("datosValesSalidas",JSON.stringify({"idInsumo":idInsumo,"idOrden":idOrden,"idResponsable":idResponsable,"Fecha":Fecha,"cantidad":CantidadSalida})); 
-            var estado=validacionSend();
-            if(estado.estado){
+            
+            var ValidacionTable=aux.validateAll(
+                [
+                    {"valor":document.getElementById("idResponsable").value,"typeOf":"select","mensaje":"<p>Selecione un responbale</p><br>"},
+                    {"valor":document.getElementById("idInsumo").value,"typeOf":"select","mensaje":"<p>Selecione un insumo</p><br>"},
+                    {"valor":document.getElementById("idOrden").value,"typeOf":"select","mensaje":"<p>Selecione una orden de produccion</p><br>"},
+                    {"valor":document.getElementById("CantidadSalida").value,"typeOf":"int","mensaje":"<p>Agregar cantidad de salida</p><br>"},
+                ]
+            )
+            if(ValidacionTable.estado){
             $.ajax({
                 url: "/src/php/SistemaProduccion/SubMovimientos.php",
                 method: "POST",
@@ -340,27 +379,37 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function() {
-                    alert("<h5>Espere</h5><p>Insertando</p>");
+                   aux.alert("<h5>Espere</h5><p>Insertando</p>");
 
                 },
                 success: function(respuesta){
-                     window.location.href = "/SistemaProduccion/Movimientos/ValesSalidaInsumos.php"
+                     window.location.href = "/SistemaProduccion/Movimientos/ValesSalidaInsumos.html"
                 },complete: function() {
-                    Swal.close();
+                    aux.cerrar();
                 }
             }) 
             }else{
-                alert(estado.texto,true,true);
+                aux.alert(ValidacionTable.texto,true,true);
             }
             return false;
 
         });
         
         $('#Cancelar').click(function() {
-                window.location.href = "/SistemaProduccion/Movimientos/ValesSalidaInsumos.php"
+                window.location.href = "/SistemaProduccion/Movimientos/ValesSalidaInsumos.html"
         });
     });
 
+    function onload(){
+        var now = new Date();
+        var dateString = moment(now).format('YYYY-MM-DD');
+        document.getElementById("Fecha").value=dateString;
+        getNextidSalida();
+        getAllOrdenProduccionSelect();
+        getAllResponsableSelect();
+        getAllClasificacionSelect();
+    }
+    
     function getNextidSalida(){
         document.getElementById('Fecha').valueAsDate = new Date();
         $.ajax({
@@ -370,66 +419,41 @@
                 "Metodo":'getNextidSalida',
             },
             beforeSend: function() {
-                alert("<h5>Espere cargando</h5>");
+                aux.alert("<h5>Espere cargando</h5>");
 
-            },
-            success: function(respuesta){
+            }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("idValeSalida").value=respuesta[0].AUTO_INCREMENT;
-                var now = new Date();
-                var dateString = moment(now).format('YYYY-MM-DD');
-                document.getElementById("Fecha").value=dateString;
-            },complete: function() {
-                Swal.close();
-            }
-        })     
+              
+            }).always(function() {
+                aux.cerrar();
+            });     
     }
 
-    function getInsumo(){
-        var idInsumo = $("#idInsumo").val();
+    function getAllOrdenProduccionSelect(){
         $.ajax({
             url: "/src/php/SistemaProduccion/SubMovimientos.php",
-            method: "POST",
-            data: {
-                "Metodo":'getInsumo',
-                "idInsumo": idInsumo
+            method:"POST",
+            data:{
+                "Metodo":'getAllOrdenProduccionSelect'
             },
-            beforeSend: function() {
-                alert("<h5>Espere cargando</h5><p>Insumos</p>");
+            beforeSend:function(){
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de Clasificacion</p>',false,false)
+            }
+        }).done(function(respuesta) {
+            respuesta=JSON.parse(respuesta);
+            respuesta.forEach(element => {
+                $('#idOrden').append($('<option>', { 
+                    value: element.idOrden,
+                    text : element.descripcion 
+                }))
+            })
+        }).always(function(){
+            aux.cerrar();
+        });
+    }
 
-            },
-            success: function(respuesta){
-                respuesta=JSON.parse(respuesta);
-                document.getElementById("NombreInsumo").value=respuesta[0].nombre;
-                document.getElementById("CategoriasInsumo").value=respuesta[0].concepto;
-                document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
-            },complete: function() {
-                Swal.close();
-            }
-        })     
-    }
-    function getResponsable(){
-        var idResponsable = $("#idResponsable").val();
-        $.ajax({
-            url: "/src/php/SistemaProduccion/SubMovimientos.php",
-            method: "POST",
-            data: {
-                "Metodo":'getResponsable',
-                "idResponsable": idResponsable
-            },
-            beforeSend: function() {
-                alert("<h5>Espere cargando</h5><p>Responsables</p>");
-            },
-            success: function(respuesta){
-                respuesta=JSON.parse(respuesta);
-                document.getElementById("NombreResponsable").value=respuesta[0].nombre;
-                document.getElementById("PuestoResponable").value=respuesta[0].puesto;
-            },complete: function() {
-                Swal.close();
-            }
-        })     
-    }
-       function getOrdenesProduccion(){
+    function getOrdenesProduccion(){
         $.ajax({
             url: "/src/php/SistemaProduccion/SubMovimientos.php",
             method: "POST",
@@ -438,7 +462,7 @@
                 "idOrdenProduccion":document.getElementById("idOrden").value,
             },
             beforeSend: function() {
-                alert("<h5>Espere cargando</h5><p>datos de la orden</p>")
+                aux.alert("<h5>Espere cargando</h5><p>datos de la orden</p>")
             },
             success: function(respuesta){
                 respuesta=JSON.parse(respuesta);
@@ -452,46 +476,151 @@
                 document.getElementById("CantidaEspera").value=respuesta[0].cantidadEsperada;
 
             },complete: function() {
-                Swal.close();
+                aux.cerrar();
             }
         });   
         return false;  
     }
 
-
-    function validacionSend(){
-        var validacion=true
-        var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
-        
-        var idResponsable = (document.getElementById("idResponsable").value);
-        var idInsumo = (document.getElementById("idInsumo").value);
-        var CantidadSalida = (document.getElementById("CantidadSalida").value).length;
-
-        if(idResponsable=='-21'){
-            error=error+"<p>Elegir un responsable</p><br>";
-            validacion=false;
-        }
-        if(idInsumo=='-21'){
-            error=error+"<p>Elegir un insumo</p><br>";
-            validacion=false;
-        }
-        if(CantidadSalida==0){
-            error=error+"<p>Agrega la cantida</p><br>";
-            validacion=false;
-        }
-        return Validacion={"estado":validacion,"texto":error};        
-    }
-     
-    function alert(mensaje,botton=false,eliminar=false){
-        Swal.fire({
-            html: mensaje,
-            showConfirmButton: botton,
-            allowOutsideClick: eliminar,
-            onRender: function() {
-                $('.swal2-content').prepend(sweet_loader);
+    function getAllResponsableSelect(){
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method:"POST",
+            data:{
+                "Metodo":'getAllResponsableSelect'
+            },
+            beforeSend:function(){
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de responsables</p>',false,false)
             }
+        }).done(function(respuesta) {
+            respuesta=JSON.parse(respuesta);
+            respuesta.forEach(element => {
+                $('#idResponsable').append($('<option>', { 
+                    value: element.idResponsable,
+                    text : element.nombre 
+                }))
+            })
+        }).always(function(){
+            aux.cerrar();
         });
     }
+
+    function getResponsable(){
+        var idResponsable = $("#idResponsable").val();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getResponsable',
+                "idResponsable": idResponsable
+            },
+            beforeSend: function() {
+                aux.alert("<h5>Espere cargando</h5><p>Responsables</p>");
+            }}).done(function (respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("NombreResponsable").value=respuesta[0].nombre;
+                document.getElementById("PuestoResponable").value=respuesta[0].puesto;
+            }).always(function(respuesta){
+                aux.cerrar();
+            });
+    }
+
+    function getAllClasificacionSelect(){
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method:"POST",
+            data:{
+                "Metodo":'getAllClasificacionSelect'
+            },
+            beforeSend:function(){
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de Clasificacion</p>',false,false)
+            }
+        }).done(function(respuesta) {
+            respuesta=JSON.parse(respuesta);
+            respuesta.forEach(element => {
+                $('#idClasificacion').append($('<option>', { 
+                    value: element.idClasificacion,
+                    text : element.concepto 
+                }))
+            })
+        }).always(function(){
+            aux.cerrar();
+        });
+    }
+
+    function getClasifiacion(){
+        var idClasificacion=$('#idClasificacion').val();
+            $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getClasifiacion',
+                "idClasificacion": idClasificacion
+            },
+            beforeSend: function() {
+                aux.alert('<h5>Espere cargando</h5><br/><p>Datos de la clasifiacion</p>',false,false)
+            }}).done(function(respuesta) {
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("conceptoClasificacion").value=respuesta[0].concepto;
+                document.getElementById("descripcionClasificacion").value=respuesta[0].descripcion;
+                getAllInsumosSelect();
+                
+            }).always(function(){
+
+            });
+    }
+
+    function getAllInsumosSelect(){
+            var idClasificacion=$('#idClasificacion').val();
+            $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getAllInsumosSelect',
+                "idClasificacion": idClasificacion
+            },
+            beforeSend: function() {
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de insumos</p>',false,false)
+            }}).done(function(respuesta) {
+                respuesta=JSON.parse(respuesta);
+                respuesta.forEach(element => {
+                    $('#idInsumo').append($('<option>', { 
+                            value: element.idInsumo,
+                            text : element.nombre 
+                    }));
+                });
+            }).always(function(){
+                aux.cerrar();
+            });
+    }
+
+    function getInsumo(){
+        var idInsumo = $("#idInsumo").val();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getInsumos',
+                "idInsumo": idInsumo
+            },
+            beforeSend: function() {
+                aux.alert("<h5>Espere cargando</h5><p>Insumos</p>");
+
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("NombreInsumo").value=respuesta[0].nombre;
+                document.getElementById("CategoriasInsumo").value=respuesta[0].concepto;
+                document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
+            },complete: function() {
+                aux.cerrar();
+            }
+        })     
+    }
+
+
+
+
 
     </script>
 

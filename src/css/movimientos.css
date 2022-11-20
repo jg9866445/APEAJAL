@@ -1,25 +1,17 @@
- button.btn.insert, button.btn.new, button.btn.cancel{
+ .btn.insert, .btn.new, .btn.cancel{
     margin-top: 20px;
     margin-bottom: 15px;
 }
 
-button.btn.update, button.btn.insert, button.btn.new, button.btn.show{
+.btn.update, .btn.insert, .btn.new, .btn.show,  .btn.download{
     color: #FFFFFF;
     background-color: #52672E;
     border-color: #52672E;
 }
 
-button.btn.cancel{
+.btn.cancel{
     color: #FFFFFF;
     background-color: #672e2e;
     border-color: #672e2e;
 }
 
-
-div.show{
-    display: block;
-}
-
-div.hide{
-    display: none;
-}

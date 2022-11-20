@@ -1,9 +1,3 @@
-<!--TODO:Falta cambiar todo el php por script con el fin de poder cambiar todos los archivos a html-->
-
-<?php
-    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
-    $conexion = new Movimientos();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,29 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
-    <link href="/src/css/menu.css" rel="stylesheet">
     <link href="/src/css/navbar.css" rel="stylesheet">
     <link href="/src/css/movimientos.css" rel="stylesheet">
-
+    <!--LINKS PARA BOOSTRAP y iconos-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    
+    <!--Links para jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
+    <!--Links para dataTable-->
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
 
+    <!--Links para moment-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>    
+
+    <!-- Links para alert-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
-
-    <script src="/src/js/auxliar.js" type="text/javascript"></script>
+        
+    <!--Links para funciones auxliar-->
+    <script src="/src/js/auxliar.js" ></script>
 </head>
 
-<body onload="getNextIdCompra();">
+<body onload="onload();">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -59,8 +56,8 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.html">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.html">Vale de salida</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
                             </ul>
                         </li>
@@ -86,8 +83,6 @@
         </nav>
         
     </div>
-
-    
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
@@ -126,12 +121,6 @@
                             <div class="row g-3">
                                 <select class="form-select" name="idProveedor" id="idProveedor" required onchange="getProveedore()">
                                 <option disabled selected value="-20">Escoja una opción</option>
-                                    <?php
-                                        $resultado = $conexion->getAllProveedores();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idProveedor']." id=".$row['idProveedor'].">". $row['nombre']."</option>";
-                                        }
-                                    ?>
                                 </select>
                                 <label for="input"></label>
                             </div>
@@ -181,12 +170,50 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="staticEmail" class="form-label">Factura física</label>
-                                    <input class="form-control" type="file" name="FacturaFisica" id="FacturaFisica"/>
+                                    <input class="form-control" type="file" name="FacturaFisica" id="FacturaFisica" accept="application/pdf" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        </div>
+        <br>
+         <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
+
+                </div>
+
+                <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">Clasificacion</div>
+                    <div class="card-body">
+                            <div class="row g-3">
+                                <select class="form-select" name="idClasificacion" id="idClasificacion" required onchange="getClasifiacion()">
+                                <option disabled selected value="-20">Escoja una opción</option>
+                                </select>
+                                <label for="input"></label>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">Nombre</label>
+                                    <input class="form-control" type="text" name="conceptoClasificacion" id="conceptoClasificacion" disabled />
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="staticEmail" class="form-label">descripcion</label>
+                                    <input class="form-control" type="text" name="descripcionClasificacion" id="descripcionClasificacion" disabled />
+                                </div>
+
+                            </div>
+                    </div>
+                    </div>
+                </div>
+
                 <div class="col-lg-2">
 
                 </div>
@@ -206,12 +233,7 @@
                             <div class="row g-3">
                                 <select class="form-select" name="idInsumo" id="idInsumo" required onchange="getInsumo()">
                                 <option disabled selected value="-20">Escoja una opción</option>
-                                    <?php
-                                        $resultado = $conexion->getAllInsumos();
-                                        foreach ($resultado as $row) {
-                                            echo "<option value=".$row['idInsumo']." id=Opcion".$row['idInsumo'].">". $row['nombre']."</option>";
-                                        }
-                                    ?>
+
                                 </select>
                                 <label for="input"></label>
                             </div>
@@ -259,7 +281,7 @@
                                 <div class="col-md-4">
                                 </div>
                                 <div class="col-md-4">
-                                    <button id='adicionar' type="button" class="btn btn-primary btn-xs btn-block text-center" disabled>Agregar</button>
+                                    <button id='adicionar' type="button" class="btn insert btn-xs btn-block text-center" disabled>Agregar</button>
                                 </div>
                             </div>
                     </div>
@@ -337,40 +359,42 @@
             <div class="row ">
                 <div class="col-lg-3 ">
                 </div>
-
                 <div class="col-lg-3">
-                        <button type="button" id="regristar" class="btn btn-primary btn-xs btn-block text-center" >Guardar compra de insumos</button>
+                    <button type="button" id="regristar" class="btn insert btn-xs btn-block text-center" >Guardar compra de insumos</button>
                 </div>
                 <div class="col-lg-3">
-                        <button type="button" id="Cancelar" class="btn btn-primary btn-xs btn-block text-center" >Cancelar compra de insumos</button>
+                    <button type="button" id="Cancelar" class="btn cancel btn-xs btn-block text-center" >Cancelar compra de insumos</button>
                 </div>
                 <div class="col-lg-3">
-
                 </div>
             </div>
         </div>
     <br>
     
     <script>
-    $(document).ready(function() {
-        
-        //se obtiene el valor de total y lo combierte en un entero con base 10
+    const aux = new auxliar();
+
+    $(document).ready(function(){
         var total=parseInt(document.getElementById("total").value,10);
-        //se inicializa el contador de los renglones
         var i = 1;
-        //espera el clic de boton agregar
         $('#adicionar').click(function() {
             total=parseInt(document.getElementById('total').value,10);
-        //obtiene el valor de el id y lo asigna a variable
             var idInsumo = document.getElementById("idInsumo").value;
-            document.getElementById("Opcion"+idInsumo).setAttribute('disabled',""); 
+            var table = $("#mytable tbody");
+            table.find('tr').each(function (i, el) {
+                if($(this).find('td').eq(0).text()=idInsumo){
+                    alert("HOLA")
+                }
+
+            });
+
             var NombreInsumo = document.getElementById("NombreInsumo").value;
             var ClasificacionInsumo = document.getElementById("ClasificacionInsumo").value;
             var ExistenciasInsumo = document.getElementById("ExistenciasInsumo").value;
             var unidadMetricaInsumo = document.getElementById("unidadMetricaInsumo").value;
             var CostoInsumo = parseInt(document.getElementById("CostoInsumo").value,10);
             var CantidadInsumo = parseInt(document.getElementById("CantidadInsumo").value,10);
-            //preparas la nueva fila
+
             var fila = 
                 '<tr id="row' + i + '" >'+
                     '<td id="idInsumo">' + idInsumo + '</td>'+
@@ -382,13 +406,17 @@
                     '<td id="Cantidad">' + CantidadInsumo + '</td>'+
                     '<td >' + CostoInsumo*CantidadInsumo + '</td>'+
                     '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
-                '</tr>'; 
-            var addTable=validacionAddTable();
-            if(addTable.estado){
+                '</tr>';
+
+            var ValidacionTable=aux.validateAll(
+                [
+                    {"valor":document.getElementById("CostoInsumo").value,"typeOf":"int","mensaje":"<p>Agregar cantidad de insumo</p><br>"},
+                    {"valor":document.getElementById("CantidadInsumo").value,"typeOf":"int","mensaje":"<p>Agregar el costo del insumo</p><br>"},
+                ]
+            )
+            if(ValidacionTable.estado){
                 i++;
-                //agregas la nueva fila con los datos
                 $('#mytable tbody:first').append(fila);
-                // limpiar datos
                 document.getElementById("idInsumo").value=-20;
                 document.getElementById("NombreInsumo").value="";
                 document.getElementById("ClasificacionInsumo").value="";
@@ -402,7 +430,7 @@
                 document.getElementById('total').value=total;
                 document.getElementById("adicionar").setAttribute('disabled',"");
             }else{
-                    alert(addTable.texto,true,true);
+                    aux.alert(ValidacionTable.texto,true,true);
             }
 
         
@@ -427,7 +455,7 @@
         });
         
         $('#Cancelar').click(function() {
-                window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.php"
+                window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.html"
         });
 
         $('#regristar').click(function() {
@@ -454,26 +482,38 @@
             formData.append("datosCompra", JSON.stringify({"FechaOrden":FechaOrden, "idProveedor":idProveedor, "factura":Factura,"total":total})    ); 
             formData.append("detalles", JSON.stringify(datos)); 
             formData.append ("file", inputFile.files[0]);
-            var estado=validacionSend();
-            if(estado.estado){
-            $.ajax({
-                url: "/src/php/SistemaProduccion/SubMovimientos.php",
-                method: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                beforeSend: function() {
-                    alert('<h5>Espere</h5><br/><p>Guardando datos</p>',false,false)
-                },
-                success: function(respuesta){
-                    alert("<h5>Listo</h5><br/><p>Datos guardados</p>")
-                    window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.php"
-                },complete: function() {
-                    Swal.close();
-                }
-            }) 
+            var resultado=aux.validateAll(
+                [
+                    {"valor":document.getElementById("idProveedor").value,"typeOf":"select","mensaje":"<p>Elegir un proveedor</p><br>"},
+                    {"valor":(document.getElementById("Factura").value).length,"typeOf":"int","mensaje":"<p>Inserte el Numero de factura</p><br>"},
+                    {"valor":document.querySelector('#FacturaFisica').files.length,"typeOf":"file","mensaje":"<p>Agregar un archivo que contenga la factura en formato pdf</p><br>"},
+                    {"valor":$("#mytable tbody").find('tr').length,"typeOf":"table","mensaje":"<p>Agregar minimo un insumo a la compra</p><br>"}
+                ]
+            )
+            if(resultado.estado){
+                $.ajax({
+                    url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                    method: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function() {
+                        aux.alert('<h5>Espere</h5><br/><p>Guardando datos</p>',false,false)
+                    },
+                    success: function(respuesta){
+                        aux.alert("<h5>Listo</h5><br/><p>Datos guardados</p>")
+                        window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.html"
+                    },
+                    complete: function() {
+                        aux.cerrar();
+                    },
+                    fail: function() {
+                        aux.cerrar();
+                        aux.alert('<h5>Espere</h5><br/><p>Error</p>',true,true)
+                    }
+                }) 
             }else{
-                alert(estado.texto,true,true);
+                aux.alert(resultado.texto,true,true);
             }
             return false;
 
@@ -482,56 +522,61 @@
 
     });
 
+    function onload(){
+        var now = new Date();
+        var dateString = moment(now).format('YYYY-MM-DD');
+        document.getElementById("FechaOrden").value=dateString;
+        getNextIdCompra();
+        getAllProveedoresSelect();
+        getAllClasificacionSelect();
+    }
+    
     function getNextIdCompra(){
         $.ajax({
-            url: "/src/php/SistemaProduccion/SubMovimientos.php",
-            method: "POST",
-            data: {
-                "Metodo":'getNextIdCompra',
-            },
-            beforeSend: function() {
-                alert('<h5>Espere cargando</h5>',false,false)
-            },
-            success: function(respuesta){
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getNextIdCompra',
+                },
+                beforeSend: function() {
+                    aux.alert('<h5>Espere cargando</h5>',false,false)
+                }
+            }).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("idOrden").value=respuesta[0].AUTO_INCREMENT;
-                var now = new Date();
-                var dateString = moment(now).format('YYYY-MM-DD');
-                document.getElementById("FechaOrden").value=dateString;
-            },complete: function() {
-                Swal.close();
-            }
-        })     
+                aux.cerrar();
+
+            }).fail(function(){
+                aux.alert('<h5>Espere</h5><br/><p>Error</p>',true,true)
+                aux.cerrar();
+            })     
     }
 
-
-
-    function getInsumo(){
-        var idInsumo = $("#idInsumo").val();
+    function getAllProveedoresSelect(){
         $.ajax({
             url: "/src/php/SistemaProduccion/SubMovimientos.php",
             method: "POST",
             data: {
-                "Metodo":'getInsumo',
-                "idInsumo": idInsumo
+                "Metodo":'getAllProveedoresSelect',
             },
             beforeSend: function() {
-                alert('<h5>Espere cargando</h5><br/><p>Datos del insumo</p>',false,false)
-            },
-            success: function(respuesta){
-                respuesta=JSON.parse(respuesta);
-                document.getElementById("NombreInsumo").value=respuesta[0].nombre;
-                document.getElementById("ClasificacionInsumo").value=respuesta[0].concepto;
-                document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
-                document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidad;
-                document.getElementById("CostoPromedio").value=respuesta[0].costoPromedio;
-                document.getElementById("adicionar").removeAttribute('disabled');
-            },complete: function() {
-                Swal.close();
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de proveedores</p>',false,false)
             }
-        })     
+        }).done(function(respuesta) {
+            respuesta=JSON.parse(respuesta);
+            respuesta.forEach(element => {
+                $('#idProveedor').append($('<option>', { 
+                    value: element.idProveedor,
+                    text : element.nombre 
+                }));
+            });
+            aux.cerrar();
+        }).fail(function(){
+            aux.alert('<h5>Espere</h5><br/><p>Error</p>',true,true)
+            aux.cerrar();
+        });
     }
-        
+
     function getProveedore(){
         var idProveedor = $("#idProveedor").val();
         $.ajax({
@@ -542,75 +587,132 @@
                 "idProveedor": idProveedor
             },
             beforeSend: function() {
-                alert('<h5>Espere cargando</h5><br/><p>Datos del provedor</p>',false,false)
-            },
-            success: function(respuesta){
+                aux.alert('<h5>Espere cargando</h5><br/><p>Datos del provedor</p>',false,false)
+            }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("NombreProveedor").value=respuesta[0].nombre;
                 document.getElementById("DomicilioProveedor").value=respuesta[0].domicilio + " " + respuesta[0].ciudad;
                 document.getElementById("ContactoProveedor").value=respuesta[0].contacto;
                 document.getElementById("EmailProveedor").value=respuesta[0].email;
-            },complete: function() {
-                Swal.close();
+                aux.cerrar();
+            }).fail(function(){
+                aux.alert('<h5>Espere</h5><br/><p>Error</p>',true,true)
+                aux.cerrar();
+            });
+    }
+
+    function getAllClasificacionSelect(){
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method:"POST",
+            data:{
+                "Metodo":'getAllClasificacionSelect'
+            },beforeSend:function(){
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de Clasificacion</p>',false,false)
             }
-        })     
-    }
-
-
-    function validacionSend(){
-        var validacion=true
-        var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
-        var idProveedor= document.getElementById("idProveedor").value;
-        var contfactura=(document.getElementById("Factura").value).length;
-        var facturaFisica = document.querySelector('#FacturaFisica').files.length
-        var insumos=$("#mytable tbody").find('tr').length; 
-
-        if(idProveedor=='-20'){
-            error=error+"<p>Elegir un proveedor</p><br>";
-            validacion=false;
-        }
-        if(contfactura<=0){
-            error=error+"<p>Inserte el Numero de factura</p><br>";
-            validacion=false;
-        }
-        if(facturaFisica==0){
-            error=error+"<p>Agregar un archivo que contenga la factura en formato pdf</p><br>";
-            validacion=false;
-        }
-        if(insumos<=0){
-            error=error+"<p>Agregar minimo un insumo a la compra</p>";
-            validacion=false;
-        }
-        return Validacion={"estado":validacion,"texto":error};        
-    }
-
-    function validacionAddTable(){
-        var validacion=true
-        var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
-        CostoInsumo=document.getElementById("CostoInsumo").value;
-        CantidadInsumo=document.getElementById("CantidadInsumo").value;
-        if(CantidadInsumo.length==0){
-            error=error+"<p>Agregar cantidad de insumo</p><br>";
-            validacion=false;
-        }
-        if(CostoInsumo.length == 0 ){
-            error=error+"<p>Agregar el costo del insumo</p><br>";
-            validacion=false;
-        }
-        return Validacion={"estado":validacion,"texto":error};
-    }
-
-    function alert(mensaje,botton,eliminar){
-        Swal.fire({
-            html: mensaje,
-            showConfirmButton: botton,
-            allowOutsideClick: eliminar,
-            onRender: function() {
-                $('.swal2-content').prepend(sweet_loader);
-            }
+        }).done(function(respuesta) {
+            respuesta=JSON.parse(respuesta);
+            respuesta.forEach(element => {
+                $('#idClasificacion').append($('<option>', { 
+                    value: element.idClasificacion,
+                    text : element.concepto 
+                }))
+            })
+        }).always(function(){
+            aux.cerrar();
         });
     }
 
+    function getClasifiacion(){
+        var idClasificacion=$('#idClasificacion').val();
+            $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getClasifiacion',
+                "idClasificacion": idClasificacion
+            },
+            beforeSend: function() {
+                aux.alert('<h5>Espere cargando</h5><br/><p>Datos de la clasifiacion</p>',false,false)
+            }}).done(function(respuesta) {
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("conceptoClasificacion").value=respuesta[0].concepto;
+                document.getElementById("descripcionClasificacion").value=respuesta[0].descripcion;
+                getAllInsumosSelect();
+                
+            }).always(function(){
+
+            });
+    }
+
+    function getAllInsumosSelect(){
+            var idClasificacion=$('#idClasificacion').val();
+            $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getAllInsumosSelect',
+                "idClasificacion": idClasificacion
+            },
+            beforeSend: function() {
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de insumos</p>',false,false)
+            }}).done(function(respuesta) {
+            respuesta=JSON.parse(respuesta);
+            respuesta.forEach(element => {
+                var table = $("#mytable tbody");
+                    if(table.find('tr').length>0){
+                        table.find('tr').each(function (i, el) {
+                            var $tds = $(this).find('td');
+                            Insumo = $tds.eq(0).text();
+                            if (Insumo == element.idInsumo){
+                                $('#idInsumo').append($('<option disabled>', { 
+                                    value: element.idInsumo,
+                                    text : element.nombre 
+                                }));
+                            }else{
+                                $('#idInsumo').append($('<option>', { 
+                                    value: element.idInsumo,
+                                    text : element.nombre 
+                                }));
+                            }
+                        })
+                    }else{
+                        $('#idInsumo').append($('<option>', { 
+                            value: element.idInsumo,
+                            text : element.nombre 
+                    }));
+                }
+            });
+            }).always(function(){
+                aux.cerrar();
+            });
+    }
+
+    function getInsumo(){
+        var idInsumo = $("#idInsumo").val();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getInsumos',
+                "idInsumo": idInsumo
+            },
+            beforeSend: function() {
+                aux.alert('<h5>Espere cargando</h5><br/><p>Datos del insumo</p>',false,false)
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("NombreInsumo").value=respuesta[0].nombre;
+                document.getElementById("ClasificacionInsumo").value=respuesta[0].concepto;
+                document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
+                document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidad;
+                document.getElementById("CostoPromedio").value=respuesta[0].costoPromedio;
+                document.getElementById("adicionar").removeAttribute('disabled');
+            },complete: function() {
+                aux.cerrar();
+            }
+        })     
+    }
     
 </script>
 

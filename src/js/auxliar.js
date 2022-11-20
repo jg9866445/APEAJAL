@@ -2,34 +2,49 @@
 class auxliar {
   
     constructor () {
-        console.log('HOLA'); 
     }
 
     validateAll(json){
-        //Datos de valicacion
-        //{"valor":"0","typeOf":"Entero","mensaje":"Error"}
-        json.forEach(function(dato) {
-            if(dato.valor.length()>0){                
+        var resultado={estado:true,texto:"<h4>Por favor de correguir los siguientes errores</h4><br/>"};
+        json.forEach(dato => {
                 switch(dato.typeOf){
-                    case "":
+                    case "int":
+                        if(dato.valor<=0){
+                            resultado.texto=resultado.texto+dato.mensaje;
+                            resultado.estado=false;
+                        }
+                    break;
+                    case "string":
 
                     break;
-                    case "":
 
+                    case "file":
+                        if(dato.valor==0){
+                            resultado.texto=resultado.texto+dato.mensaje;
+                            resultado.estado=false;
+                        }
                     break;
-                    case "":
+                    
+                    case "select":
+                        if(dato.valor=='-20'){
+                            resultado.texto=resultado.texto+dato.mensaje;
+                            resultado.estado=false;
+                        }
+                    break;
 
+                    case "table":
+                        if(dato.valor<=0){
+                            resultado.texto=resultado.texto+dato.mensaje;
+                            resultado.estado=false;
+                        }
                     break;
-                    case "":
+                    case "table-Duplicado":{
+                        
+                    }
+                }
+        });
 
-                    break;
-                    case "":
-
-                    break;
-                }}
-            console.log(numero);
-        })
-        return "Totdo";
+        return resultado;        
     }
 
     alert(mensaje,botton,eliminar){
@@ -37,9 +52,7 @@ class auxliar {
             html: mensaje,
             showConfirmButton: botton,
             allowOutsideClick: eliminar,
-            onRender: function() {
-                $('.swal2-content').prepend(sweet_loader);
-            }
+
         });
     }
 

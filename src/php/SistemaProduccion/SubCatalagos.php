@@ -19,12 +19,17 @@ class SubCatalagos
     }
 
     function API(){
-        if(isset($_POST['action'])){
-            switch ($_POST['action']) {
-                
-                case 'getAllClasificaciones':
-                    $resultado = $this->conexion->getAllClasificaciones();
+        if(isset($_POST['Metodo'])){
+            switch ($_POST['Metodo']) {
+
+                case 'getAllClasificacionesForTable':
+                    $resultado= $this->conexion->getAllClasificacionesForTable();
                     echo json_encode($resultado);
+                break;
+
+                case 'getAllClasificaciones':
+                //    $resultado = $this->conexion->getAllClasificaciones();
+                //   echo json_encode($resultado);
                 break;
 
                 case 'InsertarCalsificacion':

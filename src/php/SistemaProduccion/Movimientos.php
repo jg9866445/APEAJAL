@@ -25,50 +25,41 @@ class Movimientos {
         unset($this->connect);
     }
 
-    //funciones para llenar select
-    public function getAllProveedores() {
-        $sql = "SELECT * from proveedor";
+    //Next id 
+    function getNextIdCompra(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'facturaCompra'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    public function getAllInsumos(){
-        $sql = "SELECT * from  insumo";
+    function getNextidSalida(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'valeSalida'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    public function getAllResponsables() {
-        $sql = "SELECT * from responsable";
+    function getNextidOrdenProduccion(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'ordenProduccion'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    public function getAllPlanta(){
-        $sql = "SELECT pf.idPlanta,e.nombre FROM plantaForestal as pf INNER JOIN especie as e on pf.idEspecie = e.idEspecie";
+    function getNextidDevolucion(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'devolucion'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    public function getAllSalidas(){
-        $sql = "Select vs.idVale,i.nombre as insumo,r.nombre as responsable,vs.fecha,vs.cantidad from valeSalida as vs INNER JOIN insumo as i on i.idInsumo=vs.idInsumo INNER JOIN responsable as r on r.idResponsable = vs.idResponsable;";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-
-
-    public function getAllComprasInsumos(){
+    //get for table
+    public function getTableAllCompras(){
         $sql = "SELECT fc.idOrdenCompra,p.nombre,fc.factura,fc.fecha, fc.total  from  facturaCompra as fc INNER JOIN proveedor as p on fc.idProveedor= p.idProveedor";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -76,17 +67,71 @@ class Movimientos {
         return $results;
     }
 
-    public function getAllOrdenProduccion(){
-        $sql = "SELECT op.idOrden, r.nombre as responsable,e.nombre as especie,op.fechaOrden,op.descripcion,op.estado FROM ordenProduccion as op INNER JOIN responsable as r on r.idResponsable= op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta = op.idPlanta INNER JOIN especie as e on pf.idEspecie = e.idEspecie ";
+    public function getTableAllValesSalidas(){
+        $sql = "SELECT vs.idVale,vs.fecha, r.nombre as responsable,i.nombre as insumo,vs.cantidad FROM valeSalida as vs INNER JOIN responsable as r on r.idResponsable=vs.idResponsable INNER JOIN insumo as i on i.idInsumo = vs.idInsumo;";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    public function getAllDevoluciones() {
-        $sql = "SELECT d.idDevolucion,d.fecha, r.nombre as responsable , i.nombre as insumo , c.concepto as clasificacion,vs.cantidad as salida,d.cantidad as devolucion FROM devolucion as d INNER JOIN valeSalida as vs on vs.idVale = d.idVale INNER JOIN responsable as r on r.idResponsable = vs.idResponsable INNER JOIN insumo as i on i.idInsumo = vs.idInsumo  INNER JOIN clasificacion as c on c.idClasificacion = i.idClasificacion";
+    //get for selected 
+    public function getAllProveedoresSelect() {
+        $sql = "SELECT * from proveedor";
         $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllInsumosSelect($idClasificacion){
+        $sql = "SELECT * from  insumo where idClasificacion=:idClasificacion";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idClasificacion', $idClasificacion);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllClasificacionSelect(){
+        $sql = "SELECT * from clasificacion";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllOrdenProduccionSelect(){
+        $sql = "SELECT * from ordenProduccion where ordenProduccion.estado = 'Pendiente'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    
+    public function getAllResponsableSelect(){
+        $sql = "SELECT * from responsable";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    
+
+    //get individual
+    public function getCompra($idCompra){
+        $sql = "SELECT p.nombre as NombreProveedor, p.domicilio as DomicilioProveedor,p.contacto as ContactoProveedor, p.email as EmailProveedor, fc.factura as Factura,fc.total,fc.fecha FROM facturaCompra as fc INNER JOIN proveedor as p on p.idProveedor=fc.idProveedor WHERE fc.idOrdenCompra =  :idCompra;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idCompra', $idCompra);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getDetallesCompras($idCompra){
+        $sql = "SELECT i.idInsumo as Insumo,i.nombre as Nombre,c.concepto as Clasificación,i.existencias as Existencias,i.unidad as Unidad,dfc.costo as Costo,dfc.cantidad as Cantidad FROM detalleFacturaCompra as dfc INNER JOIN insumo as i on dfc.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion = i.idClasificacion where dfc.idOrdenCompra = :idCompra";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idCompra', $idCompra);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -101,10 +146,37 @@ class Movimientos {
         return $results;
     }
 
-    public function getInsumo($idInsumo){
-        $sql = "SELECT i.nombre,i.existencias,i.unidad,c.concepto,i.maximo,i.minimo,i.costoPromedio      from  insumo as i INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE i.idInsumo=:idInsumo";
+    public function getClasifiacion($idClasificacion){
+        $sql = "SELECT * from clasificacion where idClasificacion=:idClasificacion";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idClasificacion', $idClasificacion);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getInsumos($idInsumo){
+        $sql = "SELECT i.nombre,i.existencias,i.unidad,c.concepto,i.maximo,i.minimo,i.costoPromedio from insumo as i INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE i.idInsumo=:idInsumo";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idInsumo', $idInsumo);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getValeSalida($idVale){
+        $sql = 'SELECT op.fechaOrden AS "FechaOrdenProduccion", op.descripcion AS "DescripcionOrdenProduccion",op.cantidadEsperada AS "CantidadOrdenProduccion",r.nombre AS "NombreResponsable", r.puesto AS "PuestoResponsable",e.nombre AS "NombrePlanta", pf.descripcion AS "DescripcionPlanta",pf.existencia AS "ExistenciasPlanta", i.nombre AS "NombreInsumos",i.descripcion AS "DescripciónInsumos", i.existencias AS "ExistenciasInsumos",vs.cantidad AS "CantidadInsumos" FROM valeSalida AS vs INNER JOIN ordenProduccion AS op ON op.idOrden=vs.idOrden INNER JOIN responsable AS r ON r.idResponsable = vs.idResponsable INNER JOIN plantaForestal AS pf ON pf.idPlanta= op.idPlanta INNER JOIN especie AS e ON e.idEspecie=op.idPlanta INNER JOIN insumo AS i ON i.idInsumo = vs.idInsumo  WHERE vs.idVale=:idVale';
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idVale', $idVale);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getOrdenProduccion($idOrden){
+        $sql = "SELECT r.nombre as responsable,r.puesto,e.nombre as planta,pf.descripcion,pf.existencia,op.fechaAproxTermino,op.descripcion as descripcionOrden,op.cantidadEsperada from ordenProduccion as op  INNER JOIN responsable as r on r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON op.idPlanta=pf.idPlanta INNER JOIN especie as e on e.idEspecie= pf.idEspecie WHERE op.idOrden=:idOrden";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idOrden', $idOrden);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -119,38 +191,25 @@ class Movimientos {
         return $results;
     }
 
-    public function getPlanta($idPlanta){
-        $sql = "SELECT pf.idPlanta,pf.descripcion,pf.existencia,e.nombre FROM plantaForestal as pf INNER JOIN especie as e on pf.idEspecie = e.idEspecie WHERE idPlanta=:idPlanta";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idPlanta', $idPlanta);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getValeSalida($idVale){
-        $sql = "SELECT r.nombre AS NombreResponsable , r.puesto AS PuestoResponsable, i.idInsumo as idInsumo , i.nombre as NombreInsumo, c.concepto as CategoriaInsumo, i.descripcion as DescripcionInsumo, i.unidad as UnidadInsumos, i.existencias as ExistenciaInsumos , i.costoPromedio as Precio,ro.nombre as NombreResponsableOrden,ro.puesto as PuestoResponsableOrden,e.nombre as NombrePlanta,pf.descripcion as DescripcionPlanta, pf.existencia as ExistenciaPlanta,op.fechaAproxTermino as FechaAproxTermino ,op.descripcion as DecripcionOrden , op.cantidadEsperada as CantidaEspera,vs.cantidad as CantidadRetirada FROM valeSalida as vs INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable INNER JOIN insumo as i ON vs.idInsumo=i.idInsumo INNER JOIN clasificacion as c on i.idClasificacion=c.idClasificacion INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden INNER JOIN responsable as ro ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON pf.idPlanta = op.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie where vs.idVale = :idVale";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idVale', $idVale);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getOrdenesProduccion($idOrden){
-        $sql = "SELECT r.nombre as responsable,r.puesto,e.nombre as planta,pf.descripcion,pf.existencia,op.fechaAproxTermino,op.descripcion as descripcionOrden,op.cantidadEsperada from ordenProduccion as op  INNER JOIN responsable as r on r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON op.idPlanta=pf.idPlanta INNER JOIN especie as e on e.idEspecie= pf.idEspecie WHERE op.idOrden=:idOrden";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idOrden', $idOrden);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //INSERT AQUI SE INSERTA TODO
+
     public function insertCompraInsumos($fechaCompraInsumos,$idProveedor,$factura,$total){
         $sql="INSERT INTO facturaCompra(idProveedor, factura, fecha, total) VALUES ( :idProveedor, :factura, :fecha, :total)";
         $query = $this->connect->prepare($sql);
@@ -162,7 +221,7 @@ class Movimientos {
         $idOrdenCompra=$this->connect->lastInsertId();
         return $idOrdenCompra;
     }
-    //TODO:Dejate de mamdas cabron y haslo normal cuando pase todo esto
+    
     public function insertDetalleCompra($idCompra,$detalles){
         foreach ($detalles as $value) {
             $sql="INSERT INTO detalleFacturaCompra(idOrdenCompra, idInsumo, cantidad, costo) VALUES (:idOrdenCompra, :idInsumo, :cantidad, :costo)";
@@ -194,7 +253,7 @@ class Movimientos {
             $query->execute();
         }        
     }
-    
+
     public function insertOrdenProduccion( $idResponsable, $idPlanta, $fechaOrden, $fechaAproxTermino, $descripcion, $cantidadEsperada){
         $sql="INSERT INTO ordenProduccion(idResponsable, idPlanta, fechaOrden, fechaAproxTermino, descripcion, cantidadEsperada, estado) VALUES ( :idResponsable, :idPlanta, :fechaOrden, :fechaAproxTermino, :descripcion, :cantidadEsperada, 'Pendiente')";
         $query = $this->connect->prepare($sql);
@@ -291,37 +350,107 @@ class Movimientos {
         $query->execute();
     }
 
-    //NEXT IDS
-    function getNextIdCompra(){
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'facturaCompra'";
+
+
+ /*funciones para llenar select
+    public function getAllProveedores() {
+        $sql = "SELECT * from proveedor";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    function getNextidSalida(){
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'valeSalida'";
+    public function getAllInsumos(){
+        $sql = "SELECT * from  insumo";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    function getNextidOrdenProduccion(){
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'ordenProduccion'";
+    public function getAllResponsables() {
+        $sql = "SELECT * from responsable";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
 
-    function getNextidDevolucion(){
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'devolucion'";
+    public function getAllPlanta(){
+        $sql = "SELECT pf.idPlanta,e.nombre FROM plantaForestal as pf INNER JOIN especie as e on pf.idEspecie = e.idEspecie";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
+
+    public function getAllSalidas(){
+        $sql = "Select vs.idVale,i.nombre as insumo,r.nombre as responsable,vs.fecha,vs.cantidad from valeSalida as vs INNER JOIN insumo as i on i.idInsumo=vs.idInsumo INNER JOIN responsable as r on r.idResponsable = vs.idResponsable;";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllComprasInsumos(){
+        $sql = "SELECT fc.idOrdenCompra,p.nombre,fc.factura,fc.fecha, fc.total  from  facturaCompra as fc INNER JOIN proveedor as p on fc.idProveedor= p.idProveedor";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllOrdenProduccion(){
+        $sql = "SELECT op.idOrden, r.nombre as responsable,e.nombre as especie,op.fechaOrden,op.descripcion,op.estado FROM ordenProduccion as op INNER JOIN responsable as r on r.idResponsable= op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta = op.idPlanta INNER JOIN especie as e on pf.idEspecie = e.idEspecie ";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllDevoluciones() {
+        $sql = "SELECT d.idDevolucion,d.fecha, r.nombre as responsable , i.nombre as insumo , c.concepto as clasificacion,vs.cantidad as salida,d.cantidad as devolucion FROM devolucion as d INNER JOIN valeSalida as vs on vs.idVale = d.idVale INNER JOIN responsable as r on r.idResponsable = vs.idResponsable INNER JOIN insumo as i on i.idInsumo = vs.idInsumo  INNER JOIN clasificacion as c on c.idClasificacion = i.idClasificacion";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
+    public function getInsumo($idInsumo){
+        $sql = "SELECT i.nombre,i.existencias,i.unidad,c.concepto,i.maximo,i.minimo,i.costoPromedio      from  insumo as i INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE i.idInsumo=:idInsumo";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idInsumo', $idInsumo);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
+
+    public function getPlanta($idPlanta){
+        $sql = "SELECT pf.idPlanta,pf.descripcion,pf.existencia,e.nombre FROM plantaForestal as pf INNER JOIN especie as e on pf.idEspecie = e.idEspecie WHERE idPlanta=:idPlanta";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPlanta', $idPlanta);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getValeSalida($idVale){
+        $sql = "SELECT r.nombre AS NombreResponsable , r.puesto AS PuestoResponsable, i.idInsumo as idInsumo , i.nombre as NombreInsumo, c.concepto as CategoriaInsumo, i.descripcion as DescripcionInsumo, i.unidad as UnidadInsumos, i.existencias as ExistenciaInsumos , i.costoPromedio as Precio,ro.nombre as NombreResponsableOrden,ro.puesto as PuestoResponsableOrden,e.nombre as NombrePlanta,pf.descripcion as DescripcionPlanta, pf.existencia as ExistenciaPlanta,op.fechaAproxTermino as FechaAproxTermino ,op.descripcion as DecripcionOrden , op.cantidadEsperada as CantidaEspera,vs.cantidad as CantidadRetirada FROM valeSalida as vs INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable INNER JOIN insumo as i ON vs.idInsumo=i.idInsumo INNER JOIN clasificacion as c on i.idClasificacion=c.idClasificacion INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden INNER JOIN responsable as ro ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON pf.idPlanta = op.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie where vs.idVale = :idVale";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idVale', $idVale);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
+*/
+
+
+
 
 }

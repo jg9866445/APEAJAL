@@ -23,8 +23,13 @@
     <!--Links para dataTable-->
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
-
     
+    <!-- Links para alert-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+
+    <!--Links para funciones auxliar-->
+    <script src="/src/js/auxliar.js" ></script> 
 </head>
 
 <body>
@@ -52,8 +57,8 @@
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.php">Compra de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.php">Vale de salida</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.html">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.html">Vale de salida</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
                             </ul>
                         </li>
@@ -115,17 +120,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                $resultado = $conexion->getAllClasificacionesForTable();
-                                
-                                    foreach ($resultado as $row) {
-                                        echo "<tr>";
-                                        echo "<td>" . $row['idClasificacion'] . "</td>";
-                                        echo "<td>" . $row['concepto'] . "</td>";
-                                        echo "<td>" . $row['descripcion'] . "</td>";
-                                        echo "</tr>";
-                                    }
-                            ?>
+
                         </tbody>
                     </table>
                 </div>
@@ -176,11 +171,34 @@
     </div>
 
     <script>
+        const funciones = new auxliar();
+            funciones.alert('<h5>Espere cargando datos</h5>',false,false);
+
         $(document).ready( function () {
-            var td=$('#table_id').DataTable({
-                    scrollX:  true
-                });
+                $.ajax({
+                    url: "/src/php/SistemaProduccion/SubCatalagos.php",
+                    method: "POST",
+                    data: {
+                        "Metodo":'getAllClasificacionesForTable',
+                         },
+                    success: function(respuesta){
+                         var table=$('#table_id').DataTable({
+                            scrollX:  true,
+                            data:JSON.parse(respuesta),
+                            columns:[
+                                {title:"",data:"idClasificacion"},
+                                {title:"Nombre",data:"concepto"},
+                                {title:"Descripcion",data:"descripcion"},
+                            ]
+
+                        });
+                        funciones.cerrar();
+                    },
+                })
+               
         });
+        
+    
     </script>
     <?php
         if (isset($_POST)){
