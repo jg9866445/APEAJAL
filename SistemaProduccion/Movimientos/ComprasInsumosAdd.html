@@ -55,22 +55,27 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.html">Órdenes producción</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.html">Compra de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.html">Vale de salida</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.html">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/MermasInsumo.html">Mermas de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por proveedor en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por Clasificación en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Insumos divididos por Clasificación</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción por estado en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por fecha </a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devolución por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devoluciones por fecha</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción con vales de salida y devoluciones</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -381,59 +386,61 @@
             total=parseInt(document.getElementById('total').value,10);
             var idInsumo = document.getElementById("idInsumo").value;
             var table = $("#mytable tbody");
+            continuar=true;
             table.find('tr').each(function (i, el) {
-                if($(this).find('td').eq(0).text()=idInsumo){
-                    alert("HOLA")
+                if($(this).find('td').eq(0).text()==idInsumo){
+                    aux.alert("Ese insumo ya se encuentra agregado",true,true);
+                    continuar=false;
                 }
 
             });
+            if(continuar){
+                var NombreInsumo = document.getElementById("NombreInsumo").value;
+                var ClasificacionInsumo = document.getElementById("ClasificacionInsumo").value;
+                var ExistenciasInsumo = document.getElementById("ExistenciasInsumo").value;
+                var unidadMetricaInsumo = document.getElementById("unidadMetricaInsumo").value;
+                var CostoInsumo = parseInt(document.getElementById("CostoInsumo").value,10);
+                var CantidadInsumo = parseInt(document.getElementById("CantidadInsumo").value,10);
 
-            var NombreInsumo = document.getElementById("NombreInsumo").value;
-            var ClasificacionInsumo = document.getElementById("ClasificacionInsumo").value;
-            var ExistenciasInsumo = document.getElementById("ExistenciasInsumo").value;
-            var unidadMetricaInsumo = document.getElementById("unidadMetricaInsumo").value;
-            var CostoInsumo = parseInt(document.getElementById("CostoInsumo").value,10);
-            var CantidadInsumo = parseInt(document.getElementById("CantidadInsumo").value,10);
+                var fila = 
+                    '<tr id="row' + i + '" >'+
+                        '<td id="idInsumo">' + idInsumo + '</td>'+
+                        '<td>' + NombreInsumo + '</td>'+
+                        '<td>' + ClasificacionInsumo + '</td>'+
+                        '<td>' + ExistenciasInsumo + '</td>'+
+                        '<td>' + unidadMetricaInsumo + '</td>'+
+                        '<td id="Costo">' + CostoInsumo + '</td>'+
+                        '<td id="Cantidad">' + CantidadInsumo + '</td>'+
+                        '<td >' + CostoInsumo*CantidadInsumo + '</td>'+
+                        '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
+                    '</tr>';
 
-            var fila = 
-                '<tr id="row' + i + '" >'+
-                    '<td id="idInsumo">' + idInsumo + '</td>'+
-                    '<td>' + NombreInsumo + '</td>'+
-                    '<td>' + ClasificacionInsumo + '</td>'+
-                    '<td>' + ExistenciasInsumo + '</td>'+
-                    '<td>' + unidadMetricaInsumo + '</td>'+
-                    '<td id="Costo">' + CostoInsumo + '</td>'+
-                    '<td id="Cantidad">' + CantidadInsumo + '</td>'+
-                    '<td >' + CostoInsumo*CantidadInsumo + '</td>'+
-                    '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
-                '</tr>';
+                var ValidacionTable=aux.validateAll(
+                    [
+                        {"valor":document.getElementById("CostoInsumo").value,"typeOf":"int","mensaje":"<p>Agregar cantidad de insumo</p><br>"},
+                        {"valor":document.getElementById("CantidadInsumo").value,"typeOf":"int","mensaje":"<p>Agregar el costo del insumo</p><br>"},
+                    ]
+                )
+                if(ValidacionTable.estado){
+                    i++;
+                    $('#mytable tbody:first').append(fila);
+                    document.getElementById("idInsumo").value=-20;
+                    document.getElementById("NombreInsumo").value="";
+                    document.getElementById("ClasificacionInsumo").value="";
+                    document.getElementById("ExistenciasInsumo").value="";
+                    document.getElementById("unidadMetricaInsumo").value="";
+                    document.getElementById("CostoInsumo").value="";
+                    document.getElementById("CostoPromedio").value="";
+                    document.getElementById("CantidadInsumo").value="";
 
-            var ValidacionTable=aux.validateAll(
-                [
-                    {"valor":document.getElementById("CostoInsumo").value,"typeOf":"int","mensaje":"<p>Agregar cantidad de insumo</p><br>"},
-                    {"valor":document.getElementById("CantidadInsumo").value,"typeOf":"int","mensaje":"<p>Agregar el costo del insumo</p><br>"},
-                ]
-            )
-            if(ValidacionTable.estado){
-                i++;
-                $('#mytable tbody:first').append(fila);
-                document.getElementById("idInsumo").value=-20;
-                document.getElementById("NombreInsumo").value="";
-                document.getElementById("ClasificacionInsumo").value="";
-                document.getElementById("ExistenciasInsumo").value="";
-                document.getElementById("unidadMetricaInsumo").value="";
-                document.getElementById("CostoInsumo").value="";
-                document.getElementById("CostoPromedio").value="";
-                document.getElementById("CantidadInsumo").value="";
+                    total=parseInt(total+(CostoInsumo*CantidadInsumo),10);
+                    document.getElementById('total').value=total;
+                    document.getElementById("adicionar").setAttribute('disabled',"");
+                }else{
+                        aux.alert(ValidacionTable.texto,true,true);
+                }
 
-                total=parseInt(total+(CostoInsumo*CantidadInsumo),10);
-                document.getElementById('total').value=total;
-                document.getElementById("adicionar").setAttribute('disabled',"");
-            }else{
-                    aux.alert(ValidacionTable.texto,true,true);
-            }
-
-        
+        }
         });
   
         $(document).on('click', '.btn_remove', function() {
@@ -564,6 +571,7 @@
             }
         }).done(function(respuesta) {
             respuesta=JSON.parse(respuesta);
+
             respuesta.forEach(element => {
                 $('#idProveedor').append($('<option>', { 
                     value: element.idProveedor,
@@ -612,12 +620,14 @@
             }
         }).done(function(respuesta) {
             respuesta=JSON.parse(respuesta);
+
             respuesta.forEach(element => {
                 $('#idClasificacion').append($('<option>', { 
                     value: element.idClasificacion,
                     text : element.concepto 
                 }))
             })
+
         }).always(function(){
             aux.cerrar();
         });
@@ -638,6 +648,15 @@
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("conceptoClasificacion").value=respuesta[0].concepto;
                 document.getElementById("descripcionClasificacion").value=respuesta[0].descripcion;
+
+                document.getElementById("NombreInsumo").value="";
+                document.getElementById("ClasificacionInsumo").value="";
+                document.getElementById("ExistenciasInsumo").value="";
+                document.getElementById("unidadMetricaInsumo").value="";
+                document.getElementById("CostoPromedio").value=0;
+                document.getElementById("Cantidad").value=0
+                document.getElementById("Costo").value=0
+                document.getElementById("adicionar").removeAttribute('disabled');
                 getAllInsumosSelect();
                 
             }).always(function(){
@@ -658,7 +677,10 @@
                 aux.alert('<h5>Espere cargando</h5><br/><p>Lista de insumos</p>',false,false)
             }}).done(function(respuesta) {
             respuesta=JSON.parse(respuesta);
+            $('#idInsumo').empty().append($('<option disabled selected value="-20" > Selecione una opcion </option>'));
+      
             respuesta.forEach(element => {
+
                 var table = $("#mytable tbody");
                     if(table.find('tr').length>0){
                         table.find('tr').each(function (i, el) {

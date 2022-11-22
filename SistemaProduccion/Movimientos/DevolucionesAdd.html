@@ -1,7 +1,3 @@
-<?php
-    include_once($_SERVER['DOCUMENT_ROOT'] . "/src/php/SistemaProduccion/Movimientos.php");
-    $conexion = new Movimientos();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,29 +6,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
-    <link href="/src/css/menu.css" rel="stylesheet">
     <link href="/src/css/navbar.css" rel="stylesheet">
     <link href="/src/css/movimientos.css" rel="stylesheet">
-
+    <!--LINKS PARA BOOSTRAP y iconos-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    
+    <!--Links para jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
+    <!--Links para dataTable-->
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
 
+    <!--Links para moment-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>    
+
+    <!-- Links para alert-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
+        
+    <!--Links para funciones auxliar-->
+    <script src="/src/js/auxliar.js" ></script>
 
-    <script src="/src/js/auxliar.js" type="text/javascript"></script>
 </head>
 
-<body onload="nextIdDevoluciones()">
+<body onload="onload()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -56,22 +56,27 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.php">Órdenes producción</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.html">Órdenes producción</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.html">Compra de insumos</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.html">Vale de salida</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.php">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.html">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/MermasInsumo.html">Mermas de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/InsimosCalsificaciones.php">Reporte de insumos por clasificación</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/Provedores.php">Reporte de proveedores</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ValesSalidaPeriodos.php">Reporte de vales de salida por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/DevolucionesPeriodos.php">Reporte de devoluciones por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionPendiente.php">Reporte de órdenes de producción pendientes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionTerminadas.php">Reporte de órdenes de producción Terminada</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/OrdenProduccionCancelada.php">Reporte de órdenes de producción Cancelada</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por proveedor en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por Clasificación en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Insumos divididos por Clasificación</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción por estado en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por fecha </a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devolución por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devoluciones por fecha</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción con vales de salida y devoluciones</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -120,13 +125,7 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="idValeSalida" id="idValeSalida" required onchange="getSalidas()">
-                                    <option disabled selected value="-21">Escoja una opción</option>
-                                    <?php
-                                    $resultado = $conexion->getAllSalidas();
-                                    foreach ($resultado as $row) {
-                                        echo "<option value=".$row['idVale'].">". $row['idVale']."</option>";
-                                    }
-                                    ?>
+                                    <option disabled selected value="-20">Escoja una opción</option>
                                 </select>
                             </div>
                             <br>
@@ -322,10 +321,10 @@
                                 <div class="col-md-3">
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-primary btn-xs btn-block" id="regristar">Guardar devolución</button>
+                                    <button type="button" class="btn insert" id="regristar">Guardar devolución</button>
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-primary btn-xs btn-block" id="Cancelar">Cancelar devolución</button>
+                                    <button type="button" class="btn cancel" id="Cancelar">Cancelar devolución</button>
                                 </div>
                                 <div class="col-md-3">
                                 </div>
@@ -341,6 +340,8 @@
         </div>
     </div>
     <script >
+    const aux = new auxliar();
+    
     $(document).ready(function() {
         $('#regristar').click(function() {
             var FechaDevolucion = document.getElementById("FechaDevolucion").value;
@@ -352,50 +353,105 @@
             
             formData.append("Metodo", "insertDevolucion");
             formData.append("datosDevoluciones",JSON.stringify({"FechaDevolucion":FechaDevolucion,"idValeSalida":idValeSalida,"CantidadDevuelta":CantidadDevuelta,"idInsumo":idInsumo})); 
-            var estado=validacionSend();
-            if(estado.estado){
+                    
+
+            var ValidacionTable=aux.validateAll(
+                    [
+                        {"valor":document.getElementById("FechaDevolucion").value,"typeOf":"date","mensaje":"<p>Inserte una fecha</p><br>"},
+                        {"valor":document.getElementById("idValeSalida").value,"typeOf":"select","mensaje":"<p>Elegir un vale de salida</p><br>"},
+                        {"valor":document.getElementById("CantidadDevuelta").value,"typeOf":"int","mensaje":"<p>Agrega la cantida</p><br>"},
+                    ]
+                )
+            if(ValidacionTable.estado){
             $.ajax({
-                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                url: "/src/php/SistemaProduccion/SubMovimientos.html",
                 method: "POST",
                 data: formData,
                 processData: false,
                 contentType: false,
                 beforeSend: function() {
-                    alert("<h5>Espere</h5><p>Insertando</p>");
-
-                },
-                success: function(respuesta){
-                    window.location.href = "/SistemaProduccion/Movimientos/DevolucionesInsumos.php"
-                },complete: function() {
-                    Swal.close();
-                }
-            }) 
+                    aux.alert("<h5>Espere</h5><p>Insertando</p>");
+                }}).done(function(respuesta) {
+                    window.location.href = "/SistemaProduccion/Movimientos/DevolucionesInsumos.html"
+                }).always(function(){
+                    aux.cerrar();
+                });
             }else{
-                alert(estado.texto,true,true);
+                aux.alert(ValidacionTable.texto,true,true);
             }
             return false;
 
         });
 
         $('#Cancelar').click(function() {
-            window.location.href = "/SistemaProduccion/Movimientos/DevolucionesInsumos.php"
+            window.location.href = "/SistemaProduccion/Movimientos/DevolucionesInsumos.html"
         });
     });
+    function onload(){
+        var now = new Date();
+        var dateString = moment(now).format('YYYY-MM-DD');
+        document.getElementById("FechaDevolucion").value=dateString;
+        nextIdDevoluciones();
+        getAllValesSalidaSelect();
+    };
+        
+    function nextIdDevoluciones(){
+        document.getElementById('FechaDevolucion').valueAsDate = new Date();
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method: "POST",
+            data: {
+                "Metodo":'getNextidDevolucion',
+            },
+            beforeSend: function() {
+                aux.alert("<h5>Espere cargando</h5>");
+
+            },
+            success: function(respuesta){
+                respuesta=JSON.parse(respuesta);
+                document.getElementById("idDevolucion").value=respuesta[0].AUTO_INCREMENT;
+
+            },complete: function() {
+                aux.cerrar();
+            }
+        })     
+    }
+    
+    function getAllValesSalidaSelect(){
+        $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method:"POST",
+            data:{
+                "Metodo":'getAllValesSalidaSelect'
+            },
+            beforeSend:function(){
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de Vales de salida</p>',false,false)
+            }
+        }).done(function(respuesta) {
+            respuesta=JSON.parse(respuesta);
+            respuesta.forEach(element => {
+                $('#idValeSalida').append($('<option>', { 
+                    value: element.idVale,
+                    text : element.idVale 
+                }))
+            })
+        }).always(function(){
+            aux.cerrar();
+        });
+    }
 
     function getSalidas(){
         $.ajax({
             url: "/src/php/SistemaProduccion/SubMovimientos.php",
             method: "POST",
             data: {
-                "Metodo":'getValeSalida',
+                "Metodo":'getValeSalidaAdd',
                 "idValeSalida":document.getElementById("idValeSalida").value,
             },
             beforeSend: function() {
-                alert("<h5>Espere cargando</h5><p>datos de la orden</p>")
-            },
-            success: function(respuesta){
+                aux.alert("<h5>Espere cargando</h5><p>datos de la orden</p>")
+            }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
-                console.log(respuesta);
                 document.getElementById("NombreResponsable").value=respuesta[0].NombreResponsable;
                 document.getElementById("PuestoResponsable").value=respuesta[0].PuestoResponsable;
                 document.getElementById("idInsumo").value=respuesta[0].idInsumo;
@@ -414,78 +470,15 @@
                 document.getElementById("DecripcionOrden").value=respuesta[0].DecripcionOrden;
                 document.getElementById("CantidaEspera").value=respuesta[0].CantidaEspera;
                 document.getElementById("CantidadRetirada").value=respuesta[0].CantidadRetirada;
-                
-            },complete: function() {
-                Swal.close();
-            }
-        });   
+            }).always(function(respuesta){
+                aux.cerrar();
+            })
         return false;  
     }
-    
-    function nextIdDevoluciones(){
-        document.getElementById('FechaDevolucion').valueAsDate = new Date();
-        $.ajax({
-            url: "/src/php/SistemaProduccion/SubMovimientos.php",
-            method: "POST",
-            data: {
-                "Metodo":'getNextidDevolucion',
-            },
-            beforeSend: function() {
-                alert("<h5>Espere cargando</h5>");
 
-            },
-            success: function(respuesta){
-                respuesta=JSON.parse(respuesta);
-                document.getElementById("idDevolucion").value=respuesta[0].AUTO_INCREMENT;
-                var now = new Date();
-                var dateString = moment(now).format('YYYY-MM-DD');
-                document.getElementById("FechaDevolucion").value=dateString;
-            },complete: function() {
-                Swal.close();
-            }
-        })     
-    }
-    
-    function validacionSend(){
-        var validacion=true
-        var error ="<h4>Por favor de correguir los siguientes errores</h4><br/>"
-        
-        var FechaDevolucion = (document.getElementById("FechaDevolucion").value).length;
-        var idValeSalida = (document.getElementById("idValeSalida").value);
-        var CantidadSalida = (document.getElementById("CantidadDevuelta").value).length;
 
-        if(idValeSalida=='-21'){
-            error=error+"<p>Elegir un vale de salida</p><br>";
-            validacion=false;
-        }
-        if(FechaDevolucion==0){
-            error=error+"<p>Inserte una fecha</p><br>";
-            validacion=false;
-        }
-        if(CantidadSalida==0){
-            error=error+"<p>Agrega la cantida</p><br>";
-            validacion=false;
-        }
-        return Validacion={"estado":validacion,"texto":error};        
-    }
-     
 
-    function alert(mensaje,botton=false,eliminar=false){
-        Swal.fire({
-            html: mensaje,
-            showConfirmButton: botton,
-            allowOutsideClick: eliminar,
-            onRender: function() {
-                $('.swal2-content').prepend(sweet_loader);
-            }
-        });
-    }
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
 </body>
 
 </html>

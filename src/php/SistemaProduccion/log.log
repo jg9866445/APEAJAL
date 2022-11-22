@@ -1,0 +1,31 @@
+PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'd.idInsumoINNER' in 'on clause' in C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php:85
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php(85): PDO->prepare('Select d.idDevo...')
+#1 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(75): Movimientos->getTableAllDevoluciones()
+#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(15): SubMovimientos->API()
+#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(335): SubMovimientos->__construct()
+#4 {main}PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'd.idInsumoINNER' in 'on clause' in C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php:85
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php(85): PDO->prepare('Select d.idDevo...')
+#1 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(75): Movimientos->getTableAllDevoluciones()
+#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(15): SubMovimientos->API()
+#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(335): SubMovimientos->__construct()
+#4 {main}PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'd.idInsumoINNER' in 'on clause' in C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php:85
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php(85): PDO->prepare('Select d.idDevo...')
+#1 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(75): Movimientos->getTableAllDevoluciones()
+#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(15): SubMovimientos->API()
+#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(335): SubMovimientos->__construct()
+#4 {main}PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'd.idInsumoINNER' in 'on clause' in C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php:85
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php(85): PDO->prepare('Select d.idDevo...')
+#1 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(75): Movimientos->getTableAllDevoluciones()
+#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(15): SubMovimientos->API()
+#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(335): SubMovimientos->__construct()
+#4 {main}PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'd.idInsumoINNER' in 'on clause' in C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php:85
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php(85): PDO->prepare('Select d.idDevo...')
+#1 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(75): Movimientos->getTableAllDevoluciones()
+#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(15): SubMovimientos->API()
+#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(335): SubMovimientos->__construct()
+#4 {main}

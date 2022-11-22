@@ -23,8 +23,8 @@ class SubMovimientos
     function API(){
         try{
             if(isset($_POST['Metodo'])){
+                
                 switch ($_POST['Metodo']) {
-                    
 
                     //GET NEXT ID
                     case 'getNextidSalida':
@@ -63,6 +63,19 @@ class SubMovimientos
                         $resultado= $conexion->getTableAllValesSalidas();
                         echo json_encode($resultado);
                     break;
+                    
+                    case 'getTableAllOrdenProduccion':
+                        $conexion=new Movimientos();
+                        $resultado=$conexion->getTableAllOrdenProduccion();
+                        echo json_encode($resultado);
+                    break;
+
+                    case 'getTableAllDevoluciones':
+                        $conexion=new Movimientos();
+                        $resultado=$conexion->getTableAllDevoluciones();
+                        echo json_encode($resultado);
+                    break;
+                    
 
                     //get for selected 
                     case 'getAllProveedoresSelect':
@@ -95,6 +108,19 @@ class SubMovimientos
                         $resultado=$conexion->getAllResponsableSelect();
                         echo json_encode($resultado);
                     break;
+
+                    case 'getAllPlantasfolestalesSelect':
+                        $conexion=new Movimientos();
+                        $resultado=$conexion->getAllPlantasfolestalesSelect();
+                        echo json_encode($resultado);
+                    break;
+
+                    case 'getAllValesSalidaSelect':
+                        $conexion=new Movimientos();
+                        $resultado=$conexion->getAllValesSalidaSelect();
+                        echo json_encode($resultado);
+                    break;
+                    
 
                     // get individual
                     case 'getCompras':
@@ -152,7 +178,27 @@ class SubMovimientos
                         $resultado = $conexion->getResponsable($idResponsable);
                         echo json_encode($resultado);
                     break;
+                    
+                    case 'getPlanta':
+                        $idPlanta = $_POST['idPlanta'];
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getPlanta($idPlanta);
+                        echo json_encode($resultado);
+                    break;
+                    
+                    case 'getDevolucionInsumo':
+                        $idDevolucion= json_decode($_POST['idDevolucion']);
+                        $conexion = New Movimientos();
+                        $resultado = $conexion->getDevolucionInsumo($idDevolucion);
+                        echo json_encode($resultado);
+                    break;
 
+                    case 'getValeSalidaAdd':
+                        $idVale = $_POST['idValeSalida'];
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getValeSalidaAdd($idVale);
+                        echo json_encode($resultado);
+                    break;
 
                     //insert 
                     case 'insertCompraInsumos':
@@ -187,6 +233,7 @@ class SubMovimientos
                         $conexion = New Movimientos();
                         $idCompra=$conexion->InsertValeSalida($datosValesSalidas->idInsumo,$datosValesSalidas->idOrden,$datosValesSalidas->idResponsable,$datosValesSalidas->Fecha,$datosValesSalidas->cantidad);
                     break;
+                    
                     case 'insertDevolucion':
                         $datosDevoluciones= json_decode($_POST['datosDevoluciones']);
                         $conexion = New Movimientos();
@@ -256,21 +303,9 @@ class SubMovimientos
 
 
 
-                    case 'getPlanta':
-                        $idPlanta = $_POST['idPlanta'];
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getPlanta($idPlanta);
-                        echo json_encode($resultado);
-                    break;
 
 
 
-                    case 'getValeSalida':
-                        $idVale = $_POST['idValeSalida'];
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getValeSalida($idVale);
-                        echo json_encode($resultado);
-                    break;
 
                    */
                     default:

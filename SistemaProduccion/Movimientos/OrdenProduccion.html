@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,9 +30,9 @@
         
     <!--Links para funciones auxliar-->
     <script src="/src/js/auxliar.js" ></script>
-
 </head>
-<body id="body" onload="createTable()">
+
+<body onload="createTable()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -87,22 +88,20 @@
             <div class="linea"></div>
         </nav>
     </div>
+<br/><br/>
 
-
-    <div>
         <div class="container botton">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-4 ">
+                </div>
+                <div class="col-lg-6 ">
 
                 </div>
-                <div class="col-lg-7 ">
-                </div>
                 <div class="col-lg-2">
-                    <a class="btn insert" href="/SistemaProduccion/Movimientos/ValesSalidaAdd.html">Nuevo registro</a>
+                    <a class="btn insert" href="/SistemaProduccion/Movimientos/OrdenProduccionAdd.html">Nuevo registró</a>
                 </div>
             </div>
         </div>
-
 
         <div class="container">
             <div class="row">
@@ -111,29 +110,33 @@
                 </div>
 
                 <div class="col-lg-8 ">
-                    <h2>Vale de salida</h2>
+                    <h2>Orden producción</h2>
                     <br>
-                    <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
+                    <table id="table_id" class="display table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th> </th>
-                                <th>Fecha</th>
+                                <th></th>
                                 <th>Responsable</th>
-                                <th>Insumo</th>
-                                <th>Cantidad</th>
+                                <th>Especie</th>
+                                <th>Descripción</th>
+                                <th>Estado</th>
+                                <th>Terminar</th>
+                                <th>Cancelar</th>
                                 <th>Consultar</th>
                             </tr>
                         </thead>
                         <tbody>
-                           
+                         
                         </tbody>
                     </table>
                 </div>
+
                 <div class="col-lg-2">
 
                 </div>
             </div>
         </div>
+
     <div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
@@ -194,29 +197,6 @@
                             </div>
                     </div>
                     <br>
-                    <hr>
-                    <div class="container">
-                        <p>Insumos</p>
-                            <div class="row">
-                                    <div class="col-3">
-                                        <label for="staticEmail" class="form-label">Nombre</label>
-                                        <input class="form-control" type="text" name="NombreInsumos" id="NombreInsumos" disabled />
-                                    </div>
-                                    <div class="col-3">
-                                        <label for="staticEmail" class="form-label">Descripción</label>
-                                        <input class="form-control" type="text" name="DescripciónInsumos" id="DescripcionInsumos" disabled/>
-                                    </div>
-                                    <div class="col-3">
-                                        <label for="staticEmail" class="form-label">Existencias</label>
-                                        <input class="form-control" type="text" name="ExistenciasInsumos" id="ExistenciasInsumos" disabled/>
-                                    </div>
-                                    <div class="col-3">
-                                        <label for="staticEmail" class="form-label">Cantidad Retirada</label>
-                                        <input class="form-control" type="text" name="CantidadInsumos" id="CantidadInsumos" disabled/>
-                                    </div>
-                            </div>
-                    </div>
-                    <br>
                 <div class="modal-footer">
                     <button type="button" class="btn cancel" data-bs-dismiss="modal">Cerrar</button>
                 </div>
@@ -224,38 +204,47 @@
         </div>
     </div>
         <script>
-        const aux = new auxliar();
         var table = $('#table_id').DataTable();
-
+        const aux = new auxliar();
         $(document).ready( function () {
-            table.scrollX=true
-     
+            table.scrollX=true 
+                 
             $('#myModal').on('hidden.bs.modal', function()
             {
                 document.getElementById("body").removeAttribute('style');
                 document.getElementById("body").removeAttribute('class');
             })
-
         });
+        
         function createTable(){
-                        aux.alert('<h5>Espere cargando datos</h5>',false,false);
+                    aux.alert('<h5>Espere cargando datos</h5>',false,false);
 
                     $.ajax({ 
                             url: "/src/php/SistemaProduccion/SubMovimientos.php", 
                             method: "POST",
                             data: {
-                                "Metodo":'getTableAllValesSalidas',
+                                "Metodo":'getTableAllOrdenProduccion',
                             },
                         }).done(function(respuesta){
                             respuesta=JSON.parse(respuesta);
-                            $.each(respuesta,function(index, value){  
+                            $.each(respuesta,function(index, value){ 
+                                var  Terminar,Cancelar;
+                                if(value.estado=='Pendiente'){
+                                    Terminar="<a href=/SistemaProduccion/Movimientos/OrdenProduccionEnd.html?id="+value.idOrden+" class='btn show'><i class='bi bi-nut'></i> </a>"
+                                    Cancelar="<a href=/SistemaProduccion/Movimientos/OrdenProduccionCancelar.html?id="+value.idOrden+" class='btn show'><i class='bi bi-x-circle-fill'></i> </a>"
+                                }else{
+                                    Terminar="<td><a class='btn show disabled'><i class='bi bi-nut'></i></a>"
+                                    Cancelar="<td><a class='btn show disabled'><i class='bi bi-x-circle-fill'></i></a>"
+                                }
                                   table.row.add( [
-                                        value.idVale,
-                                        value.fecha,
+                                        value.idOrden,
                                         value.responsable,
-                                        value.insumo,
-                                        value.cantidad,
-                                        '<button type="button" class="btn show" onclick="show(this)"><i class="bi bi-eye"></i>  </button>'
+                                        value.especie,
+                                        value.descripcion,
+                                        value.estado,
+                                        Terminar,
+                                        Cancelar,
+                                        '<button type="button" class="btn show" onclick="show(this)"><i class="bi bi-eye"></i> </button>'
                                   ] ).draw();    
                         });
                         aux.cerrar();
@@ -263,39 +252,32 @@
         }
         function show(context){
             aux.alert('<h5>Espere cargando datos</h5>',false,false);
-            var idValeSalida=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
-        
+            var idOrdenProduccion=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
             $.ajax({ 
                 url: "/src/php/SistemaProduccion/SubMovimientos.php", 
                 method: "POST",
                 data: {
-                    "Metodo":'getValeSalida',
-                    "idValeSalida": idValeSalida
+                    "Metodo":'getOrdenProduccion',
+                    "idOrdenProduccion": idOrdenProduccion
                 },
                 }).done(function(respuesta){
                     respuesta=JSON.parse(respuesta);
-                        document.getElementById("FechaOrdenProduccion").value=respuesta[0].FechaOrdenProduccion;
-                        document.getElementById("DescripcionOrdenProduccion").value=respuesta[0].DescripcionOrdenProduccion;
-                        document.getElementById("CantidadOrdenProduccion").value=respuesta[0].CantidadOrdenProduccion;
-                        document.getElementById("NombreResponsable").value=respuesta[0].NombreResponsable;
-                        document.getElementById("PuestoResponsable").value=respuesta[0].PuestoResponsable;
-                        document.getElementById("NombrePlanta").value=respuesta[0].NombrePlanta;
-                        document.getElementById("DescripcionPlanta").value=respuesta[0].DescripcionPlanta;
-                        document.getElementById("ExistenciasPlanta").value=respuesta[0].ExistenciasPlanta;
-                        document.getElementById("NombreInsumos").value=respuesta[0].NombreInsumos;
-                        document.getElementById("DescripcionInsumos").value=respuesta[0].DescripcionInsumos;
-                        document.getElementById("ExistenciasInsumos").value=respuesta[0].ExistenciasInsumos;
-                        document.getElementById("CantidadInsumos").value=respuesta[0].CantidadInsumos;
+                        document.getElementById("FechaOrdenProduccion").value=respuesta[0].fechaAproxTermino;
+                        document.getElementById("DescripcionOrdenProduccion").value=respuesta[0].descripcionOrden;
+                        document.getElementById("CantidadOrdenProduccion").value=respuesta[0].cantidadEsperada;
+                        document.getElementById("NombreResponsable").value=respuesta[0].responsable;
+                        document.getElementById("PuestoResponsable").value=respuesta[0].puesto;
+                        document.getElementById("NombrePlanta").value=respuesta[0].planta;
+                        document.getElementById("DescripcionPlanta").value=respuesta[0].descripcion;
+                        document.getElementById("ExistenciasPlanta").value=respuesta[0].existencia;
                 }).always(function(){
                     aux.cerrar();
                     var myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
                     myModal.show();
                 })
         }
-
         </script>
 
-
-
 </body>
+
 </html>

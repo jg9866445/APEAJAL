@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,6 +32,8 @@
     <script src="/src/js/auxliar.js" ></script>
 
 </head>
+
+
 <body id="body" onload="createTable()">
     <div>
         <nav class="navbar logo">
@@ -83,13 +86,12 @@
             </div>
         </nav>
 
+
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
     </div>
 
-
-    <div>
         <div class="container botton">
             <div class="row">
                 <div class="col-lg-2 ">
@@ -98,7 +100,7 @@
                 <div class="col-lg-7 ">
                 </div>
                 <div class="col-lg-2">
-                    <a class="btn insert" href="/SistemaProduccion/Movimientos/ValesSalidaAdd.html">Nuevo registro</a>
+                    <a class="btn insert" href="/SistemaProduccion/Movimientos/DevolucionesAdd.html">Nuevo registró</a>
                 </div>
             </div>
         </div>
@@ -111,24 +113,26 @@
                 </div>
 
                 <div class="col-lg-8 ">
-                    <h2>Vale de salida</h2>
+                    <h2>Devoluciones</h2>
                     <br>
-                    <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
+                    <table id="table_id" class="table table-responsive table-hover">
                         <thead>
                             <tr>
-                                <th> </th>
+                                <th>id</th>
                                 <th>Fecha</th>
                                 <th>Responsable</th>
-                                <th>Insumo</th>
-                                <th>Cantidad</th>
+                                <th>Nombre insumo</th>
+                                <th>Clasificación</th>
+                                <th>Cantidad de salida</th>
+                                <th>Cantidad devuelta</th>
                                 <th>Consultar</th>
                             </tr>
                         </thead>
                         <tbody>
-                           
                         </tbody>
                     </table>
                 </div>
+					
                 <div class="col-lg-2">
 
                 </div>
@@ -198,21 +202,32 @@
                     <div class="container">
                         <p>Insumos</p>
                             <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <label for="staticEmail" class="form-label">Nombre</label>
                                         <input class="form-control" type="text" name="NombreInsumos" id="NombreInsumos" disabled />
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <label for="staticEmail" class="form-label">Descripción</label>
-                                        <input class="form-control" type="text" name="DescripciónInsumos" id="DescripcionInsumos" disabled/>
+                                        <input class="form-control" type="text" name="DescripcionInsumos" id="DescripcionInsumos" disabled/>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <label for="staticEmail" class="form-label">Existencias</label>
                                         <input class="form-control" type="text" name="ExistenciasInsumos" id="ExistenciasInsumos" disabled/>
                                     </div>
-                                    <div class="col-3">
+                            </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="container">
+                        <p>Cantidades</p>
+                            <div class="row">
+                                    <div class="col-6">
                                         <label for="staticEmail" class="form-label">Cantidad Retirada</label>
-                                        <input class="form-control" type="text" name="CantidadInsumos" id="CantidadInsumos" disabled/>
+                                        <input class="form-control" type="text" name="CantidadInsumosSalida" id="CantidadInsumosSalida" disabled/>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="staticEmail" class="form-label">Cantidad devuelta</label>
+                                        <input class="form-control" type="text" name="CantidadInsumosDevolucion" id="CantidadInsumosDevolucion" disabled/>
                                     </div>
                             </div>
                     </div>
@@ -238,23 +253,25 @@
 
         });
         function createTable(){
-                        aux.alert('<h5>Espere cargando datos</h5>',false,false);
+                    aux.alert('<h5>Espere cargando datos</h5>',false,false);
 
                     $.ajax({ 
                             url: "/src/php/SistemaProduccion/SubMovimientos.php", 
                             method: "POST",
                             data: {
-                                "Metodo":'getTableAllValesSalidas',
+                                "Metodo":'getTableAllDevoluciones',
                             },
                         }).done(function(respuesta){
                             respuesta=JSON.parse(respuesta);
                             $.each(respuesta,function(index, value){  
                                   table.row.add( [
-                                        value.idVale,
+                                        value.idDevolucion,
                                         value.fecha,
-                                        value.responsable,
+                                        value.Responsable,
                                         value.insumo,
-                                        value.cantidad,
+                                        value.clasifiacion,
+                                        value.Salida,
+                                        value.devuelta,
                                         '<button type="button" class="btn show" onclick="show(this)"><i class="bi bi-eye"></i>  </button>'
                                   ] ).draw();    
                         });
@@ -263,14 +280,14 @@
         }
         function show(context){
             aux.alert('<h5>Espere cargando datos</h5>',false,false);
-            var idValeSalida=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
+            var idDevolucion=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
         
             $.ajax({ 
                 url: "/src/php/SistemaProduccion/SubMovimientos.php", 
                 method: "POST",
                 data: {
-                    "Metodo":'getValeSalida',
-                    "idValeSalida": idValeSalida
+                    "Metodo":'getDevolucionInsumo',
+                    "idDevolucion": idDevolucion
                 },
                 }).done(function(respuesta){
                     respuesta=JSON.parse(respuesta);
@@ -285,7 +302,8 @@
                         document.getElementById("NombreInsumos").value=respuesta[0].NombreInsumos;
                         document.getElementById("DescripcionInsumos").value=respuesta[0].DescripcionInsumos;
                         document.getElementById("ExistenciasInsumos").value=respuesta[0].ExistenciasInsumos;
-                        document.getElementById("CantidadInsumos").value=respuesta[0].CantidadInsumos;
+                        document.getElementById("CantidadInsumosSalida").value=respuesta[0].CantidadInsumosSalida;
+                        document.getElementById("CantidadInsumosDevolucion").value=respuesta[0].CantidadInsumosDevolucion;
                 }).always(function(){
                     aux.cerrar();
                     var myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
@@ -296,6 +314,13 @@
         </script>
 
 
-
 </body>
+
 </html>
+
+
+
+
+
+
+

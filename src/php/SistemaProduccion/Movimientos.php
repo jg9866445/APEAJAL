@@ -6,9 +6,7 @@ class Movimientos {
     var $db;
     var $connect;
 
-
-    function __construct()
-    {        
+    function __construct(){        
         try {
             $this->db = new DB_Connect();
 
@@ -20,8 +18,7 @@ class Movimientos {
         }
     }
     
-    public function close() 
-    {
+    public function close() {
         unset($this->connect);
     }
 
@@ -75,6 +72,24 @@ class Movimientos {
         return $results;
     }
 
+    public function getTableAllOrdenProduccion(){
+        $sql = "SELECT op.idOrden,r.nombre as responsable,e.nombre as especie,op.descripcion,op.estado FROM ordenProduccion AS op INNER JOIN responsable as r ON op.idResponsable= r.idResponsable INNER JOIN plantaForestal as pf ON op.idPlanta=pf.idPlanta INNER JOIN especie as e ON pf.idEspecie=e.idEspecie";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getTableAllDevoluciones(){
+        $sql = "Select d.idDevolucion,d.fecha, r.nombre as 'Responsable' ,i.nombre as 'insumo',c.concepto as 'clasifiacion',vs.cantidad as 'Salida', d.cantidad as 'devuelta' FROM devolucion as d INNER JOIN valeSalida as vs on vs.idVale=d.idVale INNER JOIN responsable as r ON vs.idResponsable= r.idResponsable INNER JOIN insumo as i ON i.idInsumo=d.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion; ";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    
+
     //get for selected 
     public function getAllProveedoresSelect() {
         $sql = "SELECT * from proveedor";
@@ -116,7 +131,22 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
-    
+
+    public function getAllPlantasfolestalesSelect(){
+        $sql = "SELECT pf.idPlanta,e.nombre FROM plantaForestal as pf INNER JOIN especie as e ON e.idEspecie = pf.idEspecie";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getAllValesSalidaSelect(){
+        $sql = "SELECT * FROM valeSalida";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
     //get individual
     public function getCompra($idCompra){
@@ -165,7 +195,7 @@ class Movimientos {
     }
 
     public function getValeSalida($idVale){
-        $sql = 'SELECT op.fechaOrden AS "FechaOrdenProduccion", op.descripcion AS "DescripcionOrdenProduccion",op.cantidadEsperada AS "CantidadOrdenProduccion",r.nombre AS "NombreResponsable", r.puesto AS "PuestoResponsable",e.nombre AS "NombrePlanta", pf.descripcion AS "DescripcionPlanta",pf.existencia AS "ExistenciasPlanta", i.nombre AS "NombreInsumos",i.descripcion AS "DescripciónInsumos", i.existencias AS "ExistenciasInsumos",vs.cantidad AS "CantidadInsumos" FROM valeSalida AS vs INNER JOIN ordenProduccion AS op ON op.idOrden=vs.idOrden INNER JOIN responsable AS r ON r.idResponsable = vs.idResponsable INNER JOIN plantaForestal AS pf ON pf.idPlanta= op.idPlanta INNER JOIN especie AS e ON e.idEspecie=op.idPlanta INNER JOIN insumo AS i ON i.idInsumo = vs.idInsumo  WHERE vs.idVale=:idVale';
+        $sql = 'SELECT op.fechaOrden AS "FechaOrdenProduccion", op.descripcion AS "DescripcionOrdenProduccion",op.cantidadEsperada AS "CantidadOrdenProduccion",r.nombre AS "NombreResponsable", r.puesto AS "PuestoResponsable",e.nombre AS "NombrePlanta", pf.descripcion AS "DescripcionPlanta",pf.existencia AS "ExistenciasPlanta", i.nombre AS "NombreInsumos",i.descripcion AS "DescripcionInsumos", i.existencias AS "ExistenciasInsumos",vs.cantidad AS "CantidadInsumos" FROM valeSalida AS vs INNER JOIN ordenProduccion AS op ON op.idOrden=vs.idOrden INNER JOIN responsable AS r ON r.idResponsable = vs.idResponsable INNER JOIN plantaForestal AS pf ON pf.idPlanta= op.idPlanta INNER JOIN especie AS e ON e.idEspecie=op.idPlanta INNER JOIN insumo AS i ON i.idInsumo = vs.idInsumo  WHERE vs.idVale=:idVale';
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idVale', $idVale);
         $query -> execute(); 
@@ -191,9 +221,32 @@ class Movimientos {
         return $results;
     }
 
+    public function getPlanta($idPlanta){
+        $sql = "SELECT pf.idPlanta,pf.descripcion,pf.existencia,e.nombre FROM plantaForestal as pf INNER JOIN especie as e on pf.idEspecie = e.idEspecie WHERE idPlanta=:idPlanta";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idPlanta', $idPlanta);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
+    public function getDevolucionInsumo($idDevolucion){
+        $sql = 'SELECT op.fechaOrden AS "FechaOrdenProduccion",op.descripcion AS "DescripcionOrdenProduccion",op.cantidadEsperada AS "CantidadOrdenProduccion",r.nombre AS "NombreResponsable",r.puesto AS "PuestoResponsable",e.nombre AS "NombrePlanta", pf.descripcion AS "DescripcionPlanta",pf.existencia AS "ExistenciasPlanta",i.nombre AS "NombreInsumos",i.descripcion AS "DescripcionInsumos",i.existencias AS "ExistenciasInsumos",vs.cantidad AS "CantidadInsumosSalida",d.cantidad AS "CantidadInsumosDevolucion" FROM devolucion AS d INNER JOIN valeSalida as vs ON vs.idVale=d.idVale INNER JOIN ordenProduccion AS op ON op.idOrden=vs.idOrden INNER JOIN responsable AS r ON r.idResponsable = vs.idResponsable INNER JOIN plantaForestal AS pf ON pf.idPlanta= op.idPlanta INNER JOIN especie AS e ON e.idEspecie=op.idPlanta INNER JOIN insumo AS i ON i.idInsumo = vs.idInsumo  WHERE d.idDevolucion=:idDevolucion';
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idDevolucion', $idDevolucion);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
-
+    public function getValeSalidaAdd($idVale){
+        $sql = "SELECT r.nombre AS NombreResponsable , r.puesto AS PuestoResponsable, i.idInsumo as idInsumo , i.nombre as NombreInsumo, c.concepto as CategoriaInsumo, i.descripcion as DescripcionInsumo, i.unidad as UnidadInsumos, i.existencias as ExistenciaInsumos , i.costoPromedio as Precio,ro.nombre as NombreResponsableOrden,ro.puesto as PuestoResponsableOrden,e.nombre as NombrePlanta,pf.descripcion as DescripcionPlanta, pf.existencia as ExistenciaPlanta,op.fechaAproxTermino as FechaAproxTermino ,op.descripcion as DecripcionOrden , op.cantidadEsperada as CantidaEspera,vs.cantidad as CantidadRetirada FROM valeSalida as vs INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable INNER JOIN insumo as i ON vs.idInsumo=i.idInsumo INNER JOIN clasificacion as c on i.idClasificacion=c.idClasificacion INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden INNER JOIN responsable as ro ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON pf.idPlanta = op.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie where vs.idVale = :idVale";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idVale', $idVale);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
 
 
@@ -429,23 +482,9 @@ class Movimientos {
 
 
 
-    public function getPlanta($idPlanta){
-        $sql = "SELECT pf.idPlanta,pf.descripcion,pf.existencia,e.nombre FROM plantaForestal as pf INNER JOIN especie as e on pf.idEspecie = e.idEspecie WHERE idPlanta=:idPlanta";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idPlanta', $idPlanta);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
 
-    public function getValeSalida($idVale){
-        $sql = "SELECT r.nombre AS NombreResponsable , r.puesto AS PuestoResponsable, i.idInsumo as idInsumo , i.nombre as NombreInsumo, c.concepto as CategoriaInsumo, i.descripcion as DescripcionInsumo, i.unidad as UnidadInsumos, i.existencias as ExistenciaInsumos , i.costoPromedio as Precio,ro.nombre as NombreResponsableOrden,ro.puesto as PuestoResponsableOrden,e.nombre as NombrePlanta,pf.descripcion as DescripcionPlanta, pf.existencia as ExistenciaPlanta,op.fechaAproxTermino as FechaAproxTermino ,op.descripcion as DecripcionOrden , op.cantidadEsperada as CantidaEspera,vs.cantidad as CantidadRetirada FROM valeSalida as vs INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable INNER JOIN insumo as i ON vs.idInsumo=i.idInsumo INNER JOIN clasificacion as c on i.idClasificacion=c.idClasificacion INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden INNER JOIN responsable as ro ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON pf.idPlanta = op.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie where vs.idVale = :idVale";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idVale', $idVale);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
+
+
 
 
 */

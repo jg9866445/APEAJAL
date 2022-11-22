@@ -15,7 +15,10 @@ class auxliar {
                         }
                     break;
                     case "string":
-
+                        if(dato.valor.length==0){
+                            resultado.texto=resultado.texto+dato.mensaje;
+                            resultado.estado=false;
+                        }
                     break;
 
                     case "file":
@@ -38,9 +41,13 @@ class auxliar {
                             resultado.estado=false;
                         }
                     break;
-                    case "table-Duplicado":{
-                        
-                    }
+
+                    case "date":
+                        console.log(dato.valor);
+                        if(dato.valor.length==0){
+                            resultado.texto=resultado.texto+dato.mensaje;
+                            resultado.estado=false;
+                        }
                 }
         });
 
@@ -59,5 +66,12 @@ class auxliar {
     cerrar(){
         Swal.close();
     }
+    
+    getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 }
