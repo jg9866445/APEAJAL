@@ -393,12 +393,11 @@
             $Telefono = $_POST['Telefono'];
             $Celular = $_POST['Celular'];
             $idTipoCliente = $_POST['idTipoCliente'];
-            $saldo=0;
             if(isset($_FILES))
             {
                 GuardarArchivo($idCliente);
             }
-            $resultado = $conexion->insertClientes($RazonSocial,$RFC,$CURP,$domicilio,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente, $saldo);
+            $resultado = $conexion->insertClientes($RazonSocial,$RFC,$CURP,$domicilio,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente);
             unset($_POST);
             unset($_FILES);
             ob_start();

@@ -1,7 +1,3 @@
-<?php
-    include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Movimiento.php");
-    $conexion = new Movimientos();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,19 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTEMA APEAJAL</title>
-    <link href="/src/css/menu.css" rel="stylesheet">
     <link href="/src/css/navbar.css" rel="stylesheet">
-    <link href="/src/css/categorias.css" rel="stylesheet">
+    <link href="/src/css/movimientos.css" rel="stylesheet">
+    <!--LINKS PARA BOOSTRAP y iconos-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    <!--Links para jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
+    <!--Links para dataTable-->
+    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+
+    <!--Links para moment-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>    
+
+    <!-- Links para alert-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
+        
+    <!--Links para funciones auxliar-->
+    <script src="/src/js/auxliar.js" ></script>
 </head>
 
-<body onload="getSolicitud()">
+<body onload="getSolicitudPlantas()">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -37,34 +46,36 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>
-                                
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.php">Predios</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.php">Solicitud de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Venta.php">Venta de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.php">Pago de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.php">Salida de plantas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.html">Órdenes producción</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.html">Compra de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.html">Vale de salida</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.html">Devolución de insumos</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/MermasInsumo.html">Mermas de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendeinteAtender.php">Reporte de solicitudes por entregar</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/SolicitudPendientesPago.php">Reporte de solicitud pendientes de pago</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de existencias en almacén virtual</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasExsistencia.php">Reporte de existencias en almacén físico</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/PlantasDonacionPeriodo.php">Reporte de plantas en donación por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/VentasPeriodo.php">Reporte de ventas por período</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/VentasClientes.php">Reporte de ventas por clientes</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por proveedor en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Compra de insumos por Clasificación en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Insumos divididos por Clasificación</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción por estado en un periodo</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de vale de salida por fecha </a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devolución por orden de producción</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de devoluciones por fecha</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de Órdenes de producción con vales de salida y devoluciones</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -76,35 +87,22 @@
             <div class="linea"></div>
         </nav>
     </div>
-
-    <div>
-        <div class="container botton">
-            <div class="row">
-                <div class="col-lg-2 ">
-
-                </div>
-                <div class="col-lg-7 ">
-                <h1 style="text-align:center">Solicitud de Plantas forestales</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
                 </div>
-                <div class="col-lg-6 card-body">
+                <div class="col-lg-8 card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">id Solicitud</label>
-                            <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled value="<?php echo $_GET['id']?>" />
+                            <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled />
                         </div>
                         <div class="col-md-6">
+                            <h3 class="text-center"> cancelar solicitud de plantas</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
-                            <input class="form-control" type="date" name="fecha" id="fecha" disabled/>
+                            <input class="form-control" type="date" name="Fecha" id="Fecha" disabled/>
                         </div>
                     </div>
                 </div>
@@ -112,6 +110,7 @@
                 </div>
             </div>
         </div>
+
 
         <div class="container">
             <div class="row">
@@ -237,7 +236,7 @@
                 </div>
                 <div class="col-lg-2 ">
                     <div class="card-body">
-                        <button id='cancelar' type="button" class="btn btn-primary btn-xs btn-block text-center">Cancelar Solicitud</button>
+                        <button id='cancelar' type="button" class="btn insert">Cancelar Solicitud</button>
                     </div>
                 </div>
                 <div class="col-lg-2">
@@ -248,41 +247,44 @@
         </div>
         
         <script>
+        const aux = new auxliar();
 
         $(document).ready(function() {
             $('#cancelar').click(function() {
                     const formData = new FormData();
 
                     formData.append("Metodo", "cancelarSolicitud");
-                    formData.append("datosSolicud", JSON.stringify({"idSolicitud":document.getElementById("idSolicitud").value})); 
+                    formData.append("datosSolicud", JSON.stringify({"idSolicitud":aux.getParameterByName("id")})); 
         
                     $.ajax({
-                    url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                    url: "/src/php/SistemaVentas/SubMovimientos.php",
                     method: "POST",
                     data: formData,
                     processData: false,
                     contentType: false,
                     beforeSend: function() {
-                    },
-                    success: function(respuesta){
-                        window.location.href = "/SistemaProduccion/Movimientos/OrdenProduccion.php"
-                    },complete: function() {
-                    }
-                }) 
-            });
+                    }}).done(function(respuesta) {
+                        window.location.href = "/SistemaVentas/Movimientos/SolicitudPlantas.html"
+
+                    }) 
+                });
         });
-        function getSolicitud(){
+        function getSolicitudPlantas(){
             $.ajax({
                 url: "/src/php/SistemaVentas/SubMovimientos.php",
                 method: "POST",
                 data: {
-                    "Metodo":'getSolicitud',
-                    "idSolicitud":document.getElementById("idSolicitud").value,
+                    "Metodo":'getSolicitudPlantas',
+                    "idSolicitud":aux.getParameterByName("id"),
                 },
                 beforeSend: function() {
-                },
-                success: function(respuesta){
+                        var now = new Date();
+                        var dateString = moment(now).format('YYYY-MM-DD');
+                        document.getElementById("Fecha").value=dateString;
+                    aux.alert("Cargando datos")
+                }}).done(function(respuesta) {
                     respuesta=JSON.parse(respuesta);
+                    document.getElementById("idSolicitud").value=aux.getParameterByName("id");
                     document.getElementById("NombreResponsable").value=respuesta[0].nombre;
                     document.getElementById("puesto").value=respuesta[0].puesto;
                     document.getElementById("razonSocial").value=respuesta[0].razonSocial;
@@ -291,23 +293,19 @@
                     document.getElementById("curp").value=respuesta[0].curp;
                     document.getElementById("telefono").value=respuesta[0].telefono;
                     document.getElementById("celular").value=respuesta[0].celular;
-                    document.getElementById("tipoCliente").value=respuesta[0].tipoCliente
-                    
-                    getDetallesSolicitud(document.getElementById("idSolicitud").value);
-
-                },complete: function() {
-                }
-            });   
+                    document.getElementById("tipoCliente").value=respuesta[0].tipoCliente    
+                    getDetallesSolicitud(aux.getParameterByName("id"));
+                });   
             return false;  
         }
-       function getDetallesSolicitud(idSolicitud){
+        function getDetallesSolicitud(idSolicitud){
             $.ajax({
                 url: "/src/php/SistemaVentas/SubMovimientos.php",
                 method: "POST",
                 data: {
-                    "Metodo":'getDetallesSolicitud',
+                    "Metodo":'getDetallesSolicitudPlantas',
                     "idSolicitud": idSolicitud
-                },success: function(respuesta){
+                }}).done(function(respuesta){
                     respuesta=JSON.parse(respuesta);
                     var total=0;
                     $.each(respuesta,function(index, value){            
@@ -328,39 +326,15 @@
                         '</tr>'; 
                         i++;
                         $('#mytable tbody:first').append(fila);
-                    });
-                }
-            
-            })  
-        }
+                    });        
+                }).always(function(respuesta){
+                    aux.cerrar();
+                })  
+            }
 
-        $(document).ready(function() {
-            $('#cancelar').click(function() {
-                    const formData = new FormData();
-
-                    formData.append("Metodo", "cancelarSolicitud");
-                    formData.append("DatoSolicitud", JSON.stringify({"idSolicitud":document.getElementById("idSolicitud").value})); 
-        
-                    $.ajax({
-                    url: "/src/php/SistemaVentas/SubMovimientos.php",
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    beforeSend: function() {
-                    },
-                    success: function(respuesta){
-                        window.location.href = "/SistemaVentas/Movimientos/SolicitudPlantas.php"
-                    },complete: function() {
-                    }
-                }) 
-            });
-        });
 
         </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 </body>
 </html>

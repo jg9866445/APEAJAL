@@ -43,7 +43,6 @@ class auxliar {
                     break;
 
                     case "date":
-                        console.log(dato.valor);
                         if(dato.valor.length==0){
                             resultado.texto=resultado.texto+dato.mensaje;
                             resultado.estado=false;

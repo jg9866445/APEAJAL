@@ -108,7 +108,8 @@ class Catalago {
         $query->bindParam(":celular",$celular);
         $query->bindParam(":tipoCliente",$tipoCliente);
         $request=$query->execute(); 
-        return $request;
+        $idCliente=$this->connect->lastInsertId();
+        return $idCliente;
     }
 
     function insertPredios( $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud){

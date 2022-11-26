@@ -1,0 +1,2 @@
+Para el regristro de solicitudes tienes que crear un nuevo menu para el cliente algo sencillo muestre regristar cliente solicitud plantas y agregar predio ya tienes los formularios 
+Recuerda que para los formularios solicitud cliente y agregar predio la conexion con la base de datos sera diferente
