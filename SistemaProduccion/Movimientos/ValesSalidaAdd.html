@@ -584,6 +584,7 @@
                 aux.alert('<h5>Espere cargando</h5><br/><p>Lista de insumos</p>',false,false)
             }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
+                $('#idInsumo').empty().append($('<option disabled selected value="-20" > Selecione una opcion </option>'));
                 respuesta.forEach(element => {
                     $('#idInsumo').append($('<option>', { 
                             value: element.idInsumo,

@@ -133,7 +133,6 @@
         </div>
     </div>
     <br>
-    <hr>
     <div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
@@ -228,11 +227,17 @@
     <script>
         
         const aux = new auxliar();
-        var table = $('#table_id').DataTable();
-
+        var table = $('#table_id').DataTable({
+                                    scrollX:true
+        });
+        var mytable = $("#mytable").DataTable({
+                                    paging: false,
+                                    info: false,
+                                    ordering: false,
+                                    paging: false,
+                                    searching: false
+                                }); 
         $(document).ready( function () {
-            table.scrollX=true;
-
             $('#myModal').on('hidden.bs.modal', function()
             {
                 document.getElementById("body").removeAttribute('style');
@@ -268,59 +273,53 @@
             aux.alert('<h5>Espere cargando datos</h5>',false,false);
             var idCompra=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
             $.when(
-                $.ajax({ 
-                    url: "/src/php/SistemaProduccion/SubMovimientos.php", 
-                    method: "POST",
-                    data: {
-                        "Metodo":'getCompras',
-                        "idCompra": idCompra
-                    },
+                    $.ajax({ 
+                        url: "/src/php/SistemaProduccion/SubMovimientos.php", 
+                        method: "POST",
+                        data: {
+                            "Metodo":'getCompras',
+                            "idCompra": idCompra
+                        },
+                        }).done(function(respuesta){
+                            respuesta=JSON.parse(respuesta);
+                            document.getElementById("NombreProveedor").value=respuesta[0].NombreProveedor;
+                            document.getElementById("DomicilioProveedor").value=respuesta[0].DomicilioProveedor;
+                            document.getElementById("ContactoProveedor").value=respuesta[0].ContactoProveedor;
+                            document.getElementById("EmailProveedor").value=respuesta[0].EmailProveedor;
+                            document.getElementById("Factura").value=respuesta[0].Factura;
+                            document.getElementById("total").value=respuesta[0].total;
+                            document.getElementById("descarga").setAttribute("href", "/src/PDF/FacturasCompras/"+idCompra+".pdf");
+                        }),
+                    $.ajax({
+                        url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                        method: "POST",
+                        data: {
+                            "Metodo":'getDetallesCompras',
+                            "idCompra": idCompra
+                        },
                     }).done(function(respuesta){
-                        respuesta=JSON.parse(respuesta);
-                        document.getElementById("NombreProveedor").value=respuesta[0].NombreProveedor;
-                        document.getElementById("DomicilioProveedor").value=respuesta[0].DomicilioProveedor;
-                        document.getElementById("ContactoProveedor").value=respuesta[0].ContactoProveedor;
-                        document.getElementById("EmailProveedor").value=respuesta[0].EmailProveedor;
-                        document.getElementById("Factura").value=respuesta[0].Factura;
-                        document.getElementById("total").value=respuesta[0].total;
-                        document.getElementById("descarga").setAttribute("href", "/src/PDF/FacturasCompras/"+idCompra+".pdf");
-                    }),
-                $.ajax({
-                    url: "/src/php/SistemaProduccion/SubMovimientos.php",
-                    method: "POST",
-                    data: {
-                        "Metodo":'getDetallesCompras',
-                        "idCompra": idCompra
-                    },
-                }).done(function(respuesta){
-                        respuesta=JSON.parse(respuesta);
+                            respuesta=JSON.parse(respuesta);
 
-                        var table = $("#mytable").DataTable({
-                                paging: false,
-                                info: false,
-                                ordering: false,
-                                paging: false,
-                                searching: false
-                            }).clear();                    
-                        $.each(respuesta,function(index, value){ 
-                                table.row.add( [
-                                    value.Insumo,
-                                    value.Nombre,
-                                    value.Clasificación,
-                                    value.Existencias,
-                                    value.Unidad,
-                                    value.Costo,
-                                    value.Cantidad,
-                                    value.Costo*value.Cantidad
-                                ]).draw();
-                        });
-                    })
-                ).then( function(){
-                    aux.cerrar();
-                    var myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
-                    myModal.show();
-
-                });
+                         mytable.clear();
+                            $.each(respuesta,function(index, value){ 
+                                    mytable.row.add( [
+                                        value.Insumo,
+                                        value.Nombre,
+                                        value.Clasificación,
+                                        value.Existencias,
+                                        value.Unidad,
+                                        value.Costo,
+                                        value.Cantidad,
+                                        value.Costo*value.Cantidad
+                                    ]).draw();
+                            });
+                        })
+                    ).then( function(){
+                        aux.cerrar();
+                        var myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
+                        myModal.show();
+                    }
+                );
 
         }
         
