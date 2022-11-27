@@ -51,6 +51,12 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
 
+                    case 'getNextIdMerma':
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getNextIdMerma();
+                        echo json_encode($resultado);
+                    break;
+
                     //get for table
                     case 'getTableAllCompras':
                         $conexion = new Movimientos();
@@ -76,7 +82,12 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
                     
-
+                    case 'getTableAllMermas':
+                        $conexion=new Movimientos();
+                        $resultado=$conexion->getTableAllMermas();
+                        echo json_encode($resultado);
+                    break;
+                    
                     //get for selected 
                     case 'getAllProveedoresSelect':
                         $conexion= new Movimientos();
@@ -121,7 +132,6 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
                     
-
                     // get individual
                     case 'getCompras':
                         $idCompra= json_decode($_POST['idCompra']);
@@ -200,6 +210,21 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
 
+                    case 'getMermaInsumo':
+                        $idMermaInsumos= json_decode($_POST['idMermaInsumos']);
+                        $conexion = New Movimientos();
+                        $resultado = $conexion->getMermaInsumo($idMermaInsumos);
+                        echo json_encode($resultado);
+                    break;
+                    
+                    case 'getDetalleMermaInsumo':
+                        $idMermaInsumos= json_decode($_POST['idMermaInsumos']);
+                        $conexion = New Movimientos();
+                        $resultado = $conexion->getDetalleMermaInsumo($idMermaInsumos);
+                        echo json_encode($resultado);
+                    break;
+
+
                     //insert 
                     case 'insertCompraInsumos':
                         $datosCompra= json_decode($_POST['datosCompra']);
@@ -238,6 +263,14 @@ class SubMovimientos
                         $datosDevoluciones= json_decode($_POST['datosDevoluciones']);
                         $conexion = New Movimientos();
                         $idCompra=$conexion->insertDevolucion($datosDevoluciones->idValeSalida,$datosDevoluciones->idInsumo,$datosDevoluciones->FechaDevolucion,$datosDevoluciones->CantidadDevuelta);
+                    break;
+
+                    case 'insertMermaInsumos':
+                        $datosMerma= json_decode($_POST['datosMerma']);
+                        $detalles= json_decode($_POST['detalles']);
+                        $conexion = New Movimientos();
+                        $idMermaInsumos=$conexion->insertMermaInsumos($datosMerma->idResponsable,$datosMerma->fecha);
+                        $conexion->insertDetallesMermaInsumos($idMermaInsumos,$detalles);
                     break;
 
 /*

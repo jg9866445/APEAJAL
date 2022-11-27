@@ -49,6 +49,18 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
 
+                    case 'getNextidSalida':
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getNextidSalida();
+                        echo json_encode($resultado);
+                    break;
+
+                    case 'getNextidMerma':
+                        $conexion = new Movimientos();
+                        $resultado = $conexion->getNextidMerma();
+                        echo json_encode($resultado);
+                    break;
+
                     //Get for tablas
                     case 'getAllPrediosforTabla':
                         $conexion= new Movimientos();
@@ -80,6 +92,11 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
                     
+                    case 'getAllMermasForTabla':
+                        $conexion= new Movimientos();
+                        $resultado= $conexion->getAllMermasForTabla();
+                        echo json_encode($resultado);
+                    break;  
 
                     //get for selected
                     case 'getAllResponsableSelect':
@@ -110,6 +127,12 @@ class SubMovimientos
                     case 'getAllVentaSelect':
                         $conexion=new Movimientos();
                         $resultado=$conexion->getAllVentaSelect();
+                        echo json_encode($resultado);
+                    break;
+
+                    case 'getAllPagosSelector':
+                        $conexion=new Movimientos();
+                        $resultado=$conexion->getAllPagosSelector();
                         echo json_encode($resultado);
                     break;
                     
@@ -183,7 +206,14 @@ class SubMovimientos
                         $resultado= $conexion->getDetallesVentasPlantas($idVenta);
                         echo json_encode($resultado);
                     break;
-                    
+
+                    case 'getDetallesVentasSalidas':
+                        $idVenta= $_POST['idVenta'];
+                        $conexion= new Movimientos();
+                        $resultado= $conexion->getDetallesVentasSalidas($idVenta);
+                        echo json_encode($resultado);
+                    break;
+                                        
                     case 'getPagoPlantas':
                         $idPago= $_POST['idPago'];
                         $conexion= new Movimientos();
@@ -191,7 +221,20 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
                                         
-                    
+                    case 'getSalida':
+                        $idSalida= $_POST['idSalida'];
+                        $conexion= new Movimientos();
+                        $resultado= $conexion->getSalida($idSalida);
+                        echo json_encode($resultado);
+                    break;
+                                                
+                    case 'getDetalleSalida':
+                        $idSalida= $_POST['idSalida'];
+                        $conexion= new Movimientos();
+                        $resultado= $conexion->getDetalleSalida($idSalida);
+                        echo json_encode($resultado);
+                    break;
+                                              
                     
                     //INSERT 
 
@@ -230,7 +273,22 @@ class SubMovimientos
                         $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/ComprobantePago/",$idPago);
                     break;
 
+                    case 'InsertSalida':
+                        $datosSalida= json_decode($_POST['datosSalidas']);
+                        $detalles= json_decode($_POST['detalles']);
+                        $conexion = New Movimientos();
+                        $salida=$conexion->insertSalidaPlantas($datosSalida->idPago,$datosSalida->idResponsable,$datosSalida->fechaEntrega);
+                        $conexion->insertDetalleSalidas($salida['idSalida'],$detalles);
+                        $conexion->insertSalidaEstado($salida['idPago']);
+                    break;
 
+                    case 'InsertMermaPlantasForestales':
+                        $datosMerma= json_decode($_POST['datosMerma']);
+                        $detalles= json_decode($_POST['detalles']);
+                        $conexion = New Movimientos();
+                        $idMerma=$conexion->InsertMermaPlantasForestales($datosMerma->fecha,$datosMerma->idResponsable);
+                        $conexion->InsertDetalleMermaPlantaForestal($idMerma,$detalles);
+                    break;
 
 
 
@@ -271,17 +329,7 @@ class SubMovimientos
 
 
 
-                    case 'getNextidPago':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getNextidPago();
-                        echo json_encode($resultado);
-                    break;
 
-                    case 'getNextidSalida':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getNextidPago();
-                        echo json_encode($resultado);
-                    break;
 
 
 
@@ -373,16 +421,6 @@ class SubMovimientos
                     
 
 
-
-
-                    case 'InsertSalida':
-                        $datosSalida= json_decode($_POST['datosSalidas']);
-                        $detalles= json_decode($_POST['detalles']);
-                        $conexion = New Movimientos();
-                        $salida=$conexion->insertSalidaPlantas($datosSalida->idPago,$datosSalida->idResponsable,$datosSalida->fechaEntrega);
-                        $conexion->insertDetalleSalidas($salida['idSalida'],$detalles);
-                        $conexion->insertSalidaEstado($salida['idPago']);
-                    break;
 
              
 

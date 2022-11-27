@@ -54,6 +54,15 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
+    
+    function getNextIdMerma(){
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'mermaInsumo'";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    
 
     //get for table
     public function getTableAllCompras(){
@@ -88,6 +97,13 @@ class Movimientos {
         return $results;
     }
 
+    public function getTableAllMermas(){
+        $sql = "SELECT m.idMermaInsumos,r.nombre,m.fecha  from  mermaInsumo as m INNER JOIN responsable as r on r.idResponsable=m.idResponsable ";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
     
 
     //get for selected 
@@ -249,17 +265,23 @@ class Movimientos {
     }
 
 
+    public function getMermaInsumo($idMermaInsumos){
+        $sql = "SELECT r.nombre AS NombreResponsable , r.puesto AS PuestoResponsable, m.idMermaInsumos ,m.fecha FROM mermaInsumo as m  INNER JOIN responsable as r ON r.idResponsable=m.idResponsable WHERE m.idMermaInsumos =  :idMermaInsumos;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idMermaInsumos', $idMermaInsumos);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
-
-
-
-
-
-
-
-
-
-
+    public function getDetalleMermaInsumo($idMermaInsumos){
+        $sql = "SELECT i.idInsumo as Insumo,i.nombre as Nombre,c.concepto as Clasificación,i.existencias as Existencias,i.unidad as Unidad,dmi.cantidad as cantidad,dmi.motivo as motivo FROM detalleMermaInsumo as dmi INNER JOIN insumo as i on dmi.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion = i.idClasificacion where dmi.idMermaInsumos = :idMermaInsumos";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idMermaInsumos', $idMermaInsumos);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
     //INSERT AQUI SE INSERTA TODO
 
@@ -403,7 +425,42 @@ class Movimientos {
         $query->execute();
     }
 
+    public function insertMermaInsumos($idResponsable,$fecha){
+        $sql="INSERT INTO mermaInsumo(idResponsable, fecha) VALUES ( :idResponsable, :fecha)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idResponsable', $idResponsable);
+        $query->bindParam(':fecha', $fecha);
+        $query->execute();
+        $idMerma=$this->connect->lastInsertId();
+        return $idMerma;
+    }
+    
+    public function insertDetallesMermaInsumos($idMermaInsumos,$detalles){
+        foreach ($detalles as $value) {
+            $sql="INSERT INTO detalleMermaInsumo(idMermaInsumos, idInsumo, cantidad, motivo) VALUES (:idMermaInsumos, :idInsumo, :cantidad, :motivo)";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idMermaInsumos', $idMermaInsumos);
+            $query->bindParam(':idInsumo', $value->idInsumo);
+            $query->bindParam(':cantidad', $value->Cantidad);
+            $query->bindParam(':motivo', $value->Motivo);
+            $query->execute();
 
+            $sql="SELECT existencias FROM insumo WHERE idInsumo= :idInsumo";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':idInsumo', $value->idInsumo );
+            $query->execute();
+
+            $request=$query->fetchAll();                    
+
+            $existenciasnew=$request[0]['existencias']-$value->Cantidad;
+            
+            $sql="UPDATE insumo SET existencias=:existencias WHERE idInsumo= :idInsumo";
+            $query = $this->connect->prepare($sql);
+            $query->bindParam(':existencias', $existenciasnew);
+            $query->bindParam(':idInsumo', $value->idInsumo);
+            $query->execute();
+        }        
+    }
 
  /*funciones para llenar select
     public function getAllProveedores() {

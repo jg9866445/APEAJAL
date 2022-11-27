@@ -93,11 +93,11 @@
                 <div class="col-lg-8 card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
-                            <label for="staticEmail" class="form-label">id Solicitud</label>
-                            <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled />
+                            <label for="staticEmail" class="form-label">id Merma</label>
+                            <input class="form-control" type="text" name="idMermaPlantas" id="idMermaPlantas" disabled />
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center"> Nueva solicitud de plantas</h3>
+                            <h3 class="text-center"> Nueva Merma</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
@@ -143,125 +143,6 @@
                 </div>
             </div>
         </div>
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-header">Datos cliente</div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                        <div class="col-md-4">
-                                            <label for="staticEmail" class="form-label">RFC o CURP</label>
-                                            <input class="form-control" type="text" name="dato" id="dato"/>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button type="btn insert form-control" class="btn insert" id="buscar">Buscar</button>
-                                        </div>
-                                        <div class="col-md-4">
-                                        </div>
-                                    </div>
-                                <div class="row g-3">
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">idCliente</label>
-                                        <input class="form-control" type="text" name="idCliente" id="idCliente" disabled/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Razón social</label>
-                                        <input class="form-control" type="text" name="razonSocial" id="razonSocial" disabled/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Domicilio</label>
-                                        <input class="form-control" type="text" name="domicilio" id="domicilio" disabled/>
-                                    </div>
-                                </div>
-                                <div class="row g-3">
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">RFC</label>
-                                        <input class="form-control" type="text" name="rfc" id="rfc" disabled/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">CURP</label>
-                                        <input class="form-control" type="text" name="curp" id="curp" disabled/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Teléfono</label>
-                                        <input class="form-control" type="text" name="telefono" id="telefono" disabled/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Celular</label>
-                                        <input class="form-control" type="text" name="celular" id="celular" disabled/>
-                                    </div>
-                                </div>
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="col-sm-5 col-form-label">Tipo cliente</label>
-                                        <input class="form-control" type="text" name="tipoCliente" id="tipoCliente" disabled/>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-header">Datos de Predio</div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="col-sm-5 col-form-label">Predio</label>
-                                            <select class="form-select" name="idPredio" id="idPredio" required onchange="getPredio()">
-                                                <option disabled selected  value="-20">Elija una opción</option>
-                                            </select>
-                                        <label for="input"></label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Municipio</label>
-                                        <input class="form-control" type="text" name="municipio" id="municipio" disabled/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Extencion</label>
-                                        <input class="form-control" type="text" name="extencion" id="extencion" disabled/>
-                                    </div>
-                                </div>
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Uso de predio</label>
-                                        <input class="form-control" type="text" name="usoPredio" id="usoPredio" disabled/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Latitud</label>
-                                        <input class="form-control" type="number" name="latitud" id="latitud" disabled/>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Longitud</label>
-                                        <input class="form-control" type="number" name="longitud" id="longitud" disabled/>
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
@@ -289,12 +170,12 @@
                                 </div>
                                 <div class="row g-3">
                                     <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Precio</label>
-                                        <input class="form-control" type="number" name="precioPlanta" id="precioPlanta" disabled/>
+                                        <label for="staticEmail" class="form-label">Motivo</label>
+                                        <input class="form-control" type="text" name="Motivo" id="Motivo"/>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Cantidad solicitada</label>
-                                        <input class="form-control" type="number" name="cantidadSolicitada" id="cantidadSolicitada"/>
+                                        <label for="staticEmail" class="form-label">Cantidad</label>
+                                        <input class="form-control" type="number" name="Cantidad" id="Cantidad"/>
                                     </div>
                                 </div>
                                 <br>
@@ -330,17 +211,11 @@
                                     <table  id="mytable" class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Predio</th>
-                                                <th>Municipio</th>
-                                                <th>Extención</th>
-                                                <th>Latitud</th>
-                                                <th>Longitud</th>
                                                 <th>Planta</th>
                                                 <th>Especie</th>
                                                 <th>Nombre</th>
-                                                <th>Precio</th>
+                                                <th>Motivo</th>
                                                 <th>Cantidad</th>
-                                                <th>Importe</th>
                                                 <th>Eliminar</th>
                                             </tr>
                                         </thead>
@@ -356,21 +231,6 @@
             </div>
         </div>
         <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 ">
-                    <h1> </h1>
-                </div>
-
-                <div class="col-lg-3 ">
-                    <label for="staticEmail" class="col-sm-5 col-form-label">Total a pagar</label>
-                    <input class="form-control" type="text" name="total" id="total"  value="0" readonly />
-                </div>
-                <div class="col-lg-4">
-
-                </div>
-            </div>
-        </div>
         <br>
         <div class="container">
             <div class="row">
@@ -395,74 +255,31 @@
                 window.location.href = "/SistemaVentas/Movimientos/SolicitudPlantas.html"
             });
      
-            $('#buscar').click(function() {
-                    var dato = $("#dato").val();
-                    $.ajax({
-                        url: "/src/php/SistemaVentas/SubMovimientos.php",
-                        method: "POST",
-                        data: {
-                            "Metodo":'getClientes',
-                            "dato": dato
-                        },
-                        beforeSend: function() {
-                            aux.alert("<h5>Espere cargando</h5><p>Cliente</p>");
-                        }}).done(function (respuesta){
-                            aux.cerrar();
-                            respuesta=JSON.parse(respuesta);
-                            if(respuesta.length!=0){          
-                                document.getElementById("idCliente").value=respuesta[0].idCliente;              
-                                document.getElementById("razonSocial").value=respuesta[0].razonSocial;
-                                document.getElementById("domicilio").value=respuesta[0].domicilio;
-                                document.getElementById("rfc").value=respuesta[0].RFC;
-                                document.getElementById("curp").value=respuesta[0].CURP;
-                                document.getElementById("telefono").value=respuesta[0].telefono;
-                                document.getElementById("celular").value=respuesta[0].celular;
-                                document.getElementById("tipoCliente").value=respuesta[0].tipoCliente;
-                                getAllPrediosforSelect(respuesta[0].idCliente);
-                                }else{
-                                    aux.alert("Error cliente no encontrado",true,true)
-                                }
-                        });
-                });
-
             var i = 1;
             $('#adicionar').click(function() {
-                total=parseInt(document.getElementById('total').value,10);
-                var idPredio = document.getElementById("idPredio").value;
                 var idPlanta = document.getElementById("idPlanta").value;
-                var municipio = document.getElementById("municipio").value;
-                var extencion = document.getElementById("extencion").value;
-                var latitud = document.getElementById("latitud").value;
-                var longitud = document.getElementById("longitud").value;
                 var especie = document.getElementById("especiePlanta").value;
                 var nombre = document.getElementById("nombrePlanta").value;
-                var precio = parseInt(document.getElementById("precioPlanta").value,10);
-                var cantidadSolicitada = parseInt(document.getElementById("cantidadSolicitada").value,10);
+                var Motivo = document.getElementById("Motivo").value;
+                var Cantidad = parseInt(document.getElementById("Cantidad").value,10);
             
                 var duplicado=false;
                 var table = $("#mytable tbody");
                 table.find('tr').each(function (i, el) {
                     var tds = $(this).find('td');
-                    if(tds.eq(0).text()==idPredio &&  tds.eq(5).text()==idPlanta)
+                    if(tds.eq(5).text()==idPlanta)
                         duplicado=true;
                 });    
-                if(cantidadSolicitada!=0){    
-                    if(idPredio!=-20){
+                if(Cantidad!=0){    
                         if(idPlanta!=-20){
                             if(!duplicado){
                                 var fila = 
                                     '<tr id="row' + i + '" >'+
-                                        '<td id="idPredio">' + idPredio + '</td>'+
-                                        '<td>' + municipio + '</td>'+
-                                        '<td>' + extencion + '</td>'+
-                                        '<td>' + latitud + '</td>'+
-                                        '<td>' + longitud + '</td>'+
                                         '<td>' + idPlanta + '</td>'+
                                         '<td>' + especie + '</td>'+
                                         '<td>' + nombre + '</td>'+
-                                        '<td id="precio">' + precio + '</td>'+
-                                        '<td id="cantidadSolicitada">' + cantidadSolicitada + '</td>'+
-                                        '<td >' + precio*cantidadSolicitada + '</td>'+
+                                        '<td id="Motivo">' + Motivo + '</td>'+
+                                        '<td id="Cantidad">' + Cantidad + '</td>'+
                                         '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
                                     '</tr>'; 
                                 
@@ -470,29 +287,17 @@
                                 //agregas la nueva fila con los datos
                                 $('#mytable tbody:first').append(fila);
                                 //limpiar datos
-                                document.getElementById("idPredio").value=-20;
                                 document.getElementById("idPlanta").value=-20;
-                                document.getElementById("municipio").value="";
-                                document.getElementById("extencion").value="";
-                                document.getElementById("latitud").value="";
-                                document.getElementById("longitud").value="";
-                                document.getElementById("usoPredio").value=""
                                 document.getElementById("especiePlanta").value="";
                                 document.getElementById("nombrePlanta").value="";
-                                document.getElementById("precioPlanta").value="";
-                                document.getElementById("cantidadSolicitada").value="";
-
-                                total=parseInt(total+(precio*cantidadSolicitada),10);
-                                    document.getElementById('total').value=total;
+                                document.getElementById("Motivo").value="";
+                                document.getElementById("Cantidad").value="";
                             }else{
                                 aux.alert("<h5>Planta duplicada para este predio</h5>",true,true);
                             }
                         }else{
                             aux.alert("<h5>Agregar una planta</h5>",true,true);
                         }
-                    }else{
-                        aux.alert("<h5>agregar un predio</h5>",true,true);
-                    }
                 }else{
                     aux.alert("<h5>agregar una cantidad de plantas</h5>",true,true);
                 }
@@ -500,15 +305,9 @@
         });
   
             $(document).on('click', '.btn_remove', function() {
-            total=parseInt(document.getElementById('total').value,10);
             var button_id = $(this).attr("id");
 
-            cantidadSolicitada=$('#row'+button_id).find("#cantidadSolicitada")[0].textContent;
-            precio=$('#row'+button_id).find("#precio")[0].textContent;
             $('#row' + button_id).remove();
-            total=parseInt(total-(precio*cantidadSolicitada),10);
-            document.getElementById('total').value=total;
-
         });
 
             $('#regristar').click(function() {
@@ -516,7 +315,6 @@
             var ValidacionTable=aux.validateAll(
                 [
                     {"valor":document.getElementById("Fecha").value,"typeOf":"date","mensaje":"<p>Selecione una fecha</p><br>"},
-                    {"valor":document.getElementById("idCliente").value,"typeOf":"select","mensaje":"<p>Ingrese un cliente</p><br>"},
                     {"valor":document.getElementById("idResponsable").value,"typeOf":"select","mensaje":"<p>Selecione un responsable</p><br>"},
                 ]
             )
@@ -525,17 +323,16 @@
                 if(table.find('tr').length!=0){
                     table.find('tr').each(function (i, el) {
                         var $tds = $(this).find('td');
-                        idPredio = $tds.eq(0).text();
-                        idPlanta = $tds.eq(5).text();
-                        cantidadSolicitada = $tds.eq(9).text();
-                        precio = $tds.eq(8).text();
-                        dato={"predio":idPredio, "planta":idPlanta, "Cantidad":cantidadSolicitada, "precio":precio};
+                        idPlanta = $tds.eq(0).text();
+                        cantidadSolicitada = $tds.eq(4).text();
+                        Motivo = $tds.eq(3).text();
+                        dato={"planta":idPlanta, "Cantidad":cantidadSolicitada, "Motivo":Motivo};
                         datos.push(dato);
                     });
                     const formData = new FormData();
                     
-                    formData.append("Metodo", "insertSolicitudPlantas");
-                    formData.append("datosSolicud", JSON.stringify({"FechaSolicitud":document.getElementById("Fecha").value, "idCliente":document.getElementById("idCliente").value, "idResponsable":document.getElementById("idResponsable").value, "total":document.getElementById("total").value}) ); 
+                    formData.append("Metodo", "InsertMermaPlantasForestales");
+                    formData.append("datosMerma", JSON.stringify({"fecha":document.getElementById("Fecha").value, "idResponsable":document.getElementById("idResponsable").value}) ); 
                     formData.append("detalles", JSON.stringify(datos)); 
                     $.ajax({
                         url: "/src/php/SistemaVentas/SubMovimientos.php",
@@ -548,7 +345,7 @@
                         },
                         }).done(function(respuesta) {
                             aux.cerrar();
-                            window.location.href = "/SistemaVentas/Movimientos/SolicitudPlantas.html"
+                            window.location.href = "/SistemaVentas/Movimientos/MermasPlantas.html"
                         })
                 }else{
                     aux.alert("<h5>Agregar minimo una planta",true,true);
@@ -574,10 +371,10 @@
                 url: "/src/php/SistemaVentas/SubMovimientos.php",
                 method: "POST",
                 data: {
-                    "Metodo":'getNextidSolicitudPlantas',
+                    "Metodo":'getNextidMerma',
                 }}).done(function(respuesta){
                     respuesta=JSON.parse(respuesta);
-                    document.getElementById("idSolicitud").value=respuesta[0].AUTO_INCREMENT;
+                    document.getElementById("idMermaPlantas").value=respuesta[0].AUTO_INCREMENT;
                 });   
         }
 
@@ -624,54 +421,6 @@
                 });
         }
         
-        function getAllPrediosforSelect(idCliente){
-                    $.ajax({
-                        url: "/src/php/SistemaVentas/SubMovimientos.php",
-                        method: "POST",
-                        data: {
-                            "Metodo":'getAllPrediosforSelect',
-                            "idCliente": idCliente
-                        },beforeSend:function(){
-                            aux.alert("<h5>Espere cargando</h5><p>Cargando</p>");
-                        }}).done(function(respuesta) {
-                            respuesta=JSON.parse(respuesta);
-                            $('#idPredio').empty().append($('<option disabled selected value="-20" > Selecione una opcion </option>'));
-                            if(respuesta.length!=0){
-                            respuesta.forEach(element => {
-                                $('#idPredio').append($('<option>', { 
-                                    value: element.idPredio,
-                                    text : element.idPredio 
-                                    }));
-                            }); 
-                            }else{
-                                aux.alert("Este cliente no tiene predios",true,true);
-                            }
-                        }).always(function(){
-                            aux.cerrar();
-                        });
-                }
-
-        function getPredio(){
-            $.ajax({
-                url: "/src/php/SistemaVentas/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Metodo":'getPredio',
-                    "idPredio":document.getElementById("idPredio").value
-                },
-                beforeSend: function() {
-                    aux.alert("<h5>Espere cargando</h5><p>Cargando</p>");
-                }}).done(function(respuesta){
-                    respuesta=JSON.parse(respuesta);
-                    document.getElementById("municipio").value=respuesta[0].municipio;
-                    document.getElementById("extencion").value=respuesta[0].extencion;
-                    document.getElementById("usoPredio").value=respuesta[0].usoPredio;
-                    document.getElementById("latitud").value=respuesta[0].longitud;
-                    document.getElementById("longitud").value=respuesta[0].latitud;
-                }).always(function(respuesta){
-                    aux.cerrar();
-                })
-        }
         
         function getAllPlantasfolestalesSelect(){
          $.ajax({
@@ -710,7 +459,6 @@
                     respuesta=JSON.parse(respuesta);
                     document.getElementById("especiePlanta").value=respuesta[0].nombre;
                     document.getElementById("nombrePlanta").value=respuesta[0].descripcion;
-                    document.getElementById("precioPlanta").value=respuesta[0].precio;
                 }).always(function(respuesta){
                     aux.cerrar();
                 })

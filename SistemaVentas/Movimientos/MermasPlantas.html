@@ -87,52 +87,50 @@
     </div>
 
     <div>
-    <div class="container botton">
-        <div class="row">
-            <div class="col-lg-2 ">
+        <div class="container botton">
+            <div class="row">
+                <div class="col-lg-2 ">
+                </div>
+                <div class="col-lg-7 ">
+                </div>
+                <div class="col-lg-2">
+                    <a class="btn insert" href="/SistemaVentas/Movimientos/MermasPlantasAdd.html">Nuevo Registro</a>
+                </div>
             </div>
-            <div class="col-lg-8 ">
-            </div>
-            <div class="col-lg-2">
-            <a class="btn insert" href="/SistemaVentas/Movimientos/PagoAdd.html">Nuevo Pago</a>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
+
+                </div>
+
+                <div class="col-lg-8 ">
+                    <h2>Mermas</h2>
+                    <br>
+                    <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
+                        <thead>
+                            <tr>
+                                <th>id Merma</th>
+                                <th>Fecha</th>
+                                <th>Responsable</th>
+                                <th>Consultar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-lg-2">
+
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
-    <div class="row">
-        <div class="col-lg-2 ">
-
-        </div>
-
-        <div class="col-lg-8 ">
-            <br>
-            <h2>Pagos</h2>
-            <br>
-            <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
-                <thead>
-                    <tr>
-                        <th>id pago </th>
-                        <th>Venta</th>
-                        <th>Fecha</th>
-                        <th>Concepto</th>
-                        <th>Importe</th>
-                        <th>Consultar</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
-
-        <div class="col-lg-2">
-
-        </div>
-    </div>
-</div>
-</div>
-   <div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,102 +139,42 @@
                 </div>
                 <div class="modal-body">
                     <div class="container">
-                                <p>Pago</p>
+                                <p>Merma</p>
                                 <div class="row g-3">
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">id Pago</label>
-                                        <input class="form-control" type="text" name="idPago" id="idPago" disabled />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Fecha Pago</label>
-                                        <input class="form-control" type="date" name="fechaPago" id="fechaPago" disabled/>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row g-3">
-                                    <div class="col-md-5">
-                                        <label for="staticEmail" class="form-label">Nombre responsable</label>
-                                        <input class="form-control" type="text" name="nombreP" id="nombreP" disabled/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Puesto</label>
-                                        <input class="form-control" type="text" name="puestoP" id="puestoP" disabled/>
-                                    </div>
-                                </div> 
-                                <hr>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="staticEmail" class="form-label">Comprobante de pago</label>
-                                        <a id="descarga" target="_blank"><label class="btn download form-control ">Descargar</label></a>
-                                    </div>
-                                    <div class="col-md-3">
-                                    </div>
-                                </div>
-                                <br>
-                                <hr>
-                                <div class="row g-3">
-                                    <div class="col-md-5">
-                                        <label for="staticEmail" class="form-label">Concepto General</label>
-                                        <input class="form-control" type="text" name="conceptoGeneral" id="conceptoGeneral" disabled/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Importe</label>
-                                        <input class="form-control" type="number" name="importe" id="importe" disabled/>
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                </div>
-                                <hr>
-                                <p>ventas</p>
-                                 <div class="row g-3">
                                     <div class="col-md-4">
-                                        <label for="staticEmail" class="col-sm-5 col-form-label">idVenta</label>
-                                            <input class="form-control" type="text" name="idVenta" id="idVenta" disabled/>
+                                            <label for="staticEmail" class="col-sm-5 col-form-label">Merma</label>
+                                            <input class="form-control" type="text" name="idMermaPlantas" id="idMermaPlantas" disabled/>
+                                        <label for="input"></label>
                                     </div>
                                     <div class="col-md-1">
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Fecha de Venta</label>
-                                        <input class="form-control" type="date" name="fechaSolicitud" id="fechaSolicitud" disabled/>
+                                        <label for="staticEmail" class="form-label">Fecha de solicitud</label>
+                                        <input class="form-control" type="date" name="fechaMerma" id="fechaMerma" disabled/>
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="row g-3">
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Solicitud</label>
-                                        <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled/>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="staticEmail" class="form-label">Estado</label>
-                                        <input class="form-control" type="text" name="estado" id="estado" disabled/>
-                                    </div>
-                                </div>
                                 <hr>
+                                <p>Responsable</p>
                                 <div class="row g-3">
                                     <div class="col-md-5">
                                         <label for="staticEmail" class="form-label">Nombre responsable</label>
-                                        <input class="form-control" type="text" name="nombreV" id="nombreV" disabled/>
+                                        <input class="form-control" type="text" name="nombreResponsable" id="nombreResponsable" disabled/>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="staticEmail" class="form-label">Puesto</label>
-                                        <input class="form-control" type="text" name="puestoV" id="puestoV" disabled/>
+                                        <input class="form-control" type="text" name="puestoResponsable" id="puestoResponsable" disabled/>
                                     </div>
-                                </div> 
+                                </div>
                                 <hr>
-                                <p>Venta</p>
+                                <p>Mermas</p>
                                     <table  id="mytable" class="">
                                         <thead>
                                             <tr>
-                                                <th>Predio</th>
-                                                <th>Municipio</th>
-                                                <th>Extención</th>
-                                                <th>Latitud</th>
-                                                <th>Longitud</th>
                                                 <th>Planta</th>
                                                 <th>Nombre</th>
-                                                <th>Precio</th>
                                                 <th>Cantidad</th>
-                                                <th>Importe</th>
+                                                <th>Motivo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -244,18 +182,6 @@
                                         </tbody>
                                     </table> 
                                     <hr>
-                    <div class="container">
-                        <p>Total</p>
-                            <div class="row">
-                                <div class="col-4">
-                                </div>
-                                <div class="col-4">
-                                    <input class="form-control" type="text" name="total" id="total"  value="0" readonly />
-                                </div>
-                                <div class="col-4">
-                                </div>
-                            </div>
-                    </div>
                             <br>
                 </div> 
                 <div class="modal-footer">
@@ -264,7 +190,7 @@
             </div>
         </div>
     </div>
-    </div>
+
 <script>
     const aux = new auxliar();
     var table = $('#table_id').DataTable({scrollX:true});
@@ -290,73 +216,48 @@
                         url: "/src/php/SistemaVentas/SubMovimientos.php", 
                         method: "POST",
                         data: {
-                            "Metodo":'getAllPagosforTabla',
+                            "Metodo":'getAllMermasForTabla',
                         },
                         }).done(function(respuesta){
                             respuesta=JSON.parse(respuesta);
 
                             $.each(respuesta,function(index, value){ 
                                 table.row.add( [
-                                    value.idPago,
-                                    value.idVenta,
+                                    value.idMermaPlantas,
                                     value.fecha,
-                                    value.conceptoGeneral,
-                                    value.importe,
+                                    value.nombre,
                                     '<button type="button" class="btn show" onclick="show(this)"><i class="bi bi-eye"></i>  </button>'
                                 ] ).draw();
                         });
                         aux.cerrar();
                     })                     
         }
-        
+
      function show(context){
             aux.alert('<h5>Espere cargando datos</h5>',false,false);
-            var idPago=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
-            var idVenta=context.parentNode.parentNode.getElementsByTagName('td')[1].textContent; 
+            var idMermaPlantas=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
             $.when(
                     $.ajax({ 
                         url: "/src/php/SistemaVentas/SubMovimientos.php", 
                         method: "POST",
                         data: {
-                            "Metodo":'getPagoPlantas',
-                            "idPago": idPago
+                            "Metodo":'getMerma',
+                            "idMermaPlantas": idMermaPlantas
                         },
+                        
                         }).done(function(respuesta){
                             respuesta=JSON.parse(respuesta);
-                            document.getElementById("idPago").value=idPago;
-                            document.getElementById("fechaPago").value=respuesta[0].fecha;
-
-                            document.getElementById("nombreP").value=respuesta[0].nombre;
-                            document.getElementById("puestoP").value=respuesta[0].puesto;
-                            
-                            document.getElementById("conceptoGeneral").value=respuesta[0].conceptoGeneral;
-                            document.getElementById("importe").value=respuesta[0].importe;
-
-                            document.getElementById("descarga").setAttribute("href", "/src/PDF/FacturasCompras/"+idPago+".pdf");
-                        }),
-                    $.ajax({ 
-                        url: "/src/php/SistemaVentas/SubMovimientos.php", 
-                        method: "POST",
-                        data: {
-                            "Metodo":'getVentaPlantas',
-                            "idVenta": idVenta
-                        },
-                        }).done(function(respuesta){
-                            respuesta=JSON.parse(respuesta);
-                            document.getElementById("idVenta").value=idVenta;
-                            document.getElementById("fechaSolicitud").value=respuesta[0].fechaVenta;
-                            document.getElementById("idSolicitud").value=respuesta[0].idSolicitud;
-                            document.getElementById("estado").value=respuesta[0].estado;
-                            document.getElementById("nombreV").value=respuesta[0].nombre;
-                            document.getElementById("puestoV").value=respuesta[0].puesto;
-
+                            document.getElementById("idMermaPlantas").value=idMermaPlantas;
+                            document.getElementById("fechaMerma").value=respuesta[0].fechaMerma;
+                            document.getElementById("nombreResponsable").value=respuesta[0].nombre;
+                            document.getElementById("puestoResponsable").value=respuesta[0].puesto;
                         }),
                     $.ajax({
                         url: "/src/php/SistemaVentas/SubMovimientos.php",
                         method: "POST",
                         data: {
-                            "Metodo":'getDetallesVentasPlantas',
-                            "idVenta": idVenta
+                            "Metodo":'getDetallesSolicitudPlantas',
+                            "idSolicitud": idSolicitud
                         },
                     }).done(function(respuesta){
                             respuesta=JSON.parse(respuesta);
@@ -365,20 +266,13 @@
                                 total=0;                  
                             $.each(respuesta,function(index, value){ 
                                     mytable.row.add( [
-                                        value.idPredio,
-                                        value.municipio,
-                                        value.extencion,
-                                        value.latitud,
-                                        value.longitud,
+                                        value.idMermaPlantas,
                                         value.idPlanta,
                                         value.nombre,
-                                        value.precio,
-                                        value.cantidadSolicitada,
-                                        value.precio*value.cantidadSolicitada
+                                        value.Cantidad,
+                                        value.Motivo,
                                     ]).draw();
-                                    total=total+(value.precio*value.cantidadSolicitada);
                             });
-                            document.getElementById('total').value=total;
                         })
                     ).then( function(){
                         aux.cerrar();
@@ -389,8 +283,10 @@
 
 
         }
+  
 
-</script>
+    </script>
+    
 
 </body>
 

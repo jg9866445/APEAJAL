@@ -94,7 +94,7 @@
                 <div class="col-lg-8 ">
                 </div>
                 <div class="col-lg-2">
-                    <a class="btn active bottom" href="/SistemaVentas/Movimientos/AddSalida.html">Nueva Salida</a>
+                    <a class="btn insert" href="/SistemaVentas/Movimientos/SalidaPlantasAdd.html">Nueva Salida</a>
                 </div>
             </div>
         </div>
@@ -128,10 +128,147 @@
             </div>
         </div>
     </div>
+ <div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Consulta individual</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                                <p>Salida</p>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">id Salida</label>
+                                        <input class="form-control" type="text" name="idSalida" id="idSalida" disabled />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Fecha Pago</label>
+                                        <input class="form-control" type="date" name="fechaSalida" id="fechaSalida" disabled/>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row g-3">
+                                    <div class="col-md-5">
+                                        <label for="staticEmail" class="form-label">Nombre responsable</label>
+                                        <input class="form-control" type="text" name="nombreP" id="nombreP" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Puesto</label>
+                                        <input class="form-control" type="text" name="puestoP" id="puestoP" disabled/>
+                                    </div>
+                                </div> 
+                                <hr>
 
+                                <p>Salida</p>
+                                    <table  id="tableSalida" class="">
+                                        <thead>
+                                            <tr>
+                                                <th>Predio</th>
+                                                <th>Municipio</th>
+                                                <th>Extención</th>
+                                                <th>Latitud</th>
+                                                <th>Longitud</th>
+                                                <th>Planta</th>
+                                                <th>Nombre</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table> 
+                                    <hr>
+                                <hr>
+                                <p>ventas</p>
+                                 <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="staticEmail" class="col-sm-5 col-form-label">idVenta</label>
+                                            <input class="form-control" type="text" name="idVenta" id="idVenta" disabled/>
+                                    </div>
+                                    <div class="col-md-1">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Fecha de Venta</label>
+                                        <input class="form-control" type="date" name="fechaSolicitud" id="fechaSolicitud" disabled/>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Solicitud</label>
+                                        <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Estado</label>
+                                        <input class="form-control" type="text" name="estado" id="estado" disabled/>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row g-3">
+                                    <div class="col-md-5">
+                                        <label for="staticEmail" class="form-label">Nombre responsable</label>
+                                        <input class="form-control" type="text" name="nombreV" id="nombreV" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Puesto</label>
+                                        <input class="form-control" type="text" name="puestoV" id="puestoV" disabled/>
+                                    </div>
+                                </div> 
+                                <hr>
+                                <p>Venta</p>
+                                    <table  id="mytable" class="">
+                                        <thead>
+                                            <tr>
+                                                <th>Predio</th>
+                                                <th>Municipio</th>
+                                                <th>Extención</th>
+                                                <th>Latitud</th>
+                                                <th>Longitud</th>
+                                                <th>Planta</th>
+                                                <th>Nombre</th>
+                                                <th>Precio</th>
+                                                <th>Cantidad</th>
+                                                <th>Importe</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table> 
+                                    <hr>
+                    <div class="container">
+                        <p>Total</p>
+                            <div class="row">
+                                <div class="col-4">
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" type="text" name="total" id="total"  value="0" readonly />
+                                </div>
+                                <div class="col-4">
+                                </div>
+                            </div>
+                    </div>
+                            <br>
+                </div> 
+                <div class="modal-footer">
+                    <button type="button" class="btn cancel" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     <script>
         const aux = new auxliar();
         var table = $('#table_id').DataTable({scrollX:true});
+        var tableSalida = $('#tableSalida').DataTable({
+                                        paging: false,
+                                        info: false,
+                                        ordering: false,
+                                        paging: false,
+                                        searching: false
+                                    })
         var mytable = $("#mytable").DataTable({
                                         paging: false,
                                         info: false,
@@ -171,6 +308,118 @@
                             aux.cerrar();
                         })                     
         }
+
+        function show(context){
+            aux.alert('<h5>Espere cargando datos</h5>',false,false);
+            getSalida(context);
+        }
+        function getSalida(context){
+                var idSalida=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
+                $.when(
+                    $.ajax({ 
+                        url: "/src/php/SistemaVentas/SubMovimientos.php", 
+                        method: "POST",
+                        data: {
+                            "Metodo":'getSalida',
+                            "idSalida": idSalida
+                        },
+                        }).done(function(respuesta){
+                            respuesta=JSON.parse(respuesta);
+                                                        console.log(respuesta);
+
+                            document.getElementById("idSalida").value=idSalida;
+                            document.getElementById("fechaSalida").value=respuesta[0].fechaSalida;
+                            document.getElementById("nombreP").value=respuesta[0].nombreP;
+                            document.getElementById("puestoP").value=respuesta[0].puestoP;
+                            getVenta(respuesta[0].idVenta);
+                        }),
+                    $.ajax({
+                        url: "/src/php/SistemaVentas/SubMovimientos.php",
+                        method: "POST",
+                        data: {
+                            "Metodo":'getDetalleSalida',
+                            "idSalida": idSalida
+                        },
+                    }).done(function(respuesta){
+                            respuesta=JSON.parse(respuesta);
+
+                                tableSalida.clear();  
+                                total=0;                  
+                            $.each(respuesta,function(index, value){ 
+                                    tableSalida.row.add( [
+                                        value.idPredio,
+                                        value.municipio,
+                                        value.extencion,
+                                        value.latitud,
+                                        value.longitud,
+                                        value.idPlanta,
+                                        value.nombre,
+                                        value.cantidadSurtida,
+                                    ]).draw();
+                            });
+                        })
+                    ).then( function(){
+                    }
+                );
+        }
+        function getVenta(idVenta) {
+            console.log(idVenta);
+                $.when(
+                    $.ajax({ 
+                        url: "/src/php/SistemaVentas/SubMovimientos.php", 
+                        method: "POST",
+                        data: {
+                            "Metodo":'getVentaPlantas',
+                            "idVenta": idVenta
+                        },
+                        }).done(function(respuesta){
+                            respuesta=JSON.parse(respuesta);
+                            document.getElementById("idVenta").value=idVenta;
+                            document.getElementById("fechaSolicitud").value=respuesta[0].fechaVenta;
+                            document.getElementById("idSolicitud").value=respuesta[0].idSolicitud;
+                            document.getElementById("estado").value=respuesta[0].estado;
+                            document.getElementById("nombreV").value=respuesta[0].nombre;
+                            document.getElementById("puestoV").value=respuesta[0].puesto;
+
+                        }),
+                    $.ajax({
+                        url: "/src/php/SistemaVentas/SubMovimientos.php",
+                        method: "POST",
+                        data: {
+                            "Metodo":'getDetallesVentasPlantas',
+                            "idVenta": idVenta
+                        },
+                    }).done(function(respuesta){
+                            respuesta=JSON.parse(respuesta);
+
+                                mytable.clear();  
+                                total=0;                  
+                            $.each(respuesta,function(index, value){ 
+                                    mytable.row.add( [
+                                        value.idPredio,
+                                        value.municipio,
+                                        value.extencion,
+                                        value.latitud,
+                                        value.longitud,
+                                        value.idPlanta,
+                                        value.nombre,
+                                        value.precio,
+                                        value.cantidadSolicitada,
+                                        value.precio*value.cantidadSolicitada
+                                    ]).draw();
+                                    total=total+(value.precio*value.cantidadSolicitada);
+                            });
+                            document.getElementById('total').value=total;
+                        })
+                    ).then( function(){
+                        aux.cerrar();
+                        var myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
+                        myModal.show();
+                    }
+                );
+        }
+
+
 
     
     </script>
