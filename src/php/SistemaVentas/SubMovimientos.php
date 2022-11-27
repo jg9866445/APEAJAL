@@ -290,39 +290,6 @@ class SubMovimientos
                         $conexion->InsertDetalleMermaPlantaForestal($idMerma,$detalles);
                     break;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 
 
@@ -435,6 +402,14 @@ class SubMovimientos
         }catch (Exception $e){
                 save(var_dump($e));
         }
+    }
+    function bitacora($idUsuario,$fecha,$archivo,$actividad){
+        $idUsuario="USUARIO QUE MODIFICA";
+        $fecha="FEcha de alterazion";
+        $archivo="Archivo que se modifica";
+        $actividad="Actividad que se realiza";
+
+        
     }
 
     function GuardarArchivo($ubicacion,$nombre){
