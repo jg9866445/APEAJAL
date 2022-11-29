@@ -31,7 +31,7 @@
     <script src="/src/js/auxliar.js" ></script>
 </head>
 
-<body onload="getOrden()">
+<body >
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -232,7 +232,7 @@
             window.location.href = "/SistemaProduccion/Movimientos/OrdenProduccion.html"
         });
     });
-    function getOrden(){
+    onload=function(){
         $.ajax({
             url: "/src/php/SistemaProduccion/SubMovimientos.php",
             method: "POST",

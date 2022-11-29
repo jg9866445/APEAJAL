@@ -34,7 +34,7 @@
 </head>
 
 
-<body id="body" onload="createTable()">
+<body id="body" >
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -252,7 +252,7 @@
             })
 
         });
-        function createTable(){
+        onload=function(){
                     aux.alert('<h5>Espere cargando datos</h5>',false,false);
 
                     $.ajax({ 

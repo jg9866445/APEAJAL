@@ -32,7 +32,7 @@
 
 </head>
 
-<body onload="onload()">
+<body>
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -387,7 +387,8 @@
             window.location.href = "/SistemaProduccion/Movimientos/DevolucionesInsumos.html"
         });
     });
-    function onload(){
+    
+    onload=function(){
         var now = new Date();
         var dateString = moment(now).format('YYYY-MM-DD');
         document.getElementById("FechaDevolucion").value=dateString;
@@ -406,15 +407,13 @@
             beforeSend: function() {
                 aux.alert("<h5>Espere cargando</h5>");
 
-            },
-            success: function(respuesta){
+            }}).done({function(respuesta){
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("idDevolucion").value=respuesta[0].AUTO_INCREMENT;
-
-            },complete: function() {
-                aux.cerrar();
-            }
-        })     
+                }
+            }).always(function(){
+                aux.cerrar()    
+            });
     }
     
     function getAllValesSalidaSelect(){

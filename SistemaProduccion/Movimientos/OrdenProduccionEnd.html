@@ -32,7 +32,7 @@
     <script src="/src/js/auxliar.js" ></script>
 </head>
 
-<body onload="getOrdenProduccion()">
+<body>
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -287,7 +287,7 @@
         
     });
 
-    function getOrdenProduccion(){
+    onload=function(){
         $.ajax({
             url: "/src/php/SistemaProduccion/SubMovimientos.php",
             method: "POST",
@@ -297,8 +297,7 @@
             },
             beforeSend: function() {
                 aux.alert("<h5>Espere cargando</h5><p>Datos de la orden</p>");
-            },
-            success: function(respuesta){
+            }}).done(function(respuesta){
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("NombreResponsable").value=respuesta[0].responsable;
                 document.getElementById("PuestoResponsable").value=respuesta[0].puesto;
@@ -308,10 +307,9 @@
                 document.getElementById("FechaAproxTermino").value=respuesta[0].fechaAproxTermino;
                 document.getElementById("DecripcionOrden").value=respuesta[0].descripcionOrden;
                 document.getElementById("CantidaEspera").value=respuesta[0].cantidadEsperada;
-            },complete: function() {
+            }).always (function() {
                 aux.cerrar();
-            }
-        })     
+            })     
     }
 
     </script>

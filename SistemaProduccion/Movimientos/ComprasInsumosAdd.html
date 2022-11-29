@@ -31,7 +31,7 @@
     <script src="/src/js/auxliar.js" ></script>
 </head>
 
-<body onload="onload();">
+<body >
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -506,19 +506,16 @@
                     contentType: false,
                     beforeSend: function() {
                         aux.alert('<h5>Espere</h5><br/><p>Guardando datos</p>',false,false)
-                    },
-                    success: function(respuesta){
+                    }}).done(function(respuesta){
                         aux.alert("<h5>Listo</h5><br/><p>Datos guardados</p>")
                         window.location.href = "/SistemaProduccion/Movimientos/ComprasInsumos.html"
-                    },
-                    complete: function() {
+                    }).always(function() {
                         aux.cerrar();
-                    },
-                    fail: function() {
+                    }).fail(function() {
                         aux.cerrar();
                         aux.alert('<h5>Espere</h5><br/><p>Error</p>',true,true)
-                    }
-                }) 
+                    })
+
             }else{
                 aux.alert(resultado.texto,true,true);
             }
@@ -529,7 +526,7 @@
 
     });
 
-    function onload(){
+    onload=function(){
         var now = new Date();
         var dateString = moment(now).format('YYYY-MM-DD');
         document.getElementById("FechaOrden").value=dateString;
@@ -721,19 +718,16 @@
             },
             beforeSend: function() {
                 aux.alert('<h5>Espere cargando</h5><br/><p>Datos del insumo</p>',false,false)
-            },
-            success: function(respuesta){
-                respuesta=JSON.parse(respuesta);
+            }}).done(function(respuesta){                respuesta=JSON.parse(respuesta);
                 document.getElementById("NombreInsumo").value=respuesta[0].nombre;
                 document.getElementById("ClasificacionInsumo").value=respuesta[0].concepto;
                 document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
                 document.getElementById("unidadMetricaInsumo").value=respuesta[0].unidad;
                 document.getElementById("CostoPromedio").value=respuesta[0].costoPromedio;
                 document.getElementById("adicionar").removeAttribute('disabled');
-            },complete: function() {
+            }).always(function() {
                 aux.cerrar();
-            }
-        })     
+            })    
     }
     
 </script>

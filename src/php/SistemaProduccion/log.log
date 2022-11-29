@@ -1,19 +1,29 @@
-PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'cantidad' cannot be null in C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php:446
+Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
 Stack trace:
-#0 C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php(446): PDOStatement->execute()
-#1 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(273): Movimientos->insertDetallesMermaInsumos('1', Array)
-#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(15): SubMovimientos->API()
-#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(382): SubMovimientos->__construct()
-#4 {main}PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.idMermaPlantas' in 'field list' in C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php:270
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(148): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(15): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(164): SubReportes->__construct()
+#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
 Stack trace:
-#0 C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php(270): PDO->prepare('SELECT r.nombre...')
-#1 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(216): Movimientos->getMermaInsumo(5)
-#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(15): SubMovimientos->API()
-#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(382): SubMovimientos->__construct()
-#4 {main}PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'm.idMermaPlantas' in 'field list' in C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php:270
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(149): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(15): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(165): SubReportes->__construct()
+#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
 Stack trace:
-#0 C:\xampp\htdocs\src\php\SistemaProduccion\Movimientos.php(270): PDO->prepare('SELECT r.nombre...')
-#1 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(216): Movimientos->getMermaInsumo(5)
-#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(15): SubMovimientos->API()
-#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubMovimientos.php(382): SubMovimientos->__construct()
-#4 {main}
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(188): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(15): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(204): SubReportes->__construct()
+#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
+Stack trace:
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(188): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(15): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaProduccion\SubReportes.php(204): SubReportes->__construct()
+#5 {main}

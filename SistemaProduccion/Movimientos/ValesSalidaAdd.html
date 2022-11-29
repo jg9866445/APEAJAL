@@ -31,7 +31,7 @@
     <script src="/src/js/auxliar.js" ></script>
 </head>
 
-<body onload="onload()">
+<body>
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -382,13 +382,11 @@
                 beforeSend: function() {
                    aux.alert("<h5>Espere</h5><p>Insertando</p>");
 
-                },
-                success: function(respuesta){
+                }}).done(function(respuesta) {
                      window.location.href = "/SistemaProduccion/Movimientos/ValesSalidaInsumos.html"
-                },complete: function() {
+                }).always(function() {
                     aux.cerrar();
-                }
-            }) 
+                }) 
             }else{
                 aux.alert(ValidacionTable.texto,true,true);
             }
@@ -401,7 +399,7 @@
         });
     });
 
-    function onload(){
+    onload=function(){
         var now = new Date();
         var dateString = moment(now).format('YYYY-MM-DD');
         document.getElementById("Fecha").value=dateString;
@@ -464,8 +462,7 @@
             },
             beforeSend: function() {
                 aux.alert("<h5>Espere cargando</h5><p>datos de la orden</p>")
-            },
-            success: function(respuesta){
+            }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("NombreResponsableOrden").value=respuesta[0].responsable;
                 document.getElementById("PuestoResponsable").value=respuesta[0].puesto;
@@ -476,10 +473,9 @@
                 document.getElementById("DecripcionOrden").value=respuesta[0].descripcion;
                 document.getElementById("CantidaEspera").value=respuesta[0].cantidadEsperada;
 
-            },complete: function() {
+            }).always(function() {
                 aux.cerrar();
-            }
-        });   
+            })
         return false;  
     }
 
@@ -608,23 +604,15 @@
             beforeSend: function() {
                 aux.alert("<h5>Espere cargando</h5><p>Insumos</p>");
 
-            },
-            success: function(respuesta){
+            }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("NombreInsumo").value=respuesta[0].nombre;
                 document.getElementById("CategoriasInsumo").value=respuesta[0].concepto;
                 document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
-            },complete: function() {
+            }).always(function() {
                 aux.cerrar();
-            }
-        })     
+            })     
     }
-
-
-
-
-
     </script>
-
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/src/php/connectividad.php");
 
-class Movimientos {
+class Reportes {
 
     var $db;
     var $connect;
@@ -24,6 +24,7 @@ class Movimientos {
     {
         unset($this->connect);
     }
+
 
 
     

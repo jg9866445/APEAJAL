@@ -32,7 +32,7 @@
     <script src="/src/js/auxliar.js" ></script>
 </head>
 
-<body onload="onload()">
+<body >
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -305,7 +305,7 @@
         });
     });
     
-    function onload(){
+    onload=function(){
         var now = new Date();
         var dateString = moment(now).format('YYYY-MM-DD');
         document.getElementById("Fecha").value=dateString;
