@@ -97,92 +97,9 @@
 
                 </div>
                 <div class="col-lg-7 ">
-                    <h3>Consulta Compra de insumos dividido por clasifiacion</h3>
+                    <h3>Ordenes de produccion
                 </div>
                 <div class="col-lg-2">
-                </div>
-            </div>
-        </div>
-        <br>
-  <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-
-                </div>
-
-                <div class="col-lg-8 ">
-                        <div class="card">
-                        <div class="card-header">Ordenes de producción</div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <select class="form-select" name="idOrden" id="idOrden" required onchange="getOrdenesProduccion()">
-                                <option disabled selected value="-20">Escoja una opción</option>
-
-                                </select>
-                                <label for="input"></label>
-                            </div>
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-12">Orden de producción</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Fecha de aproximada Termino</label>
-                                    <input class="form-control" type="text" name="FechaAproxTermino" id="FechaAproxTermino" disabled />
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="DecripcionOrden" id="DecripcionOrden" disabled/>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Cantidad esperada</label>
-                                    <input class="form-control" type="text" name="CantidaEspera" id="CantidaEspera" disabled />
-                                </div>
-                            </div>
-                            <br>
-                            <hr>
-                            <div class="row g-3">
-                                <div class="col-md-12">Responsable</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="NombreResponsableOrden" id="NombreResponsableOrden" disabled />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="staticEmail" class="form-label">Puesto</label>
-                                    <input class="form-control" type="text" name="PuestoResponsable" id="PuestoResponsable" disabled/>
-                                </div>
-                            </div>
-                            <hr>
-                            <br>    
-                            <div class="row g-3">
-                                <div class="col-md-12">Planta</div>
-                            </div>
-                            <br>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="NombrePlanta" id="NombrePlanta" disabled />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Descripción</label>
-                                    <input class="form-control" type="text" name="DescripcionPlanta" id="DescripcionPlanta" disabled />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Existencias</label>
-                                    <input class="form-control" type="text" name="ExistenciaPlanta" id="ExistenciaPlanta" disabled/>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2">
-
                 </div>
             </div>
         </div>
@@ -229,12 +146,15 @@
             </div>
         </div>
     </div>
-        <div class="container">
+       <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
                 </div>
-                <div class="col-lg-8 ">
-                            <button type="button" class="btn insert" id="Descargar" >Descargar consulta</button>
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
+                </div>
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
                 </div>
                 <div class="col-lg-2">
                 </div>
@@ -246,74 +166,28 @@
 <script>
     const aux = new auxliar();
     onload=function(){
-        getAllClasificacionSelect();
     }
     $(document).ready(function() {
 
-        $('#Descargar').click(function() {
-            if(document.getElementById("idClasificacion").value!=-20)
+        $('#PDF').click(function() {
                 if(document.getElementById("fechaInicial").value!=0 )
                     if( document.getElementById("fechaFinal").value!=0)
-                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraClasificacion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idClasificacion").value
+                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=ROrdenProduccion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&tipo=PDF"
                     else aux.alert("<h5>Inserte fecha final</h5>",true,true)
                 else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
-            else aux.alert("<h5>Selecione un proveedor</h5>",true,true)
-        });
+            });
 
+        $('#EXCEL').click(function() {
+                if(document.getElementById("fechaInicial").value!=0 )
+                    if( document.getElementById("fechaFinal").value!=0)
+                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=ROrdenProduccion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&tipo=Excel"
+                    else aux.alert("<h5>Inserte fecha final</h5>",true,true)
+                else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
+            });
     });
 
 
-      function getAllOrdenProduccionSelect(){
-        $.ajax({
-            url: "/src/php/SistemaProduccion/SubMovimientos.php",
-            method:"POST",
-            data:{
-                "Metodo":'getAllOrdenProduccionSelect'
-            },
-            beforeSend:function(){
-                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de Clasificacion</p>',false,false)
-            }
-        }).done(function(respuesta) {
-            respuesta=JSON.parse(respuesta);
-            respuesta.forEach(element => {
-                $('#idOrden').append($('<option>', { 
-                    value: element.idOrden,
-                    text : element.descripcion 
-                }))
-            })
-        }).always(function(){
-            aux.cerrar();
-        });
-    }
-
-    function getOrdenesProduccion(){
-        $.ajax({
-            url: "/src/php/SistemaProduccion/SubMovimientos.php",
-            method: "POST",
-            data: {
-                "Metodo":'getOrdenProduccion',
-                "idOrdenProduccion":document.getElementById("idOrden").value,
-            },
-            beforeSend: function() {
-                aux.alert("<h5>Espere cargando</h5><p>datos de la orden</p>")
-            },
-            success: function(respuesta){
-                respuesta=JSON.parse(respuesta);
-                document.getElementById("NombreResponsableOrden").value=respuesta[0].responsable;
-                document.getElementById("PuestoResponsable").value=respuesta[0].puesto;
-                document.getElementById("NombrePlanta").value=respuesta[0].planta;
-                document.getElementById("DescripcionPlanta").value=respuesta[0].fechaAproxTermino;
-                document.getElementById("ExistenciaPlanta").value=respuesta[0].existencia;
-                document.getElementById("FechaAproxTermino").value=respuesta[0].descripcionOrden;
-                document.getElementById("DecripcionOrden").value=respuesta[0].descripcion;
-                document.getElementById("CantidaEspera").value=respuesta[0].cantidadEsperada;
-
-            },complete: function() {
-                aux.cerrar();
-            }
-        });   
-        return false;  
-    }
+    
 
 </script>
 

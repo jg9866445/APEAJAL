@@ -295,14 +295,28 @@
                                     <input class="form-control" type="text" name="NombreInsumo" id="NombreInsumo" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Clasificación   </label>
-                                    <input class="form-control" type="text" name="CategoriasInsumo" id="CategoriasInsumo" disabled/>
+                                    <label for="staticEmail" class="form-label">Existencias</label>
+                                    <input class="form-control" type="text" name="ExistenciaInsumos" id="ExistenciaInsumos" disabled />
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Existencias</label>
-                                    <input class="form-control" type="text" name="ExistenciasInsumo" id="ExistenciasInsumo" disabled/>
+                                    <label for="staticEmail" class="form-label">Unidad</label>
+                                    <input class="form-control" type="text" name="UnidadInsumos" id="UnidadInsumos" disabled />
                                 </div>
                             </div>
+                            <br>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">Precio</label>
+                                    <input class="form-control" type="text" name="PrecioInsumo" id="PrecioInsumo" disabled />
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                            </div>
+                            <br>
                             <br>
                             <div class="row g-3">
                                 <div class="col-md-3">
@@ -607,8 +621,9 @@
             }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("NombreInsumo").value=respuesta[0].nombre;
-                document.getElementById("CategoriasInsumo").value=respuesta[0].concepto;
-                document.getElementById("ExistenciasInsumo").value=respuesta[0].existencias;
+                document.getElementById("UnidadInsumos").value=respuesta[0].unidad;
+                document.getElementById("ExistenciaInsumos").value=respuesta[0].existencias;
+                document.getElementById("PrecioInsumo").value=respuesta[0].costoPromedio;
             }).always(function() {
                 aux.cerrar();
             })     

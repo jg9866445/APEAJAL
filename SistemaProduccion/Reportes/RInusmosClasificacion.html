@@ -160,8 +160,11 @@
             <div class="row">
                 <div class="col-lg-2 ">
                 </div>
-                <div class="col-lg-8 ">
-                            <button type="button" class="btn insert" id="Descargar" >Descargar consulta</button>
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
+                </div>
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
                 </div>
                 <div class="col-lg-2">
                 </div>
@@ -177,9 +180,15 @@
     }
     $(document).ready(function() {
 
-        $('#Descargar').click(function() {
+        $('#PDF').click(function() {
             if(document.getElementById("idClasificacion").value!=-20)
-                window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RInusmosClasificacion&id="+document.getElementById("idClasificacion").value
+                window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RInusmosClasificacion&id="+document.getElementById("idClasificacion").value+"&tipo=PDF"
+            else aux.alert("<h5>Selecione una clasificacion</h5>",true,true)
+        });
+
+        $('#EXCEL').click(function() {
+            if(document.getElementById("idClasificacion").value!=-20)
+                window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RInusmosClasificacion&id="+document.getElementById("idClasificacion").value+"&tipo=Excel"
             else aux.alert("<h5>Selecione una clasificacion</h5>",true,true)
         });
 

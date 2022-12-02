@@ -97,7 +97,7 @@
 
                 </div>
                 <div class="col-lg-7 ">
-                    <h3>Consulta Compra de insumos dividido por proveedor</h3>
+                    <h3>Consulta Orden de produccion dividido por estados</h3>
                 </div>
                 <div class="col-lg-2">
                 </div>
@@ -116,9 +116,9 @@
                     <div class="card-body">
                             <div class="row g-3">
                                 <select class="form-select" name="Estado" id="Estado" required >
-                                <option disabled selected value="Pendiente">Pendiente</option>
-                                <option disabled selected value="Cancelado">Cancelado</option>
-                                <option disabled selected value="Terminado">Terminado</option>
+                                <option selected value="Pendiente">Pendiente</option>
+                                <option value="Cancelado">Cancelado</option>
+                                <option value="Terminado">Terminado</option>
                                 </select>
                                 <label for="input"></label>
                             </div>
@@ -175,12 +175,15 @@
             </div>
         </div>
     </div>
-        <div class="container">
+       <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
                 </div>
-                <div class="col-lg-8 ">
-                            <button type="button" class="btn insert" id="Descargar" >Descargar consulta</button>
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
+                </div>
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
                 </div>
                 <div class="col-lg-2">
                 </div>
@@ -192,14 +195,21 @@
 <script>
     const aux = new auxliar();
     onload=function(){
-        getAllProveedoresSelect();
     }
     $(document).ready(function() {
 
-        $('#Descargar').click(function() {
+        $('#PDF').click(function() {
                 if(document.getElementById("fechaInicial").value!=0 )
                     if( document.getElementById("fechaFinal").value!=0)
-                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraInumosProveedor&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idProveedor").value
+                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=ROrdenProduccionEstados&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&Estado="+document.getElementById("Estado").value+"&tipo=PDF"
+                    else aux.alert("<h5>Inserte fecha final</h5>",true,true)
+                else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
+        });
+
+        $('#EXCEL').click(function() {
+                if(document.getElementById("fechaInicial").value!=0 )
+                    if( document.getElementById("fechaFinal").value!=0)
+                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=ROrdenProduccionEstados&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&Estado="+document.getElementById("Estado").value+"&tipo=Excel"
                     else aux.alert("<h5>Inserte fecha final</h5>",true,true)
                 else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
         });

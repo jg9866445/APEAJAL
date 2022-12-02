@@ -188,8 +188,11 @@
             <div class="row">
                 <div class="col-lg-2 ">
                 </div>
-                <div class="col-lg-8 ">
-                            <button type="button" class="btn insert" id="Descargar" >Descargar consulta</button>
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
+                </div>
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
                 </div>
                 <div class="col-lg-2">
                 </div>
@@ -205,16 +208,24 @@
     }
     $(document).ready(function() {
 
-        $('#Descargar').click(function() {
+        $('#PDF').click(function() {
             if(document.getElementById("idClasificacion").value!=-20)
                 if(document.getElementById("fechaInicial").value!=0 )
                     if( document.getElementById("fechaFinal").value!=0)
-                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraClasificacion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idClasificacion").value
+                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraClasificacion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idClasificacion").value+"&tipo=PDF"
                     else aux.alert("<h5>Inserte fecha final</h5>",true,true)
                 else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
             else aux.alert("<h5>Selecione un proveedor</h5>",true,true)
         });
-
+        $('#EXCEL').click(function() {
+            if(document.getElementById("idClasificacion").value!=-20)
+                if(document.getElementById("fechaInicial").value!=0 )
+                    if( document.getElementById("fechaFinal").value!=0)
+                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraClasificacion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idClasificacion").value+"&tipo=Excel"
+                    else aux.alert("<h5>Inserte fecha final</h5>",true,true)
+                else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
+            else aux.alert("<h5>Selecione un proveedor</h5>",true,true)
+        });
     });
 
 

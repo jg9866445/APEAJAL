@@ -135,13 +135,15 @@
     </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 ">
-                </div>
                 <div class="col-lg-2 ">
-                            <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
-                            <button type="button" class="btn insert" id="Excel" >Descargar consulta en excel</button>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
+                </div>
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
+                </div>
+                <div class="col-lg-2">
                 </div>
             </div>
         </div>
@@ -160,7 +162,7 @@
             else aux.alert("Inserte fecha inicial",true,true)
         });
 
-        $('#Excel').click(function() {
+        $('#EXCEL').click(function() {
             if(document.getElementById("fechaInicial").value!=0 )
                 if( document.getElementById("fechaFinal").value!=0)
                     window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraInumos&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&tipo=Excel"

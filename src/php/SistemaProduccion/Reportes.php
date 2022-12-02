@@ -96,8 +96,18 @@ class Reportes {
         return $datos;
     }
 
-    public function ROrdenProduccionEstado($estado,$fi,$ff){
-        $sql = "SELECT op.idOrden,r.nombre as responsable,pf.descripcion as plantaForestal,e.nombre as especie,op.fechaOrden,op.fechaAproxTermino,op.descripcion,op.cantidadEsperada,op.cantidadLograda,op.costoProduccion,op.fechaRealTermino FROM ordenProduccion as op INNER JOIN responsable as r ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta=op.idPlanta INNER JOIN especie as e on e.idEspecie=pf.idEspecie WHERE  fc.fecha BETWEEN :fi AND :ff and  op.estado=:estado ORDER BY op.idOrden";
+    public function ROrdenProduccion($fi,$ff){
+        $sql = "SELECT op.idOrden,r.nombre as responsable,pf.descripcion as plantaForestal,op.fechaOrden,op.fechaAproxTermino,op.descripcion,op.cantidadEsperada,op.cantidadLograda,op.costoProduccion,op.fechaRealTermino,op.estado FROM ordenProduccion as op INNER JOIN responsable as r ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta=op.idPlanta INNER JOIN especie as e on e.idEspecie=pf.idEspecie WHERE  op.fechaOrden BETWEEN :fi AND :ff ORDER BY op.idOrden";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':fi', $fi,PDO::PARAM_STR);
+        $query->bindParam(':ff', $ff,PDO::PARAM_STR);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function ROrdenProduccionEstados($estado,$fi,$ff){
+        $sql = "SELECT op.idOrden,r.nombre as responsable,pf.descripcion as plantaForestal,op.fechaOrden,op.fechaAproxTermino,op.descripcion,op.cantidadEsperada,op.cantidadLograda,op.costoProduccion,op.fechaRealTermino FROM ordenProduccion as op INNER JOIN responsable as r ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta=op.idPlanta  WHERE op.fechaOrden  BETWEEN :fi AND :ff and  op.estado=:estado ORDER BY op.idOrden";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
@@ -106,43 +116,77 @@ class Reportes {
         $results = $query -> fetchAll(); 
         return $results;
     }
-    public function RValeSalida($fi,$ff){
 
+    public function RValeSalidaOrdenProduccion($idOrdenProduccion,$fi,$ff){
+        $sql = " SELECT  vs.idVale,vs.fecha,r.nombre as responsable,i.nombre,vs.cantidad FROM valeSalida as vs INNER JOIN insumo as i ON i.idInsumo=vs.idInsumo INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable WHERE  vs.fecha BETWEEN :fi AND :ff and vs.idOrden = :idOrdenProduccion;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':fi', $fi,PDO::PARAM_STR);
+        $query->bindParam(':ff', $ff,PDO::PARAM_STR);
+        $query->bindParam(':idOrdenProduccion', $idOrdenProduccion);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+
+        $sql = "SELECT r.nombre as responsable,r.puesto,e.nombre as planta,pf.descripcion,pf.existencia,op.fechaAproxTermino,op.descripcion as descripcionOrden,op.cantidadEsperada from ordenProduccion as op  INNER JOIN responsable as r on r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON op.idPlanta=pf.idPlanta INNER JOIN especie as e on e.idEspecie= pf.idEspecie WHERE op.idOrden=:idOrdenProduccion";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idOrdenProduccion', $idOrdenProduccion);
+        $query -> execute(); 
+        $results2 = $query -> fetchAll(); 
+        $datos=[
+            "detalles"=>$results,
+            "Orden"=>$results2
+        ];
+        return $datos;
     }
-    public function RDevolucionOrdenProduccion($idOrdenProduccion,$fi,$ff){
 
+    public function RValeSalida($fi,$ff){
+        $sql = " SELECT vs.idOrden, op.descripcion, vs.idVale,vs.fecha,r.nombre as responsable,i.nombre,vs.cantidad FROM valeSalida as vs INNER JOIN insumo as i ON i.idInsumo=vs.idInsumo INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden WHERE  vs.fecha BETWEEN :fi AND :ff";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':fi', $fi,PDO::PARAM_STR);
+        $query->bindParam(':ff', $ff,PDO::PARAM_STR);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function RDevolucionOrdenProduccion($idOrdenProduccion,$fi,$ff){
+        $sql = " SELECT dv.idDevolucion,dv.fecha,r.nombre as responsable,i.nombre,dv.cantidad FROM devolucion as dv INNER JOIN valeSalida as vs INNER JOIN responsable as r ON r.idResponsable = vs.idResponsable INNER JOIN insumo as i on vs.idInsumo=i.idInsumo WHERE   vs.fecha BETWEEN :fi AND :ff and vs.idOrden = :idOrdenProduccion;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':fi', $fi,PDO::PARAM_STR);
+        $query->bindParam(':ff', $ff,PDO::PARAM_STR);
+        $query->bindParam(':idOrdenProduccion', $idOrdenProduccion);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+
+        $sql = "SELECT r.nombre as responsable,r.puesto,e.nombre as planta,pf.descripcion,pf.existencia,op.fechaAproxTermino,op.descripcion as descripcionOrden,op.cantidadEsperada from ordenProduccion as op  INNER JOIN responsable as r on r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON op.idPlanta=pf.idPlanta INNER JOIN especie as e on e.idEspecie= pf.idEspecie WHERE op.idOrden=:idOrdenProduccion";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idOrdenProduccion', $idOrdenProduccion);
+        $query -> execute(); 
+        $results2 = $query -> fetchAll(); 
+        $datos=[
+            "detalles"=>$results,
+            "Orden"=>$results2
+        ];
+        return $datos;
     }
     public function RDevolucion($ff,$fi){
-
+        $sql="SELECT vs.idOrden,op.descripcion, dv.idDevolucion,dv.fecha,r.nombre as responsable,i.nombre,dv.cantidad FROM devolucion as dv INNER JOIN valeSalida as vs INNER JOIN responsable as r ON r.idResponsable = vs.idResponsable INNER JOIN insumo as i on vs.idInsumo=i.idInsumo INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden  WHERE   dv.fecha BETWEEN :fi AND :ff;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':fi', $fi,PDO::PARAM_STR);
+        $query->bindParam(':ff', $ff,PDO::PARAM_STR);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return  $results;
     }
-    public function RMermas($fi,$ff){}
 
-    /*
- Consulta de Compra de insumos por Clasificación                        Pedir fechas y Clasificación       RCompraClasificacion -
-            idClasificacion	concepto	descripcion
-            
-3     Consulta de Insumos divididos por Clasificación                        Clasificación                      RInusmosClasificacion -
-            idClasificacion	concepto	descripcion
-            nombre	descripcion	unidad	existencias	maximo	minimo	costoPromedio	
+    public function RMermas($fi,$ff){
+        $sql="SELECT mi.fecha,r.nombre,i.nombre,dmi.cantidad,dmi.motivo from mermaInsumo as mi INNER JOIN detalleMermaInsumo as dmi on mi.idMermaInsumos=dmi.idMermaInsumos INNER JOIN responsable as r ON r.idResponsable = mi.idResponsable INNER JOIN insumo as i ON i.idInsumo= dmi.idInsumo WHERE   mi.fecha BETWEEN :fi AND :ff;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':fi', $fi,PDO::PARAM_STR);
+        $query->bindParam(':ff', $ff,PDO::PARAM_STR);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return  $results;
+    }
 
-4     Consulta por estado de  Órdenes de producción                          Pedir fechas y Estado              ROrdenProduccionEstado -
-            Estado metodo _GET
-            idOrden	,idResponsable(nombre)	,idPlanta	(Nombre),fechaOrden	,fechaAproxTermino	,descripcion 	,cantidadEsperada	,cantidadLograda	(Solo si estado es = termiando),costoProduccion	(Solo si estado es = termiando),fechaRealTermino	(Solo si estado es = termiando)
 
-5     Consulta de vale de salida por orden de producción                     Pedir fechas y orden de produccion RValeSalidaOrdenProduccion
-            (Consutla de vale de salida y sus datos)
-            idVale	idResponsable	(nombre) cantidad	 idInsumo	(nombre) Clasificacion	(nombre) fecha	 
-6     Consulta de vale de salida                                             Pedir fechas                       RValeSalida
-            idVale	idResponsable  idOrden descripcion	(nombre) cantidad	 idInsumo	(nombre) Clasificacion	(nombre) fecha	 
-
-7     Consulta de devolución por orden de producción                         Pedir fechas y orden de produccion RDevolucionOrdenProduccion
-            (Consutla de vale de salida y sus datos)
-            idInsumo(nombre ) idrespinsable Clasificacion	fecha	cantidad	
-
-8     Consulta de devoluciones                                               Pedir fechas                       RDevolucion
-            id Devolucion idresponsable idInsumo(nombre ) Clasificacion	fecha	cantidad	
-
-9     Consulta de mermas                                                      Pedir fechas                       RMermas
-            idMermaInsumos	idResponsable(Responsable) fecha   idInsumo	(Nombre)    idClasificacion(nombre)    cantidad   motivo	
-*/
 }

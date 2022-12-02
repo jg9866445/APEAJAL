@@ -30,3 +30,30 @@ Area Ventas
 7    Consultas de existencias en almacen virtual    pedir fecha                            
 8    Consulta de plantas para donar                 pedir fecha            
 9    Consulta de mermas                             pedir fecha
+
+
+    
+Area Produccion
+1     Consulta de Compra de insumos                                          Pedir fechas                       RCompra -Teminado    
+1     Consulta de Compra de insumos por proveedor                            Pedir fechas y proveedor           RCompraProveedor -Falta consulta
+2     Consulta de Compra de insumos por Clasificación                        Pedir fechas y Clasificación       RCompraClasificacion -
+            idClasificacion	concepto	descripcion
+            Nombre de Proveedor ,factura ,fecha  Nombre, unidad, cantidad ,costo, importe    
+3     Consulta de Insumos divididos por Clasificación                        Clasificación                      RInusmosClasificacion -
+            idClasificacion	concepto	descripcion
+            nombre	descripcion	unidad	existencias	maximo	minimo	costoPromedio	
+4     Consulta por estado de  Órdenes de producción                          Pedir fechas y Estado              ROrdenProduccionEstado -
+            Estado metodo _GET
+            idOrden	,idResponsable(nombre)	,idPlanta	(Nombre),fechaOrden	,fechaAproxTermino	,descripcion 	,cantidadEsperada	,cantidadLograda	(Solo si estado es = termiando),costoProduccion	(Solo si estado es = termiando),fechaRealTermino	(Solo si estado es = termiando)
+5     Consulta de vale de salida por orden de producción                     Pedir fechas y orden de produccion RValeSalidaOrdenProduccion
+            (Consutla de vale de salida y sus datos)
+            idVale	idResponsable	(nombre) cantidad	 idInsumo	(nombre) Clasificacion	(nombre) fecha	 
+6     Consulta de vale de salida                                             Pedir fechas                       RValeSalida
+            idVale	idResponsable  idOrden descripcion	(nombre) cantidad	 idInsumo	(nombre) Clasificacion	(nombre) fecha	 
+7     Consulta de devolución por orden de producción                         Pedir fechas y orden de produccion RDevolucionOrdenProduccion
+            (Consutla de vale de salida y sus datos)
+            idInsumo(nombre ) Clasificacion	fecha	cantidad	
+8     Consulta de devoluciones                                               Pedir fechas                       RDevolucion
+            id Devolucion idresponsable idInsumo(nombre ) Clasificacion	fecha	cantidad	
+9     Consulta de mermas                                                      Pedir fechas                       RMermas
+            idMermaInsumos	idResponsable(Responsable) fecha   idInsumo	(Nombre) idClasificacion(nombre) cantidad   motivo	

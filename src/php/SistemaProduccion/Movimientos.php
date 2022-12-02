@@ -90,7 +90,7 @@ class Movimientos {
     }
 
     public function getTableAllDevoluciones(){
-        $sql = "Select d.idDevolucion,d.fecha, r.nombre as 'Responsable' ,i.nombre as 'insumo',c.concepto as 'clasifiacion',vs.cantidad as 'Salida', d.cantidad as 'devuelta' FROM devolucion as d INNER JOIN valeSalida as vs on vs.idVale=d.idVale INNER JOIN responsable as r ON vs.idResponsable= r.idResponsable INNER JOIN insumo as i ON i.idInsumo=d.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion; ";
+        $sql = "Select d.idDevolucion,d.fecha, r.nombre as 'Responsable' ,i.nombre as 'insumo',c.concepto as 'clasifiacion',vs.cantidad as 'Salida', d.cantidad as 'devuelta' FROM devolucion as d INNER JOIN valeSalida as vs on vs.idVale=d.idVale INNER JOIN responsable as r ON vs.idResponsable= r.idResponsable INNER JOIN insumo as i ON i.idInsumo=vs.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion; ";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -405,7 +405,6 @@ class Movimientos {
         $sql="INSERT INTO devolucion( idVale, idInsumo, fecha, cantidad) VALUES ( :idVale, :idInsumo, :fecha, :cantidad)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idVale', $idVale);
-        $query->bindParam(':idInsumo', $idInsumo);
         $query->bindParam(':fecha', $fecha);
         $query->bindParam(':cantidad', $cantidad);
         $query->execute();
