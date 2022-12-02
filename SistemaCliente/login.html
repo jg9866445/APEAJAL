@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    if(window.localStorage.getItem('dato') != undefined)
+        window.location.href = "/SistemaCliente/index.html"
 
+</script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,25 +42,19 @@
                         <div class="card-body area text-center">
 
                             <div class="mb-md-5 mt-md-4 pb-5">
-                                <form action="../menu.html">
 
 
                                     <h2 class="fw-bold mb-2 text-uppercase"><img src="/src/imagenes/Logo.jpeg" width="50%" height="50%"></h2>
-                                    <p class="text-50 mb-5">Sistema de gestion de viviero forestal de APEAJAL</p>
+                                    <p class="text-50 mb-5">Sistema de gestion de viviero forestal de APEAJAL - Clientes</p>
 
                                     <div class="form-outline form-white mb-4">
-                                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                                        <label class="form-label" for="typeEmailX">Usuario</label>
+                                        <input type="text" id="dato" class="form-control form-control-lg" />
+                                        <label class="form-label" for="typeEmailX">CURP O RFC</label>
                                     </div>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                                        <label class="form-label" for="typePasswordX">Password</label>
-                                    </div>
+                                    <button class="btn insert btn-lg px-5" id="Iniciar">Inicio de sesion</button>
 
-                                    <button class="btn insert btn-lg px-5">Inicio de sesion</button>
-                                </form>
-                                    <a class="btn link btn-lg px-5" href="/SistemaCliente/login.html">Soy Cliente</a>
+                                    <button class="btn insert btn-lg px-5" id="crear">Crear nuevo cliente</button>
                             </div>
                         </div>
                     </div>
@@ -65,5 +63,35 @@
         </div>
 
 </body>
+<script>
+        const aux = new auxliar();
 
+ $(document).ready(function() {
+            $('#Iniciar').click(function() {
+                $.ajax({
+                    url: "/src/php/SistemaClientes/SubSistemaClientes.php",
+                    method: "POST",
+                    data: {
+                        "Metodo":'ISlogin',
+                        "dato":document.getElementById("dato").value
+                    },
+                    beforeSend: function() {
+                        aux.alert("<h5>Espere cargando datos</h5>")
+                    }}).done(function(respuesta) {
+                        respuesta=JSON.parse(respuesta);
+                        if(respuesta[0].ISlogin){
+                            localStorage.setItem("dato", document.getElementById("dato").value);
+                            window.location.href = "/SistemaCliente/index.html"
+                        }else{
+                            aux.alert("<h5>Error Cliente no encontrado</h5>",true,true);
+                        }
+                    })             
+                });       
+        
+            $('#crear').click(function() {
+                            window.location.href = "/SistemaCliente/Catalagos/Cliente.html"            
+                });       
+    });
+
+    </script>
 </html>

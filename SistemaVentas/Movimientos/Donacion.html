@@ -31,6 +31,7 @@
     <script src="/src/js/auxliar.js" ></script>
 
 </head>
+
 <body id="body" onload="createTable()">
     <div>
         <nav class="navbar logo">
@@ -82,53 +83,51 @@
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
-    </div>
 
     <div>
         <div class="container botton">
             <div class="row">
                 <div class="col-lg-2 ">
                 </div>
-                <div class="col-lg-7 ">
+                <div class="col-lg-8 ">
                 </div>
                 <div class="col-lg-2">
-                    <a class="btn insert" href="/SistemaVentas/Movimientos/VentaAdd.html">Nuevo Registro</a>
+                    <a class="btn insert" href="/SistemaVentas/Movimientos/DonacionAdd.html">Nueva Donacion</a>
                 </div>
             </div>
         </div>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-2 ">
 
-        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
+                </div>
 
-        <div class="col-lg-8 ">
-            <h2>Ventas</h2>
-            <br>
-            <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
-                <thead>
-                    <tr>
-                        <th>id venta</th>
-                        <th>Fecha</th>
-                        <th>Solicitud</th>
-                        <th>Responsable</th>
-                        <th>Total</th>
-                        <th>Consultar</th>
-                    </tr>
-                </thead>
-                <tbody>
+                <div class="col-lg-8 ">
+                    <h2>Donacion</h2>
+                    <br>
+                    <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
+                        <thead>
+                            <tr>
+                                <th>id Donacion</th>
+                                <th>idPago</th>
+                                <th>Cliente</th>
+                                <th>Responsable</th>
+                                <th>fecha Entrega</th>
+                                <th>Consultas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                </tbody>
-            </table>
-        </div>
+                        </tbody>
+                    </table>
+                </div>
 
-        <div class="col-lg-2">
-
+                <div class="col-lg-2">
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</div>
-    <div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+ <div class="modal fade" id="myModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -137,7 +136,51 @@
                 </div>
                 <div class="modal-body">
                     <div class="container">
-                                <p>Venta de plantas forestales</p>
+                                <p>Salida</p>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">id Salida</label>
+                                        <input class="form-control" type="text" name="idSalida" id="idSalida" disabled />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Fecha Pago</label>
+                                        <input class="form-control" type="date" name="fechaSalida" id="fechaSalida" disabled/>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row g-3">
+                                    <div class="col-md-5">
+                                        <label for="staticEmail" class="form-label">Nombre responsable</label>
+                                        <input class="form-control" type="text" name="nombreP" id="nombreP" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Puesto</label>
+                                        <input class="form-control" type="text" name="puestoP" id="puestoP" disabled/>
+                                    </div>
+                                </div> 
+                                <hr>
+
+                                <p>Salida</p>
+                                    <table  id="tableSalida" class="">
+                                        <thead>
+                                            <tr>
+                                                <th>Predio</th>
+                                                <th>Municipio</th>
+                                                <th>Extención</th>
+                                                <th>Latitud</th>
+                                                <th>Longitud</th>
+                                                <th>Planta</th>
+                                                <th>Nombre</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table> 
+                                    <hr>
+                                <hr>
+                                <p>ventas</p>
                                  <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="staticEmail" class="col-sm-5 col-form-label">idVenta</label>
@@ -214,54 +257,114 @@
             </div>
         </div>
     </div>
-<script>
-    const aux = new auxliar();
-    var table = $('#table_id').DataTable({scrollX:true});
-    var mytable = $("#mytable").DataTable({
-                                    paging: false,
-                                    info: false,
-                                    ordering: false,
-                                    paging: false,
-                                    searching: false
-                                })
-    $(document).ready( function () {
+    </div>
+    <script>
+        const aux = new auxliar();
+        var table = $('#table_id').DataTable({scrollX:true});
+        var tableSalida = $('#tableSalida').DataTable({
+                                        paging: false,
+                                        info: false,
+                                        ordering: false,
+                                        paging: false,
+                                        searching: false
+                                    })
+        var mytable = $("#mytable").DataTable({
+                                        paging: false,
+                                        info: false,
+                                        ordering: false,
+                                        paging: false,
+                                        searching: false
+                                    })
+        $(document).ready( function () {
 
-            $('#myModal').on('hidden.bs.modal', function()
-            {
-                document.getElementById("body").removeAttribute('style');
-                document.getElementById("body").removeAttribute('class');
-            })
-        } );
+                $('#myModal').on('hidden.bs.modal', function()
+                {
+                    document.getElementById("body").removeAttribute('style');
+                    document.getElementById("body").removeAttribute('class');
+                })
+            } );
 
-    function createTable(){
-                aux.alert('<h5>Espere cargando datos</h5>',false,false);
-                $.ajax({ 
+        function createTable(){
+                    aux.alert('<h5>Espere cargando datos</h5>',false,false);
+                    $.ajax({ 
+                            url: "/src/php/SistemaVentas/SubMovimientos.php", 
+                            method: "POST",
+                            data: {
+                                "Metodo":'getAllSalidasForTabla',
+                            },
+                            }).done(function(respuesta){
+                                respuesta=JSON.parse(respuesta);
+
+                                $.each(respuesta,function(index, value){ 
+                                    table.row.add( [
+                                        value.idSalida,
+                                        value.idSalida,
+                                        value.idPago,
+                                        value.Responsable,
+                                        value.fechaEntrega,
+                                        '<button type="button" class="btn show" onclick="show(this)"><i class="bi bi-eye"></i>  </button>'
+                                    ] ).draw();
+                            });
+                            aux.cerrar();
+                        })                     
+        }
+
+        function show(context){
+            aux.alert('<h5>Espere cargando datos</h5>',false,false);
+            getSalida(context);
+        }
+        function getSalida(context){
+                var idSalida=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
+                $.when(
+                    $.ajax({ 
                         url: "/src/php/SistemaVentas/SubMovimientos.php", 
                         method: "POST",
                         data: {
-                            "Metodo":'getAllVentasforTabla',
+                            "Metodo":'getSalida',
+                            "idSalida": idSalida
                         },
                         }).done(function(respuesta){
                             respuesta=JSON.parse(respuesta);
+                                                        console.log(respuesta);
 
+                            document.getElementById("idSalida").value=idSalida;
+                            document.getElementById("fechaSalida").value=respuesta[0].fechaSalida;
+                            document.getElementById("nombreP").value=respuesta[0].nombreP;
+                            document.getElementById("puestoP").value=respuesta[0].puestoP;
+                            getVenta(respuesta[0].idVenta);
+                        }),
+                    $.ajax({
+                        url: "/src/php/SistemaVentas/SubMovimientos.php",
+                        method: "POST",
+                        data: {
+                            "Metodo":'getDetalleSalida',
+                            "idSalida": idSalida
+                        },
+                    }).done(function(respuesta){
+                            respuesta=JSON.parse(respuesta);
+
+                                tableSalida.clear();  
+                                total=0;                  
                             $.each(respuesta,function(index, value){ 
-                                table.row.add( [
-                                    value.idVenta,
-                                    value.fechaVenta,
-                                    value.idSolicitud,
-                                    value.nombre,
-                                    value.total,
-                                    '<button type="button" class="btn show" onclick="show(this)"><i class="bi bi-eye"></i>  </button>'
-                                ] ).draw();
-                        });
-                        aux.cerrar();
-                    })                     
+                                    tableSalida.row.add( [
+                                        value.idPredio,
+                                        value.municipio,
+                                        value.extencion,
+                                        value.latitud,
+                                        value.longitud,
+                                        value.idPlanta,
+                                        value.nombre,
+                                        value.cantidadSurtida,
+                                    ]).draw();
+                            });
+                        })
+                    ).then( function(){
+                    }
+                );
         }
-
-     function show(context){
-            aux.alert('<h5>Espere cargando datos</h5>',false,false);
-            var idVenta=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
-            $.when(
+        function getVenta(idVenta) {
+            console.log(idVenta);
+                $.when(
                     $.ajax({ 
                         url: "/src/php/SistemaVentas/SubMovimientos.php", 
                         method: "POST",
@@ -314,12 +417,14 @@
                         myModal.show();
                     }
                 );
-
-
         }
-  
 
-</script>
+
+
+    
+    </script>
+
+
 
 
 </body>

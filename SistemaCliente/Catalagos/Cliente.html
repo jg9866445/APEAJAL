@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    if(window.localStorage.getItem('dato') != undefined)
+        window.location.href = "/SistemaCliente/index.html"
 
+</script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -120,6 +124,7 @@
                                         <input class="form-control" type="text" name="razonSocial" id="razonSocial" />
                                     </div>
                                 </div>
+                                <br>
                                 <div class="row g-3">
                                     <div class="col-md-5">
                                         <label for="staticEmail" class="form-label">RFC</label>
@@ -130,6 +135,7 @@
                                         <input class="form-control" type="text" name="curp" id="curp" />
                                     </div>
                                 </div>
+                                <br>
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="staticEmail" class="form-label">Domicilio</label>
@@ -144,6 +150,7 @@
                                         <input class="form-control" type="text" name="Estado" id="Estado" />
                                     </div>
                                 </div>
+                                <br>
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <label for="staticEmail" class="form-label">email</label>
@@ -158,6 +165,7 @@
                                         <input class="form-control" type="text" name="celular" id="celular" />
                                     </div>
                                 </div>
+                                <br>
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="staticEmail" class="form-label">Constancia de Situación Fiscal</label>
@@ -179,7 +187,7 @@
                 <div class="col-lg-3 ">
                 </div>
                 <div class="col-lg-3">
-                    <button type="button" id="regristar" class="btn insert btn-xs btn-block text-center" >Guardar Predios</button>
+                    <button type="button" id="regristar" class="btn insert btn-xs btn-block text-center" >Guardar Cliente</button>
                 </div>
                 <div class="col-lg-3">
                     <button type="button" id="Cancelar" class="btn cancel btn-xs btn-block text-center" >Cancelar Guardado</button>
@@ -212,7 +220,7 @@
             if(resultado.estado){
                 const formData = new FormData();
             
-                formData.append("Busqueda", "insertClientes");
+                formData.append("Metodo", "insertClientes");
                 formData.append("datosClientes", JSON.stringify(
                     {
                     "RazonSocial":document.getElementById("razonSocial").value,
@@ -229,7 +237,7 @@
                     formData.append ("file", document.querySelector("#Constancia").files[0]);
 
                 $.ajax({
-                    url: "/src/php/SistemaVentas/SubCatalagos.php",
+                    url: "/src/php/SistemaClientes/SubSistemaClientes.php",
                     method: "POST",
                     data: formData,
                     processData: false,
@@ -239,8 +247,7 @@
                     },
                     success: function(respuesta){
                         aux.alert("<h5>Listo</h5><br/><p>Datos guardados</p>")
-                        //TODO:IF PARA CUADNO TENGA inicio de session
-                        ///window.location.href = "/SistemaVentas/Movimientos/Predios.html"
+                        window.location.href = "/SistemaCliente/login.html"
                     },
                     complete: function() {
                         aux.cerrar();
@@ -255,8 +262,7 @@
             }
             });
             $('#Cancelar').click(function() {
-                    //TODO:IF PARA CUADNO TENGA inicio de session
-                    //window.location.href = "/SistemaVentas/Movimientos/Predios.html"
+                    window.location.href = "/SistemaCliente/login.html"
             });
         });
         function onload(){

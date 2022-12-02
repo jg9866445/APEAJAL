@@ -67,15 +67,13 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="">Consulta por estado de solicitudes</a></li>
-                                <li><a class="dropdown-item" href="">Consulta por estado de Ventas</a></li>
-                                <li><a class="dropdown-item" href="">Consulta de ventas por cliente</a></li>
-                                <li><a class="dropdown-item" href="">consulta por estado de pago</a></li>
-                                <li><a class="dropdown-item" href="">consulta por estado de salida</a></li>
-                                <li><a class="dropdown-item" href="">Consulta de existencias en almacen fisico</a></li>
-                                <li><a class="dropdown-item" href="">Consultas de existencias en almacen virtual</a></li>
-                                <li><a class="dropdown-item" href="">Consulta de plantas para donar</a></li>
-                                <li><a class="dropdown-item" href="">Consulta de mermas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSolicitudes.html">Consulta de solicitudes</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RVentas.html">Consulta de Ventas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RPago.html">Consulta de pago</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSalida.html">consulta de salida</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacen fisico</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacen virtual</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -288,7 +286,7 @@
 
                 <div class="col-lg-4 ">
                     <div class="card-body">
-                        <button type="button" id="regristar" class="btn btn-primary btn-xs btn-block text-center" >Guardar Pago</button>
+                        <button type="button" id="regristar" class="btn insert" >Guardar Pago</button>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -335,7 +333,7 @@
                                 aux.alert("<h5>Espere</h5><p>Insertando</p>")
                             }}).done(function(respuesta) {
                                 aux.cerrar();
-                                window.location.href = "/SistemaVentas/Movimientos/Pagos.php"
+                                window.location.href = "/SistemaVentas/Movimientos/Pagos.html"
                             }) 
                 }else{
                     aux.alert(ValidacionTable.texto,true,true);

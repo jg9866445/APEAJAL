@@ -92,7 +92,7 @@
 
                     </div>
                     <div class="col-lg-7 ">
-                    <h1 style="text-align:center">Salida de Plantas forestales</h1>
+                    <h1 style="text-align:center">Donacion</h1>
                     </div>
                 </div>
             </div>
@@ -105,8 +105,8 @@
                 <div class="col-lg-6 card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
-                            <label for="staticEmail" class="form-label">id Salida</label>
-                            <input class="form-control" type="text" name="idSalida" id="idSalida" disabled />
+                            <label for="staticEmail" class="form-label">id Donacion</label>
+                            <input class="form-control" type="text" name="idDonacion" id="idDonacion" disabled />
                         </div>
                         <div class="col-md-6">
                         </div>
@@ -155,7 +155,76 @@
             </div>
         </div>
         <br>
-
+  <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">Datos cliente</div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="staticEmail" class="form-label">RFC o CURP</label>
+                                            <input class="form-control" type="text" name="dato" id="dato"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="btn insert form-control" class="btn insert" id="buscar">Buscar</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                        </div>
+                                    </div>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">idCliente</label>
+                                        <input class="form-control" type="text" name="idCliente" id="idCliente" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Razón social</label>
+                                        <input class="form-control" type="text" name="razonSocial" id="razonSocial" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Domicilio</label>
+                                        <input class="form-control" type="text" name="domicilio" id="domicilio" disabled/>
+                                    </div>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">RFC</label>
+                                        <input class="form-control" type="text" name="rfc" id="rfc" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">CURP</label>
+                                        <input class="form-control" type="text" name="curp" id="curp" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Teléfono</label>
+                                        <input class="form-control" type="text" name="telefono" id="telefono" disabled/>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="staticEmail" class="form-label">Celular</label>
+                                        <input class="form-control" type="text" name="celular" id="celular" disabled/>
+                                    </div>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="staticEmail" class="col-sm-5 col-form-label">Tipo cliente</label>
+                                        <input class="form-control" type="text" name="tipoCliente" id="tipoCliente" disabled/>
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
@@ -208,11 +277,6 @@
                                     <table  id="mytable" class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Predio</th>
-                                                <th>Municipio</th>
-                                                <th>Extención</th>
-                                                <th>Latitud</th>
-                                                <th>Longitud</th>
                                                 <th>Planta</th>
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
@@ -360,8 +424,10 @@
                                                 <th>Planta</th>
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
+                                                <th>Por surtir</th>
                                                 <th>Surtir</th>
                                                 <th>Importe</th>
+                                                <th>Quitar</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -443,10 +509,10 @@
             document.getElementById("cantidadSurtida").value="";
             i++;
             });
-        
-            $(document).on('click', '.btn_remove', function() {
+            
+
+            $(document).on('click', '.surtir', function() {
                 var button_id = $(this).attr("id");
-                document.getElementById("idPredio").value=$('#row'+button_id).find("#idPredioS")[0].textContent;
                 document.getElementById("idPlanta").value=$('#row'+button_id).find("#idPlantaS")[0].textContent;
                 document.getElementById("nombrePlanta").value=$('#row'+button_id).find("#nombrePlantaS")[0].textContent;
                 
@@ -637,17 +703,12 @@
                         if(value.cantidadSolicitada>0){    
                             var fila =
                             '<tr id="row' + i + '" >'+
-                                '<td id="idPredioS">' + value.idPredio + '</td>'+
-                                '<td>' + value.municipio + '</td>'+
-                                '<td>' + value.extencion + '</td>'+
-                                '<td>' + value.latitud + '</td>'+
-                                '<td>' + value.longitud + '</td>'+
                                 '<td id="idPlantaS">' + value.idPlanta + '</td>'+
                                 '<td id="nombrePlantaS">' + value.nombre + '</td>'+
                                 '<td id="precioPlanta">' + value.precio + '</td>'+
                                 '<td id="cantidadSolicitadaS">' + value.cantidadSolicitada + '</td>'+
                                 '<td>' + value.precio * value.cantidadSolicitada + '</td>'+
-                                '<td><button type="button" name="surtir" id="' + i + '" class="btn btn-danger btn_remove">Surtir</button></td>'+
+                                '<td><button type="button" name="surtir" id="' + i + '" class="btn btn-danger surtir">Surtir</button></td>'+
                             '</tr>'; 
                             $('#mytable tbody:first').append(fila);
                             i++;

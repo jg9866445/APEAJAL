@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    if(window.localStorage.getItem('dato') == undefined)
+        window.location.href = "/SistemaCliente/login.html"
 
+</script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +44,6 @@
         </nav>
 
         <nav class="navbar navbar-expand-lg menu">
-            <div class="container-fluid">       <nav class="navbar navbar-expand-lg menu">
             <div class="container-fluid">
                 <div class="navbar-nav " id="navbarCenteredExample">
                     <ul class="navbar-nav">
@@ -67,13 +70,15 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSolicitudes.html">Consulta de solicitudes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RVentas.html">Consulta de Ventas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RPago.html">Consulta de pago</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSalida.html">consulta de salida</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacen fisico</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacen virtual</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
+                                <li><a class="dropdown-item" href="">Consulta por estado de solicitudes</a></li>
+                                <li><a class="dropdown-item" href="">Consulta por estado de Ventas</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de ventas por cliente</a></li>
+                                <li><a class="dropdown-item" href="">consulta por estado de pago</a></li>
+                                <li><a class="dropdown-item" href="">consulta por estado de salida</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de existencias en almacen fisico</a></li>
+                                <li><a class="dropdown-item" href="">Consultas de existencias en almacen virtual</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de plantas para donar</a></li>
+                                <li><a class="dropdown-item" href="">Consulta de mermas</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -118,10 +123,9 @@
                                 <div class="row g-3">
                                         <div class="col-md-4">
                                             <label for="staticEmail" class="form-label">RFC o CURP</label>
-                                            <input class="form-control" type="text" name="dato" id="dato"/>
+                                            <input class="form-control" type="text" name="dato" id="dato" disabled/>
                                         </div>
                                         <div class="col-md-4">
-                                            <button type="btn insert form-control" class="btn insert" id="buscar">Buscar</button>
                                         </div>
                                         <div class="col-md-4">
                                         </div>
@@ -258,34 +262,7 @@
 <script>
         const aux = new auxliar();
         $(document).ready(function(){
-            $('#buscar').click(function() {
-                var dato = $("#dato").val();
-                $.ajax({
-                    url: "/src/php/SistemaVentas/SubMovimientos.php",
-                    method: "POST",
-                    data: {
-                        "Metodo":'getClientes',
-                        "dato": dato
-                    },
-                    beforeSend: function() {
-                        aux.alert("<h5>Espere cargando</h5><p>Cliente</p>");
-                    }}).done(function (respuesta){
-                        aux.cerrar();
-                        respuesta=JSON.parse(respuesta);
-                        if(respuesta.length!=0){              
-                            document.getElementById("idCliente").value=respuesta[0].idCliente;          
-                            document.getElementById("razonSocial").value=respuesta[0].razonSocial;
-                            document.getElementById("domicilio").value=respuesta[0].domicilio;
-                            document.getElementById("rfc").value=respuesta[0].RFC;
-                            document.getElementById("curp").value=respuesta[0].CURP;
-                            document.getElementById("telefono").value=respuesta[0].telefono;
-                            document.getElementById("celular").value=respuesta[0].celular;
-                            document.getElementById("tipoCliente").value=respuesta[0].tipoCliente;
-                            }else{
-                                aux.alert("Error cliente no encontrado",true,true)
-                            }
-                    });
-            });
+
             $('#regristar').click(function() {
                 
             var resultado=aux.validateAll(
@@ -316,7 +293,7 @@
                     },
                     success: function(respuesta){
                         aux.alert("<h5>Listo</h5><br/><p>Datos guardados</p>")
-                        window.location.href = "/SistemaVentas/Movimientos/Predios.html"
+                        window.location.href = "/SistemaCliente/index.html"
                     },
                     complete: function() {
                         aux.cerrar();
@@ -331,14 +308,44 @@
             }
             });
             $('#Cancelar').click(function() {
-                    window.location.href = "/SistemaVentas/Movimientos/Predios.html"
+                    window.location.href = "/SistemaCliente/index.html"
             });
         });
         function onload(){
             var now = new Date();
             var dateString = moment(now).format('YYYY-MM-DD');
             document.getElementById("Fecha").value=dateString;
+            document.getElementById("dato").value=window.localStorage.getItem('dato')
+            getCliente();
             getNextidPredio();
+        }
+        function getCliente(){
+                            var dato = $("#dato").val();
+                $.ajax({
+                    url: "/src/php/SistemaVentas/SubMovimientos.php",
+                    method: "POST",
+                    data: {
+                        "Metodo":'getClientes',
+                        "dato": dato
+                    },
+                    beforeSend: function() {
+                        aux.alert("<h5>Espere cargando</h5><p>Cliente</p>");
+                    }}).done(function (respuesta){
+                        aux.cerrar();
+                        respuesta=JSON.parse(respuesta);
+                        if(respuesta.length!=0){              
+                            document.getElementById("idCliente").value=respuesta[0].idCliente;          
+                            document.getElementById("razonSocial").value=respuesta[0].razonSocial;
+                            document.getElementById("domicilio").value=respuesta[0].domicilio;
+                            document.getElementById("rfc").value=respuesta[0].RFC;
+                            document.getElementById("curp").value=respuesta[0].CURP;
+                            document.getElementById("telefono").value=respuesta[0].telefono;
+                            document.getElementById("celular").value=respuesta[0].celular;
+                            document.getElementById("tipoCliente").value=respuesta[0].tipoCliente;
+                            }else{
+                                aux.alert("Error cliente no encontrado",true,true)
+                            }
+                    });
         }
         function getNextidPredio(){
             $.ajax({

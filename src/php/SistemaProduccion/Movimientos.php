@@ -402,7 +402,7 @@ class Movimientos {
     }
 
     public function insertDevolucion( $idVale, $idInsumo, $fecha, $cantidad){
-        $sql="INSERT INTO devolucion( idVale, idInsumo, fecha, cantidad) VALUES ( :idVale, :idInsumo, :fecha, :cantidad)";
+        $sql="INSERT INTO devolucion( idVale, fecha, cantidad) VALUES ( :idVale, :fecha, :cantidad)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idVale', $idVale);
         $query->bindParam(':fecha', $fecha);
@@ -461,89 +461,6 @@ class Movimientos {
         }        
     }
 
- /*funciones para llenar select
-    public function getAllProveedores() {
-        $sql = "SELECT * from proveedor";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllInsumos(){
-        $sql = "SELECT * from  insumo";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllResponsables() {
-        $sql = "SELECT * from responsable";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllPlanta(){
-        $sql = "SELECT pf.idPlanta,e.nombre FROM plantaForestal as pf INNER JOIN especie as e on pf.idEspecie = e.idEspecie";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllSalidas(){
-        $sql = "Select vs.idVale,i.nombre as insumo,r.nombre as responsable,vs.fecha,vs.cantidad from valeSalida as vs INNER JOIN insumo as i on i.idInsumo=vs.idInsumo INNER JOIN responsable as r on r.idResponsable = vs.idResponsable;";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllComprasInsumos(){
-        $sql = "SELECT fc.idOrdenCompra,p.nombre,fc.factura,fc.fecha, fc.total  from  facturaCompra as fc INNER JOIN proveedor as p on fc.idProveedor= p.idProveedor";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllOrdenProduccion(){
-        $sql = "SELECT op.idOrden, r.nombre as responsable,e.nombre as especie,op.fechaOrden,op.descripcion,op.estado FROM ordenProduccion as op INNER JOIN responsable as r on r.idResponsable= op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta = op.idPlanta INNER JOIN especie as e on pf.idEspecie = e.idEspecie ";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllDevoluciones() {
-        $sql = "SELECT d.idDevolucion,d.fecha, r.nombre as responsable , i.nombre as insumo , c.concepto as clasificacion,vs.cantidad as salida,d.cantidad as devolucion FROM devolucion as d INNER JOIN valeSalida as vs on vs.idVale = d.idVale INNER JOIN responsable as r on r.idResponsable = vs.idResponsable INNER JOIN insumo as i on i.idInsumo = vs.idInsumo  INNER JOIN clasificacion as c on c.idClasificacion = i.idClasificacion";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-
-    public function getInsumo($idInsumo){
-        $sql = "SELECT i.nombre,i.existencias,i.unidad,c.concepto,i.maximo,i.minimo,i.costoPromedio      from  insumo as i INNER JOIN clasificacion as c on i.idClasificacion = c.idClasificacion WHERE i.idInsumo=:idInsumo";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idInsumo', $idInsumo);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-
-
-
-
-
-
-
-*/
 
 
 

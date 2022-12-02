@@ -1,15 +1,16 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/src/php/log.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Catalago.php");
+
+require_once($_SERVER['DOCUMENT_ROOT']."/src/php/auxiliar/log.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaClientes/SistemaClientes.php");
     
-class SubCatalagos
+class SubSistemaClientes
 {
 
     public $conexion;
 
     function __construct(){        
         try {
-            $this->conexion = new Catalago();
+            $this->conexion = new SistemaClientes();
 
             $this->API();
         } 
@@ -21,28 +22,35 @@ class SubCatalagos
 
     function API(){
         try{
-            if(isset($_POST['Busqueda'])){
-                switch ($_POST['Busqueda']) {
-                    case 'NextCliente':
-                        $conexion = new Catalago();
-                        $resultado = $conexion->getNextIdCliente();
+            if(isset($_POST['Metodo'])){
+                
+                switch ($_POST['Metodo']) {
+
+                    //GET NEXT ID
+                    case 'ISlogin':
+                        $conexion = new SistemaClientes();
+                        $resultado = $conexion->ISlogin($_POST['dato'],$_POST['dato']);
                         echo json_encode($resultado);
                     break;
-                    
-                    case 'insertClientes':
-                        $conexion = new Catalago();
+
+                     case 'insertClientes':
+                        $conexion = new SistemaClientes();
                         $datosClientes= json_decode($_POST['datosClientes']);
                         $idCliente=$conexion->insertClientes($datosClientes->RazonSocial,$datosClientes->RFC,$datosClientes->CURP,$datosClientes->domicilio,$datosClientes->Ciudad,$datosClientes->Estado,$datosClientes->email,$datosClientes->Telefono, $datosClientes->Celular, "Venta");
                         $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/ConstanciaFiscal/",$idCliente);
 
                     break;
+             
+                    default:
+                        echo "Metodo No encontrado";
+                    break;
+            
                 }
             }
         }catch (Exception $e){
-                save(var_dump($e));
+                save($e);
         }
     }
-    
     function GuardarArchivo($ubicacion,$nombre){
         $nombre=$nombre.".pdf";
         $carpetaDestino=$ubicacion;
@@ -69,5 +77,4 @@ class SubCatalagos
             }
     }
 }
-
-    new SubCatalagos();
+new SubSistemaClientes();

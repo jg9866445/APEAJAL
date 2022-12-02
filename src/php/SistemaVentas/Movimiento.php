@@ -242,7 +242,7 @@ class Movimientos {
     
     public function getDetallesVentasSalidas($idVenta)
     {
-        $sql = "Select p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.precio, (ds.cantidadSolicitada-(SELECT ifNull(SUM(dsa.cantidadSurtida),0) FROM pagos as pa INNER JOIN salidas as sa ON sa.idPago=pa.idPago INNER JOIN detalleSalida as dsa ON sa.idSalida=dsa.idSalida WHERE pa.idVenta=:idVenta and p.idPredio = dsa.idPredio and dsa.idPlanta= pf.idPlanta )) as cantidadSolicitada FROM detalleVenta as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE idVenta= :idVenta1;";
+        $sql = "SELECT p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.precio, (ds.cantidadSolicitada-(SELECT ifNull(SUM(dsa.cantidadSurtida),0) FROM pagos as pa INNER JOIN salidas as sa ON sa.idPago=pa.idPago INNER JOIN detalleSalida as dsa ON sa.idSalida=dsa.idSalida WHERE pa.idVenta=:idVenta and p.idPredio = dsa.idPredio and dsa.idPlanta= pf.idPlanta )) as cantidadSolicitada FROM detalleVenta as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE idVenta= :idVenta1;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idVenta', $idVenta);
         $query->bindParam(':idVenta1', $idVenta);
@@ -261,7 +261,7 @@ class Movimientos {
     }
     
     public function getPagoPlantas($idPago){
-        $sql="Select p.idVenta, p.idPago,p.fecha,r.nombre,r.puesto,p.conceptoGeneral,p.importe FROM pagos as p INNER JOIN responsable as r on r.idResponsable=p.idResponsable WHERE p.idPago=:idPago";
+        $sql="SELECT p.idVenta, p.idPago,p.fecha,r.nombre,r.puesto,p.conceptoGeneral,p.importe FROM pagos as p INNER JOIN responsable as r on r.idResponsable=p.idResponsable WHERE p.idPago=:idPago";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idPago', $idPago);
         $query -> execute(); 
@@ -279,7 +279,7 @@ class Movimientos {
     }
 
     public function getDetalleSalida($idSalida){
-       $sql = "Select p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.cantidadSurtida FROM detalleSalida as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE ds.idSalida=:idSalida";
+       $sql = "SELECT p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.cantidadSurtida FROM detalleSalida as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE ds.idSalida=:idSalida";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idSalida', $idSalida);
         $query -> execute(); 
