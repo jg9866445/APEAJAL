@@ -1,8 +1,8 @@
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT']."/src/php/log.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/src/php/auxiliar/log.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Reportes.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/src/php/PDF.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/src/php/auxiliar/PDF.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/src/Lib/PHP_XLSXWriter/xlsxwriter.class.php");
 
 class SubReportes

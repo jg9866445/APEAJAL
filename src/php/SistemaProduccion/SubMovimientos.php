@@ -1,6 +1,6 @@
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT']."/src/php/log.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/src/php/auxiliar/log.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Movimientos.php");
     
 class SubMovimientos
@@ -272,75 +272,7 @@ class SubMovimientos
                         $idMermaInsumos=$conexion->insertMermaInsumos($datosMerma->idResponsable,$datosMerma->fecha);
                         $conexion->insertDetallesMermaInsumos($idMermaInsumos,$detalles);
                     break;
-
-/*
-
-                    case 'getAllProveedores':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getAllProveedores();
-                        echo json_encode($resultado);
-                    break;
-
-                    case 'getAllInsumos':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getAllInsumos();
-                        echo json_encode($resultado);
-                    break;
-
-                    case 'getAllResponsables':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getAllResponsables();
-                        echo json_encode($resultado);
-                    break;
-
-                    case 'getAllPlanta':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getAllPlanta();
-                        echo json_encode($resultado);
-                    break;
-
-                    case 'getAllSalidas':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getAllSalidas();
-                        echo json_encode($resultado);
-                    break;
-
-                    case 'getAllComprasInsumos':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getAllComprasInsumos();
-                        echo json_encode($resultado);
-                    break;
-
-                    case 'getAllOrdenProduccion':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getAllOrdenProduccion();
-                        echo json_encode($resultado);
-                    break;
-
-                    case 'getAllDevoluciones':
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getAllDevoluciones();
-                        echo json_encode($resultado);
-                    break;
-
-                    case 'getAllValeSalida':
-                        $idValeSalida = $_POST['idValeSalida'];
-                        $conexion = new Movimientos();
-                        $resultado = $conexion->getValeSalida($idValeSalida);
-                        echo json_encode($resultado);
-                    break;
-
-
-
-         
-
-
-
-
-
-
-
-                   */
+                    
                     default:
                         echo "Metodo No encontrado";
                     break;
