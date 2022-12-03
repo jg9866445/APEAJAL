@@ -7,61 +7,6 @@ Roles
     Administrdor {todos} 
     Viverista {mermas}
     Cordinador {todos}
-    
-Area Produccion
-1     Consulta de Compra de insumos por proveedor                            Pedir fechas
-2     Consulta de Compra de insumos por Clasificación                        Pedir fechas
-3     Consulta de Insumos divididos por Clasificación                        Pedir fechas
-4     Consulta por estado de  Órdenes de producción                          Pedir fechas
-5     Consulta de vale de salida por orden de producción                     Pedir fechas
-6     Consulta de vale de salida                                             Pedir fechas
-7     Consulta de devolución por orden de producción                         Pedir fechas 
-8     Consulta de devoluciones                                               pedir fechas
-9     Consulta de Órdenes de producción con vales de salida y devoluciones   pedir fechas
-10    Consulta de mermas                                                    pedir fechas
-
-Area Ventas
-
-1    Consulta de solicitudes             pedir fecha                
-2    Consulta de Ventas                  pedir fecha            
-4    consulta de pago                    pedir fecha            
-5    consulta de salida                  pedir fecha   
-
-6    Consulta de existencias en almacen fisico                             
-7    Consultas de existencias en almacen virtual                           
-
-9    Consulta de mermas                             pedir fecha
-
-
- 
-1    Consulta de solicitudes             pedir fecha           
-RSolicitudes     
-idSolicitud idResponsable	idCliente fecha total	idPredio	idPlanta	cantidadSolicitada	precio	
-
-2    Consulta de Ventas                  pedir fecha  
-Rventas          
-idVenta idResponsable	idCliente fechaventa total idPredio	idPlanta	cantidadSolicitada	precio	
-
-3    consulta de pago                    pedir fecha
-Rpago   
-         
-idPago    idResponsable	idCliente idventa fecha conceptoGeneral importe
-
-4    consulta de salida                  pedir fecha
-Rsalida   
-idSalida idResponasble idPago fechaEntrega idPredio	idPlanta	cantidadSolicitada	precio	
-
-5    Consulta de existencias en almacen fisico  
-RAlmacenFisico                           
-idPlanta 	idEspecie	descripcion	existencia	precio	
-
-6    Consultas de existencias en almacen virtual                           
-;
-7    Consulta de mermas    (Copiar no mames cabron)                         pedir fecha
-Rmermas
-SELECT idPlanta,descripcion,( is not null )as existencia FROM plantaForestal as pf;
-
-
 
 --en tabla devolucion eliminar id insumo.
 --cuando entras en el sistema de produccion quitar el mensaje que aparece.
@@ -83,4 +28,14 @@ En salida Agregar boton de quitar el cual regrese a la parte superior los regris
 En salida Alerta No funciona bien verificar que onda
 
 En TODO EL SISMTE AGREGAR BOTON DE CERRAR SESSION
-En Catalago Clientes no se cargan todos lo datos ??
+En Catalago Clientes no se cargan todos lo datos 
+En compra de insumo cambiar nueva compra de inusmo por compra de insumo
+Cambiar en todo el sistema Unidad por unidad de medida
+Agregar en todo area donde aparesca Insumo unidad de medida
+descripciones lleva acento en la o
+En consultas alargar nombre de inusmo 
+Catalago de motivo de mermas
+En formularios donde se maneje planta forestal cambiar nombre por especie 
+RSalida marco error 
+Error en almacen fisico 
+Error en mermas plantas folestales
