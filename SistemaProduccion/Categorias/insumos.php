@@ -61,17 +61,17 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraInsumos.html">Consulta de Compra de insumos por periodo</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIProveedor.html">Consulta de Compra de insumos por proveedor en un periodo</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIClasificacion.html">Consulta de Compra de insumos por Clasificación en un periodo</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RInusmosClasificacion.html">Consulta de Insumos divididos por Clasificación</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccion.html">Consulta de Órdenes de producción en un periodo</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccionEstado.html">Consulta de Órdenes de producción por estado en un periodo</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraInsumos.html">Consulta de compra de insumos por periodo</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIProveedor.html">Consulta de compra de insumos por proveedor en un periodo</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIClasificacion.html">Consulta de compra de insumos por clasificación en un periodo</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RInusmosClasificacion.html">Consulta de insumos divididos por clasificación</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccion.html">Consulta de órdenes de producción en un periodo</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccionEstado.html">Consulta de órdenes de producción por estado en un periodo</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RValeSalidaOrdenProduccion.html">Consulta de vale de salida por orden de producción</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RValeSalida.html">Consulta de vale de salida por fecha </a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucionOrdenProduccion.html">Consulta de devolución por orden de producción</a></li>
                                 <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucion.html">Consulta de devoluciones por fecha</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RMermas.html">Consulta de meramas por fecha</a></li>
+                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RMermas.html">Consulta de mermas por fecha</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -93,7 +93,7 @@
 
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn new" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
+                    <button class="btn new" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo registro</button>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
                         <thead>
                             <tr>
                                 <th>  </th>
-                                <th>concepto</th>
+                                <th>Concepto</th>
                                 <th>Descripción</th>
                                 <th>Clasificación</th>
                                 <th>Unidad</th>

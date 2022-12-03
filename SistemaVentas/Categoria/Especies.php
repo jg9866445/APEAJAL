@@ -65,8 +65,8 @@
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RVentas.html">Consulta de Ventas</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RPago.html">Consulta de pago</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSalida.html">consulta de salida</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacen fisico</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacen virtual</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacén físico</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacén virtual</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
                             </ul>
                         </li>
@@ -90,7 +90,7 @@
 
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn insert" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo Registro</button>
+                    <button class="btn insert" type="submit" data-bs-toggle="modal" data-bs-target="#insert">Nuevo registro</button>
                 </div>
             </div>
         </div>

@@ -61,11 +61,11 @@
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSolicitudes.html">Consulta de solicitudes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RVentas.html">Consulta de Ventas</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RVentas.html">Consulta de ventas</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RPago.html">Consulta de pago</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSalida.html">consulta de salida</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacen fisico</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacen virtual</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacén físico</a></li>
+                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacén virtual</a></li>
                                 <li><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
                             </ul>
                         </li>
@@ -88,7 +88,7 @@
 
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn insert" type="submit" data-bs-toggle="modal" data-bs-target="#insert" onclick="getUltimoInsert()">Nuevo Registro</button>
+                    <button class="btn insert" type="submit" data-bs-toggle="modal" data-bs-target="#insert" onclick="getUltimoInsert()">Nuevo registro</button>
                 </div>
             </div>
         </div>
@@ -111,10 +111,10 @@
                                 <th>Razón social</th>
                                 <th>RFC</th>
                                 <th>Domicilio</th>
-                                <th>Correo</th>
+                                <th>Email</th>
                                 <th>Teléfono</th>
                                 <th>Tipo de cliente</th>
-                                <th>Constancia de Situacion Fiscal</th>
+                                <th>Constancia de Situación Fiscal</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
@@ -197,7 +197,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electrónico</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="email" id="email" name="email" placeholder="Correo Electronico " required/>
                                 <label for="input"></label>
@@ -291,7 +291,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Correo Electrónico</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="email" id="emailM" name="emailM" placeholder="Correo Electronico" required/>
                                 <label for="input"></label>
