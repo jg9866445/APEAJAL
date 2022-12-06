@@ -97,11 +97,9 @@
                 <div class="col-lg-8 card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
-                            <label for="staticEmail" class="form-label">id Solicitud</label>
-                            <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled />
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center">Nueva solicitud de plantas</h3>
+                            <h3 class="text-center">Solicitud de plantas</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
@@ -364,7 +362,7 @@
 
         $(document).ready(function() {
             $('#Cancelar').click(function() {
-                window.location.href = "/SistemaCliente/index.html";
+                window.location.href = "/SistemaCliente/Movimientos/SolicitudPlantas.html";
             });
 
             var i = 1;
@@ -489,7 +487,7 @@
                         },
                         }).done(function(respuesta) {
                             aux.cerrar();
-                            window.location.href = "/SistemaCliente/index.html"
+                            window.location.href = "/SistemaCliente/Movimientos/SolicitudPlantas.html"
                         })
                 }else{
                     aux.alert("<h5>Agregar minimo una planta",true,true);
@@ -507,7 +505,6 @@
             document.getElementById("Fecha").value=dateString;
             document.getElementById("dato").value=window.localStorage.getItem('dato')
             getCliente();
-            getNextidSolicitudPlantas();
             getAllPlantasfolestalesSelect();
         }
         function getCliente(){
@@ -539,19 +536,7 @@
                                 }
                         });
         }
-        
-        function getNextidSolicitudPlantas(){
-            $.ajax({
-                url: "/src/php/SistemaVentas/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Metodo":'getNextidSolicitudPlantas',
-                }}).done(function(respuesta){
-                    respuesta=JSON.parse(respuesta);
-                    document.getElementById("idSolicitud").value=respuesta[0].AUTO_INCREMENT;
-                });   
-        }
-
+    
 
         function getAllPrediosforSelect(idCliente){
                     $.ajax({

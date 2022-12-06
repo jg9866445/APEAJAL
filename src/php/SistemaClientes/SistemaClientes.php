@@ -22,11 +22,11 @@ class SistemaClientes {
         unset($this->connect);
     }
 
-    public function ISlogin($CURP,$RFC){
+    public function ISlogin($dato){
         $sql = "SELECT IF(COUNT(*)>0,TRUE,FALSE) AS ISlogin from clientes AS C WHERE C.RFC = :RFC OR C.CURP = :CURP;";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':RFC', $CURP);
-        $query->bindParam(':CURP', $RFC);
+        $query->bindParam(':RFC', $dato);
+        $query->bindParam(':CURP', $dato);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -49,4 +49,26 @@ class SistemaClientes {
         $idCliente=$this->connect->lastInsertId();
         return $idCliente;
     }
+
+    public function getAllPrediosforTabla($dato){
+        $sql = "SELECT * from predios as p inner join clientes as c on p.idCliente = c.idCliente WHERE c.RFC = :RFC OR c.CURP = :CURP";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":RFC",$dato);
+        $query->bindParam(":CURP",$dato);
+
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    
+    public function getAllSolicitudPlantasforTabla($dato){
+        $sql = "Select s.idSolicitud,s.fecha, r.nombre, c.razonSocial,c.RFC,c.CURP,c.tipoCliente,s.estado from solicitudes as s INNER JOIN clientes as c on c.idCliente = s.idCliente INNER JOIN responsable as r on r.idResponsable = s.idResponsable WHERE c.RFC = :RFC OR c.CURP = :CURP;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":RFC",$dato);
+        $query->bindParam(":CURP",$dato);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    
 }

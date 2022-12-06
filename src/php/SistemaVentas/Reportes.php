@@ -33,7 +33,7 @@ class Reportes {
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
         $query -> execute(); 
-        $results = $query -> fetchAll(); 
+        $results = $query -> fetchAll(PDO::FETCH_NUM); 
         return $results;
     }
 

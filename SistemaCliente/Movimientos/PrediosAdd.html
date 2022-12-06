@@ -43,48 +43,6 @@
             </a>
         </nav>
 
-        <nav class="navbar navbar-expand-lg menu">
-            <div class="container-fluid">
-                <div class="navbar-nav " id="navbarCenteredExample">
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
-                            <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>   
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
-                            <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.html">Predios</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.html">Solicitud de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Venta.html">Venta de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.html">Pago de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.html">Salida de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/MermasPlantas.html">Mermas de plantas</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
-                            <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="">Consulta por estado de solicitudes</a></li>
-                                <li><a class="dropdown-item" href="">Consulta por estado de Ventas</a></li>
-                                <li><a class="dropdown-item" href="">Consulta de ventas por cliente</a></li>
-                                <li><a class="dropdown-item" href="">consulta por estado de pago</a></li>
-                                <li><a class="dropdown-item" href="">consulta por estado de salida</a></li>
-                                <li><a class="dropdown-item" href="">Consulta de existencias en almacen fisico</a></li>
-                                <li><a class="dropdown-item" href="">Consultas de existencias en almacen virtual</a></li>
-                                <li><a class="dropdown-item" href="">Consulta de plantas para donar</a></li>
-                                <li><a class="dropdown-item" href="">Consulta de mermas</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
@@ -95,11 +53,10 @@
                 <div class="col-lg-8 card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
-                            <label for="staticEmail" class="form-label">id Predio</label>
-                            <input class="form-control" type="text" name="idPredio" id="idPredio" disabled />
+                            
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center"> Nuevo Predio</h3>
+                            <h3 class="text-center">Predio</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
@@ -293,7 +250,7 @@
                     },
                     success: function(respuesta){
                         aux.alert("<h5>Listo</h5><br/><p>Datos guardados</p>")
-                        window.location.href = "/SistemaCliente/index.html"
+                        window.location.href = "/SistemaCliente/Movimientos/Predios.html"
                     },
                     complete: function() {
                         aux.cerrar();
@@ -308,7 +265,7 @@
             }
             });
             $('#Cancelar').click(function() {
-                    window.location.href = "/SistemaCliente/index.html"
+                    window.location.href = "/SistemaCliente/Movimientos/Predios.html"
             });
         });
         function onload(){
@@ -317,7 +274,6 @@
             document.getElementById("Fecha").value=dateString;
             document.getElementById("dato").value=window.localStorage.getItem('dato')
             getCliente();
-            getNextidPredio();
         }
         function getCliente(){
                             var dato = $("#dato").val();
@@ -347,24 +303,7 @@
                             }
                     });
         }
-        function getNextidPredio(){
-            $.ajax({
-                    url: "/src/php/SistemaVentas/SubMovimientos.php",
-                method: "POST",
-                data: {
-                    "Metodo":'getNextidPredio',
-                },
-                beforeSend: function() {
-                    aux.alert("<h5>Espere cargando</h5>");
 
-                }}).done(function(respuesta) {
-                    respuesta=JSON.parse(respuesta);
-                    document.getElementById("idPredio").value=respuesta[0].AUTO_INCREMENT;
-                
-                }).always(function() {
-                    aux.cerrar();
-                });     
-        }
 </script>
 
 

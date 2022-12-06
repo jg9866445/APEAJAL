@@ -29,7 +29,7 @@ class SubSistemaClientes
                     //GET NEXT ID
                     case 'ISlogin':
                         $conexion = new SistemaClientes();
-                        $resultado = $conexion->ISlogin($_POST['dato'],$_POST['dato']);
+                        $resultado = $conexion->ISlogin($_POST['dato']);
                         echo json_encode($resultado);
                     break;
 
@@ -40,7 +40,19 @@ class SubSistemaClientes
                         $this->GuardarArchivo($_SERVER['DOCUMENT_ROOT']."/src/PDF/ConstanciaFiscal/",$idCliente);
 
                     break;
-             
+
+                    case 'getAllPrediosforTabla':
+                        $conexion= new SistemaClientes();
+                        $resultado= $conexion->getAllPrediosforTabla($_POST['datosClientes']);
+                        echo json_encode($resultado);
+                    break;
+                    
+                    case 'getAllSolicitudPlantasforTabla':
+                        $conexion= new SistemaClientes();
+                        $resultado= $conexion->getAllSolicitudPlantasforTabla($_POST['datosClientes']);
+                        echo json_encode($resultado);
+                    break;
+
                     default:
                         echo "Metodo No encontrado";
                     break;

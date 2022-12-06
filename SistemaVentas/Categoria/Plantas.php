@@ -184,7 +184,7 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Precio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="number" id="Precio" name="Precio" placeholder="Precio" required pattern="[0-9]+" minlength="1" maxlength="11" />
+                                <input class="form-control" type="number" id="Precio" name="Precio" placeholder="Precio" required step="any" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -240,7 +240,7 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Precio</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="number" id="PrecioM" name="PrecioM" placeholder="Precio" required pattern="[0-9]+" minlength="1" maxlength="11" />
+                                <input class="form-control" type="number" id="PrecioM" name="PrecioM" placeholder="Precio" required step="any"/>
                                 <label for="input"></label>
                             </div>
                         </div>

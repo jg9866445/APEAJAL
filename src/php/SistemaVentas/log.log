@@ -1,8 +1,0 @@
-Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
-Stack trace:
-#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
-#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(336): FPDF->Output()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(417): SubReportes->__construct()
-#5 {main}

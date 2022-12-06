@@ -39,25 +39,11 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(25,7,"IdSolicitud",1,0,'C');
-                                $pdf->Cell(25,7,"Fecha",1,0);
-                                $pdf->Cell(60,7,"Nombre del responable",1,0);
-                                $pdf->Cell(60,7,"Razon Social",1,0);
-                                $pdf->Cell(25,7,"IdPredio",1,0);
-                                $pdf->Cell(25,7,"Planta Forestal",1,0);
-                                $pdf->Cell(25,7,"Cantidad Solicitada",1,0);
-                                $pdf->Cell(25,7,"Precio",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(25,25,60,60,25,25,25,25));
+                                $pdf->Row(array("IdSolicitud","Fecha","Nombre del responable","Razon Social","IdPredio","Planta Forestal","Cantidad Solicitada","Precio"));
                                 foreach( $ventas as $row){  
-                                    $pdf->Cell(25,7,$row[0],1,0,'C');
-                                    $pdf->Cell(25,7,$row[1],1,0);
-                                    $pdf->Cell(60,7,$row[2],1,0);
-                                    $pdf->Cell(60,7,$row[3],1,0);
-                                    $pdf->Cell(25,7,$row[4],1,0);
-                                    $pdf->Cell(25,7,$row[5],1,0);
-                                    $pdf->Cell(25,7,$row[6],1,0);
-                                    $pdf->Cell(25,7,$row[7],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row($row);
+                                    
                                     }
                                 }else{
                                     $pdf->Ln();

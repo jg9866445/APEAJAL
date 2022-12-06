@@ -26,7 +26,7 @@ input:not(:placeholder-shown):focus+label::after {
 }
 
 input:invalid:focus:not(:placeholder-shown)+label::before {
-    content: 'Error en la informacion ingresada';
+    content: 'Error en la informacion ingresada Cambio';
     color: red;
 }
 

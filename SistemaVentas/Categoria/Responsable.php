@@ -31,6 +31,13 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link "><i class="bi bi-x-octagon-fill"></i></a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="nav justify-content-end">
         </nav>
 
        <nav class="navbar navbar-expand-lg menu">
