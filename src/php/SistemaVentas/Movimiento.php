@@ -204,7 +204,7 @@ class Movimientos {
     }
 
     public function getSolicitudPlantas($idSolicitud){
-        $sql = "SELECT c.idCliente, c.razonSocial, c.domicilio,c.celular, c.RFC, c.telefono,c.tipoCliente, s.fecha, s.estado,s.total, r.nombre, r.puesto  from  solicitudes as s INNER JOIN clientes as c on s.idCliente = c.idCliente INNER JOIN responsable as r on s.idResponsable = r.idResponsable where s.idSolicitud = :idSolicitud";
+        $sql = "SELECT c.idCliente, c.razonSocial, c.domicilio,c.celular, c.RFC,c.CURP, c.telefono,c.tipoCliente, s.fecha, s.estado,s.total, r.nombre, r.puesto  from  solicitudes as s INNER JOIN clientes as c on s.idCliente = c.idCliente INNER JOIN responsable as r on s.idResponsable = r.idResponsable where s.idSolicitud = :idSolicitud";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idSolicitud', $idSolicitud);
         $query -> execute(); 
@@ -222,7 +222,7 @@ class Movimientos {
     }
     
     public function getVentaPlantas($idVenta){
-        $sql = "SELECT v.idVenta,v.fechaVenta, s.idSolicitud, s.estado, r.nombre, r.puesto,v.total FROM ventas as v INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud INNER JOIN responsable as r ON r.idResponsable = v.idResponsable WHERE v.idVenta = :idVenta";
+        $sql = "SELECT v.idVenta,v.fechaVenta, s.idSolicitud, s.estado, r.nombre, r.puesto,v.total,c.tipoCliente FROM ventas as v INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud INNER JOIN clientes as c on s.idCliente = c.idCliente INNER JOIN responsable as r ON r.idResponsable = v.idResponsable WHERE v.idVenta = :idVenta";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idVenta', $idVenta);
         $query -> execute(); 

@@ -14,9 +14,19 @@ class login {
                 if(window.localStorage.getItem('dato') != undefined)
                     window.location.href = "/SistemaCliente/index.html"
             break;
+            case "Empleado":
+                console.log("Empleado")
+            break;
+
+            case "No-Empleado":
+
+            break;
+            default:
+                console.log("No-Empleado");
+            break;
         }
     }
-    alertLogout(){
+    alertLogout(users){
         Swal.fire({
         title: 'Usted desea cerrar sesion?',
         showDenyButton: true,
@@ -31,8 +41,13 @@ class login {
         }).then((result) => {
             if (result.isConfirmed) {
                 window.localStorage.clear();
-                window.location.href = "/SistemaCliente/login.html"
-            } 
+                console.log(users);
+                if (users=="Cliente")
+                    window.location.href = "/SistemaCliente/login.html"
+                else
+                    window.location.href = "/index.html"
+
+            }
         })
     }
 
