@@ -1,3 +1,4 @@
+
 <?php
     include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaProduccion/Catalago.php");
     $conexion = new Catalago();

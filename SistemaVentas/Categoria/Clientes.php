@@ -2,6 +2,7 @@
         include_once  ($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Catalago.php");
         $conexion = new Catalago();
     ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,6 +32,14 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a id="logout">
+                        <img class="img-responsive" src="/src/imagenes/logout.jpeg" width="50VW" height="50VH" alt="" />
+                    </a>                
+                </li>
+            </ul>
+
         </nav>
 
        <nav class="navbar navbar-expand-lg menu">
@@ -40,33 +49,33 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>   
+                                <li id="Especies" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
+                                <li id="Plantas" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
+                                <li id="Responsable" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
+                                <li id="Clientes" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>   
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.html">Predios</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.html">Solicitud de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Venta.html">Venta de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.html">Pago de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.html">Salida de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/MermasPlantas.html">Mermas de plantas</a></li>
+                                <li id="Pedios" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.html">Predios</a></li>
+                                <li id="Solicitud" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.html">Solicitud de plantas</a></li>
+                                <li id="Ventas" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/Venta.html">Venta de plantas</a></li>
+                                <li id="Pago" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.html">Pago de plantas</a></li>
+                                <li id="Salidas"style="display: block;" ><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.html">Salida de plantas</a></li>
+                                <li id="Mermas" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/MermasPlantas.html">Mermas de plantas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSolicitudes.html">Consulta de solicitudes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RVentas.html">Consulta de ventas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RPago.html">Consulta de pago</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSalida.html">consulta de salida</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacén físico</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacén virtual</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
+                                <li id="consutal1" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RSolicitudes.html">Consulta de solicitudes</a></li>
+                                <li id="consutal2" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RVentas.html">Consulta de ventas</a></li>
+                                <li id="consutal3" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RPago.html">Consulta de pago</a></li>
+                                <li id="consutal4" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RSalida.html">consulta de salida</a></li>
+                                <li id="consutal5" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacén físico</a></li>
+                                <li id="consutal6" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacén virtual</a></li>
+                                <li id="consutal7" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -110,9 +119,13 @@
                                 <th>  </th>
                                 <th>Razón social</th>
                                 <th>RFC</th>
+                                <th>CURP</th>
                                 <th>Domicilio</th>
+                                <th>Ciudad</th>
+                                <th>Estado</th>
                                 <th>Email</th>
                                 <th>Teléfono</th>
+                                <th>Celular</th>
                                 <th>Tipo de cliente</th>
                                 <th>Constancia de Situación Fiscal</th>
                                 <th>Modificar</th>
@@ -126,9 +139,13 @@
                                         echo "<td>" . $row['idCliente'] . "</td>";
                                         echo "<td>" . $row['razonSocial'] . "</td>";
                                         echo "<td>" . $row['RFC'] . "</td>";
+                                        echo "<td>" . $row['CURP'] . "</td>";
                                         echo "<td>" . $row['domicilio'] . "</td>";
+                                        echo "<td>" . $row['ciudad'] . "</td>";
+                                        echo "<td>" . $row['estado'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td>" . $row['telefono'] . "</td>";
+                                        echo "<td>" . $row['celular'] . "</td>";
                                         echo "<td>" . $row['tipoCliente'] . "</td>";
                                         echo "<td><a class='btn' role='button' href=/src/PDF/ConstanciaFiscal/". $row['idCliente'].".pdf>Descargar</a></td>";
                                         echo "<td><button type='button' class='btn update' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
@@ -193,7 +210,7 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Estado </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado   " required required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"  />
+                                <input class="form-control" type="text" id="Estado" name="Estado" placeholder="Estado   " required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"  />
                                 <label for="input"></label>
                             </div>
 
@@ -338,10 +355,15 @@
     </div>
 
 <script>
-        /* Initialization of datatable */
+        const session = new login();
         $(document).ready( function () {
+            session.confirmarlogin("Empleado");
+            
             var td=$('#table_id').DataTable({
                     scrollX:true
+            });
+            $('#logout').click(function() {
+                session.alertLogout();
             });
         });
 
@@ -375,6 +397,30 @@
             })   
         }
 </script>
+     <script>
+        if(window.localStorage.getItem("position")=='Viverista'){
+            document.getElementById("Especies").style.display = "none";
+            document.getElementById("Plantas").style.display = "block";
+            document.getElementById("Responsable").style.display = "none";
+            document.getElementById("Clientes").style.display = "none";
+            document.getElementById("Usuarios").style.display = "none";
+            document.getElementById("MotivosMermas").style.display = "none";
+            document.getElementById("Pedios").style.display = "none";
+            document.getElementById("Solicitud").style.display = "none";
+            document.getElementById("Ventas").style.display = "none";
+            document.getElementById("Pago").style.display = "none";
+            document.getElementById("Salidas").style.display = "block";
+            document.getElementById("Mermas").style.display = "block";
+            document.getElementById("consutal").style.display = "none";
+            document.getElementById("consutal1").style.display = "none";
+            document.getElementById("consutal2").style.display = "none";
+            document.getElementById("consutal3").style.display = "none";
+            document.getElementById("consutal4").style.display = "none";
+            document.getElementById("consutal5").style.display = "none";
+            document.getElementById("consutal6").style.display = "none";
+            document.getElementById("consutal7").style.display = "none";
+        }
+    </script>
 
 <?php
 

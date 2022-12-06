@@ -30,6 +30,15 @@ class Catalago {
         $results = $query -> fetchAll(); 
         return $results;
     }
+    
+    public function getMotivoMerma(){
+        $sql = "SELECT * FROM motivoMerma";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
 
     public function getAllClasificacionesForSelect(){
         $sql = "SELECT idClasificacion,concepto FROM clasificacion";
@@ -161,6 +170,15 @@ class Catalago {
     
 
 
+    function insertMotivoMerma( $nombre, $descripcion){
+        $sql = "INSERT INTO motivoMerma ( nombre, descripcion) VALUES (:nombre,:descripcion)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":nombre",$nombre);
+        $query->bindParam(":descripcion",$descripcion);
+        $query->execute();  
+        return $query->rowCount(); 
+    }
+    
 
 }
 

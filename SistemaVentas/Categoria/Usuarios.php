@@ -23,6 +23,8 @@
     <!--Links para dataTable-->
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" type="text/javascript" charset="utf8"></script>
+
+    <script src="/src/js/login.js"></script>
 </head>
 
 <body>
@@ -31,42 +33,52 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a id="logout">
+                        <img class="img-responsive" src="/src/imagenes/logout.jpeg" width="50VW" height="50VH" alt="" />
+                    </a>                
+                </li>
+            </ul>
+
         </nav>
 
-       <nav class="navbar navbar-expand-lg menu">
+        <nav class="navbar navbar-expand-lg menu">
             <div class="container-fluid">
                 <div class="navbar-nav " id="navbarCenteredExample">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>   
+                                <li id="Especies" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Especies.php">Especies</a></li>
+                                <li id="Plantas" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Plantas.php">Plantas forestales</a></li>
+                                <li id="Responsable" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
+                                <li id="Clientes" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>   
+                                <li id="Usuarios" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Usuarios.php">Usuarios</a></li>   
+                                <li id="MotivosMermas" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/MotivosMerma.php">Motivo de mermas</a></li>   
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.html">Predios</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.html">Solicitud de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Venta.html">Venta de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.html">Pago de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.html">Salida de plantas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Movimientos/MermasPlantas.html">Mermas de plantas</a></li>
+                                <li id="Pedios" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/Predios.html">Predios</a></li>
+                                <li id="Solicitud" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/SolicitudPlantas.html">Solicitud de plantas</a></li>
+                                <li id="Ventas" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/Venta.html">Venta de plantas</a></li>
+                                <li id="Pago" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/Pagos.html">Pago de plantas</a></li>
+                                <li id="Salidas"style="display: block;" ><a class="dropdown-item" href="/SistemaVentas/Movimientos/SalidaPlantas.html">Salida de plantas</a></li>
+                                <li id="Mermas" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Movimientos/MermasPlantas.html">Mermas de plantas</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" id="consutal" style="display: block;">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSolicitudes.html">Consulta de solicitudes</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RVentas.html">Consulta de ventas</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RPago.html">Consulta de pago</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RSalida.html">consulta de salida</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacén físico</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacén virtual</a></li>
-                                <li><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
+                                <li id="consutal1" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RSolicitudes.html">Consulta de solicitudes</a></li>
+                                <li id="consutal2" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RVentas.html">Consulta de ventas</a></li>
+                                <li id="consutal3" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RPago.html">Consulta de pago</a></li>
+                                <li id="consutal4" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RSalida.html">consulta de salida</a></li>
+                                <li id="consutal5" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacén físico</a></li>
+                                <li id="consutal6" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacén virtual</a></li>
+                                <li id="consutal7" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -99,25 +111,25 @@
                 <div class="col-lg-2 ">
                 </div>
                 <div class="col-lg-8 ">
-                    <h2 style="text-align:center">Responsable</h2>
+                    <h2 style="text-align:center">Usuario</h2>
                     <br>
                     <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
                         <thead>
                             <tr>
                                 <th> </th>
-                                <th>Nombre</th>
+                                <th>Username</th>
                                 <th>Puesto</th>
                                 <th>Modificar</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $resultado = $conexion->getResponsable();
+                                $resultado = $conexion->getAllUserforTable();
                                     foreach ($resultado as $row) {
                                         echo "<tr>";
-                                        echo "<td>" . $row['idResponsable'] . "</td>";
-                                        echo "<td>" . $row['nombre'] . "</td>";
-                                        echo "<td>" . $row['puesto'] . "</td>";
+                                        echo "<td>" . $row['idUsuario'] . "</td>";
+                                        echo "<td>" . $row['Username'] . "</td>";
+                                        echo "<td>" . $row['Puesto'] . "</td>";
                                         echo "<td><button type='button' class='btn update' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i>  </button></td>";
                                         echo "</tr>";
                                     }
@@ -140,22 +152,34 @@
                     <h5 class="modal-title" id="exampleModalLabel">Agregar un nuevo responsable</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/SistemaVentas/Categoria/Responsable.php" method="POST" >
+                <form action="/SistemaVentas/Categoria/Usuarios.php" method="POST" >
                     <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">username </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreResponsable" name="NombreResponsable" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="username" name="username" placeholder="Nombre" required  minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Puesto" name="Puesto" placeholder="Puesto" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
+                                <select class="form-select" name="Puesto" id="Puesto" required>
+                                    <option disabled selected>Elija una opción</option>
+                                    <option value="Administrdor">Administrdor</option>
+                                    <option value="Viverista">Viverista</option>
+                                    <option value="Cordinador">Cordinador</option>
+                                </select>
                                 <label for="input"></label>
                             </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">password </label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="password" name="password" placeholder="password" required  minlength="3" maxlength="40" />
+                                <label for="input"></label>
+                            </div>
+
                         </div>
                     </div>
 
@@ -176,21 +200,31 @@
                     <h5 class="modal-title" id="exampleModalLabel">Modificar datos del empleado</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/SistemaVentas/Categoria/Responsable.php" method="POST" >
+                <form action="/SistemaVentas/Categoria/Usuarios.php" method="POST" >
                     <input type="hidden" name="categoria" value="Modificar">
-                    <input type="hidden" name="idResponsableM" id="idResponsableM">
+                    <input type="hidden" name="idUsuarioM" id="idUsuarioM">
                     <div class="modal-body">
                         <div class="mb-3 row">
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">username </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreResponsableM" name="NombreResponsableM" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="usernameM" name="usernameM" placeholder="Nombre" required  minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="PuestoM" name="PuestoM" placeholder="Puesto" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
+                                <select class="form-select" name="PuestoM" id="PuestoM" required>
+                                    <option disabled selected>Elija una opción</option>
+                                    <option value="Administrdor">Administrdor</option>
+                                    <option value="Viverista">Viverista</option>
+                                    <option value="Cordinador">Cordinador</option>
+                                </select>
+                                <label for="input"></label>
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">password </label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="password" required  minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -206,34 +240,66 @@
     </div>
 
     <script>
+        const session = new login();
         $(document).ready( function () {
+            session.confirmarlogin("Empleado");
+
             $('#table_id').DataTable({
                 scrollX:true
+            });
+            $('#logout').click(function() {
+                session.alertLogout();
             });
         } );
 
         function update(context){
             var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
-            document.getElementById("idResponsableM").value=elementosTD[0].textContent;
-            document.getElementById("NombreResponsableM").value=elementosTD[1].textContent;
+            document.getElementById("idUsuarioM").value=elementosTD[0].textContent;
+            document.getElementById("usernameM").value=elementosTD[1].textContent;
             document.getElementById('PuestoM').value=elementosTD[2].textContent;
             }
+    </script>
+     <script>
+        if(window.localStorage.getItem("position")=='Viverista'){
+            document.getElementById("Especies").style.display = "none";
+            document.getElementById("Plantas").style.display = "block";
+            document.getElementById("Responsable").style.display = "none";
+            document.getElementById("Clientes").style.display = "none";
+            document.getElementById("Usuarios").style.display = "none";
+            document.getElementById("MotivosMermas").style.display = "none";
+            document.getElementById("Pedios").style.display = "none";
+            document.getElementById("Solicitud").style.display = "none";
+            document.getElementById("Ventas").style.display = "none";
+            document.getElementById("Pago").style.display = "none";
+            document.getElementById("Salidas").style.display = "block";
+            document.getElementById("Mermas").style.display = "block";
+            document.getElementById("consutal").style.display = "none";
+            document.getElementById("consutal1").style.display = "none";
+            document.getElementById("consutal2").style.display = "none";
+            document.getElementById("consutal3").style.display = "none";
+            document.getElementById("consutal4").style.display = "none";
+            document.getElementById("consutal5").style.display = "none";
+            document.getElementById("consutal6").style.display = "none";
+            document.getElementById("consutal7").style.display = "none";
+        }
     </script>
 
     <?php
     if (isset($_POST)){
         if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
-            $NombreResponsable = $_POST['NombreResponsable'];
+            $NombreResponsable = $_POST['username'];
             $Puesto = $_POST['Puesto'];
-            $resultado = $conexion->insertResponsable($NombreResponsable, $Puesto);
+            $password= $_POST['password'];
+            $resultado = $conexion->insertUsuarios($NombreResponsable, $Puesto,$password);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
         }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
             $idResponsable=$_POST["idResponsableM"];
-            $NombreResponsable = $_POST['NombreResponsableM'];
+            $NombreResponsable = $_POST['usernameM'];
             $Puesto = $_POST['PuestoM'];
-            $resultado = $conexion->updateResponsable($idResponsable, $NombreResponsable, $Puesto);
+            $password = $_POST['passwordM'];
+            $resultado = $conexion->updateUsuarios($idResponsable, $NombreResponsable, $Puesto,$password);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");

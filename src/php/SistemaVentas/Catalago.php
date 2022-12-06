@@ -25,6 +25,25 @@ class Catalago {
         unset($this->connect);
     }
 
+
+
+
+    public function getAllUserforTable(){
+        $sql = "SELECT * FROM User";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    public function getMotivoMerma(){
+        $sql = "SELECT * FROM motivoMerma";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
     public function getEspecies(){
         $sql = "SELECT * FROM especie";
         $query = $this->connect->prepare($sql);
@@ -85,6 +104,26 @@ class Catalago {
         return $query->rowCount(); 
     }
 
+    function insertUsuarios( $Username, $Puesto,$Password){
+        $sql = "INSERT INTO User ( Username, Puesto,Password) VALUES (:Username, :Puesto,:Password)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":Username",$Username);
+        $query->bindParam(":Puesto",$Puesto);
+        $query->bindParam(":Password",$Password);
+        $query->execute();  
+        return $query->rowCount(); 
+    }
+    
+    function insertMotivoMerma( $nombre, $descripcion){
+        $sql = "INSERT INTO motivoMerma ( nombre, descripcion) VALUES (:nombre,:descripcion)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":nombre",$nombre);
+        $query->bindParam(":descripcion",$descripcion);
+        $query->execute();  
+        return $query->rowCount(); 
+    }
+    
+
     function insertResponsable($nombre, $puesto){
         $sql = "INSERT INTO responsable ( nombre, puesto) VALUES ( :nombre, :puesto)";
         $query = $this->connect->prepare($sql);
@@ -140,13 +179,22 @@ class Catalago {
     function updateEspecies($idEspecie, $nombre, $descripcion){
         $sql = "UPDATE especie SET nombre=:nombre,descripcion=:descripcion where idEspecie=:idEspecie";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':$idEspecie', $idEspecie);
+        $query->bindParam(':idEspecie', $idEspecie);
         $query->bindParam(':nombre', $nombre);
         $query->bindParam(':descripcion', $descripcion);
         $request=$query->execute(); 
         return $request;    
     }
-
+    function updateUsuarios($idUsuario, $Username, $Puesto,$Password){
+        $sql = "UPDATE User SET Username=:Username,Puesto=:Puesto,Password=:Password where idUsuario =:idUsuario ";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idUsuario ', $idUsuario );
+        $query->bindParam(':Username', $Username);
+        $query->bindParam(':Puesto', $Puesto);
+        $query->bindParam(':Password', $Password);
+        $request=$query->execute(); 
+        return $request;    
+    }
     function updateResponsable($idResponsable, $nombre, $puesto){
         $sql = "UPDATE responsable SET nombre=:nombre, puesto=:puesto  where idResponsable=:idResponsable";
         $query = $this->connect->prepare($sql);

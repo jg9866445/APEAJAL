@@ -108,7 +108,7 @@
                 <div class="col-lg-2 ">
                 </div>
                 <div class="col-lg-8 ">
-                    <h2 style="text-align:center">Especies de plantas</h2>
+                    <h2 style="text-align:center">Motivos de merma</h2>
                     <br>
                     <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
                         <thead>
@@ -120,10 +120,10 @@
                         </thead>
                         <tbody>
                             <?php
-                                $resultado = $conexion->getEspecies();    
+                                $resultado = $conexion->getMotivoMerma();    
                                 foreach ($resultado as $row) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['idEspecie'] . "</td>";
+                                    echo "<td>" . $row['idMotivoMerma'] . "</td>";
                                     echo "<td>" . $row['nombre'] . "</td>";
                                     echo "<td>" . $row['descripcion'] . "</td>";
                                     echo "</tr>";
@@ -143,23 +143,23 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agregar nueva especie</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Motivo de merma</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/SistemaVentas/Categoria/Especies.php" method="POST">
+                <form action="/SistemaVentas/Categoria/MotivosMerma.php" method="POST">
                     <input type="hidden" name="categoria" value="Agregar">
                     <div class="modal-body">
                         <div class="mb-3 row">
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="NombreEspecie" name="NombreEspecie" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"  minlength="3" maxlength="30" />
+                                <input class="form-control" type="text" id="NombreMotivoMerma" name="NombreMotivoMerma" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"  minlength="3" maxlength="30" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="DescripcionEspecie" name="DescripcionEspecie" placeholder="Descripcion" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"  minlength="3" maxlength="60" />
+                                <input class="form-control" type="text" id="DescripcionMotivoMerma" name="DescripcionMotivoMerma" placeholder="Descripcion" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"  minlength="3" maxlength="60" />
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -185,7 +185,7 @@
             });
         } );
     </script>
-   <script>
+    <script>
         if(window.localStorage.getItem("position")=='Viverista'){
             document.getElementById("Especies").style.display = "none";
             document.getElementById("Plantas").style.display = "block";
@@ -213,9 +213,9 @@
     <?php
         if (isset($_POST)){
             if (isset($_POST["categoria"]) && $_POST["categoria"] == "Agregar"){
-                $nombre = $_POST['NombreEspecie'];
-                $descripcion = $_POST['DescripcionEspecie'];
-                $resultado = $conexion->insertEspecies($nombre, $descripcion);
+                $nombre = $_POST['NombreMotivoMerma'];
+                $descripcion = $_POST['DescripcionMotivoMerma'];
+                $resultado = $conexion->insertMotivoMerma($nombre, $descripcion);
                 unset($_POST);
                 ob_start();
                 $URL = $_SERVER['PHP_SELF'];

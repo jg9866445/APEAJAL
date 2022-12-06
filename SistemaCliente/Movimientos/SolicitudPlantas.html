@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    if(window.localStorage.getItem('dato') == undefined)
-        window.location.href = "/SistemaCliente/login.html"
-
-</script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,6 +28,7 @@
         
     <!--Links para funciones auxliar-->
     <script src="/src/js/auxliar.js" ></script>
+    <script src="/src/js/login.js"></script>
 
 </head>
 <body id="body" onload="createTable()">
@@ -44,7 +40,7 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <a id="logout">
-                        <img class="img-responsive" src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" alt="" />
+                        <img class="img-responsive" src="/src/imagenes/logout.jpeg" width="50VW" height="50VH" alt="" />
                     </a>                
                 </li>
             </ul>
@@ -188,6 +184,7 @@
     </div>
 
 <script>
+    const session = new login();
     const aux = new auxliar();
     var table = $('#table_id').DataTable({scrollX:true});
     var mytable = $("#mytable").DataTable({
@@ -198,6 +195,7 @@
                                     searching: false
                                 })
     $(document).ready( function () {
+            session.confirmarlogin("Cliente");
 
             $('#myModal').on('hidden.bs.modal', function()
             {
@@ -207,9 +205,7 @@
             
 
             $('#logout').click(function() {
-                
-                window.localStorage.removeItem('dato');
-                window.location.href = "/SistemaCliente/login.html"
+                session.alertLogout();
             });
         } );
 

@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    if(window.localStorage.getItem('dato') != undefined)
-        window.location.href = "/SistemaCliente/index.html"
-
-</script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,6 +28,7 @@
         
     <!--Links para funciones auxliar-->
     <script src="/src/js/auxliar.js" ></script>
+    <script src="/src/js/login.js"></script>
 
 </head>
 <body onload="onload()">
@@ -156,8 +152,11 @@
         </div>
 <br>
 <script>
+        const session = new login();
+
         const aux = new auxliar();
         $(document).ready(function(){
+            session.confirmarlogin("No-Clientes");
 
             $('#regristar').click(function() {
                 
