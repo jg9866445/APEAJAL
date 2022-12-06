@@ -195,7 +195,7 @@ class SubReportes
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
                                 $pdf->Cell(25,7,"idSalida",1,0,'C');
-                                $pdf->Cell(25,7,"Nombre del responsable",1,0);
+                                $pdf->Cell(40,7,"Nombre del responsable",1,0);
                                 $pdf->Cell(60,7,"idPago",1,0);
                                 $pdf->Cell(60,7,"Fecha",1,0);
                                 $pdf->Cell(25,7,"idPredio",1,0);
@@ -204,7 +204,7 @@ class SubReportes
                                 $pdf->Ln();
                                 foreach( $ventas as $row){  
                                     $pdf->Cell(25,7,$row[0],1,0,'C');
-                                    $pdf->Cell(25,7,$row[1],1,0);
+                                    $pdf->Cell(40,7,$row[1],1,0);
                                     $pdf->Cell(60,7,$row[2],1,0);
                                     $pdf->Cell(60,7,$row[3],1,0);
                                     $pdf->Cell(25,7,$row[4],1,0);
@@ -253,14 +253,16 @@ class SubReportes
                                 $pdf->Cell(60,7,"Nombre responsable",1,0);
                                 $pdf->Cell(60,7,"Planta Forestal",1,0);
                                 $pdf->Cell(25,7,"Cantidad",1,0);
-                                $pdf->Cell(25,7,"Motivo",1,0);
+                                $pdf->Cell(40,7,"Motivo",1,0);
+                                $pdf->Cell(25,7,"Motivo Merma",1,0);
                                 $pdf->Ln();
                                 foreach( $ventas as $row){  
                                     $pdf->Cell(25,7,$row[0],1,0,'C');
                                     $pdf->Cell(60,7,$row[1],1,0);
                                     $pdf->Cell(60,7,$row[2],1,0);
                                     $pdf->Cell(25,7,$row[3],1,0);
-                                    $pdf->Cell(25,7,$row[4],1,0);
+                                    $pdf->Cell(40,7,$row[4],1,0);
+                                    $pdf->Cell(25,7,$row[5],1,0);
                                     $pdf->Ln();
                                     }
                                 }else{
@@ -280,10 +282,10 @@ class SubReportes
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Salidas"));
                                 $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                $writer->writeSheetRow('Sheet1', array("Fecha","Nombre responsable","Planta Forestal","Cantidad","Motivo"));
+                                $writer->writeSheetRow('Sheet1', array("Fecha","Nombre responsable","Planta Forestal","Cantidad","Motivo","Motivo Merma"));
                                 $ventas=$this->conexion->RMermas($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
-                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4]));
+                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5]));
                                 }
                                 $writer->writeToStdOut();
                         }
@@ -337,11 +339,12 @@ class SubReportes
                                 }
                                 $writer->writeToStdOut();
                         }
-                    break;     
+                    break;  
+
                     case 'RInventarioVirtual':
                         if($_GET['tipo']=='PDF'){                        
                             $pdf = new PDF('L','mm','A4');
-                            $pdf->setTitulos("Inventario Fisico","");
+                            $pdf->setTitulos("Inventario Virtual","");
                             $pdf->AddPage();
                             $pdf->SetFont('Arial','',7);
                             $ventas=$this->conexion->RInventarioVirtual();
@@ -353,6 +356,7 @@ class SubReportes
                                 $pdf->Cell(60,7,"Planta Forestal",1,0);
                                 $pdf->Cell(60,7,"Descripcion",1,0);
                                 $pdf->Cell(25,7,"Existencia",1,0);
+                                $pdf->Cell(25,7,"Precio",1,0);
                                 $pdf->Ln();
                                 foreach( $ventas as $row){  
                                     $pdf->Cell(25,7,$row[0],1,0,'C');
@@ -360,6 +364,7 @@ class SubReportes
                                     $pdf->Cell(60,7,$row[2],1,0);
                                     $row[3]=$row[4]=="null"?$row[3]:$row[3]-$row[4];
                                     $pdf->Cell(25,7,$row[3],1,0);
+                                    $pdf->Cell(25,7,$row[4],1,0);
                                     $pdf->Ln();
                                     }
                                 }else{
@@ -386,7 +391,8 @@ class SubReportes
                                 }
                                 $writer->writeToStdOut();
                         }
-                    break;                           
+                    break;
+
                     default:
                         echo "Metodo No encontrado";
                     break;

@@ -139,6 +139,14 @@ class Movimientos {
         return $results;
     }
     
+    public function getAllMotivoMermasSelect(){
+        $sql = "Select * from motivoMerma";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    
     public function getAllPrediosforSelect($idCliente){
         $sql = "SELECT * FROM predios as p WHERE p.idCliente=:idCliente;";
         $query = $this->connect->prepare($sql);
@@ -155,6 +163,13 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
+    public function getMotivoMerma(){
+        $sql = "Select * from motivoMerma";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
     public function getAllVentaSelect(){
         $sql = "SELECT * FROM ventas as v INNER JOIN solicitudes as s on s.idSolicitud=v.idSolicitud WHERE s.estado = 'Atendido'";
@@ -165,7 +180,7 @@ class Movimientos {
     }
 
     public function getAllPagosSelector(){
-        $sql = "select * FROM pagos";
+        $sql = "SELECT p.*,s.estado FROM pagos as p INNER JOIN ventas as v on p.idVenta=v.idVenta INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud WHERE s.estado='Pagado' OR s.estado='Entregando';";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -287,6 +302,24 @@ class Movimientos {
         return $results;
     }
 
+    public function getMermaPlantas($idMermaPlanta){
+        $sql = "SELECT r.nombre AS NombreResponsable , r.puesto AS PuestoResponsable, m.idMermaPlanta ,m.fecha FROM mermaPlantaForestal as m  INNER JOIN responsable as r ON r.idResponsable=m.idResponsable WHERE m.idMermaPlanta =  :idMermaPlanta;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idMermaPlanta', $idMermaPlanta);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+
+    public function getDetallesMermas($idMermaPlanta){
+       $sql = "SELECT dmpf.*,mm.nombre as motivoMerma,e.nombre FROM detalleMermaPlantaForestal as dmpf INNER JOIN motivoMerma as mm ON dmpf.idMotivoMerma=mm.idMotivoMerma INNER JOIN plantaForestal as pf on pf.idPlanta=dmpf.idPlanta INNER JOIN especie as e on e.idEspecie=pf.idEspecie WHERE dmpf.idMermaPlanta=:idMermaPlanta";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idMermaPlanta', $idMermaPlanta);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
     //INSERT
 
     public function insertPredios( $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud){
@@ -480,7 +513,7 @@ class Movimientos {
         $idSolicitud=$request[0]['idSolicitud'];
 
         if($VentaNoTerminada){
-            $sql="UPDATE solicitudes SET estado='Entregado' WHERE  idSolicitud=:idSolicitud";
+            $sql="UPDATE solicitudes SET estado='Terminado' WHERE  idSolicitud=:idSolicitud";
             $query = $this->connect->prepare($sql);
             $query->bindParam(':idSolicitud', $idSolicitud);
             $query->execute();
@@ -505,12 +538,13 @@ class Movimientos {
     
     public function InsertDetalleMermaPlantaForestal($idMermaPlantas,$detalles){
          foreach ($detalles as $value) {
-            $sql="INSERT INTO detalleMermaPlantaForestal(idMermaPlanta, idPlanta, cantidad, motivo) VALUES (:idMermaPlantas, :idPlanta, :Cantidad,:Motivo)";
+            $sql="INSERT INTO detalleMermaPlantaForestal(idMermaPlanta, idPlanta,idMotivoMerma, cantidad, motivo) VALUES (:idMermaPlantas, :idPlanta,:idMotivoMerma, :Cantidad,:Motivo)";
             $query = $this->connect->prepare($sql);
             $query->bindParam(':idMermaPlantas', $idMermaPlantas);
             $query->bindParam(':idPlanta', $value->planta);
             $query->bindParam(':Cantidad', $value->Cantidad);
             $query->bindParam(':Motivo', $value->Motivo);
+            $query->bindParam(':idMotivoMerma', $value->idMotivoMerma);
             $query->execute();
 
             $sql="SELECT existencia  from  plantaForestal  WHERE idPlanta=:idPlanta";

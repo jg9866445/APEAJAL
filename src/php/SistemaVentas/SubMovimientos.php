@@ -136,6 +136,11 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
                     
+                    case 'getAllMotivoMermasSelect':
+                        $conexion=new Movimientos();
+                        $resultado=$conexion->getAllMotivoMermasSelect();
+                        echo json_encode($resultado);
+                    break;                 
                     //get Individual 
                     case 'getResponsable':
                         $idResponsable = $_POST['idResponsable'];
@@ -220,7 +225,29 @@ class SubMovimientos
                         $resultado= $conexion->getPagoPlantas($idPago);
                         echo json_encode($resultado);
                     break;
-                                        
+
+                    case 'getMotivoMerma':
+                        $idMotivoMerma= $_POST['idMotivoMerma'];
+                        $conexion= new Movimientos();
+                        $resultado= $conexion->getMotivoMerma($idMotivoMerma);
+                        echo json_encode($resultado);
+                    break;
+
+
+                    case 'getMermaPlantas':
+                        $idMermaPlantas= $_POST['idMermaPlantas'];
+                        $conexion= new Movimientos();
+                        $resultado= $conexion->getMermaPlantas($idMermaPlantas);
+                        echo json_encode($resultado);
+                    break;
+
+                    case 'getDetallesMermas':
+                        $idMermaPlantas= $_POST['idMermaPlantas'];
+                        $conexion= new Movimientos();
+                        $resultado= $conexion->getDetallesMermas($idMermaPlantas);
+                        echo json_encode($resultado);
+                    break;
+                                     
                     case 'getSalida':
                         $idSalida= $_POST['idSalida'];
                         $conexion= new Movimientos();

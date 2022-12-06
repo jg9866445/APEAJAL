@@ -69,7 +69,7 @@ class Reportes {
     }
 
     public function RMermas($fi,$ff){
-        $sql="SELECT mpf.fecha,r.nombre,e.nombre,dmpf.cantidad,dmpf.motivo from mermaPlantaForestal as mpf INNER JOIN detalleMermaPlantaForestal as dmpf on mpf.idMermaPlanta=dmpf.idMermaPlanta INNER JOIN responsable as r ON r.idResponsable = mpf.idResponsable INNER JOIN plantaForestal as pf ON pf.idPlanta= dmpf.idMermaPlanta INNER JOIN especie as e ON pf.idEspecie=e.idEspecie WHERE   mpf.fecha BETWEEN :fi AND :ff;";
+        $sql="SELECT mpf.fecha,r.nombre,e.nombre,dmpf.cantidad,dmpf.motivo,mm.nombre as motivoMerma from mermaPlantaForestal as mpf INNER JOIN detalleMermaPlantaForestal as dmpf on mpf.idMermaPlanta=dmpf.idMermaPlanta INNER JOIN responsable as r ON r.idResponsable = mpf.idResponsable INNER JOIN plantaForestal as pf ON pf.idPlanta= dmpf.idMermaPlanta INNER JOIN especie as e ON pf.idEspecie=e.idEspecie INNER JOIN motivoMerma as mm ON mm.idMotivoMerma = dmpf.idMotivoMerma WHERE mpf.fecha BETWEEN :fi AND :ff;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
@@ -79,7 +79,7 @@ class Reportes {
     }
 
     public function RInventarioFisicio(){
-        $sql="Select pf.idPlanta,e.nombre,pf.descripcion,pf.existencia from plantaForestal as pf INNER JOIN especie as e ON e.idEspecie=pf.idEspecie ;";
+        $sql="Select pf.idPlanta,e.nombre,pf.descripcion,pf.existencia,pf.precio from plantaForestal as pf INNER JOIN especie as e ON e.idEspecie=pf.idEspecie ;";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
