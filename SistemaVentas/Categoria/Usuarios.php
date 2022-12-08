@@ -297,11 +297,11 @@
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");
         }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
-            $idResponsable=$_POST["idResponsableM"];
+            $idUsuarioM=$_POST["idUsuarioM"];
             $NombreResponsable = $_POST['usernameM'];
             $Puesto = $_POST['PuestoM'];
             $password = $_POST['passwordM'];
-            $resultado = $conexion->updateUsuarios($idResponsable, $NombreResponsable, $Puesto,$password);
+            $resultado = $conexion->updateUsuarios($idUsuarioM, $NombreResponsable, $Puesto,$password);
             unset($_POST);
             ob_start();
             echo("<meta http-equiv='refresh' content='1'>");

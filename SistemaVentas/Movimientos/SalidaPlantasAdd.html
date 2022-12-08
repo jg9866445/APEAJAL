@@ -103,7 +103,6 @@
 
                     </div>
                     <div class="col-lg-7 ">
-                    <h1 style="text-align:center">Salida de plantas forestales</h1>
                     </div>
                 </div>
             </div>
@@ -120,6 +119,7 @@
                             <input class="form-control" type="text" name="idSalida" id="idSalida" disabled />
                         </div>
                         <div class="col-md-6">
+                            <h1 style="text-align:center">Salida</h1>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha salida</label>
@@ -517,7 +517,7 @@
                                 var $tds = $(this).find('td');
                                 idPredio = $tds.eq(0).text();
                                 idPlanta = $tds.eq(5).text();
-                                cantidadSolicitada = $tds.eq(8).text();
+                                cantidadSolicitada = $tds.eq(9).text();
                                 dato={"predio":idPredio, "planta":idPlanta, "Cantidad":cantidadSolicitada};
                                 datos.push(dato);
                             });

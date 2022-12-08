@@ -156,7 +156,7 @@
                                         echo "<td>" . $row['telefono'] . "</td>";
                                         echo "<td>" . $row['celular'] . "</td>";
                                         echo "<td>" . $row['tipoCliente'] . "</td>";
-                                        echo "<td><a class='btn' role='button' href=/src/PDF/ConstanciaFiscal/". $row['idCliente'].".pdf>Descargar</a></td>";
+                                        echo "<td><a class='btn download' role='button' href=/src/PDF/ConstanciaFiscal/". $row['idCliente'].".pdf>Descargar</a></td>";
                                         echo "<td><button type='button' class='btn update' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
                                         echo "</tr>";
                                     }
@@ -195,13 +195,13 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">RFC</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RFC" name="RFC" placeholder="RFC " required pattern="[A-Za-z0-9 ]+" minlength="1" maxlength="15" />
+                                <input class="form-control" type="text" id="RFC" name="RFC" placeholder="RFC " pattern="[A-Za-z0-9 ]+" minlength="1" maxlength="15" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">CURP</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="CURP" name="CURP" placeholder="CURP" required pattern="[A-Za-z0-9 ]+" minlength="1" maxlength="15" />
+                                <input class="form-control" type="text" id="CURP" name="CURP" placeholder="CURP" pattern="[A-Za-z0-9 ]+" minlength="1" maxlength="15" />
                                 <label for="input"></label>
                             </div>
 
@@ -246,7 +246,7 @@
                                 <select class="form-select" name="idTipoCliente" id="idTipoCliente" required>
                                     <option disabled selected>Elija una opción</option>
                                     <option value="Donación">Donación</option>
-                                    <option value="Compra">Compra</option>
+                                    <option value="Venta">Venta</option>
                                 </select>
                                 <label for="input"></label>
                             </div>
@@ -289,13 +289,13 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">RFC</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="RFCM" name="RFCM" placeholder="RFC" required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="15" />
+                                <input class="form-control" type="text" id="RFCM" name="RFCM" placeholder="RFC" pattern="[A-Za-z0-9 ]+" minlength="1" maxlength="15" />
                                 <label for="input"></label>
                             </div>
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">CURP</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="CURPM" name="CURPM" placeholder="CURP" required pattern="[A-Za-z1-9 ]+" minlength="1" maxlength="15" />
+                                <input class="form-control" type="text" id="CURPM" name="CURPM" placeholder="CURP" pattern="[A-Za-z0-9 ]+" minlength="1" maxlength="15" />
                                 <label for="input"></label>
                             </div>
 
@@ -416,7 +416,7 @@
             document.getElementById('idTipoClienteM').value=elementosTD[10].textContent;
             }
 
-            function getUltimoInsert(){
+        function getUltimoInsert(){
             $.ajax({
                 url: "/src/php/SistemaVentas/SubCatalagos.php",
                 method: "POST",
@@ -446,10 +446,7 @@
             $Telefono = $_POST['Telefono'];
             $Celular = $_POST['Celular'];
             $idTipoCliente = $_POST['idTipoCliente'];
-            if(isset($_FILES))
-            {
-                GuardarArchivo($idCliente);
-            }
+            GuardarArchivo($idCliente);
             $resultado = $conexion->insertClientes($RazonSocial,$RFC,$CURP,$domicilio,$Ciudad,$Estado,$email,$Telefono, $Celular, $idTipoCliente);
             unset($_POST);
             unset($_FILES);
@@ -467,10 +464,7 @@
             $Telefono = $_POST['TelefonoM'];
             $Celular = $_POST['CelularM'];
             $idTipoCliente = $_POST['idTipoClienteM'];
-            if(!isset($_FILES))
-            {
-                GuardarArchivo($idCliente);
-            }
+            GuardarArchivo($idCliente);
             $resultado = $conexion->updateClientes($idCliente,$RazonSocial,$RFC,$CURP,$domicilio,$Ciudad,$Estado,$email,$Telefono,$Celular,$idTipoCliente);
             unset($_POST);
             unset($_FILES);
@@ -494,13 +488,13 @@
                     if(move_uploaded_file($origen, $destino))
                     {
                         }else{
-                            //log("Error : archivos no movido");
+                            echo ("Error : archivos no movido");
                         }
                 }else{
-                    //log("Error : archivos no es pdf");
+                    echo("Error : archivos no es pdf");
                 }
             }else{
-                //log("Error : archivos no encotrados");
+                echo("Error : archivos no encotrados");
             }
     }
 ?>

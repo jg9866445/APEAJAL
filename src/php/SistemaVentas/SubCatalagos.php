@@ -1,5 +1,5 @@
 <?php 
-require_once($_SERVER['DOCUMENT_ROOT']."/src/php/log.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/src/php/auxiliar/log.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/src/php/SistemaVentas/Catalago.php");
     
 class SubCatalagos

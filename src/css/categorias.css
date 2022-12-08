@@ -1,9 +1,9 @@
- button.btn.insert, button.btn.new, button.btn.cancel{
+ button.btn.insert, button.btn.new, button.btn.cancel,.btn.download{
     margin-top: 20px;
     margin-bottom: 15px;
 }
 
-button.btn.update, button.btn.insert, button.btn.new{
+button.btn.update, button.btn.insert, button.btn.new,a.btn.download{
     color: #FFFFFF;
     background-color: #52672E;
     border-color: #52672E;

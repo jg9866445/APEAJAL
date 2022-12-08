@@ -37,7 +37,7 @@ class Catalago {
     }
 
     public function getMotivoMerma(){
-        $sql = "SELECT * FROM motivoMerma";
+        $sql = "SELECT * FROM motivoMermaPlantaForestal";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -104,18 +104,18 @@ class Catalago {
         return $query->rowCount(); 
     }
 
-    function insertUsuarios( $Username, $Puesto,$Password){
-        $sql = "INSERT INTO User ( Username, Puesto,Password) VALUES (:Username, :Puesto,:Password)";
+    function insertUsuarios( $Username, $Puesto,$Pass){
+        $sql = "INSERT INTO User ( Username, Puesto,Pass) VALUES (:Username, :Puesto,:Pass)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":Username",$Username);
         $query->bindParam(":Puesto",$Puesto);
-        $query->bindParam(":Password",$Password);
+        $query->bindParam(":Pass",$Pass);
         $query->execute();  
         return $query->rowCount(); 
     }
     
     function insertMotivoMerma( $nombre, $descripcion){
-        $sql = "INSERT INTO motivoMerma ( nombre, descripcion) VALUES (:nombre,:descripcion)";
+        $sql = "INSERT INTO motivoMermaPlantaForestal ( nombre, descripcion) VALUES (:nombre,:descripcion)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":nombre",$nombre);
         $query->bindParam(":descripcion",$descripcion);
@@ -185,16 +185,20 @@ class Catalago {
         $request=$query->execute(); 
         return $request;    
     }
-    function updateUsuarios($idUsuario, $Username, $Puesto,$Password){
-        $sql = "UPDATE User SET Username=:Username,Puesto=:Puesto,Password=:Password where idUsuario =:idUsuario ";
+
+    function updateUsuarios($idUsuario, $Username, $Puesto,$Pass){
+        $sql = "UPDATE User SET Username = :Username, Puesto = :Puesto, Pass = :Pass where idUsuario = :idUsuario ";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':idUsuario ', $idUsuario );
+
         $query->bindParam(':Username', $Username);
         $query->bindParam(':Puesto', $Puesto);
-        $query->bindParam(':Password', $Password);
+        $query->bindParam(':Pass', $Pass);
+        $query->bindParam(':idUsuario', $idUsuario );
+
         $request=$query->execute(); 
         return $request;    
     }
+    
     function updateResponsable($idResponsable, $nombre, $puesto){
         $sql = "UPDATE responsable SET nombre=:nombre, puesto=:puesto  where idResponsable=:idResponsable";
         $query = $this->connect->prepare($sql);

@@ -107,7 +107,7 @@
                             <input class="form-control" type="text" name="idSolicitud" id="idSolicitud" disabled />
                         </div>
                         <div class="col-md-6">
-                            <h3 class="text-center"> Solicitud de plantas</h3>
+                            <h3 class="text-center">Solicitud</h3>
                         </div>
                         <div class="col-md-3">
                             <label for="staticEmail" class="form-label">Fecha</label>
@@ -347,7 +347,7 @@
                                                 <th>Longitud</th>
                                                 <th>Planta</th>
                                                 <th>Especie</th>
-                                                <th>Nombre</th>
+                                                <th>Descripcion</th>
                                                 <th>Precio</th>
                                                 <th>Cantidad</th>
                                                 <th>Importe</th>
@@ -486,7 +486,8 @@
                     if(tds.eq(0).text()==idPredio &&  tds.eq(5).text()==idPlanta)
                         duplicado=true;
                 });    
-                if(cantidadSolicitada!=0){    
+                if(cantidadSolicitada!=0 && !isNaN(cantidadSolicitada)){ 
+                    console.log(cantidadSolicitada);   
                     if(idPredio!=-20){
                         if(idPlanta!=-20){
                             if(!duplicado){

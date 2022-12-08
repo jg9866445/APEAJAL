@@ -45,7 +45,7 @@
 
                                     <div class="form-outline form-white mb-4">
                                         <input type="text" id="dato" class="form-control form-control-lg" />
-                                        <label class="form-label" for="typeEmailX">CURP O RFC</label>
+                                        <label class="form-label" for="typeEmailX">RFC O CURP</label>
                                     </div>
 
                                     <button class="btn link btn-lg px-5" id="Iniciar">Inicio de sesión</button>
@@ -68,24 +68,26 @@
             session.confirmarlogin("No-Clientes");
 
             $('#Iniciar').click(function() {
-                $.ajax({
-                    url: "/src/php/SistemaClientes/SubSistemaClientes.php",
-                    method: "POST",
-                    data: {
-                        "Metodo":'ISlogin',
-                        "dato":document.getElementById("dato").value
-                    },
-                    beforeSend: function() {
-                        aux.alert("<h5>Espere cargando datos</h5>")
-                    }}).done(function(respuesta) {
-                        respuesta=JSON.parse(respuesta);
-                        if(respuesta[0].ISlogin){
-                            localStorage.setItem("dato", document.getElementById("dato").value);
-                            window.location.href = "/SistemaCliente/index.html"
-                        }else{
-                            aux.alert("<h5>Error Cliente no encontrado</h5>",true,true);
-                        }
-                    })             
+                if(document.getElementById("dato").value!=0){                    
+                    $.ajax({
+                        url: "/src/php/SistemaClientes/SubSistemaClientes.php",
+                        method: "POST",
+                        data: {
+                            "Metodo":'ISlogin',
+                            "dato":document.getElementById("dato").value
+                        },
+                        beforeSend: function() {
+                            aux.alert("<h5>Espere cargando datos</h5>")
+                        }}).done(function(respuesta) {
+                            respuesta=JSON.parse(respuesta);
+                            if(respuesta[0].ISlogin){
+                                localStorage.setItem("dato", document.getElementById("dato").value);
+                                window.location.href = "/SistemaCliente/index.html"
+                            }else{
+                                aux.alert("<h5>Error Cliente no encontrado</h5>",true,true);
+                            }
+                        }) 
+                    }else aux.alert("<h5>Inserte un RFC o CURP<h5>",true,true);            
                 });       
         
             $('#crear').click(function() {

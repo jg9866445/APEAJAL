@@ -123,7 +123,7 @@
                                 <th>Concepto</th>
                                 <th>Descripción</th>
                                 <th>Clasificación</th>
-                                <th>Unidad</th>
+                                <th>Unidad de medida</th>
                                 <th>Existencia</th>
                                 <th>Máximo</th>
                                 <th>Mínimo</th>
@@ -196,7 +196,7 @@
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad de medida</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="UnidadMedidaM" id="UnidadMedidaM" required>
                                         <option disabled selected value="">Elija una opción</option>
@@ -283,7 +283,7 @@
                                     <label for="input"></label>
                                 </div>
 
-                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad</label>
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Unidad de medida</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" name="UnidadMedida" id="UnidadMedida" required>
                                         <option disabled selected value="">Elija una opción</option>
