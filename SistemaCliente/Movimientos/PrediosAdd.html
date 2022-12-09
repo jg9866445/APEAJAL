@@ -303,8 +303,8 @@
                             document.getElementById("idCliente").value=respuesta[0].idCliente;          
                             document.getElementById("razonSocial").value=respuesta[0].razonSocial;
                             document.getElementById("domicilio").value=respuesta[0].domicilio;
-                            document.getElementById("rfc").value=respuesta[0].RFC;
-                            document.getElementById("curp").value=respuesta[0].CURP;
+                            document.getElementById("rfc").value=(respuesta[0].RFC==undefined || respuesta[0].RFC==""? "Sin RFC":respuesta[0].RFC);
+                            document.getElementById("curp").value=(respuesta[0].CURP==undefined || respuesta[0].CURP==""? "Sin CURP":respuesta[0].CURP);
                             document.getElementById("telefono").value=respuesta[0].telefono;
                             document.getElementById("celular").value=respuesta[0].celular;
                             document.getElementById("tipoCliente").value=respuesta[0].tipoCliente;

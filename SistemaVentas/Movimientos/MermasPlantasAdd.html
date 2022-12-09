@@ -216,7 +216,7 @@
                                 </div>
                                 <div class="row g-3">
                                     <div class="col-md-4">
-                                        <label for="staticEmail" class="form-label">Motivo</label>
+                                        <label for="staticEmail" class="form-label">Observaciones</label>
                                         <input class="form-control" type="text" name="MotivoT" id="MotivoT"/>
                                     </div>
                                     <div class="col-md-3">
@@ -261,7 +261,7 @@
                                                 <th>Especie</th>
                                                 <th>idMotivo</th>
                                                 <th>Motivo</th>
-                                                <th>Motivo</th>
+                                                <th>Observaciones</th>
                                                 <th>Cantidad</th>
                                                 <th>Eliminar</th>
                                             </tr>
@@ -573,7 +573,7 @@
                 url: "/src/php/SistemaVentas/SubMovimientos.php",
                 method: "POST",
                 data: {
-                    "Metodo":'getMotivoMerma',
+                    "Metodo":'getMotivoMermaPlantaForestal',
                     "idMotivoMerma":document.getElementById("idMotivoMerma").value
                 },
                 beforeSend: function() {

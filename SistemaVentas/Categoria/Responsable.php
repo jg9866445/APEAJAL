@@ -167,9 +167,14 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="Puesto" name="Puesto" placeholder="Puesto" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
+                                <select class="form-select" name="Puesto" id="Puesto" required>
+                                    <option disabled selected>Elija una opción</option>
+                                    <option value="Administrdor">Administrdor</option>
+                                    <option value="Viverista">Viverista</option>
+                                    <option value="Cordinador">Cordinador</option>
+                                </select>
                                 <label for="input"></label>
                             </div>
                         </div>
@@ -203,10 +208,14 @@
                                 <input class="form-control" type="text" id="NombreResponsableM" name="NombreResponsableM" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
-
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Puesto</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="PuestoM" name="PuestoM" placeholder="Puesto" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" minlength="3" maxlength="40" />
+                                <select class="form-select" name="PuestoM" id="PuestoM" required>
+                                    <option disabled selected>Elija una opción</option>
+                                    <option value="Administrdor">Administrdor</option>
+                                    <option value="Viverista">Viverista</option>
+                                    <option value="Cordinador">Cordinador</option>
+                                </select>
                                 <label for="input"></label>
                             </div>
                         </div>

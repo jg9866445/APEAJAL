@@ -140,7 +140,7 @@ class Movimientos {
     }
     
     public function getAllMotivoMermasSelect(){
-        $sql = "Select * from motivoMerma";
+        $sql = "Select * from motivoMermaPlantaForestal";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -163,9 +163,11 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
-    public function getMotivoMerma(){
-        $sql = "Select * from motivoMerma";
+
+    public function getMotivoMermaPlantaForestal($idMotivoMerma){
+        $sql = "Select * from motivoMermaPlantaForestal as mpf where mpf.idMotivoMerma=:idMotivoMerma";
         $query = $this->connect->prepare($sql);
+        $query->bindParam(':idMotivoMerma', $idMotivoMerma);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -313,7 +315,7 @@ class Movimientos {
 
 
     public function getDetallesMermas($idMermaPlanta){
-       $sql = "SELECT dmpf.*,mm.nombre as motivoMerma,e.nombre FROM detalleMermaPlantaForestal as dmpf INNER JOIN motivoMerma as mm ON dmpf.idMotivoMerma=mm.idMotivoMerma INNER JOIN plantaForestal as pf on pf.idPlanta=dmpf.idPlanta INNER JOIN especie as e on e.idEspecie=pf.idEspecie WHERE dmpf.idMermaPlanta=:idMermaPlanta";
+       $sql = "SELECT dmpf.*,mm.nombre as motivoMerma,e.nombre FROM detalleMermaPlantaForestal as dmpf INNER JOIN motivoMermaPlantaForestal as mm ON dmpf.idMotivoMerma=mm.idMotivoMerma INNER JOIN plantaForestal as pf on pf.idPlanta=dmpf.idPlanta INNER JOIN especie as e on e.idEspecie=pf.idEspecie WHERE dmpf.idMermaPlanta=:idMermaPlanta";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idMermaPlanta', $idMermaPlanta);
         $query -> execute(); 

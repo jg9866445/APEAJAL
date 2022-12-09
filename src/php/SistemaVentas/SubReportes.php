@@ -40,14 +40,14 @@ class SubReportes
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
                                 $pdf->SetWidths(array(25,25,60,60,25,25,25,25));
-                                $pdf->Row(array("IdSolicitud","Fecha","Nombre del responable","Razon Social","IdPredio","Planta Forestal","Cantidad Solicitada","Precio"));
+                                $pdf->Row(array("IdSolicitud","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio"));
                                 foreach( $ventas as $row){  
                                     $pdf->row($row);
                                     
                                     }
                                 }else{
                                     $pdf->Ln();
-                                    $pdf->Cell(100,6,"No existen compras para estas fechas",0,0);
+                                    $pdf->Cell(100,6,"No existen solicitudes para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
                                 $pdf->Output();
@@ -62,7 +62,7 @@ class SubReportes
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Solicitudes"));
                                 $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                $writer->writeSheetRow('Sheet1', array("IdSolicitud","Fecha","Nombre del responable","Razon Social","IdPredio","Planta Forestal","Cantidad Solicitada","Precio"));
+                                $writer->writeSheetRow('Sheet1', array("IdSolicitud","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio"));
                                 $ventas=$this->conexion->RSolicitudes($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
                                     $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]));
@@ -82,29 +82,14 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(25,7,"IdVenta",1,0,'C');
-                                $pdf->Cell(25,7,"Fecha",1,0);
-                                $pdf->Cell(60,7,"Nombre del responsable",1,0);
-                                $pdf->Cell(60,7,"RazonSocial",1,0);
-                                $pdf->Cell(25,7,"idPredio",1,0);
-                                $pdf->Cell(25,7,"Planta Forestal",1,0);
-                                $pdf->Cell(25,7,"Cantidad Solicitada",1,0);
-                                $pdf->Cell(25,7,"Precio",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(25,25,60,60,25,25,25,25));
+                                $pdf->row(array("IdVenta","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio"));
                                 foreach( $ventas as $row){  
-                                    $pdf->Cell(25,7,$row[0],1,0,'C');
-                                    $pdf->Cell(25,7,$row[1],1,0);
-                                    $pdf->Cell(60,7,$row[2],1,0);
-                                    $pdf->Cell(60,7,$row[3],1,0);
-                                    $pdf->Cell(25,7,$row[4],1,0);
-                                    $pdf->Cell(25,7,$row[5],1,0);
-                                    $pdf->Cell(25,7,$row[6],1,0);
-                                    $pdf->Cell(25,7,$row[7],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row($row);
                                     }
                                 }else{
                                     $pdf->Ln();
-                                    $pdf->Cell(100,6,"No existen compras para estas fechas",0,0);
+                                    $pdf->Cell(100,6,"No existen Ventas para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
                                 $pdf->Output();
@@ -119,7 +104,7 @@ class SubReportes
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Ventas"));
                                 $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                $writer->writeSheetRow('Sheet1', array("IdVenta","Fecha","Nombre del responable","Razon Social","IdPredio","Planta Forestal","Cantidad Solicitada","Precio"));
+                                $writer->writeSheetRow('Sheet1', array("IdVenta","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio"));
                                 $ventas=$this->conexion->RVentas($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
                                     $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]));
@@ -139,27 +124,14 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(25,7,"idPago",1,0,'C');
-                                $pdf->Cell(60,7,"Nombre Responsable",1,0);
-                                $pdf->Cell(60,7,"Razon Social",1,0);
-                                $pdf->Cell(25,7,"IdVenta",1,0);
-                                $pdf->Cell(25,7,"Fecha",1,0);
-                                $pdf->Cell(60,7,"Concepto General",1,0);
-                                $pdf->Cell(25,7,"Importe",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(25,60,60,25,25,60,25));
+                                $pdf->row(array("idPago","Nombre Responsable","Razon Social","IdVenta","Fecha","Concepto General","Importe"));
                                 foreach( $ventas as $row){  
-                                    $pdf->Cell(25,7,$row[0],1,0,'C');
-                                    $pdf->Cell(60,7,$row[1],1,0);
-                                    $pdf->Cell(60,7,$row[2],1,0);
-                                    $pdf->Cell(25,7,$row[3],1,0);
-                                    $pdf->Cell(25,7,$row[4],1,0);
-                                    $pdf->Cell(60,7,$row[5],1,0);
-                                    $pdf->Cell(25,7,$row[6],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row($row);
                                     }
                                 }else{
                                     $pdf->Ln();
-                                    $pdf->Cell(100,6,"No existen compras para estas fechas",0,0);
+                                    $pdf->Cell(100,6,"No existen pagos para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
                                 $pdf->Output();
@@ -194,27 +166,15 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(25,7,"idSalida",1,0,'C');
-                                $pdf->Cell(40,7,"Nombre del responsable",1,0);
-                                $pdf->Cell(60,7,"idPago",1,0);
-                                $pdf->Cell(60,7,"Fecha",1,0);
-                                $pdf->Cell(25,7,"idPredio",1,0);
-                                $pdf->Cell(25,7,"Planta Forestal",1,0);
-                                $pdf->Cell(25,7,"Cantidad Surtida",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(25,40,60,60,25,25,25));
+                                $pdf->row(array("idSalida","Nombre del responsable","idPago","Fecha","idPredio","Especie","Cantidad Surtida"));
+
                                 foreach( $ventas as $row){  
-                                    $pdf->Cell(25,7,$row[0],1,0,'C');
-                                    $pdf->Cell(40,7,$row[1],1,0);
-                                    $pdf->Cell(60,7,$row[2],1,0);
-                                    $pdf->Cell(60,7,$row[3],1,0);
-                                    $pdf->Cell(25,7,$row[4],1,0);
-                                    $pdf->Cell(25,7,$row[5],1,0);
-                                    $pdf->Cell(25,7,$row[6],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row($row);
                                     }
                                 }else{
                                     $pdf->Ln();
-                                    $pdf->Cell(100,6,"No existen compras para estas fechas",0,0);
+                                    $pdf->Cell(100,6,"No existen salidas para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
                                 $pdf->Output();
@@ -229,7 +189,7 @@ class SubReportes
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Salidas"));
                                 $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                $writer->writeSheetRow('Sheet1', array("idSalida","Nombre del responsable","idPago","Fecha","idPredio","Planta Forestal","Cantidad Surtida"));
+                                $writer->writeSheetRow('Sheet1', array("idSalida","Nombre del responsable","idPago","Fecha","idPredio","Especie","Cantidad Surtida"));
                                 $ventas=$this->conexion->Rsalida($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
                                     $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6]));
@@ -249,25 +209,14 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(25,7,"Fecha",1,0,'C');
-                                $pdf->Cell(60,7,"Nombre responsable",1,0);
-                                $pdf->Cell(60,7,"Planta Forestal",1,0);
-                                $pdf->Cell(25,7,"Cantidad",1,0);
-                                $pdf->Cell(40,7,"Motivo",1,0);
-                                $pdf->Cell(25,7,"Motivo Merma",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(25,60,60,25,40,25));
+                                $pdf->row(array("Fecha","Nombre responsable","Especie","Cantidad","Motivo","Motivo Merma"));
                                 foreach( $ventas as $row){  
-                                    $pdf->Cell(25,7,$row[0],1,0,'C');
-                                    $pdf->Cell(60,7,$row[1],1,0);
-                                    $pdf->Cell(60,7,$row[2],1,0);
-                                    $pdf->Cell(25,7,$row[3],1,0);
-                                    $pdf->Cell(40,7,$row[4],1,0);
-                                    $pdf->Cell(25,7,$row[5],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row($row);
                                     }
                                 }else{
                                     $pdf->Ln();
-                                    $pdf->Cell(100,6,"No existen compras para estas fechas",0,0);
+                                    $pdf->Cell(100,6,"No existen mermas para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
                                 $pdf->Output();
@@ -280,9 +229,9 @@ class SubReportes
                                 header('Cache-Control: must-revalidate');
                                 header('Pragma: public');   
                                 $writer = new XLSXWriter();
-                                $writer->writeSheetRow('Sheet1', array("Salidas"));
+                                $writer->writeSheetRow('Sheet1', array("Mermas"));
                                 $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                $writer->writeSheetRow('Sheet1', array("Fecha","Nombre responsable","Planta Forestal","Cantidad","Motivo","Motivo Merma"));
+                                $writer->writeSheetRow('Sheet1', array("Fecha","Nombre responsable","Especie","Cantidad","Motivo","Motivo Merma"));
                                 $ventas=$this->conexion->RMermas($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
                                     $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5]));
@@ -302,19 +251,10 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(25,7,"IdPlanta",1,0,'C');
-                                $pdf->Cell(60,7,"Planta Forestal",1,0);
-                                $pdf->Cell(60,7,"Descripcion",1,0);
-                                $pdf->Cell(25,7,"Existencia",1,0);
-                                $pdf->Cell(25,7,"Precio",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(25,60,60,25,25));
+                                $pdf->row(array("IdPlanta","Especie","Descripcion","Existencia","Precio"));
                                 foreach( $ventas as $row){  
-                                    $pdf->Cell(25,7,$row[0],1,0,'C');
-                                    $pdf->Cell(60,7,$row[1],1,0);
-                                    $pdf->Cell(60,7,$row[2],1,0);
-                                    $pdf->Cell(25,7,$row[3],1,0);
-                                    $pdf->Cell(25,7,$row[4],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row($row);
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -332,7 +272,7 @@ class SubReportes
                                 header('Pragma: public');   
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Salidas"));
-                                $writer->writeSheetRow('Sheet1', array("IdPlanta","Planta Forestal","Descripcion","Existencia","Precio"));
+                                $writer->writeSheetRow('Sheet1', array("IdPlanta","Especie","Descripcion","Existencia","Precio"));
                                 $ventas=$this->conexion->RInventarioFisicio();
                                 foreach( $ventas as $row){ 
                                     $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4]));
@@ -352,20 +292,11 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(25,7,"IdPlanta",1,0,'C');
-                                $pdf->Cell(60,7,"Planta Forestal",1,0);
-                                $pdf->Cell(60,7,"Descripcion",1,0);
-                                $pdf->Cell(25,7,"Existencia",1,0);
-                                $pdf->Cell(25,7,"Precio",1,0);
-                                $pdf->Ln();
-                                foreach( $ventas as $row){  
-                                    $pdf->Cell(25,7,$row[0],1,0,'C');
-                                    $pdf->Cell(60,7,$row[1],1,0);
-                                    $pdf->Cell(60,7,$row[2],1,0);
+                                $pdf->SetWidths(array(25,60,60,25,25));
+                                $pdf->row(array("IdPlanta","Especie","Descripcion","Existencia","Precio"));
+                                foreach( $ventas as $row){
                                     $row[3]=$row[4]=="null"?$row[3]:$row[3]-$row[4];
-                                    $pdf->Cell(25,7,$row[3],1,0);
-                                    $pdf->Cell(25,7,$row[4],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row(array($row[0],$row[1],$row[2],$row[3],$row[5]));  
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -383,11 +314,11 @@ class SubReportes
                                 header('Pragma: public');   
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Salidas"));
-                                $writer->writeSheetRow('Sheet1', array("IdPlanta","Planta Forestal","Descripcion","Existencia"));
+                                $writer->writeSheetRow('Sheet1', array("IdPlanta","Especie","Descripcion","Existencia"));
                                 $ventas=$this->conexion->RInventarioVirtual();
                                 foreach( $ventas as $row){ 
                                     $row[3]=$row[4]=="null"?$row[3]:$row[3]-$row[4];
-                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3]));
+                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[5]));
                                 }
                                 $writer->writeToStdOut();
                         }

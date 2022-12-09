@@ -374,6 +374,7 @@
                                                 <th>Cantidad Solicitada</th>
                                                 <th>Surtir</th>
                                                 <th>Importe</th>
+                                                <th>Quitar</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -445,6 +446,7 @@
             });
      
             $('#adicionar').click(function() {
+            
             var idPredio = document.getElementById("idPredio").value;
             var idPlanta = document.getElementById("idPlanta").value;
             var municipio = document.getElementById("municipio").value;
@@ -456,38 +458,54 @@
             var precio = parseInt(document.getElementById("precioPlantas").value,10);
             var cantidadSurtida = parseInt(document.getElementById("cantidadSurtida").value,10);
             var cantidadSolicitada = document.getElementById("cantidadSolicitada").value;
+            if(idPredio!=""){
+                console.log(idPredio);
+                if(idPlanta!=""){
+                    console.log(idPlanta);
+                    if(cantidadSurtida!=0 && !isNaN(cantidadSurtida)){ 
+                        console.log(cantidadSurtida);
+                        var fila = 
+                            '<tr id="row' + i + '" >'+
+                                '<td id="idPredio">' + idPredio + '</td>'+
+                                '<td id="municipio">' + municipio + '</td>'+
+                                '<td id="extencion">' + extencion + '</td>'+
+                                '<td id="latitud">' + latitud + '</td>'+
+                                '<td id="longitud">' + longitud + '</td>'+
+                                '<td id="idPlanta">' + idPlanta + '</td>'+
+                                '<td id="especie">' + especie + '</td>'+
+                                '<td id="precioPlanta">' + precio + '</td>'+
+                                '<td id="cantidadSolicitadaS">'+cantidadSolicitada+'</td>'+
+                                '<td id="cantidadSurtida">' + cantidadSurtida + '</td>'+
+                                '<td  id="importe">' + precio*cantidadSurtida + '</td>'+
+                                '<td><button type="button" name="surtir" id="' + i + '" class="btn btn-danger btn_quitar">Quitar</button></td>'+
 
-            var fila = 
-                '<tr id="row' + i + '" >'+
-                    '<td id="idPredio">' + idPredio + '</td>'+
-                    '<td>' + municipio + '</td>'+
-                    '<td>' + extencion + '</td>'+
-                    '<td>' + latitud + '</td>'+
-                    '<td>' + longitud + '</td>'+
-                    '<td id="idPlanta">' + idPlanta + '</td>'+
-                    '<td>' + especie + '</td>'+
-                    '<td id="precioPlanta">' + precio + '</td>'+
-                    '<td id="cantidadSolicitadaS">'+cantidadSolicitada+'</td>'+
-                    '<td id="cantidadSurtida">' + cantidadSurtida + '</td>'+
-                    '<td >' + precio*cantidadSurtida + '</td>'+
-                '</tr>'; 
+                            '</tr>'; 
 
-            $('#mytable-Salida tbody:first').append(fila);
-            document.getElementById("idPredio").value="";
-            document.getElementById("municipio").value="";
-            document.getElementById("extencion").value="";
-            document.getElementById("usoPredio").value="";
-            document.getElementById("latitud").value="";
-            document.getElementById("longitud").value="";
-            document.getElementById("idPlanta").value="";
-            document.getElementById("nombrePlanta").value="";
-            document.getElementById("especiePlanta").value="";
-            document.getElementById("precioPlantas").value="";
-            document.getElementById("DescripcionPlanta").value="";
-            document.getElementById("cantidadSolicitada").value="";
-            document.getElementById("cantidadSurtida").value="";
-            i++;
-            });
+                        $('#mytable-Salida tbody:first').append(fila);
+                        document.getElementById("idPredio").value="";
+                        document.getElementById("municipio").value="";
+                        document.getElementById("extencion").value="";
+                        document.getElementById("usoPredio").value="";
+                        document.getElementById("latitud").value="";
+                        document.getElementById("longitud").value="";
+                        document.getElementById("idPlanta").value="";
+                        document.getElementById("nombrePlanta").value="";
+                        document.getElementById("especiePlanta").value="";
+                        document.getElementById("precioPlantas").value="";
+                        document.getElementById("DescripcionPlanta").value="";
+                        document.getElementById("cantidadSolicitada").value="";
+                        document.getElementById("cantidadSurtida").value="";
+                        i++;
+                    }else{
+                        aux.alert("Inserte una cantidad por surtir",true,true);
+                    }
+                }else{
+                    aux.alert("Selecione una planta",true,true);
+                }
+            }else{
+                aux.alert("Selecione un predio",true,true);
+            }       
+                });
         
             $(document).on('click', '.btn_remove', function() {
                 var button_id = $(this).attr("id");
@@ -498,6 +516,39 @@
                 document.getElementById("cantidadSolicitada").value =$('#row'+button_id).find("#cantidadSolicitadaS")[0].textContent;
                 getPredio();
                 getPlantasForestal();
+                $('#row' + button_id).remove();
+            });
+
+            $(document).on('click', '.btn_quitar', function() {
+                var button_id = $(this).attr("id");
+                idPredio=$('#row'+button_id).find("#idPredio")[0].textContent;
+                municipio=$('#row'+button_id).find("#municipio")[0].textContent;
+                extencion=$('#row'+button_id).find("#extencion")[0].textContent;
+                latitud=$('#row'+button_id).find("#latitud")[0].textContent;
+                longitud=$('#row'+button_id).find("#longitud")[0].textContent;
+                idPlanta=$('#row'+button_id).find("#idPlanta")[0].textContent;
+                especie=$('#row'+button_id).find("#especie")[0].textContent;
+                precioPlanta=$('#row'+button_id).find("#precioPlanta")[0].textContent;
+                cantidadSolicitadaS=$('#row'+button_id).find("#cantidadSolicitadaS")[0].textContent;
+                importe=$('#row'+button_id).find("#importe")[0].textContent;
+                
+                var fila = 
+                    '<tr id="row' + i + '" >'+
+                        '<td id="idPredioS">' + idPredio + '</td>'+
+                        '<td >' + municipio + '</td>'+
+                        '<td >' + extencion + '</td>'+
+                        '<td >' + latitud + '</td>'+
+                        '<td >' + longitud + '</td>'+
+                        '<td id="idPlantaS">' + idPlanta + '</td>'+
+                        '<td id="nombrePlantaS">' + especie + '</td>'+
+                        '<td id="precioPlanta">' + precioPlanta + '</td>'+
+                        '<td id="cantidadSolicitadaS">'+cantidadSolicitadaS+'</td>'+
+                        '<td >' + importe + '</td>'+
+                        '<td><button type="button" name="surtir" id="' + i + '" class="btn btn-danger btn_remove">Surtir</button></td>'+
+
+                    '</tr>'; 
+                            $('#mytable tbody:first').append(fila);
+                i++;
                 $('#row' + button_id).remove();
             });
 
@@ -717,8 +768,8 @@
                     document.getElementById("municipio").value=respuesta[0].municipio;
                     document.getElementById("extencion").value=respuesta[0].extencion;
                     document.getElementById("usoPredio").value=respuesta[0].usoPredio;
-                    document.getElementById("latitud").value=respuesta[0].longitud;
-                    document.getElementById("longitud").value=respuesta[0].latitud;
+                    document.getElementById("latitud").value=respuesta[0].latitud;
+                    document.getElementById("longitud").value=respuesta[0].longitud;
                 }).always(function(respuesta){
                     aux.cerrar();
                 })

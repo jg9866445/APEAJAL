@@ -534,8 +534,9 @@
                         $('#mytable tbody:first').append(fila);
                         i++;
                     });     
-                    aux.cerrar();       
-                })  
+                })  .always(function(){
+                    aux.cerrar();
+                });
         }
        
 

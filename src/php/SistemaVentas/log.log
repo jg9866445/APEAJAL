@@ -1,0 +1,86 @@
+Exception: FPDF error: Some data has already been output, can't send PDF file (output started at C:\xampp\htdocs\src\php\auxiliar\PDF.php:76) in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
+Stack trace:
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1046): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(97): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(396): SubReportes->__construct()
+#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
+Stack trace:
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(137): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(381): SubReportes->__construct()
+#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file (output started at C:\xampp\htdocs\src\php\auxiliar\PDF.php:76) in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
+Stack trace:
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1046): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(137): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(381): SubReportes->__construct()
+#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file (output started at C:\xampp\htdocs\src\php\auxiliar\PDF.php:83) in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
+Stack trace:
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1046): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(136): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(380): SubReportes->__construct()
+#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
+Stack trace:
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(307): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
+#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
+Stack trace:
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(307): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
+#5 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
+#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
+#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
+#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
+#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
+#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
+#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
+#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
+#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
+#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
+#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
+#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
+#4 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
+Stack trace:
+#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(307): FPDF->Output()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
+#5 {main}

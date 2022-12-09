@@ -44,17 +44,17 @@ class Reportes {
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
         $query -> execute(); 
-        $results = $query -> fetchAll(); 
+        $results = $query -> fetchAll(PDO::FETCH_NUM); 
         return $results;
     }
 
     public function Rpago($fi,$ff){
-        $sql = "SELECT p.idPago,r.nombre,c.razonSocial,v.idVenta,p.fecha,p.conceptoGeneral,p.importe FROM pagos as p INNER JOIN responsable as r ON r.idResponsable= p.idResponsable INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s ON s.idSolicitud=v.idSolicitud INNER JOIN clientes as c ON c.idCliente=s.idCliente WHERE s.estado='Pagado' and  s.fecha BETWEEN :fi AND :ff ;";
+        $sql = "SELECT p.idPago,r.nombre,c.razonSocial,v.idVenta,p.fecha,p.conceptoGeneral,p.importe FROM pagos as p INNER JOIN responsable as r ON r.idResponsable= p.idResponsable INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s ON s.idSolicitud=v.idSolicitud INNER JOIN clientes as c ON c.idCliente=s.idCliente WHERE   s.fecha BETWEEN :fi AND :ff ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
         $query -> execute(); 
-        $results = $query -> fetchAll(); 
+        $results = $query -> fetchAll(PDO::FETCH_NUM); 
         return $results;
     }
 
@@ -64,7 +64,7 @@ class Reportes {
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
         $query -> execute(); 
-        $results = $query -> fetchAll(); 
+        $results = $query -> fetchAll(PDO::FETCH_NUM); 
         return $results;
     }
 
@@ -74,7 +74,7 @@ class Reportes {
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
         $query -> execute(); 
-        $results = $query -> fetchAll(); 
+        $results = $query -> fetchAll(PDO::FETCH_NUM); 
         return  $results;
     }
 
@@ -82,7 +82,7 @@ class Reportes {
         $sql="Select pf.idPlanta,e.nombre,pf.descripcion,pf.existencia,pf.precio from plantaForestal as pf INNER JOIN especie as e ON e.idEspecie=pf.idEspecie ;";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
-        $results = $query -> fetchAll(); 
+        $results = $query -> fetchAll(PDO::FETCH_NUM); 
         return  $results;
     }
 
@@ -90,7 +90,7 @@ class Reportes {
         $sql="Select pf.idPlanta,e.nombre,pf.descripcion,pf.existencia,(SELECT IFNULL(SUM(dv.cantidadSolicitada),0) FROM pagos as p inner join ventas as v on v.idVenta=p.idVenta INNER JOIN solicitudes as s ON s.idSolicitud=v.idSolicitud INNER JOIN detalleVenta as dv ON dv.idVenta=v.idVenta inner join plantaForestal as pfl on pfl.idPlanta=dv.idPlanta WHERE dv.idPlanta=pf.idPlanta GROUP BY pfl.idPlanta) as existenciaV,pf.precio from plantaForestal as pf INNER JOIN especie as e ON e.idEspecie=pf.idEspecie;";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
-        $results = $query -> fetchAll(); 
+        $results = $query -> fetchAll(PDO::FETCH_NUM); 
         return  $results;
     }
 

@@ -226,13 +226,12 @@ class SubMovimientos
                         echo json_encode($resultado);
                     break;
 
-                    case 'getMotivoMerma':
+                    case 'getMotivoMermaPlantaForestal':
                         $idMotivoMerma= $_POST['idMotivoMerma'];
                         $conexion= new Movimientos();
-                        $resultado= $conexion->getMotivoMerma($idMotivoMerma);
+                        $resultado= $conexion->getMotivoMermaPlantaForestal($idMotivoMerma);
                         echo json_encode($resultado);
                     break;
-
 
                     case 'getMermaPlantas':
                         $idMermaPlantas= $_POST['idMermaPlantas'];
