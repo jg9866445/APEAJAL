@@ -28,7 +28,7 @@ class Reportes {
 
 
     public function RSolicitudes($fi,$ff){
-        $sql = "SELECT s.idSolicitud,s.fecha,r.nombre,c.razonSocial,ds.idPredio,e.nombre,ds.cantidadSolicitada,ds.precio FROM solicitudes as s INNER JOIN clientes as c ON c.idCliente=s.idCliente INNER JOIN responsable as r ON r.idResponsable=s.idResponsable INNER JOIN detalleSolicitud as ds ON ds.idSolicitud=s.idSolicitud INNER JOIN plantaForestal as pf ON pf.idPlanta= ds.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie WHERE s.estado = 'Pendiente' and  s.fecha BETWEEN :fi AND :ff  ;";
+        $sql = "SELECT s.idSolicitud,s.fecha,r.nombre,c.razonSocial,ds.idPredio,e.nombre,ds.cantidadSolicitada,ds.precio,s.estado FROM solicitudes as s INNER JOIN clientes as c ON c.idCliente=s.idCliente INNER JOIN responsable as r ON r.idResponsable=s.idResponsable INNER JOIN detalleSolicitud as ds ON ds.idSolicitud=s.idSolicitud INNER JOIN plantaForestal as pf ON pf.idPlanta= ds.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie WHERE   s.fecha BETWEEN :fi AND :ff  ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
@@ -39,7 +39,7 @@ class Reportes {
 
     
     public function RVentas($fi,$ff){
-        $sql = "SELECT v.idVenta,v.fechaVenta,r.nombre,c.razonSocial,dv.idPredio,e.nombre,dv.cantidadSolicitada,dv.precio FROM ventas as v INNER JOIN solicitudes as s ON s.idSolicitud=v.idSolicitud INNER JOIN clientes as c ON c.idCliente=s.idCliente INNER JOIN responsable as r ON r.idResponsable=s.idResponsable INNER JOIN detalleVenta as dv ON dv.idVenta=v.idVenta INNER JOIN plantaForestal as pf ON pf.idPlanta= dv.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie WHERE s.estado = 'Atendido' and  s.fecha BETWEEN :fi AND :ff ;";
+        $sql = "SELECT v.idVenta,v.fechaVenta,r.nombre,c.razonSocial,dv.idPredio,e.nombre,dv.cantidadSolicitada,dv.precio,s.estado FROM ventas as v INNER JOIN solicitudes as s ON s.idSolicitud=v.idSolicitud INNER JOIN clientes as c ON c.idCliente=s.idCliente INNER JOIN responsable as r ON r.idResponsable=v.idResponsable INNER JOIN detalleVenta as dv ON dv.idVenta=v.idVenta INNER JOIN plantaForestal as pf ON pf.idPlanta= dv.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie WHERE s.fecha BETWEEN :fi AND :ff ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
@@ -49,7 +49,7 @@ class Reportes {
     }
 
     public function Rpago($fi,$ff){
-        $sql = "SELECT p.idPago,r.nombre,c.razonSocial,v.idVenta,p.fecha,p.conceptoGeneral,p.importe FROM pagos as p INNER JOIN responsable as r ON r.idResponsable= p.idResponsable INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s ON s.idSolicitud=v.idSolicitud INNER JOIN clientes as c ON c.idCliente=s.idCliente WHERE   s.fecha BETWEEN :fi AND :ff ;";
+        $sql = "SELECT p.idPago,r.nombre,c.razonSocial,v.idVenta,p.fecha,p.conceptoGeneral,p.importe,s.estado FROM pagos as p INNER JOIN responsable as r ON r.idResponsable= p.idResponsable INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud INNER JOIN clientes as c ON c.idCliente=s.idCliente WHERE   p.fecha BETWEEN :fi AND :ff ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
@@ -59,7 +59,7 @@ class Reportes {
     }
 
     public function Rsalida($fi,$ff){
-        $sql = "SELECT sa.idSalida,r.nombre,p.idPago,sa.fechaEntrega,dsa.idPredio,e.nombre as 'Planta',dsa.cantidadSurtida FROM salidas as sa INNER JOIN pagos as p ON sa.idPago=p.idPago INNER JOIN ventas as v ON p.idVenta=v.idVenta INNER JOIN solicitudes as s ON s.idSolicitud=v.idSolicitud INNER JOIN responsable as r on r.idResponsable=s.idResponsable INNER JOIN detalleSalida as dsa ON dsa.idSalida= sa.idSalida INNER JOIN plantaForestal as pf on pf.idPlanta = dsa.idPlanta INNER JOIN especie as e ON pf.idEspecie=e.idEspecie WHERE s.estado = 'Entregado' OR s.estado='Entregando' and  s.fecha BETWEEN :fi AND :ff ;";
+        $sql = "SELECT sa.idSalida,r.nombre,p.idPago,sa.fechaEntrega,dsa.idPredio,e.nombre as 'Planta',dsa.cantidadSurtida ,s.estado FROM salidas as sa INNER JOIN pagos as p ON sa.idPago=p.idPago INNER JOIN ventas as v ON p.idVenta=v.idVenta INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud  INNER JOIN responsable as r on r.idResponsable=sa.idResponsable INNER JOIN detalleSalida as dsa ON dsa.idSalida= sa.idSalida INNER JOIN plantaForestal as pf on pf.idPlanta = dsa.idPlanta INNER JOIN especie as e ON pf.idEspecie=e.idEspecie WHERE  sa.fechaEntrega BETWEEN :fi AND :ff ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);

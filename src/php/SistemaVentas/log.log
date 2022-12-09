@@ -1,86 +1,26 @@
-Exception: FPDF error: Some data has already been output, can't send PDF file (output started at C:\xampp\htdocs\src\php\auxiliar\PDF.php:76) in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
+PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'v.idSolicitud' in 'on clause' in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:53
 Stack trace:
-#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1046): FPDF->Error('Some data has a...')
-#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(97): FPDF->Output()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(396): SubReportes->__construct()
-#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
-Stack trace:
-#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
-#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(137): FPDF->Output()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(381): SubReportes->__construct()
-#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file (output started at C:\xampp\htdocs\src\php\auxiliar\PDF.php:76) in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
-Stack trace:
-#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1046): FPDF->Error('Some data has a...')
-#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(137): FPDF->Output()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(381): SubReportes->__construct()
-#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file (output started at C:\xampp\htdocs\src\php\auxiliar\PDF.php:83) in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
-Stack trace:
-#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1046): FPDF->Error('Some data has a...')
-#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(136): FPDF->Output()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(380): SubReportes->__construct()
-#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
-Stack trace:
-#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
-#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(307): FPDF->Output()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
-#5 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
-Stack trace:
-#0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
-#1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(307): FPDF->Output()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
-#5 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
-Stack trace:
-#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
-#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
-#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
-Stack trace:
-#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
-#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
-#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
-Stack trace:
-#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
-#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
-#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
-Stack trace:
-#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
-#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
-#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
-Stack trace:
-#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
-#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
-#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
-#4 {main}PDOException: SQLSTATE[21000]: Cardinality violation: 1241 Operand should contain 1 column(s) in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:91
-Stack trace:
-#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(91): PDO->prepare('Select pf.idPla...')
-#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(290): Reportes->RInventarioVirtual()
+#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(53): PDO->prepare('SELECT p.idPago...')
+#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(122): Reportes->Rpago('2022-01-01', '2022-12-31')
 #2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
 #3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
 #4 {main}Exception: FPDF error: Some data has already been output, can't send PDF file in C:\xampp\htdocs\src\Lib\fpdf\fpdf.php:273
 Stack trace:
 #0 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1057): FPDF->Error('Some data has a...')
 #1 C:\xampp\htdocs\src\Lib\fpdf\fpdf.php(1003): FPDF->_checkoutput()
-#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(307): FPDF->Output()
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(138): FPDF->Output()
 #3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
 #4 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(341): SubReportes->__construct()
-#5 {main}
+#5 {main}PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as sa INNER JOIN pagos as p ON sa.idPago=p.idPago INNER JOIN ventas as v ON p...' at line 1 in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:63
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(63): PDO->prepare('SELECT sa.idSal...')
+#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(164): Reportes->Rsalida('2022-01-01', '2022-12-31')
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(340): SubReportes->__construct()
+#4 {main}PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as sa INNER JOIN pagos as p ON sa.idPago=p.idPago INNER JOIN ventas as v ON p...' at line 1 in C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php:63
+Stack trace:
+#0 C:\xampp\htdocs\src\php\SistemaVentas\Reportes.php(63): PDO->prepare('SELECT sa.idSal...')
+#1 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(164): Reportes->Rsalida('2022-01-01', '2022-12-31')
+#2 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(17): SubReportes->API()
+#3 C:\xampp\htdocs\src\php\SistemaVentas\SubReportes.php(340): SubReportes->__construct()
+#4 {main}

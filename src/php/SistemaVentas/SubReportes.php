@@ -39,8 +39,8 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->SetWidths(array(25,25,60,60,25,25,25,25));
-                                $pdf->Row(array("IdSolicitud","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio"));
+                                $pdf->SetWidths(array(20,20,60,60,20,20,20,20,20));
+                                $pdf->Row(array("IdSolicitud","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio","Estado"));
                                 foreach( $ventas as $row){  
                                     $pdf->row($row);
                                     
@@ -62,10 +62,10 @@ class SubReportes
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Solicitudes"));
                                 $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                $writer->writeSheetRow('Sheet1', array("IdSolicitud","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio"));
+                                $writer->writeSheetRow('Sheet1', array("IdSolicitud","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio","Estado"));
                                 $ventas=$this->conexion->RSolicitudes($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
-                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]));
+                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]));
                                 }
                                 $writer->writeToStdOut();
                         }
@@ -82,8 +82,8 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->SetWidths(array(25,25,60,60,25,25,25,25));
-                                $pdf->row(array("IdVenta","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio"));
+                                $pdf->SetWidths(array(20,20,60,60,20,20,20,20,20));
+                                $pdf->row(array("IdVenta","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio","Estado"));
                                 foreach( $ventas as $row){  
                                     $pdf->row($row);
                                     }
@@ -104,10 +104,10 @@ class SubReportes
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Ventas"));
                                 $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                $writer->writeSheetRow('Sheet1', array("IdVenta","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio"));
+                                $writer->writeSheetRow('Sheet1', array("IdVenta","Fecha","Nombre del responable","Razon Social","IdPredio","Especie","Cantidad Solicitada","Precio","Estado"));
                                 $ventas=$this->conexion->RVentas($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
-                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]));
+                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]));
                                 }
                                 $writer->writeToStdOut();
                         }
@@ -124,8 +124,8 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->SetWidths(array(25,60,60,25,25,60,25));
-                                $pdf->row(array("idPago","Nombre Responsable","Razon Social","IdVenta","Fecha","Concepto General","Importe"));
+                                $pdf->SetWidths(array(20,60,60,20,20,60,20,20));
+                                $pdf->row(array("idPago","Nombre Responsable","Razon Social","IdVenta","Fecha","Concepto General","Importe","estado"));
                                 foreach( $ventas as $row){  
                                     $pdf->row($row);
                                     }
@@ -146,10 +146,10 @@ class SubReportes
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Pagos"));
                                 $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                $writer->writeSheetRow('Sheet1', array("idPago","Nombre Responsable","Razon Social","IdVenta","Fecha","Concepto General","Importe"));
+                                $writer->writeSheetRow('Sheet1', array("idPago","Nombre Responsable","Razon Social","IdVenta","Fecha","Concepto General","Importe","Estado"));
                                 $ventas=$this->conexion->Rpago($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
-                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6]));
+                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]));
                                 }
                                 $writer->writeToStdOut();
                         }
@@ -166,8 +166,8 @@ class SubReportes
                             if(count($ventas)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->SetWidths(array(25,40,60,60,25,25,25));
-                                $pdf->row(array("idSalida","Nombre del responsable","idPago","Fecha","idPredio","Especie","Cantidad Surtida"));
+                                $pdf->SetWidths(array(20,40,20,20,20,20,20,20));
+                                $pdf->row(array("idSalida","Nombre del responsable","idPago","Fecha","idPredio","Especie","Cantidad Surtida","estado"));
 
                                 foreach( $ventas as $row){  
                                     $pdf->row($row);
@@ -189,10 +189,10 @@ class SubReportes
                                 $writer = new XLSXWriter();
                                 $writer->writeSheetRow('Sheet1', array("Salidas"));
                                 $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                $writer->writeSheetRow('Sheet1', array("idSalida","Nombre del responsable","idPago","Fecha","idPredio","Especie","Cantidad Surtida"));
+                                $writer->writeSheetRow('Sheet1', array("idSalida","Nombre del responsable","idPago","Fecha","idPredio","Especie","Cantidad Surtida","estado"));
                                 $ventas=$this->conexion->Rsalida($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
-                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6]));
+                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]));
                                 }
                                 $writer->writeToStdOut();
                         }
