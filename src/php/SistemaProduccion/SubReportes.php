@@ -36,29 +36,13 @@ class SubReportes
                             $ventas=$this->conexion->RCompraInumos($_GET['FI'],$_GET['FF']);
                             $pdf->ln(5);
                             if(count($ventas)!=0){ 
+                                
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(70,7,"Nombre de Proveedor",1,0,'C');
-                                $pdf->Cell(25,7,"factura",1,0);
-                                $pdf->Cell(25,7,"fecha",1,0);
-                                $pdf->Cell(25,7,"Clasificacion",1,0);
-                                $pdf->Cell(25,7,"Nombre",1,0);
-                                $pdf->Cell(25,7,"unidad",1,0);
-                                $pdf->Cell(25,7,"cantidad",1,0);
-                                $pdf->Cell(25,7,"costo",1,0);
-                                $pdf->Cell(25,7,"importe",1,0);
-                                $pdf->Ln();
-                                foreach( $ventas as $row){  
-                                    $pdf->Cell(70,7,$row[0],1,0,'C');
-                                    $pdf->Cell(25,7,$row[1],1,0);
-                                    $pdf->Cell(25,7,$row[2],1,0);
-                                    $pdf->Cell(25,7,$row[3],1,0);
-                                    $pdf->Cell(25,7,$row[4],1,0);
-                                    $pdf->Cell(25,7,$row[5],1,0);
-                                    $pdf->Cell(25,7,$row[6],1,0);
-                                    $pdf->Cell(25,7,$row[7],1,0);
-                                    $pdf->Cell(25,7,$row[8],1,0);
-                                    $pdf->Ln();
+                                $pdf->SetWidths(array(70,25,25,25,25,25,25,25,25));
+                                $pdf->row(array("Nombre de Proveedor","factura","fecha","Clasificacion","Nombre","unidad","cantidad","costo","importe"));
+                                foreach( $ventas as $row){ 
+                                    $pdf->row(array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8])); 
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -96,30 +80,15 @@ class SubReportes
                             $proveedor=$Resultado["Proveedor"][0];
                             $datos=$Resultado["detalles"];
                             $pdf->ln(10);
-                            $pdf->Cell(0,0,"Nombre del proveedor: ".$proveedor['nombre']."      "."Domicilio: ".$proveedor['domicilio']." ".$proveedor['ciudad']."        Telefono: ".$proveedor['telefono']."     email: ".$proveedor["email"]);
+                            $pdf->Cell(0,0,"Nombre del proveedor: ".$proveedor['Nombre']."      "."Domicilio: ".$proveedor['Domicilio']." ".$proveedor['Ciudad']."        RFC: ".$proveedor['RFC']);
                             $pdf->ln(5);
                             if(count($datos)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(35,7,"Factura",1,0);
-                                $pdf->Cell(35,7,"Fecha",1,0);
-                                $pdf->Cell(35,7,"Clasificacion",1,0);
-                                $pdf->Cell(35,7,"Nombre",1,0);
-                                $pdf->Cell(35,7,"Unidad",1,0);
-                                $pdf->Cell(35,7,"Cantidad",1,0);
-                                $pdf->Cell(35,7,"Costo",1,0);
-                                $pdf->Cell(35,7,"Importe",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(35,35,35,35,35,35,35,35));
+                                $pdf->row(array("factura","fecha","Clasificacion","Nombre","unidad","cantidad","costo","importe"));
                                 foreach( $datos as $row){  
-                                    $pdf->Cell(35,7,$row[0],1,0);
-                                    $pdf->Cell(35,7,$row[1],1,0);
-                                    $pdf->Cell(35,7,$row[2],1,0);
-                                    $pdf->Cell(35,7,$row[3],1,0);
-                                    $pdf->Cell(35,7,$row[4],1,0);
-                                    $pdf->Cell(35,7,$row[5],1,0);
-                                    $pdf->Cell(35,7,$row[6],1,0);
-                                    $pdf->Cell(35,7,$row[7],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row(array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]));
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -165,25 +134,10 @@ class SubReportes
                             if(count($datos)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(60,7,"idProveedor",1,0);
-                                $pdf->Cell(30,7,"Factura",1,0);
-                                $pdf->Cell(30,7,"Cecha",1,0);
-                                $pdf->Cell(30,7,"Nombre",1,0);
-                                $pdf->Cell(30,7,"Unidad",1,0);
-                                $pdf->Cell(30,7,"Cantidad",1,0);
-                                $pdf->Cell(30,7,"Costo",1,0);
-                                $pdf->Cell(30,7,"Importe",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(60,30,30,30,30,30,30,30));
+                                $pdf->row(array("Nombre de Proveedor","factura","fecha","Nombre","unidad","cantidad","costo","importe"));
                                 foreach( $datos as $row){  
-                                    $pdf->Cell(60,7,$row[0],1,0);
-                                    $pdf->Cell(30,7,$row[1],1,0);
-                                    $pdf->Cell(30,7,$row[2],1,0);
-                                    $pdf->Cell(30,7,$row[3],1,0);
-                                    $pdf->Cell(30,7,$row[4],1,0);
-                                    $pdf->Cell(30,7,$row[5],1,0);
-                                    $pdf->Cell(30,7,$row[6],1,0);
-                                    $pdf->Cell(30,7,$row[7],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row(array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]));
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -229,23 +183,10 @@ class SubReportes
                             if(count($datos)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(30,7,"nombre",1,0);
-                                $pdf->Cell(90,7,"descripcion",1,0);
-                                $pdf->Cell(30,7,"unidad",1,0);
-                                $pdf->Cell(30,7,"existencias",1,0);
-                                $pdf->Cell(30,7,"maximo",1,0);
-                                $pdf->Cell(30,7,"minimo",1,0);
-                                $pdf->Cell(30,7,"costo promedio",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(30,90,30,30,30,30,30));
+                                $pdf->row(array("nombre","descripcion","unidad","existencias","maximo","minimo","costo promedio"));
                                 foreach( $datos as $row){  
-                                    $pdf->Cell(30,7,$row['nombre'],1,0);
-                                    $pdf->Cell(90,7,$row["descripcion"],1,0);
-                                    $pdf->Cell(30,7,$row["unidad"],1,0);
-                                    $pdf->Cell(30,7,$row["existencias"],1,0);
-                                    $pdf->Cell(30,7,$row["maximo"],1,0);
-                                    $pdf->Cell(30,7,$row["minimo"],1,0);
-                                    $pdf->Cell(30,7,$row["costoPromedio"],1,0);
-                                    $pdf->Ln();
+                                        $pdf->row(array( $row['nombre'],$row["descripcion"],$row["unidad"],$row["existencias"],$row["maximo"],$row["minimo"],$row["costoPromedio"]));
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -286,37 +227,13 @@ class SubReportes
                             if(count($Resultado)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(15,7,"idOrden",1,0);
-                                $pdf->Cell(40,7,"responsable",1,0);
-                                $pdf->Cell(50,7,"planta Forestal",1,0);
-                                $pdf->Cell(20,7,"fecha Orden",1,0);
-                                $pdf->Cell(20,7,"fecha apoximada",1,0);
-                                $pdf->Cell(30,7,"descripcion",1,0);
-                                $pdf->Cell(22,7,"cantidad Esperada",1,0);
-                                $pdf->Cell(22,7,"cantidad Lograda",1,0);
-                                $pdf->Cell(22,7,"costo Produccion",1,0);
-                                $pdf->Cell(22,7,"fecha Termino",1,0);
-                                $pdf->Cell(20,7,"estado",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(15,40,50,20,20,30,22,22,22,22,22));
+                                $pdf->row( array("idOrden","responsable","planta Forestal","fecha Orden","fecha apoximada","descripcion","cantidad Esperada","cantidad Lograda","costo Produccion","fecha Termino","estado"));
                                 foreach( $Resultado as $row){  
-                                    $pdf->Cell(15,7,$row[0],1,0);
-                                    $pdf->Cell(40,7,$row[1],1,0);
-                                    $pdf->Cell(50,7,$row[2],1,0);
-                                    $pdf->Cell(20,7,$row[3],1,0);
-                                    $pdf->Cell(20,7,$row[4],1,0);
-                                    $pdf->Cell(30,7,$row[5],1,0);
-                                    $pdf->Cell(22,7,$row[6],1,0);
-                                    if($row[10]=="Terminado"){
-                                        $pdf->Cell(22,7,$row[7],1,0);
-                                        $pdf->Cell(22,7,$row[8],1,0);
-                                        $pdf->Cell(22,7,$row[9],1,0);
-                                    }else{
-                                        $pdf->Cell(22,7,"--",1,0);
-                                        $pdf->Cell(22,7,"--",1,0);
-                                        $pdf->Cell(22,7,"--",1,0);
-                                    }
-                                    $pdf->Cell(20,7,$row[10],1,0);
-                                    $pdf->Ln();
+                                        if($row[10]=="Terminado")
+                                            $pdf->row(array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9],$row[10]));
+                                        else
+                                            $pdf->row(array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],"---","---","---",$row[10]));
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -361,53 +278,19 @@ class SubReportes
                                 if($_GET['Estado']=="Terminado"){
                                     $pdf->Ln();
                                     $pdf->SetLineWidth(0);
-                                    $pdf->Cell(15,7,"idOrden",1,0);
-                                    $pdf->Cell(40,7,"responsable",1,0);
-                                    $pdf->Cell(50,7,"planta Forestal",1,0);
-                                    $pdf->Cell(20,7,"fecha Orden",1,0);
-                                    $pdf->Cell(20,7,"fecha apoximada",1,0);
-                                    $pdf->Cell(50,7,"descripcion",1,0);
-                                    $pdf->Cell(22,7,"cantidad Esperada",1,0);
-                                    $pdf->Cell(22,7,"cantidad Lograda",1,0);
-                                    $pdf->Cell(22,7,"costo Produccion",1,0);
-                                    $pdf->Cell(22,7,"fecha Termino",1,0);
-                                    $pdf->Ln();
-                                    
+                                    $pdf->SetWidths(array(15,40,50,20,20,50,22,22,22,22));
+                                    $pdf->row(array("idOrden","responsable","planta Forestal","fecha Orden","fecha apoximada","descripcion","cantidad Esperada","cantidad Lograda","costo Produccion","fecha Termino"));
                                     foreach( $Resultado as $row){  
-                                        $pdf->Cell(15,7,$row[0],1,0);
-                                        $pdf->Cell(40,7,$row[1],1,0);
-                                        $pdf->Cell(50,7,$row[2],1,0);
-                                        $pdf->Cell(20,7,$row[3],1,0);
-                                        $pdf->Cell(20,7,$row[4],1,0);
-                                        $pdf->Cell(50,7,$row[5],1,0);
-                                        $pdf->Cell(22,7,$row[6],1,0);
-                                        $pdf->Cell(22,7,$row[7],1,0);
-                                        $pdf->Cell(22,7,$row[8],1,0);
-                                        $pdf->Cell(22,7,$row[9],1,0);
-                                        $pdf->Ln();
+                                            $pdf->row(array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9]));
                                         }
                                     }else{   
                                         $pdf->Ln();
-                                        $pdf->SetLineWidth(0);
-                                        $pdf->Cell(15,7,"idOrden",1,0);
-                                        $pdf->Cell(40,7,"responsable",1,0);
-                                        $pdf->Cell(50,7,"planta Forestal",1,0);
-                                        $pdf->Cell(20,7,"fecha Orden",1,0);
-                                        $pdf->Cell(20,7,"fecha apoximada",1,0);
-                                        $pdf->Cell(50,7,"descripcion",1,0);
-                                        $pdf->Cell(22,7,"cantidad Esperada",1,0);
-                                        $pdf->Ln();
-                                        
-                                        foreach( $Resultado as $row){  
-                                            $pdf->Cell(15,7,$row[0],1,0);
-                                            $pdf->Cell(40,7,$row[1],1,0);
-                                            $pdf->Cell(50,7,$row[2],1,0);
-                                            $pdf->Cell(20,7,$row[3],1,0);
-                                            $pdf->Cell(20,7,$row[4],1,0);
-                                            $pdf->Cell(50,7,$row[5],1,0);
-                                            $pdf->Cell(22,7,$row[6],1,0);
-                                            $pdf->Ln();
-                                            }                                      
+                                        $pdf->SetLineWidth(0);                                    
+                                        $pdf->SetWidths(array(15,40,50,20,20,50,22));
+                                        $pdf->row(array("idOrden","responsable","planta Forestal","fecha Orden","fecha apoximada","descripcion","cantidad Esperada"));
+                                        foreach( $Resultado as $row){                                             
+                                            $pdf->row(array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6]));
+                                        }                                      
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -462,19 +345,10 @@ class SubReportes
                             if(count($datos)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(40,7,"idVale",1,0);
-                                $pdf->Cell(40,7,"fecha",1,0);
-                                $pdf->Cell(40,7,"responsable",1,0);
-                                $pdf->Cell(40,7,"nombre",1,0);
-                                $pdf->Cell(40,7,"cantidad",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(40,40,40,40,40));
+                                $pdf->row(array("idVale","fecha","responsable","nombre","cantidad"));
                                 foreach( $datos as $row){  
-                                    $pdf->Cell(40,7,$row['idVale'],1,0);
-                                    $pdf->Cell(40,7,$row["fecha"],1,0);
-                                    $pdf->Cell(40,7,$row["responsable"],1,0);
-                                    $pdf->Cell(40,7,$row["nombre"],1,0);
-                                    $pdf->Cell(40,7,$row["cantidad"],1,0);
-                                    $pdf->Ln();
+                                        $pdf->row(array( $row["idVale"],$row["fecha"],$row["responsable"],$row["nombre"],$row["cantidad"]));
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -522,23 +396,11 @@ class SubReportes
                             if(count($Resultado)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(40,7,"idOrden",1,0);
-                                $pdf->Cell(40,7,"descripcion",1,0);
-                                $pdf->Cell(40,7,"idVale",1,0);
-                                $pdf->Cell(40,7,"fecha",1,0);
-                                $pdf->Cell(40,7,"responsable",1,0);
-                                $pdf->Cell(40,7,"nombre",1,0);
-                                $pdf->Cell(40,7,"cantidad",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(40,40,40,40,40,40,40));
+                                $pdf->row(array("idOrden","descripcion","idVale","fecha","responsable","nombre","cantidad"));
+
                                 foreach( $Resultado as $row){  
-                                    $pdf->Cell(40,7,$row['idOrden'],1,0);
-                                    $pdf->Cell(40,7,$row['descripcion'],1,0);
-                                    $pdf->Cell(40,7,$row['idVale'],1,0);
-                                    $pdf->Cell(40,7,$row["fecha"],1,0);
-                                    $pdf->Cell(40,7,$row["responsable"],1,0);
-                                    $pdf->Cell(40,7,$row["nombre"],1,0);
-                                    $pdf->Cell(40,7,$row["cantidad"],1,0);
-                                    $pdf->Ln();
+                                        $pdf->row( array( $row["idOrden"],$row["descripcion"],$row["idVale"],$row["fecha"],$row["responsable"],$row["nombre"],$row["cantidad"]));
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -586,19 +448,11 @@ class SubReportes
                             if(count($datos)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(40,7,"idDevolucion",1,0);
-                                $pdf->Cell(40,7,"fecha",1,0);
-                                $pdf->Cell(40,7,"responsable",1,0);
-                                $pdf->Cell(40,7,"nombre",1,0);
-                                $pdf->Cell(40,7,"cantidad",1,0);
-                                $pdf->Ln();
-                                foreach( $datos as $row){  
-                                    $pdf->Cell(40,7,$row['idDevolucion'],1,0);
-                                    $pdf->Cell(40,7,$row["fecha"],1,0);
-                                    $pdf->Cell(40,7,$row["responsable"],1,0);
-                                    $pdf->Cell(40,7,$row["nombre"],1,0);
-                                    $pdf->Cell(40,7,$row["cantidad"],1,0);
-                                    $pdf->Ln();
+                                $pdf->SetWidths(array(40,40,40,40,40));
+                                $pdf->row( array("idDevolucion","fecha","responsable","nombre","cantidad"));
+
+                                foreach( $datos as $row){ 
+                                    $pdf->row(array( $row["idDevolucion"],$row["fecha"],$row["responsable"],$row["nombre"],$row["cantidad"]));
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -638,7 +492,7 @@ class SubReportes
                     case 'RDevolucion':
                         if($_GET['tipo']=='PDF'){
                             $pdf = new PDF('L','mm','A4');
-                            $pdf->setTitulos("Mermas","Desde:".$_GET['FI']." A ".$_GET['FF']);
+                            $pdf->setTitulos("Devoluciones","Desde:".$_GET['FI']." A ".$_GET['FF']);
                             $pdf->AddPage();
                             $pdf->SetFont('Arial','',7);
                             $Resultado=$this->conexion->RDevolucion($_GET['FI'],$_GET['FF']);
@@ -646,23 +500,11 @@ class SubReportes
                             if(count($Resultado)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(40,7,"idOrden",1,0);
-                                $pdf->Cell(40,7,"descripcion",1,0);
-                                $pdf->Cell(40,7,"idDevolucion",1,0);
-                                $pdf->Cell(40,7,"fecha",1,0);
-                                $pdf->Cell(40,7,"responsable",1,0);
-                                $pdf->Cell(40,7,"nombre",1,0);
-                                $pdf->Cell(40,7,"cantidad",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(40,40,40,40,40,40,40));
+                                $pdf->row(array("idOrden","descripcion","idDevolucion","fecha","responsable","nombre","cantidad"));
+
                                 foreach( $Resultado as $row){  
-                                    $pdf->Cell(40,7,$row['idOrden'],1,0);
-                                    $pdf->Cell(40,7,$row['descripcion'],1,0);
-                                    $pdf->Cell(40,7,$row['idDevolucion'],1,0);
-                                    $pdf->Cell(40,7,$row["fecha"],1,0);
-                                    $pdf->Cell(40,7,$row["responsable"],1,0);
-                                    $pdf->Cell(40,7,$row["nombre"],1,0);
-                                    $pdf->Cell(40,7,$row["cantidad"],1,0);
-                                    $pdf->Ln();
+                                        $pdf->row(array( $row["idOrden"],$row["descripcion"],$row["idDevolucion"],$row["fecha"],$row["responsable"],$row["nombre"],$row["cantidad"]));
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -702,19 +544,10 @@ class SubReportes
                             if(count($Resultado)!=0){ 
                                 $pdf->Ln();
                                 $pdf->SetLineWidth(0);
-                                $pdf->Cell(40,7,"fecha",1,0);
-                                $pdf->Cell(40,7,"nombre",1,0);
-                                $pdf->Cell(40,7,"nombre",1,0);
-                                $pdf->Cell(40,7,"cantidad",1,0);
-                                $pdf->Cell(40,7,"motivo",1,0);
-                                $pdf->Ln();
+                                $pdf->SetWidths(array(40,40,40,40,40));
+                                $pdf->row( array("fecha","nombre","nombre","cantidad","motivo"));
                                 foreach( $Resultado as $row){  
-                                    $pdf->Cell(40,7,$row['fecha'],1,0);
-                                    $pdf->Cell(40,7,$row['nombre'],1,0);
-                                    $pdf->Cell(40,7,$row['nombre'],1,0);
-                                    $pdf->Cell(40,7,$row["cantidad"],1,0);
-                                    $pdf->Cell(40,7,$row["motivo"],1,0);
-                                    $pdf->Ln();
+                                    $pdf->row( array( $row["fecha"],$row["nombre"],$row["nombre"],$row["cantidad"],$row["motivo"]));
                                     }
                                 }else{
                                     $pdf->Ln();

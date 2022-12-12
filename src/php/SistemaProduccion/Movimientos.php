@@ -176,7 +176,7 @@ class Movimientos {
     
     public function getAllResponsableSelect(){
         $this->bitacora("Movimientos","Responsable","Obtiene todos los regristos",$_SESSION["id"]);
-        $sql = "SELECT * from responsable";
+        $sql = "SELECT * from responsable as r WHERE r.idResponsable <> 1";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -200,7 +200,16 @@ class Movimientos {
         $results = $query -> fetchAll(); 
         return $results;
     }
-
+    
+    public function getAllMotivoMermasSelect(){
+        $this->bitacora("Movimientos","Mermas","Obtener todos los regristros",$_SESSION["id"]);
+        $sql = "Select * from motivoMermaInsumo";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+    
     //get individual
     public function getCompra($idCompra){
         $this->bitacora("Movimientos","Ventas","Obtener regristro ".$this->texto(array("idCompra"),array($idCompra)),$_SESSION["id"]);
@@ -304,7 +313,7 @@ class Movimientos {
 
     public function getValeSalidaAdd($idVale){
         $this->bitacora("Movimientos","Ventas","Obtener regristro ".$this->texto(array("idVale"),array($idVale)),$_SESSION["id"]);
-        $sql = "SELECT r.nombre AS NombreResponsable , r.puesto AS PuestoResponsable, i.idInsumo as idInsumo , i.nombre as NombreInsumo, c.concepto as CategoriaInsumo, i.descripcion as DescripcionInsumo, i.unidad as UnidadInsumos, i.existencias as ExistenciaInsumos , i.costoPromedio as Precio,ro.nombre as NombreResponsableOrden,ro.puesto as PuestoResponsableOrden,e.nombre as NombrePlanta,pf.descripcion as DescripcionPlanta, pf.existencia as ExistenciaPlanta,op.fechaAproxTermino as FechaAproxTermino ,op.descripcion as DecripcionOrden , op.cantidadEsperada as CantidaEspera,vs.cantidad as CantidadRetirada FROM valeSalida as vs INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable INNER JOIN insumo as i ON vs.idInsumo=i.idInsumo INNER JOIN clasificacion as c on i.idClasificacion=c.idClasificacion INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden INNER JOIN responsable as ro ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON pf.idPlanta = op.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie where vs.idVale = :idVale";
+        $sql = "SELECT r.nombre AS NombreResponsable , r.puesto AS PuestoResponsable, i.idInsumo as idInsumo , i.nombre as NombreInsumo, c.concepto as CategoriaInsumo, i.descripcion as DescripcionInsumo, i.unidad as UnidadInsumos, i.existencias as ExistenciaInsumos , i.costoPromedio as Precio,ro.nombre as NombreResponsableOrden,ro.puesto as PuestoResponsableOrden,e.nombre as NombrePlanta,pf.descripcion as DescripcionPlanta, pf.existencia as ExistenciaPlanta,op.fechaAproxTermino as FechaAproxTermino ,op.descripcion as DecripcionOrden , op.cantidadEsperada as CantidaEspera,vs.cantidad as CantidadRetirada FROM valeSalida as vs INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable INNER JOIN insumo as i ON vs.idInsumo=i.idInsumo INNER JOIN clasificacion as c on i.idClasificacion=c.idClasificacion INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden INNER JOIN responsable as ro ON ro.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf ON pf.idPlanta = op.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie where vs.idVale = :idVale";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idVale', $idVale);
         $query -> execute(); 
@@ -325,7 +334,7 @@ class Movimientos {
 
     public function getDetalleMermaInsumo($idMermaInsumos){
         $this->bitacora("Movimientos","Ventas","Obtener regristro ".$this->texto(array("idMermaInsumos"),array($idMermaInsumos)),$_SESSION["id"]);
-        $sql = "SELECT i.idInsumo as Insumo,i.nombre as Nombre,c.concepto as Clasificación,i.existencias as Existencias,i.unidad as Unidad,dmi.cantidad as cantidad,dmi.motivo as motivo FROM detalleMermaInsumo as dmi INNER JOIN insumo as i on dmi.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion = i.idClasificacion where dmi.idMermaInsumos = :idMermaInsumos";
+        $sql = "SELECT dmi.idMermaInsumos,i.idInsumo,i.nombre as insumo,mmr.idMotivoMerma,mmr.nombre,dmi.cantidad,dmi.motivo FROM detalleMermaInsumo as dmi INNER JOIN insumo as i on dmi.idInsumo=i.idInsumo INNER JOIN motivoMermaInsumo as mmr ON mmr.idMotivoMerma=dmi.idMotivoMerma where dmi.idMermaInsumos = :idMermaInsumos";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idMermaInsumos', $idMermaInsumos);
         $query -> execute(); 
@@ -333,6 +342,15 @@ class Movimientos {
         return $results;
     }
 
+    public function getMotivoMermaInsumo($idMotivoMerma){
+        $this->bitacora("Movimientos","Motivo Mermas","Obtener regristro ".$this->texto(array("idMotivoMerma"),array($idMotivoMerma)),$_SESSION["id"]);
+        $sql = "Select * from motivoMermaInsumo as mpi where mpi.idMotivoMerma=:idMotivoMerma";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':idMotivoMerma', $idMotivoMerma);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
     //INSERT AQUI SE INSERTA TODO
 
     public function insertCompraInsumos($fechaCompraInsumos,$idProveedor,$factura,$total){
@@ -493,10 +511,11 @@ class Movimientos {
     
     public function insertDetallesMermaInsumos($idMermaInsumos,$detalles){
         foreach ($detalles as $value) {
-            $sql="INSERT INTO detalleMermaInsumo(idMermaInsumos, idInsumo, cantidad, motivo) VALUES (:idMermaInsumos, :idInsumo, :cantidad, :motivo)";
+            $sql="INSERT INTO detalleMermaInsumo(idMermaInsumos, idInsumo,idMotivoMerma, cantidad, motivo) VALUES (:idMermaInsumos, :idInsumo,:idMotivoMerma, :cantidad, :motivo)";
             $query = $this->connect->prepare($sql);
             $query->bindParam(':idMermaInsumos', $idMermaInsumos);
             $query->bindParam(':idInsumo', $value->idInsumo);
+            $query->bindParam(':idMotivoMerma', $value->idMotivoMerma);
             $query->bindParam(':cantidad', $value->Cantidad);
             $query->bindParam(':motivo', $value->Motivo);
             $query->execute();

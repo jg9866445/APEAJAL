@@ -446,7 +446,7 @@
                     formData.append("datosSolicud", JSON.stringify({"FechaSolicitud":document.getElementById("Fecha").value, "idCliente":document.getElementById("idCliente").value, "idResponsable":1, "total":document.getElementById("total").value}) ); 
                     formData.append("detalles", JSON.stringify(datos)); 
                     $.ajax({
-                        url: "/src/php/SistemaVentas/SubMovimientos.php",
+                        url: "/src/php/SistemaClientes/SubSistemaClientes.php",
                         method: "POST",
                         data: formData,
                         processData: false,
@@ -479,7 +479,7 @@
         function getCliente(){
                                 var dato = $("#dato").val();
                     $.ajax({
-                        url: "/src/php/SistemaVentas/SubMovimientos.php",
+                        url: "/src/php/SistemaClientes/SubSistemaClientes.php",
                         method: "POST",
                         data: {
                             "Metodo":'getClientes',
@@ -509,7 +509,7 @@
 
         function getAllPrediosforSelect(idCliente){
                     $.ajax({
-                        url: "/src/php/SistemaVentas/SubMovimientos.php",
+                        url: "/src/php/SistemaClientes/SubSistemaClientes.php",
                         method: "POST",
                         data: {
                             "Metodo":'getAllPrediosforSelect',
@@ -536,7 +536,7 @@
 
         function getPredio(){
             $.ajax({
-                url: "/src/php/SistemaVentas/SubMovimientos.php",
+                url: "/src/php/SistemaClientes/SubSistemaClientes.php",
                 method: "POST",
                 data: {
                     "Metodo":'getPredio',
@@ -558,7 +558,7 @@
         
         function getAllPlantasfolestalesSelect(){
          $.ajax({
-            url: "/src/php/SistemaVentas/SubMovimientos.php",
+            url: "/src/php/SistemaClientes/SubSistemaClientes.php",
             method:"POST",
             data:{
                 "Metodo":'getAllPlantasfolestalesSelect'
@@ -581,7 +581,7 @@
 
         function getPlantasForestal(){
             $.ajax({
-                url: "/src/php/SistemaVentas/SubMovimientos.php",
+                url: "/src/php/SistemaClientes/SubSistemaClientes.php",
                 method: "POST",
                 data: {
                     "Metodo":'getPlantasForestal',

@@ -250,7 +250,7 @@
                 formData.append("datosPredio", JSON.stringify({"idCliente":document.getElementById("idCliente").value,"municipio":document.getElementById("municipio").value,"extencion":document.getElementById("extencion").value,"usoPredio":document.getElementById("usoPredio").value,"longitud":document.getElementById("longitud").value,"latitud":document.getElementById("latitud").value})); 
 
                 $.ajax({
-                    url: "/src/php/SistemaVentas/SubMovimientos.php",
+                    url: "/src/php/SistemaClientes/SubSistemaClientes.php",
                     method: "POST",
                     data: formData,
                     processData: false,
@@ -288,7 +288,7 @@
         function getCliente(){
                             var dato = $("#dato").val();
                 $.ajax({
-                    url: "/src/php/SistemaVentas/SubMovimientos.php",
+                    url: "/src/php/SistemaClientes/SubSistemaClientes.php",
                     method: "POST",
                     data: {
                         "Metodo":'getClientes',

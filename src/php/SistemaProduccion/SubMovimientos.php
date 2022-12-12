@@ -273,6 +273,19 @@ class SubMovimientos
                         $conexion->insertDetallesMermaInsumos($idMermaInsumos,$detalles);
                     break;
                     
+                    case 'getAllMotivoMermasSelect':
+                        $conexion=new Movimientos();
+                        $resultado=$conexion->getAllMotivoMermasSelect();
+                        echo json_encode($resultado);
+                    break;    
+
+
+                    case 'getMotivoMermaInsumo':
+                        $idMotivoMerma= $_POST['idMotivoMerma'];
+                        $conexion= new Movimientos();
+                        $resultado= $conexion->getMotivoMermaInsumo($idMotivoMerma);
+                        echo json_encode($resultado);
+                    break;
                     default:
                         echo "Metodo No encontrado";
                     break;
@@ -316,3 +329,5 @@ new SubMovimientos();
 
 
 
+//getAllMotivoMermasSelect
+//getMotivoMermaPlantaForestal

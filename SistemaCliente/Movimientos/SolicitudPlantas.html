@@ -151,7 +151,7 @@
                                                 <th>Latitud</th>
                                                 <th>Longitud</th>
                                                 <th>Planta</th>
-                                                <th>Nombre</th>
+                                                <th>Especie</th>
                                                 <th>Precio</th>
                                                 <th>Cantidad</th>
                                                 <th>Importe</th>
@@ -239,7 +239,7 @@
             var idSolicitud=context.parentNode.parentNode.getElementsByTagName('td')[0].textContent; 
             $.when(
                     $.ajax({ 
-                        url: "/src/php/SistemaVentas/SubMovimientos.php", 
+                        url: "/src/php/SistemaClientes/SubSistemaClientes.php", 
                         method: "POST",
                         data: {
                             "Metodo":'getSolicitudPlantas',
@@ -254,7 +254,7 @@
                             document.getElementById("puestoRes").value=respuesta[0].puesto;
                         }),
                     $.ajax({
-                        url: "/src/php/SistemaVentas/SubMovimientos.php",
+                        url: "/src/php/SistemaClientes/SubSistemaClientes.php",
                         method: "POST",
                         data: {
                             "Metodo":'getDetallesSolicitudPlantas',

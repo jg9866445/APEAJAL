@@ -83,7 +83,7 @@ class Catalago {
 
     public function getResponsable(){
         $this->bitacora("Catalago","Responsables","Consultar general",$_SESSION["id"]);
-        $sql = "SELECT * FROM responsable";
+        $sql = "SELECT * FROM responsable as r WHERE r.idResponsable <> 1";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 

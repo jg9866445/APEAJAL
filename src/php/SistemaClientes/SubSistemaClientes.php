@@ -41,9 +41,37 @@ class SubSistemaClientes
 
                     break;
 
+                    case 'insertPredios':
+                        $datosPredio= json_decode($_POST['datosPredio']);
+                        $conexion = New SistemaClientes();
+                        $conexion->insertPredios( $datosPredio->idCliente, $datosPredio->municipio, $datosPredio->extencion, $datosPredio->usoPredio, $datosPredio->longitud, $datosPredio->latitud);
+                    break;
+
+                    case 'insertSolicitudPlantas':
+                        $datosSolicud= json_decode($_POST['datosSolicud']);
+                        $detalles= json_decode($_POST['detalles']);
+                        $conexion = New SistemaClientes();
+                        $idSolicitud=$conexion->insertSolicitud($datosSolicud->idCliente,$datosSolicud->FechaSolicitud,$datosSolicud->total,$datosSolicud->idResponsable);
+                        $conexion->insertDetallesSolicitud($idSolicitud,$detalles);
+                    break;
+
                     case 'getAllPrediosforTabla':
                         $conexion= new SistemaClientes();
                         $resultado= $conexion->getAllPrediosforTabla($_POST['datosClientes']);
+                        echo json_encode($resultado);
+                    break;
+
+                    case 'getAllPrediosforSelect':
+                        $idCliente = $_POST['idCliente'];
+                        $conexion = new SistemaClientes();                        
+                        $resultado = $conexion->getAllPrediosforSelect($idCliente);
+                        echo json_encode($resultado);
+                    break;
+
+                    case 'getPredio':
+                        $idPredio = $_POST['idPredio'];
+                        $conexion = new SistemaClientes();                        
+                        $resultado = $conexion->getAllPredio($idPredio);
                         echo json_encode($resultado);
                     break;
                     
@@ -53,6 +81,40 @@ class SubSistemaClientes
                         echo json_encode($resultado);
                     break;
 
+                    case 'getAllPlantasfolestalesSelect':
+                        $conexion=new SistemaClientes();
+                        $resultado=$conexion->getAllPlantasfolestalesSelect();
+                        echo json_encode($resultado);
+                    break;
+                    
+                    case 'getPlantasForestal':
+                        $idPlanta= $_POST['idPlanta'];
+                        $conexion= new SistemaClientes();
+                        $resultado= $conexion->getPlantasForestal($idPlanta);
+                        echo json_encode($resultado);
+                    break;
+
+                    case 'getClientes':
+                        $dato= $_POST['dato'];
+                        $conexion= new SistemaClientes();
+                        $resultado= $conexion->getClientes($dato);
+                        echo json_encode($resultado);
+                    break;
+
+                    case 'getSolicitudPlantas':
+                        $idSolicitud = $_POST['idSolicitud'];
+                        $conexion = new SistemaClientes();                        
+                        $resultado = $conexion->getSolicitudPlantas($idSolicitud);
+                        echo json_encode($resultado);
+                    break;
+                    
+                    case 'getDetallesSolicitudPlantas':
+                        $idSolicitud= $_POST['idSolicitud'];
+                        $conexion= new SistemaClientes();
+                        $resultado= $conexion->getDetallesSolicitudPlantas($idSolicitud);
+                        echo json_encode($resultado);
+                    break;
+                    
                     default:
                         echo "Metodo No encontrado";
                     break;

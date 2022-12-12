@@ -155,7 +155,7 @@ class Movimientos {
     //get for selected
     public function getAllResponsableSelect(){
         $this->bitacora("Movimientos","responables","Obtener todos lo regristro",$_SESSION["id"]);
-        $sql = "SELECT * from responsable";
+        $sql = "SELECT * from responsable as r WHERE r.idResponsable <> 1";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 

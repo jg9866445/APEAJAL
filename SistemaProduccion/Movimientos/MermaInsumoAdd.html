@@ -203,6 +203,39 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 ">
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header">Motivo de merma</div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="staticEmail" class="col-sm-5 col-form-label">Motivo de merma</label>
+                                            <select class="form-select" name="idMotivoMerma" id="idMotivoMerma" required onchange="getMotivoMerma()">
+                                                <option value="-20" disabled selected>Selecione una opcion</option>
+                                            </select>
+                                        <label for="input"></label>
+                                    </div>   
+                                    <div class="col-md-4">
+                                        <label for="staticEmail" class="form-label">Motivo</label>
+                                        <input class="form-control" type="text" name="Motivo" id="Motivo" disabled/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="staticEmail" class="form-label">Descripción</label>
+                                        <input class="form-control" type="text" name="descripcion" id="descripcion" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                    </div>
+                </div>
+            </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
 
                 </div>
 
@@ -246,8 +279,8 @@
                                 <div class="col-md-4">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Motivo</label>
-                                    <input class="form-control" type="text" name="Motivo" id="Motivo" />
+                                    <label for="staticEmail" class="form-label">Observaciones</label>
+                                    <input class="form-control" type="text" name="Observaciones" id="Observaciones" />
                                 </div>
                                 <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Cantidad</label>
@@ -280,7 +313,7 @@
                     <h1> </h1>
                 </div>
 
-                <div class="col-lg-8 ">
+                <div class="col-lg-9 ">
                     <div class="card">
                         <div class="card-header">Detalles</div>
                         <div class="card-body">
@@ -293,7 +326,9 @@
                                     <th>Existencias</th>
                                     <th>Unidad</th>
                                     <th>Cantidad</th>
+                                    <th>idMotivo</th>
                                     <th>Motivo</th>
+                                    <th>Observaciones</th>
                                     <th>Eliminar</th>
                                 </tr>
                             </thead>
@@ -305,7 +340,7 @@
                 </div>
 
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-1">
 
                 </div>
             </div>
@@ -381,6 +416,8 @@
                 var ClasificacionInsumo = document.getElementById("ClasificacionInsumo").value;
                 var ExistenciasInsumo = document.getElementById("ExistenciasInsumo").value;
                 var unidadMetricaInsumo = document.getElementById("unidadMetricaInsumo").value;
+                var Observaciones = document.getElementById("Observaciones").value;
+                var idMotivoMerma = document.getElementById("idMotivoMerma").value;
                 var Motivo = document.getElementById("Motivo").value;
                 var CantidadInsumo = parseInt(document.getElementById("CantidadInsumo").value,10);
 
@@ -392,13 +429,15 @@
                         '<td>' + ExistenciasInsumo + '</td>'+
                         '<td>' + unidadMetricaInsumo + '</td>'+
                         '<td id="Cantidad">' + CantidadInsumo + '</td>'+
-                        '<td id="Motivo">' + Motivo + '</td>'+
+                        '<td id="idMotivoMerma">' + idMotivoMerma + '</td>'+
+                        '<td >' + Motivo + '</td>'+
+                        '<td id="Observaciones">' + Observaciones + '</td>'+
                         '<td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td>'+
                     '</tr>';
 
                 var ValidacionTable=aux.validateAll(
                     [
-                        {"valor":document.getElementById("Motivo").value,"typeOf":"string","mensaje":"<p>Agregar un motivo de insumo</p><br>"},
+                        {"valor":document.getElementById("Observaciones").value,"typeOf":"string","mensaje":"<p>Agregar un Observaciones de insumo</p><br>"},
                         {"valor":document.getElementById("CantidadInsumo").value,"typeOf":"int","mensaje":"<p>Agregar el costo del insumo</p><br>"},
                     ]
                 )
@@ -446,8 +485,9 @@
                 var $tds = $(this).find('td');
                 Insumo = $tds.eq(0).text();
                 Cantidad = $tds.eq(5).text();
-                Motivo = $tds.eq(6).text();
-                dato={"idInsumo":Insumo, "Motivo":Motivo, "Cantidad":Cantidad};
+                idMotivoMerma = $tds.eq(6).text();
+                Motivo = $tds.eq(8).text();
+                dato={"idInsumo":Insumo, "Motivo":Motivo, "Cantidad":Cantidad,"idMotivoMerma":idMotivoMerma};
                 datos.push(dato);
             });
 
@@ -497,6 +537,8 @@
         getNextIdMerma();
         getAllResponsableSelect();
         getAllClasificacionSelect();
+        getAllMotivoMermasSelect();
+
     }
     
     function getNextIdMerma(){
@@ -684,6 +726,47 @@
                 aux.cerrar();
             })     
     }
+        function getAllMotivoMermasSelect(){
+         $.ajax({
+            url: "/src/php/SistemaProduccion/SubMovimientos.php",
+            method:"POST",
+            data:{
+                "Metodo":'getAllMotivoMermasSelect'
+            },
+            beforeSend:function(){
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de Plantas</p>',false,false)
+            }
+            }).done(function(respuesta) {
+            respuesta=JSON.parse(respuesta);
+            respuesta.forEach(element => {
+                $('#idMotivoMerma').append($('<option>', { 
+                    value: element.idMotivoMerma ,
+                    text : element.nombre 
+                }))
+            })
+            }).always(function(){
+                aux.cerrar();
+            });
+        }
+
+        function getMotivoMerma(){
+            $.ajax({
+                url: "/src/php/SistemaProduccion/SubMovimientos.php",
+                method: "POST",
+                data: {
+                    "Metodo":'getMotivoMermaInsumo',
+                    "idMotivoMerma":document.getElementById("idMotivoMerma").value
+                },
+                beforeSend: function() {
+                    aux.alert("<h5>Espere cargando</h5><p>Cargando</p>");
+                }}).done(function(respuesta){
+                    respuesta=JSON.parse(respuesta);
+                    document.getElementById("Motivo").value=respuesta[0].nombre;
+                    document.getElementById("descripcion").value=respuesta[0].descripcion;
+                }).always(function(respuesta){
+                    aux.cerrar();
+                })
+        }
     
 </script>
 

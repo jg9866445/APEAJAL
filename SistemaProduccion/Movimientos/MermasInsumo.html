@@ -31,7 +31,7 @@
     <script src="/src/js/auxliar.js" ></script>
     <script src="/src/js/login.js"></script></head>
 
-<body>
+<body id="body">
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
@@ -181,22 +181,22 @@
                         <p>Merma</p>
                             <div class="row">
                                     <div class="col-12">
-                                        <table  id="mytable" class="">
-                                            <thead>
-                                                <tr>
-                                                    <th>id Insumo</th>
-                                                    <th>Nombre</th>
-                                                    <th>Clasificación</th>
-                                                    <th>Existencias</th>
-                                                    <th>Unidad</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Motivo</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                      <table  id="mytable" class="">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>idInsumo</th>
+                                                <th>Insumo</th>
+                                                <th>idMotivoMerma</th>
+                                                <th>Motivo Merma</th>
+                                                <th>Cantidad</th>
+                                                <th>Observaciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                            </tbody>
-                                        </table>
+                                        </tbody>
+                                    </table> 
                                     </div>
                             </div>
                     </div>
@@ -312,11 +312,11 @@
                          mytable.clear();
                             $.each(respuesta,function(index, value){ 
                                     mytable.row.add( [
-                                        value.Insumo,
-                                        value.Nombre,
-                                        value.Clasificación,
-                                        value.Existencias,
-                                        value.Unidad,
+                                        value.idMermaInsumos,
+                                        value.idInsumo,
+                                        value.insumo,
+                                        value.idMotivoMerma,
+                                        value.nombre,
                                         value.cantidad,
                                         value.motivo,
                                     ]).draw();
