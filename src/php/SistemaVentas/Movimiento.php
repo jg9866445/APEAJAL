@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once($_SERVER['DOCUMENT_ROOT']."/src/php/connectividad.php");
 
 class Movimientos {
@@ -25,8 +27,25 @@ class Movimientos {
         unset($this->connect);
     }
     //get next id
-    
+    function texto($array,$array2){
+
+        $text=str_replace('=', ':', http_build_query(array_combine( $array,$array2),""," ,"));
+        return $text;
+    }
+    function bitacora($Area, $Tabla, $Actividad, $idUsuario){
+        date_default_timezone_set($_SESSION["Zona"]);
+        $sql = "INSERT INTO Bitacora(Sistema, Area, Actividad, Tabla, idUsuario, Fecha, Hora) VALUES ( 'Ventas', :Area, :Actividad, :Tabla, :idUsuario, '".date("Y/m/d")."', '".date("H:i:s")."')";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":Area",$Area);
+        $query->bindParam(":Actividad",$Actividad);
+        $query->bindParam(":Tabla",$Tabla);
+        $query->bindParam(":idUsuario",$idUsuario);
+        $query->execute(); 
+        return 0;
+    }
+
     public function getNextidPredio(){
+        $this->bitacora("Movimientos","Predios","Obtiene el sigueinte id",$_SESSION["id"]);
         $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'predios'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -35,6 +54,7 @@ class Movimientos {
     }
     
     public function getNextidSolicitudPlantas(){
+        $this->bitacora("Movimientos","Solicitud Plantas","Obtener siguiente id",$_SESSION["id"]);
         $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'solicitudes'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -43,6 +63,7 @@ class Movimientos {
     }
 
     public function getNextidVenta(){
+        $this->bitacora("Movimientos","Ventas","Obtener siguiente id",$_SESSION["id"]);
         $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'ventas'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -51,6 +72,7 @@ class Movimientos {
     }
     
     public function getNextidPago(){
+        $this->bitacora("Movimientos","Pagos","Obtener siguiente id",$_SESSION["id"]);
         $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'pagos'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -59,6 +81,7 @@ class Movimientos {
     }
 
     public function getNextidSalida(){
+        $this->bitacora("Movimientos","Salida","Obtener siguiente id",$_SESSION["id"]);
         $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'salidas'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -67,6 +90,7 @@ class Movimientos {
     }
 
     public function getNextidMerma(){
+        $this->bitacora("Movimientos","Merma","Obtener siguiente id",$_SESSION["id"]);
         $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'mermaPlantaForestal'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -75,6 +99,7 @@ class Movimientos {
     }
     //Get tablas
     public function getAllPrediosforTabla(){
+        $this->bitacora("Movimientos","Predios","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "SELECT * from predios as p inner join clientes as c on p.idCliente = c.idCliente";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -83,6 +108,7 @@ class Movimientos {
     }
     
     public function getAllSolicitudPlantasforTabla(){
+        $this->bitacora("Movimientos","Solicitud Plantas","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "Select s.idSolicitud,s.fecha, r.nombre, c.razonSocial,c.RFC,c.CURP,c.tipoCliente,s.estado from solicitudes as s INNER JOIN clientes as c on c.idCliente = s.idCliente INNER JOIN responsable as r on r.idResponsable = s.idResponsable;";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -91,6 +117,7 @@ class Movimientos {
     }
 
     public function getAllVentasforTabla(){
+        $this->bitacora("Movimientos","Ventas","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "SELECT v.idVenta, v.fechaVenta, v.idSolicitud , r.nombre , v.total FROM ventas as v INNER JOIN responsable as r on r.idResponsable=v.idResponsable";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -99,6 +126,7 @@ class Movimientos {
     }
     
     public function getAllPagosforTabla(){
+        $this->bitacora("Movimientos","Pagos","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "SELECT p.* from pagos as p INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s on s.idSolicitud=v.idSolicitud";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -107,6 +135,7 @@ class Movimientos {
     }
 
     public function getAllSalidasForTabla(){
+        $this->bitacora("Movimientos","Salidas","Obtener todos los regristros",$_SESSION["id"]);
         $sql = 'SELECT s.idSalida,s.idPago,r.nombre as "Responsable",s.fechaEntrega from salidas as s INNER JOIN responsable as r on r.idResponsable=s.idResponsable';
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -115,6 +144,7 @@ class Movimientos {
     }
 
     public function getAllMermasForTabla(){
+        $this->bitacora("Movimientos","Mermas","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "Select m.idMermaPlanta,m.fecha, r.nombre from mermaPlantaForestal as m INNER JOIN responsable as r on r.idResponsable = m.idResponsable;";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -124,6 +154,7 @@ class Movimientos {
     
     //get for selected
     public function getAllResponsableSelect(){
+        $this->bitacora("Movimientos","responables","Obtener todos lo regristro",$_SESSION["id"]);
         $sql = "SELECT * from responsable";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -132,6 +163,7 @@ class Movimientos {
     }
 
     public function getAllPlantasfolestalesSelect(){
+        $this->bitacora("Movimientos","Plantas","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "SELECT pf.idPlanta,e.nombre FROM plantaForestal as pf INNER JOIN especie as e ON e.idEspecie = pf.idEspecie";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -140,6 +172,7 @@ class Movimientos {
     }
     
     public function getAllMotivoMermasSelect(){
+        $this->bitacora("Movimientos","Mermas","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "Select * from motivoMermaPlantaForestal";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -148,6 +181,7 @@ class Movimientos {
     }
     
     public function getAllPrediosforSelect($idCliente){
+        $this->bitacora("Movimientos","Predios","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "SELECT * FROM predios as p WHERE p.idCliente=:idCliente;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idCliente', $idCliente);
@@ -157,6 +191,7 @@ class Movimientos {
     }
 
     public function getAllSolicitudSelect(){
+        $this->bitacora("Movimientos","Solicitud","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "Select * from solicitudes as s where s.estado = 'Pendiente';";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -165,6 +200,7 @@ class Movimientos {
     }
 
     public function getMotivoMermaPlantaForestal($idMotivoMerma){
+        $this->bitacora("Movimientos","Motivo Mermas","Obtener regristro ".$this->texto(array("idMotivoMerma"),array($idMotivoMerma)),$_SESSION["id"]);
         $sql = "Select * from motivoMermaPlantaForestal as mpf where mpf.idMotivoMerma=:idMotivoMerma";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idMotivoMerma', $idMotivoMerma);
@@ -174,6 +210,7 @@ class Movimientos {
     }
 
     public function getAllVentaSelect(){
+        $this->bitacora("Movimientos","Ventas","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "SELECT * FROM ventas as v INNER JOIN solicitudes as s on s.idSolicitud=v.idSolicitud WHERE s.estado = 'Atendido'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -182,6 +219,7 @@ class Movimientos {
     }
 
     public function getAllPagosSelector(){
+        $this->bitacora("Movimientos","Pagos","Obtener todos los regristros",$_SESSION["id"]);
         $sql = "SELECT p.*,s.estado FROM pagos as p INNER JOIN ventas as v on p.idVenta=v.idVenta INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud WHERE s.estado='Pagado' OR s.estado='Entregando';";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
@@ -193,6 +231,7 @@ class Movimientos {
     //Get Individual
 
     public function getPlantasForestal($idPlanta){
+        $this->bitacora("Movimientos","plantas Forestal","Obtiene los regristros de".$this->texto(array("idPlanta"),array($idPlanta)),$_SESSION["id"]);
         $sql = "SELECT e.nombre,p.*  from  plantaForestal as p INNER JOIN especie as e on p.idEspecie = e.idEspecie where p.idPlanta = :idPlanta";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idPlanta', $idPlanta);
@@ -202,6 +241,7 @@ class Movimientos {
     }
 
     public function getAllPredio($idPredio){
+        $this->bitacora("Movimientos","predios","Obtiene los regristros de".$this->texto(array("idPredio"),array($idPredio)),$_SESSION["id"]);
         $sql = "SELECT * FROM predios as p INNER JOIN clientes as c ON c.idCliente=p.idCliente WHERE p.idPredio = :idPredio";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idPredio', $idPredio);
@@ -211,6 +251,7 @@ class Movimientos {
     }
     
     public function getClientes($dato){
+        $this->bitacora("Movimientos","clientes","Obtiene los regristros de".$this->texto(array("dato"),array($dato)),$_SESSION["id"]);
         $sql = "SELECT * FROM clientes where RFC = :RFC OR CURP = :CURP;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':RFC', $dato);
@@ -221,6 +262,7 @@ class Movimientos {
     }
 
     public function getSolicitudPlantas($idSolicitud){
+        $this->bitacora("Movimientos","Solicitud","Obtiene los regristros de".$this->texto(array("idSolicitud"),array($idSolicitud)),$_SESSION["id"]);
         $sql = "SELECT c.idCliente, c.razonSocial, c.domicilio,c.celular, c.RFC,c.CURP, c.telefono,c.tipoCliente, s.fecha, s.estado,s.total, r.nombre, r.puesto  from  solicitudes as s INNER JOIN clientes as c on s.idCliente = c.idCliente INNER JOIN responsable as r on s.idResponsable = r.idResponsable where s.idSolicitud = :idSolicitud";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idSolicitud', $idSolicitud);
@@ -230,6 +272,7 @@ class Movimientos {
     }
 
     public function getDetallesSolicitudPlantas($idSolicitud){
+        $this->bitacora("Movimientos","detalles Solicitud","Obtiene los regristros de".$this->texto(array("idSolicitud"),array($idSolicitud)),$_SESSION["id"]);
         $sql = "Select p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.precio, ds.cantidadSolicitada FROM detalleSolicitud as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE idSolicitud= :idSolicitud";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idSolicitud', $idSolicitud);
@@ -239,6 +282,7 @@ class Movimientos {
     }
     
     public function getVentaPlantas($idVenta){
+        $this->bitacora("Movimientos","ventas","Obtiene los regristros de".$this->texto(array("idVenta"),array($idVenta)),$_SESSION["id"]);
         $sql = "SELECT v.idVenta,v.fechaVenta, s.idSolicitud, s.estado, r.nombre, r.puesto,v.total,c.tipoCliente FROM ventas as v INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud INNER JOIN clientes as c on s.idCliente = c.idCliente INNER JOIN responsable as r ON r.idResponsable = v.idResponsable WHERE v.idVenta = :idVenta";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idVenta', $idVenta);
@@ -248,6 +292,7 @@ class Movimientos {
     }
 
     public function getDetallesVentasPlantas($idVenta){
+        $this->bitacora("Movimientos","detalles ventas plantas","Obtiene los regristros de".$this->texto(array("idVenta"),array($idVenta)),$_SESSION["id"]);
         $sql = "Select p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.precio, ds.cantidadSolicitada FROM detalleVenta as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE idVenta= :idVenta";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idVenta', $idVenta);
@@ -259,6 +304,7 @@ class Movimientos {
     
     public function getDetallesVentasSalidas($idVenta)
     {
+        $this->bitacora("Movimientos","detalles venta salida","Obtiene los regristros de".$this->texto(array("idVenta"),array($idVenta)),$_SESSION["id"]);
         $sql = "SELECT p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.precio, (ds.cantidadSolicitada-(SELECT ifNull(SUM(dsa.cantidadSurtida),0) FROM pagos as pa INNER JOIN salidas as sa ON sa.idPago=pa.idPago INNER JOIN detalleSalida as dsa ON sa.idSalida=dsa.idSalida WHERE pa.idVenta=:idVenta and p.idPredio = dsa.idPredio and dsa.idPlanta= pf.idPlanta )) as cantidadSolicitada FROM detalleVenta as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE idVenta= :idVenta1;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idVenta', $idVenta);
@@ -269,6 +315,7 @@ class Movimientos {
     }
     
     public function getResponsable($idResponsable){
+        $this->bitacora("Movimientos","responsable","Obtiene los regristros de".$this->texto(array("idResponsable"),array($idResponsable)),$_SESSION["id"]);
         $sql = "SELECT * FROM responsable where idResponsable = :idResponsable";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idResponsable', $idResponsable);
@@ -278,6 +325,7 @@ class Movimientos {
     }
     
     public function getPagoPlantas($idPago){
+        $this->bitacora("Movimientos","Pagos","Obtiene los regristros de".$this->texto(array("idPago"),array($idPago)),$_SESSION["id"]);
         $sql="SELECT p.idVenta, p.idPago,p.fecha,r.nombre,r.puesto,p.conceptoGeneral,p.importe FROM pagos as p INNER JOIN responsable as r on r.idResponsable=p.idResponsable WHERE p.idPago=:idPago";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idPago', $idPago);
@@ -287,6 +335,7 @@ class Movimientos {
     }
 
     public function getSalida($idSalida){
+        $this->bitacora("Movimientos","salidas","Obtiene los regristros de".$this->texto(array("idSalida"),array($idSalida)),$_SESSION["id"]);
         $sql = "SELECT s.idSalida,s.fechaEntrega as fechaSalida,r.nombre as nombreP,r.puesto as puestoP ,v.idVenta From salidas as s INNER JOIN responsable as r ON r.idResponsable=s.idResponsable  INNER JOIN pagos as p ON p.idPago=s.idPago INNER JOIN ventas as v on v.idVenta=p.idVenta WHERE s.idSalida = :idSalida";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idSalida', $idSalida);
@@ -296,6 +345,7 @@ class Movimientos {
     }
 
     public function getDetalleSalida($idSalida){
+        $this->bitacora("Movimientos","detalles salida","Obtiene los regristros de".$this->texto(array("idSalida"),array($idSalida)),$_SESSION["id"]);
        $sql = "SELECT p.idPredio, p.municipio, p.extencion, p.latitud, p.longitud, pf.idPlanta, e.nombre,pf.descripcion, ds.cantidadSurtida FROM detalleSalida as ds INNER JOIN predios as p ON ds.idPredio = p.idPredio INNER JOIN plantaForestal as pf ON ds.idPlanta = pf.idPlanta INNER JOIN especie AS e ON pf.idEspecie = e.idEspecie WHERE ds.idSalida=:idSalida";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idSalida', $idSalida);
@@ -305,6 +355,7 @@ class Movimientos {
     }
 
     public function getMermaPlantas($idMermaPlanta){
+        $this->bitacora("Movimientos","merma","Obtiene los regristros de".$this->texto(array("idMermaPlanta"),array($idMermaPlanta)),$_SESSION["id"]);
         $sql = "SELECT r.nombre AS NombreResponsable , r.puesto AS PuestoResponsable, m.idMermaPlanta ,m.fecha FROM mermaPlantaForestal as m  INNER JOIN responsable as r ON r.idResponsable=m.idResponsable WHERE m.idMermaPlanta =  :idMermaPlanta;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idMermaPlanta', $idMermaPlanta);
@@ -315,6 +366,7 @@ class Movimientos {
 
 
     public function getDetallesMermas($idMermaPlanta){
+        $this->bitacora("Movimientos","detalles merma","Obtiene los regristros de".$this->texto(array("idMermaPlanta"),array($idMermaPlanta)),$_SESSION["id"]);
        $sql = "SELECT dmpf.*,mm.nombre as motivoMerma,e.nombre FROM detalleMermaPlantaForestal as dmpf INNER JOIN motivoMermaPlantaForestal as mm ON dmpf.idMotivoMerma=mm.idMotivoMerma INNER JOIN plantaForestal as pf on pf.idPlanta=dmpf.idPlanta INNER JOIN especie as e on e.idEspecie=pf.idEspecie WHERE dmpf.idMermaPlanta=:idMermaPlanta";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idMermaPlanta', $idMermaPlanta);
@@ -325,6 +377,7 @@ class Movimientos {
     //INSERT
 
     public function insertPredios( $idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud){
+        $this->bitacora("Movimientos","Predios","Inserta ".$this->texto(array("idCliente", "municipio", "extencion", "usoPredio", "longitud", "latitud"),array($idCliente, $municipio, $extencion, $usoPredio, $longitud, $latitud)),$_SESSION["id"]);
         $sql = "INSERT INTO predios( idCliente, municipio, extencion, usoPredio, longitud, latitud) VALUES ( :idCliente, :municipio, :extencion, :usoPredio, :longitud, :latitud)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idCliente', $idCliente);
@@ -338,6 +391,7 @@ class Movimientos {
     }
 
     public function insertSolicitud($idCliente,$fecha,$total,$idResponsable){
+        $this->bitacora("Movimientos","Solicitud","Inserta ".$this->texto(array("idCliente","fecha","total","idResponsable"),array($idCliente,$fecha,$total,$idResponsable)),$_SESSION["id"]);
         $sql="INSERT INTO solicitudes(idCliente, fecha, estado, idResponsable, total) VALUES ( :idCliente, :fecha, 'Pendiente', :idResponsable,:total)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idCliente', $idCliente);
@@ -363,6 +417,7 @@ class Movimientos {
     }
     
     public function cancelarSolicitud($idSolicitud){
+        $this->bitacora("Movimientos","plantas","Cancelo solicitud ".$this->texto(array("idSolicitud"),array($idSolicitud)),$_SESSION["id"]);
         $sql="UPDATE solicitudes SET estado='Cancelado' WHERE  idSolicitud=:idSolicitud";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idSolicitud', $idSolicitud);
@@ -370,6 +425,7 @@ class Movimientos {
     }
 
     public function insertVentaPlanta($idSolicitud,$idResponsable,$fechaVenta,$total){
+        $this->bitacora("Movimientos","Ventas de plantas","Inserta ".$this->texto(array("idSolicitud","idResponsable","fechaVenta","total"),array($idSolicitud,$idResponsable,$fechaVenta,$total)),$_SESSION["id"]);
         $sql="INSERT INTO ventas(idSolicitud, idResponsable, fechaVenta, total) VALUES ( :idSolicitud, :idResponsable, :fechaVenta, :total)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idSolicitud', $idSolicitud);
@@ -401,6 +457,7 @@ class Movimientos {
     }
 
     public function insertPagos($idResponsable, $idVenta, $fecha, $conceptoGeneral, $importe){
+        $this->bitacora("Movimientos","Pagos","Inserta ".$this->texto(array("idResponsable", "idVenta", "fecha", "conceptoGeneral", "importe"),array($idResponsable, $idVenta, $fecha, $conceptoGeneral, $importe)),$_SESSION["id"]);
         $sql="INSERT INTO pagos(idResponsable, idVenta, fecha, conceptoGeneral, importe) VALUES (:idResponsable,:idVenta,:fecha,:conceptoGeneral,:importe)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idResponsable', $idResponsable);
@@ -428,6 +485,7 @@ class Movimientos {
     }
 
     public function insertSalidaPlantas($idPago,$idResponsable,$fechaEntrega){
+        $this->bitacora("Movimientos","inserta Salida de plantas","Inserta ".$this->texto(array("idPago","idResponsable","fechaEntrega"),array($idPago,$idResponsable,$fechaEntrega)),$_SESSION["id"]);
         $sql="INSERT INTO salidas(idPago, idResponsable, fechaEntrega) VALUES ( :idPago, :idResponsable,:fechaEntrega)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idPago', $idPago);
@@ -529,6 +587,7 @@ class Movimientos {
     }
 
     public function InsertMermaPlantasForestales($fecha,$idResponsable){
+        $this->bitacora("Movimientos","Mermas","Inserta ".$this->texto(array("fecha","idResponsable"),array($fecha,$idResponsable)),$_SESSION["id"]);
         $sql="INSERT INTO mermaPlantaForestal(fecha, idResponsable) VALUES ( :fecha,:idResponsable)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fecha', $fecha);
@@ -568,181 +627,4 @@ class Movimientos {
 
 
 
-
-/*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function getAllResponsable() {
-        $sql = "SELECT * from responsable";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-    
-
-
-    public function getPredios($idPredio)
-    {
-        $sql = "SELECT * FROM predios where idPredio = :idPredio";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idPredio', $idPredio);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
- 
-    public function getPredioForCliente($idCliente)
-    {
-        $sql = "SELECT * FROM predios where idCliente = :idCliente";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idCliente', $idCliente);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getPlantasForestal($idPlanta)
-    {
-
-    }
-
-
-
-    public function getAllPlantas()
-    {
-        $sql = "SELECT p.*,e.nombre FROM plantaForestal as p INNER JOIN especie as e ON e.idEspecie=p.idEspecie;";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllPredios() {
-        $sql = "SELECT * from predios as p inner join clientes as c on p.idCliente = c.idCliente";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-   public function getAllSolicitud()
-    {
-        $sql = "Select s.idSolicitud,s.fecha, r.nombre, c.razonSocial,c.RFC,c.CURP,c.tipoCliente,s.estado from solicitudes as s INNER JOIN clientes as c on c.idCliente = s.idCliente INNER JOIN responsable as r on r.idResponsable = s.idResponsable;";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-   public function getAllSolicitudPendientes()
-    {
-
-    }
-
-    public function getAllVentas()
-    {
-;
-    }
-
-    public function getVentaPlanta()
-    {
-        $sql = "Select v.idVenta, v.fechaVenta, s.idSolicitud, r.nombre, v.total from ventas as v INNER JOIN responsable as r on v.idResponsable = r.idResponsable INNER Join solicitudes as s on v.idSolicitud = s.idSolicitud";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllVenta(){
-        $sql = "SELECT v.idVenta,v.fechaVenta, s.idSolicitud, s.estado, r.nombre, r.puesto FROM ventas as v INNER JOIN solicitudes as s ON s.idSolicitud = v.idSolicitud INNER JOIN responsable as r ON r.idResponsable = v.idResponsable WHERE s.estado = 'Atendido'";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-    
-
-
-    //
-
-    
-    public function getPagoPlanta($idPago)
-    {
-        $sql = "SELECT p.fecha as fechaPago,p.conceptoGeneral,p.importe,r.nombre as nombreResponsable,r.puesto,p.idVenta,s.idCliente from pagos as p INNER JOIN responsable as r ON r.idResponsable=p.idResponsable  INNER JOIN ventas as v on v.idVenta = p.idVenta INNER JOIN solicitudes as s on s.idSolicitud= v.idSolicitud WHERE p.idPago = :idPago";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idPago', $idPago);
-        $query -> execute();         
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllPago()
-    {
-        $sql = "SELECT p.idPago,p.fecha,p.conceptoGeneral,p.importe,r.nombre as nombreResponsable,r.puesto,p.idVenta,s.idCliente   from pagos as p INNER JOIN responsable as r ON r.idResponsable=p.idResponsable  INNER JOIN ventas as v on v.idVenta = p.idVenta INNER JOIN solicitudes as s on s.idSolicitud= v.idSolicitud";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idPago', $idPago);
-        $query -> execute();         
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getSalidaPlanta()
-    {
-        $sql = "Select * from salidas";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-
-    public function getAllPagos()
-    {
-
-    }
-	
-	public function getAllPagosSelect()
-    {
-        $sql = "SELECT p.idPago from pagos as p INNER JOIN ventas as v ON v.idVenta=p.idVenta INNER JOIN solicitudes as s on s.idSolicitud=v.idSolicitud WHERE s.estado = 'Pagado' or s.estado ='Entregando'";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
-	
-
-   
-    
-
-
-    
- 
-    
-
-
-    //NEXT IDS
-
-
-
-
-
-
-
-
-    //TODO:SELECT DEBAJO DE ESTa liena es importete no BORRES 
-    //SELECT dv.saldo -(SELECT SUM(ds.cantidadSurtida) from salidas as s INNER JOIN pagos as p on s.idPago= p.idPago INNER JOIN ventas as v on v.idVenta = p.idVenta INNER JOIN detalleSalida as ds on ds.idSalida = s.idSalida WHERE ds.idPlanta = 1 and v.idVenta = 1 and ds.) from pagos as p INNER JOIN ventas as v on p.idVenta = v.idVenta INNER JOIN detalleVenta as dv on dv.idVenta = v.idVenta;
-
-*/
 }

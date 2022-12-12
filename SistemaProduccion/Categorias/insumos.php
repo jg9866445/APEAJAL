@@ -54,6 +54,8 @@
                                 <li id="Insumos"><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li id="Provedores"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
                                 <li id="Responsable"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
+                                <li id="MotivoMerma"><a class="dropdown-item" href="/SistemaProduccion/Categorias/MotivosMerma.php">Motivo de merma</a></li>
+                                <li id="Usuarios"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Usuarios.php">Usuarios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -333,7 +335,38 @@
         </div>
     </div>
     <script>
+                const session = new login();
 
+            session.confirmarlogin("Empleado");
+
+            $('#logout').click(function() {
+                session.alertLogout("Empleado");
+            });
+            if(window.localStorage.getItem("position")=='Viverista'){
+                document.getElementById("Clasifiacion").style.display = "block";
+                document.getElementById("Insumos").style.display = "block";
+                document.getElementById("Provedores").style.display = "none";
+                document.getElementById("Responsable").style.display = "none";
+                document.getElementById("MotivoMerma").style.display = "block";
+                document.getElementById("Usuarios").style.display = "none";
+                document.getElementById("OrdenProduccion").style.display = "none";
+                document.getElementById("ComprasInsumos").style.display = "none";
+                document.getElementById("ValesSalidaInsumos").style.display = "block";
+                document.getElementById("DevolucionesInsumos").style.display = "block";
+                document.getElementById("MermasInsumo").style.display = "block";
+                document.getElementById("RCompraInsumos").style.display = "none";
+                document.getElementById("RCompraIProveedor").style.display = "none";
+                document.getElementById("RCompraIClasificacion").style.display = "none";
+                document.getElementById("RInusmosClasificacion").style.display = "none";
+                document.getElementById("ROrdenProduccion").style.display = "none";
+                document.getElementById("ROrdenProduccionEstado").style.display = "none";
+                document.getElementById("RValeSalidaOrdenProduccion").style.display = "none";
+                document.getElementById("RValeSalida").style.display = "none";
+                document.getElementById("RDevolucionOrdenProduccion").style.display = "none";
+                document.getElementById("RDevolucion").style.display = "none";
+                document.getElementById("RMermas").style.display = "none";
+                document.getElementById("consutal").style.display = "none";
+        }
         /* Initialization of datatable */
         $(document).ready( function () {
             var td=$('#table_id').DataTable({

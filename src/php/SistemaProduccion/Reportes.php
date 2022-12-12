@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once($_SERVER['DOCUMENT_ROOT']."/src/php/connectividad.php");
 
 class Reportes {
@@ -25,7 +27,20 @@ class Reportes {
         unset($this->connect);
     }
 
+    function bitacora($Area, $Tabla, $Actividad, $idUsuario){
+        date_default_timezone_set($_SESSION["Zona"]);
+        $sql = "INSERT INTO Bitacora(Sistema, Area, Actividad, Tabla, idUsuario, Fecha, Hora) VALUES ( 'Produccion', :Area, :Actividad, :Tabla, :idUsuario, '".date("Y/m/d")."', '".date("H:i:s")."')";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":Area",$Area);
+        $query->bindParam(":Actividad",$Actividad);
+        $query->bindParam(":Tabla",$Tabla);
+        $query->bindParam(":idUsuario",$idUsuario);
+        $query->execute(); 
+        return 0;
+    }
+
     public function RCompraInumos($fi,$ff){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = "SELECT p.nombre,fc.factura,fc.fecha,c.concepto,i.nombre,i.unidad,dfc.cantidad,dfc.costo,(dfc.cantidad*dfc.costo) as 'importe' from facturaCompra as fc INNER JOIN proveedor as p on p.idProveedor=fc.idProveedor INNER JOIN detalleFacturaCompra as dfc ON dfc.idOrdenCompra=fc.idOrdenCompra INNER JOIN insumo as i On dfc.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion WHERE  fc.fecha BETWEEN :fi AND :ff ORDER BY p.idProveedor,fc.factura ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
@@ -36,6 +51,7 @@ class Reportes {
     }
 
     public function RCompraInumosProveedor($idProveedor,$fi,$ff){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = "SELECT fc.factura,fc.fecha,c.concepto,i.nombre,i.unidad,dfc.cantidad,dfc.costo,(dfc.cantidad*dfc.costo) as 'importe' from facturaCompra as fc INNER JOIN proveedor as p on p.idProveedor=fc.idProveedor INNER JOIN detalleFacturaCompra as dfc ON dfc.idOrdenCompra=fc.idOrdenCompra INNER JOIN insumo as i On dfc.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion WHERE  fc.fecha BETWEEN :fi AND :ff and p.idProveedor = :idProveedor ORDER BY p.idProveedor,fc.factura ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
@@ -57,6 +73,7 @@ class Reportes {
     }
 
     public function RCompraClasificacion($idClasificacion,$fi,$ff){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = "SELECT p.nombre,fc.factura,fc.fecha,i.nombre,i.unidad,dfc.cantidad,dfc.costo,(dfc.cantidad*dfc.costo) as 'importe'  from facturaCompra as fc INNER JOIN proveedor as p on p.idProveedor=fc.idProveedor INNER JOIN detalleFacturaCompra as dfc ON dfc.idOrdenCompra=fc.idOrdenCompra INNER JOIN insumo as i On dfc.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion WHERE  fc.fecha BETWEEN :fi AND :ff and c.idClasificacion = :idClasificacion ORDER BY c.idClasificacion,fc.factura ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
@@ -78,6 +95,7 @@ class Reportes {
     }
     
     public function RInusmosClasificacion($idClasificacion){
+        $this->bitacora("Reportes","Solicitud","Genera reporte a la clasificacion".$idClasificacion,$_SESSION["id"]);
         $sql = "SELECT * FROM insumo as i WHERE i.idClasificacion = :idClasificacion";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idClasificacion', $idClasificacion);
@@ -97,6 +115,7 @@ class Reportes {
     }
 
     public function ROrdenProduccion($fi,$ff){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = "SELECT op.idOrden,r.nombre as responsable,pf.descripcion as plantaForestal,op.fechaOrden,op.fechaAproxTermino,op.descripcion,op.cantidadEsperada,op.cantidadLograda,op.costoProduccion,op.fechaRealTermino,op.estado FROM ordenProduccion as op INNER JOIN responsable as r ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta=op.idPlanta INNER JOIN especie as e on e.idEspecie=pf.idEspecie WHERE  op.fechaOrden BETWEEN :fi AND :ff ORDER BY op.idOrden";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
@@ -107,6 +126,7 @@ class Reportes {
     }
 
     public function ROrdenProduccionEstados($estado,$fi,$ff){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con estado ".$estado." y fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = "SELECT op.idOrden,r.nombre as responsable,pf.descripcion as plantaForestal,op.fechaOrden,op.fechaAproxTermino,op.descripcion,op.cantidadEsperada,op.cantidadLograda,op.costoProduccion,op.fechaRealTermino FROM ordenProduccion as op INNER JOIN responsable as r ON r.idResponsable=op.idResponsable INNER JOIN plantaForestal as pf on pf.idPlanta=op.idPlanta  WHERE op.fechaOrden  BETWEEN :fi AND :ff and  op.estado=:estado ORDER BY op.idOrden";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
@@ -118,6 +138,7 @@ class Reportes {
     }
 
     public function RValeSalidaOrdenProduccion($idOrdenProduccion,$fi,$ff){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con orden de produccion ".$idOrdenProduccion." y fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = " SELECT  vs.idVale,vs.fecha,r.nombre as responsable,i.nombre,vs.cantidad FROM valeSalida as vs INNER JOIN insumo as i ON i.idInsumo=vs.idInsumo INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable WHERE  vs.fecha BETWEEN :fi AND :ff and vs.idOrden = :idOrdenProduccion;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
@@ -139,6 +160,7 @@ class Reportes {
     }
 
     public function RValeSalida($fi,$ff){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = " SELECT vs.idOrden, op.descripcion, vs.idVale,vs.fecha,r.nombre as responsable,i.nombre,vs.cantidad FROM valeSalida as vs INNER JOIN insumo as i ON i.idInsumo=vs.idInsumo INNER JOIN responsable as r ON r.idResponsable=vs.idResponsable INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden WHERE  vs.fecha BETWEEN :fi AND :ff";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
@@ -149,6 +171,7 @@ class Reportes {
     }
 
     public function RDevolucionOrdenProduccion($idOrdenProduccion,$fi,$ff){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con orden de produccion ".$idOrdenProduccion." y fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = " SELECT dv.idDevolucion,dv.fecha,r.nombre as responsable,i.nombre,dv.cantidad FROM devolucion as dv INNER JOIN valeSalida as vs INNER JOIN responsable as r ON r.idResponsable = vs.idResponsable INNER JOIN insumo as i on vs.idInsumo=i.idInsumo WHERE   vs.fecha BETWEEN :fi AND :ff and vs.idOrden = :idOrdenProduccion;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
@@ -169,6 +192,7 @@ class Reportes {
         return $datos;
     }
     public function RDevolucion($ff,$fi){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql="SELECT vs.idOrden,op.descripcion, dv.idDevolucion,dv.fecha,r.nombre as responsable,i.nombre,dv.cantidad FROM devolucion as dv INNER JOIN valeSalida as vs INNER JOIN responsable as r ON r.idResponsable = vs.idResponsable INNER JOIN insumo as i on vs.idInsumo=i.idInsumo INNER JOIN ordenProduccion as op ON op.idOrden=vs.idOrden  WHERE   dv.fecha BETWEEN :fi AND :ff;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
@@ -179,6 +203,7 @@ class Reportes {
     }
 
     public function RMermas($fi,$ff){
+        $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql="SELECT mi.fecha,r.nombre,i.nombre,dmi.cantidad,dmi.motivo from mermaInsumo as mi INNER JOIN detalleMermaInsumo as dmi on mi.idMermaInsumos=dmi.idMermaInsumos INNER JOIN responsable as r ON r.idResponsable = mi.idResponsable INNER JOIN insumo as i ON i.idInsumo= dmi.idInsumo WHERE   mi.fecha BETWEEN :fi AND :ff;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);

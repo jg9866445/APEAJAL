@@ -31,53 +31,62 @@
         
     <!--Links para funciones auxliar-->
     <script src="/src/js/auxliar.js" ></script>
+    <script src="/src/js/login.js"></script></head>
 
-</head>
 <body>
     <div>
         <nav class="navbar logo">
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
-        </nav>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a id="logout">
+                        <img class="img-responsive" src="/src/imagenes/logout.jpeg" width="50VW" height="50VH" alt="" />
+                    </a>                
+                </li>
+            </ul>
 
-  <nav class="navbar navbar-expand-lg menu">
+        </nav>
+        <nav class="navbar navbar-expand-lg menu">
             <div class="container-fluid">
                 <div class="navbar-nav " id="navbarCenteredExample">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="btn  active menu catalago" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Catálogos</a>
                             <ul class="dropdown-menu menu catalago despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
+                                <li id="Clasifiacion"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Clasificacion.php">Clasificación de insumos</a></li>
+                                <li id="Insumos"><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
+                                <li id="Provedores"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
+                                <li id="Responsable"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
+                                <li id="MotivoMerma"><a class="dropdown-item" href="/SistemaProduccion/Categorias/MotivosMerma.php">Motivo de merma</a></li>
+                                <li id="Usuarios"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Usuarios.php">Usuarios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu movimientos" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movimientos</a>
                             <ul class="dropdown-menu menu movimientos despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.html">Órdenes producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.html">Compra de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.html">Vale de salida</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.html">Devolución de insumos</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Movimientos/MermasInsumo.html">Mermas de insumos</a></li>
+                                <li id="OrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Movimientos/OrdenProduccion.html">Órdenes producción</a></li>
+                                <li id="ComprasInsumos"><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ComprasInsumos.html">Compra de insumos</a></li>
+                                <li id="ValesSalidaInsumos"><a class="dropdown-item" href="/SistemaProduccion/Movimientos/ValesSalidaInsumos.html">Vale de salida</a></li>
+                                <li id="DevolucionesInsumos"><a class="dropdown-item" href="/SistemaProduccion/Movimientos/DevolucionesInsumos.html">Devolución de insumos</a></li>
+                                <li id="MermasInsumo"><a class="dropdown-item" href="/SistemaProduccion/Movimientos/MermasInsumo.html">Mermas de insumos</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraInsumos.html">Consulta de compra de insumos por periodo</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIProveedor.html">Consulta de compra de insumos por proveedor en un periodo</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIClasificacion.html">Consulta de compra de insumos por clasificación en un periodo</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RInusmosClasificacion.html">Consulta de insumos divididos por clasificación</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccion.html">Consulta de órdenes de producción en un periodo</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccionEstado.html">Consulta de órdenes de producción por estado en un periodo</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RValeSalidaOrdenProduccion.html">Consulta de vale de salida por orden de producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RValeSalida.html">Consulta de vale de salida por fecha </a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucionOrdenProduccion.html">Consulta de devolución por orden de producción</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucion.html">Consulta de devoluciones por fecha</a></li>
-                                <li><a class="dropdown-item" href="/SistemaProduccion/Reportes/RMermas.html">Consulta de mermas por fecha</a></li>
+                                <li id="RCompraInsumos"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraInsumos.html">Consulta de compra de insumos por periodo</a></li>
+                                <li id="RCompraIProveedor"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIProveedor.html">Consulta de compra de insumos por proveedor en un periodo</a></li>
+                                <li id="RCompraIClasificacion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIClasificacion.html">Consulta de compra de insumos por clasificación en un periodo</a></li>
+                                <li id="RInusmosClasificacion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RInusmosClasificacion.html">Consulta de insumos divididos por clasificación</a></li>
+                                <li id="ROrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccion.html">Consulta de órdenes de producción en un periodo</a></li>
+                                <li id="ROrdenProduccionEstado"><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccionEstado.html">Consulta de órdenes de producción por estado en un periodo</a></li>
+                                <li id="RValeSalidaOrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RValeSalidaOrdenProduccion.html">Consulta de vale de salida por orden de producción</a></li>
+                                <li id="RValeSalida"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RValeSalida.html">Consulta de vale de salida por fecha </a></li>
+                                <li id="RDevolucionOrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucionOrdenProduccion.html">Consulta de devolución por orden de producción</a></li>
+                                <li id="RDevolucion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucion.html">Consulta de devoluciones por fecha</a></li>
+                                <li id="RMermas"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RMermas.html">Consulta de mermas por fecha</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -89,7 +98,6 @@
             <div class="linea"></div>
         </nav>
     </div>
-
     <div>
         <div class="container botton">
             <div class="row">
@@ -121,22 +129,19 @@
                                 <label for="input"></label>
                             </div>
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Nombre</label>
                                     <input class="form-control" type="text" name="NombreProveedor" id="NombreProveedor" disabled />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Domicilio</label>
                                     <input class="form-control" type="text" name="DomicilioProveedor" id="DomicilioProveedor" disabled/>
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Contacto</label>
-                                    <input class="form-control" type="text" name="ContactoProveedor" id="ContactoProveedor" disabled />
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">RFC</label>
+                                    <input class="form-control" type="text" name="RFC" id="RFC" disabled />
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Email</label>
-                                    <input class="form-control" type="text" name="EmailProveedor" id="EmailProveedor" disabled/>
-                                </div>
+\
                             </div>
                     </div>
                     </div>
@@ -208,6 +213,38 @@
 </body>
 
 <script>
+                const session = new login();
+
+            session.confirmarlogin("Empleado");
+
+            $('#logout').click(function() {
+                session.alertLogout("Empleado");
+            });
+            if(window.localStorage.getItem("position")=='Viverista'){
+                document.getElementById("Clasifiacion").style.display = "block";
+                document.getElementById("Insumos").style.display = "block";
+                document.getElementById("Provedores").style.display = "none";
+                document.getElementById("Responsable").style.display = "none";
+                document.getElementById("MotivoMerma").style.display = "block";
+                document.getElementById("Usuarios").style.display = "none";
+                document.getElementById("OrdenProduccion").style.display = "none";
+                document.getElementById("ComprasInsumos").style.display = "none";
+                document.getElementById("ValesSalidaInsumos").style.display = "block";
+                document.getElementById("DevolucionesInsumos").style.display = "block";
+                document.getElementById("MermasInsumo").style.display = "block";
+                document.getElementById("RCompraInsumos").style.display = "none";
+                document.getElementById("RCompraIProveedor").style.display = "none";
+                document.getElementById("RCompraIClasificacion").style.display = "none";
+                document.getElementById("RInusmosClasificacion").style.display = "none";
+                document.getElementById("ROrdenProduccion").style.display = "none";
+                document.getElementById("ROrdenProduccionEstado").style.display = "none";
+                document.getElementById("RValeSalidaOrdenProduccion").style.display = "none";
+                document.getElementById("RValeSalida").style.display = "none";
+                document.getElementById("RDevolucionOrdenProduccion").style.display = "none";
+                document.getElementById("RDevolucion").style.display = "none";
+                document.getElementById("RMermas").style.display = "none";
+                document.getElementById("consutal").style.display = "none";
+        }
     const aux = new auxliar();
     onload=function(){
         getAllProveedoresSelect();
@@ -251,8 +288,8 @@
 
             respuesta.forEach(element => {
                 $('#idProveedor').append($('<option>', { 
-                    value: element.idProveedor,
-                    text : element.nombre 
+                    value: element.IdProveedor,
+                    text : element.Nombre 
                 }));
             });
             aux.cerrar();
@@ -275,10 +312,9 @@
                 aux.alert('<h5>Espere cargando</h5><br/><p>Datos del provedor</p>',false,false)
             }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
-                document.getElementById("NombreProveedor").value=respuesta[0].nombre;
-                document.getElementById("DomicilioProveedor").value=respuesta[0].domicilio + " " + respuesta[0].ciudad;
-                document.getElementById("ContactoProveedor").value=respuesta[0].contacto;
-                document.getElementById("EmailProveedor").value=respuesta[0].email;
+                document.getElementById("NombreProveedor").value=respuesta[0].Nombre;
+                document.getElementById("DomicilioProveedor").value=respuesta[0].Domicilio + " " + respuesta[0].Ciudad;
+                document.getElementById("RFC").value=respuesta[0].RFC;
                 aux.cerrar();
             }).fail(function(){
                 aux.alert('<h5>Espere</h5><br/><p>Error</p>',true,true)

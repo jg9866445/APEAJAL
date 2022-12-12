@@ -5,12 +5,14 @@ class Catalago {
 
     var $db;
     var $connect;
+    var $connect_externa;
 
     function __construct(){        
         try {
             $this->db = new DB_Connect();
 
             $this->connect=$this->db->connect();
+            $this->connect_externa=$this->db->connect_externa();
         } 
         catch (PDOException $e) {
             print "¡Error!: " . $e->getMessage() . "<br/>";
@@ -21,6 +23,24 @@ class Catalago {
     public function close() {
         unset($this->connect);
     }
+    
+    function texto($array,$array2){
+
+        $text=str_replace('=', ':', http_build_query(array_combine( $array,$array2),""," ,"));
+        return $text;
+    }
+    function bitacora($Area, $Tabla, $Actividad, $idUsuario){
+        date_default_timezone_set($_SESSION["Zona"]);
+        $sql = "INSERT INTO Bitacora(Sistema, Area, Actividad, Tabla, idUsuario, Fecha, Hora) VALUES ( 'Produccion', :Area, :Actividad, :Tabla, :idUsuario, '".date("Y/m/d")."', '".date("H:i:s")."')";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":Area",$Area);
+        $query->bindParam(":Actividad",$Actividad);
+        $query->bindParam(":Tabla",$Tabla);
+        $query->bindParam(":idUsuario",$idUsuario);
+        $query->execute(); 
+        return 0;
+    }
+
 
     //Funciones para Calsificacion 
     public function getAllClasificacionesForTable(){
@@ -31,13 +51,6 @@ class Catalago {
         return $results;
     }
     
-    public function getMotivoMerma(){
-        $sql = "SELECT * FROM motivoMerma";
-        $query = $this->connect->prepare($sql);
-        $query -> execute(); 
-        $results = $query -> fetchAll(); 
-        return $results;
-    }
 
 
     public function getAllClasificacionesForSelect(){
@@ -101,39 +114,13 @@ class Catalago {
 
     //funciones para insumos
     public function getAllProveedoresForTable(){
-        $sql = "SELECT * FROM proveedor";
-        $query = $this->connect->prepare($sql);
+        $sql = "SELECT * FROM proveedores";
+        $query = $this->connect_externa->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
     }
-    
-    public function insertProveedor( $nombre, $contacto, $domicilio, $ciudad, $telefono, $email){
-        $sql = "INSERT INTO proveedor (nombre, contacto, domicilio, ciudad, telefono, email) VALUES ( :nombre, :contacto, :domicilio, :ciudad, :telefono, :email)";
-        $query = $this->connect->prepare    ($sql);
-        $query->bindParam(':nombre', $nombre);
-        $query->bindParam(':contacto', $contacto);
-        $query->bindParam(':domicilio', $domicilio);
-        $query->bindParam(':ciudad', $ciudad);
-        $query->bindParam(':telefono', $telefono);
-        $query->bindParam(':email', $email);
-        $request=$query->execute(); 
-        return $request;
-    }
 
-    function updateProveedor($idProveedor, $nombre, $contacto, $domicilio, $ciudad, $telefono, $email){
-        $sql = "UPDATE proveedor SET nombre=:nombre,contacto=:contacto,domicilio=:domicilio,ciudad=:ciudad,telefono=:telefono,email=:email where idProveedor=:idProveedor";
-        $query = $this->connect->prepare($sql);
-        $query->bindParam(':idProveedor', $idProveedor);
-        $query->bindParam(':nombre', $nombre);
-        $query->bindParam(':contacto', $contacto);
-        $query->bindParam(':domicilio', $domicilio);
-        $query->bindParam(':ciudad', $ciudad);
-        $query->bindParam(':telefono', $telefono);
-        $query->bindParam(':email', $email);
-        $request=$query->execute(); 
-        return $request;    
-    }
     //Fin de funciones para insumos
 
     //funciones para insumos
@@ -168,10 +155,17 @@ class Catalago {
 
 
     
+    public function getMotivoMerma(){
+        $sql = "SELECT * FROM motivoMermaInsumo";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
 
 
     function insertMotivoMerma( $nombre, $descripcion){
-        $sql = "INSERT INTO motivoMerma ( nombre, descripcion) VALUES (:nombre,:descripcion)";
+        $sql = "INSERT INTO motivoMermaInsumo ( nombre, descripcion) VALUES (:nombre,:descripcion)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":nombre",$nombre);
         $query->bindParam(":descripcion",$descripcion);
@@ -180,6 +174,39 @@ class Catalago {
     }
     
 
+    public function getAllUserforTable(){
+        //$this->bitacora("Catalago","Usuarios","Consultar general",$_SESSION["id"]);
+        $sql = "SELECT * FROM User";
+        $query = $this->connect->prepare($sql);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
+    
+    function insertUsuarios( $Username, $Puesto,$Pass){
+       // $this->bitacora("Catalago","Usuario","Insertar ".$this->texto(array("Username", "Puesto","Pass"),array($Username, $Puesto,$Pass)),$_SESSION["id"]);
+        $sql = "INSERT INTO User ( Username, Puesto,Pass) VALUES (:Username, :Puesto,:Pass)";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(":Username",$Username);
+        $query->bindParam(":Puesto",$Puesto);
+        $query->bindParam(":Pass",$Pass);
+        $query->execute();  
+        return $query->rowCount(); 
+    }
+
+    function updateUsuarios($idUsuario, $Username, $Puesto,$Pass){
+        //$this->bitacora("Catalago","Usuario","Actualizar ".$this->texto(array("idUsuario", "Username", "Puesto","Pass"),array($idUsuario, $Username, $Puesto,$Pass)),$_SESSION["id"]);
+        $sql = "UPDATE User SET Username = :Username, Puesto = :Puesto, Pass = :Pass where idUsuario = :idUsuario ";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':Username', $Username);
+        $query->bindParam(':Puesto', $Puesto);
+        $query->bindParam(':Pass', $Pass);
+        $query->bindParam(':idUsuario', $idUsuario );
+
+        $request=$query->execute(); 
+        return $request;    
+    }
 }
 
 ?>

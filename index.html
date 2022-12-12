@@ -28,6 +28,7 @@
         
     <!--Links para funciones auxliar-->
     <script src="/src/js/auxliar.js" ></script>
+    <script src="/src/js/login.js"></script>
 
 </head>
 <body>
@@ -38,24 +39,22 @@
                         <div class="card-body area text-center">
 
                             <div class="mb-md-5 mt-md-4 pb-5">
-                                <form action="../menu.html">
 
 
                                     <h2 class="fw-bold mb-2 text-uppercase"><img src="/src/imagenes/Logo.jpeg" width="50%" height="50%"></h2>
                                     <p class="text-50 mb-5">Sistema de gestion de viviero forestal de APEAJAL</p>
 
                                     <div class="form-outline form-white mb-4">
-                                        <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                                        <input type="email" id="username" class="form-control form-control-lg" />
                                         <label class="form-label" for="typeEmailX">Usuario</label>
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
-                                        <input type="password" id="typePasswordX" class="form-control form-control-lg" />
+                                        <input type="password" id="password" class="form-control form-control-lg" />
                                         <label class="form-label" for="typePasswordX">Password</label>
                                     </div>
 
-                                    <button class="btn link btn-lg px-5">Inicio de sesion</button>
-                                </form>
+                                    <button class="btn link btn-lg px-5" id="Iniciar">Inicio de sesion</button>
                                     <a class="btn link btn-lg px-5" href="/SistemaCliente/login.html">Soy Cliente</a>
                             </div>
                         </div>
@@ -65,5 +64,45 @@
         </div>
 
 </body>
+    <script>
+    const aux = new auxliar();
+        const session = new login();
+
+        $(document).ready( function () {
+            session.confirmarlogin("No-Empleado");
+
+            $('#Iniciar').click(function() {
+                if(document.getElementById("username").value!=0){
+                    if(document.getElementById("password").value!=0){
+                        aux.alert('<h5>Espere cargando datos</h5>',false,false);
+                        $.ajax({ 
+                                url: "/src/php/auxiliar/login.php", 
+                                method: "POST",
+                                data: {
+                                    "Metodo":'login',
+                                    "Username":document.getElementById("username").value,
+                                    "Passwor":document.getElementById("password").value,
+                                    "Zona":Intl.DateTimeFormat().resolvedOptions().timeZone
+                                },
+                                    }).done(function(respuesta){
+                                        respuesta=JSON.parse(respuesta);
+                                        console.log(respuesta);
+                                        if(Boolean(respuesta[0][0])){
+                                            localStorage.setItem("username", document.getElementById("username").value);
+                                            localStorage.setItem("position", respuesta[0][1]);
+                                            window.location.href = "/menu.html"
+                                        }else {
+                                            aux.cerrar();
+                                            aux.alert("Error verificar los datos",true,true);
+                                        }
+                                })
+                    }else 
+                        aux.alert("<h5>Inserte un usuario<h5>",true,true);
+                }else      
+                    aux.alert("<h5>Inserte un password<h5>",true,true)           
+            });
+
+        } );
+    </script>
 
 </html>

@@ -58,6 +58,8 @@
                                 <li id="Insumos"><a class="dropdown-item" href="/SistemaProduccion/Categorias/insumos.php">Insumos</a></li>
                                 <li id="Provedores"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Provedores.php">Proveedores</a></li>
                                 <li id="Responsable"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Responsable.php">Responsable</a></li>
+                                <li id="MotivoMerma"><a class="dropdown-item" href="/SistemaProduccion/Categorias/MotivosMerma.php">Motivo de merma</a></li>
+                                <li id="Usuarios"><a class="dropdown-item" href="/SistemaProduccion/Categorias/Usuarios.php">Usuarios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -94,8 +96,6 @@
         <nav class="navbar navbar-expand-lg">
             <div class="linea"></div>
         </nav>
-    </div>
-        
     </div>
         <div class="container">
             <div class="row">
@@ -139,22 +139,19 @@
                                 <label for="input"></label>
                             </div>
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Nombre</label>
                                     <input class="form-control" type="text" name="NombreProveedor" id="NombreProveedor" disabled />
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="staticEmail" class="form-label">Domicilio</label>
                                     <input class="form-control" type="text" name="DomicilioProveedor" id="DomicilioProveedor" disabled/>
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Contacto</label>
-                                    <input class="form-control" type="text" name="ContactoProveedor" id="ContactoProveedor" disabled />
+                                <div class="col-md-4">
+                                    <label for="staticEmail" class="form-label">RFC</label>
+                                    <input class="form-control" type="text" name="RFC" id="RFC" disabled />
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="staticEmail" class="form-label">Email</label>
-                                    <input class="form-control" type="text" name="EmailProveedor" id="EmailProveedor" disabled/>
-                                </div>
+
                             </div>
                     </div>
                     </div>
@@ -325,7 +322,7 @@
                                     <th>Nombre</th>
                                     <th>Clasificación</th>
                                     <th>Existencias</th>
-                                    <th>Unidad</th>
+                                    <th>Unidad de medida</th>
                                     <th>Costo</th>
                                     <th>Cantidad</th>
                                     <th>Importe</th>
@@ -386,6 +383,38 @@
     <br>
     
     <script>
+                        const session = new login();
+
+            session.confirmarlogin("Empleado");
+
+            $('#logout').click(function() {
+                session.alertLogout("Empleado");
+            });
+            if(window.localStorage.getItem("position")=='Viverista'){
+                document.getElementById("Clasifiacion").style.display = "block";
+                document.getElementById("Insumos").style.display = "block";
+                document.getElementById("Provedores").style.display = "none";
+                document.getElementById("Responsable").style.display = "none";
+                document.getElementById("MotivoMerma").style.display = "block";
+                document.getElementById("Usuarios").style.display = "none";
+                document.getElementById("OrdenProduccion").style.display = "none";
+                document.getElementById("ComprasInsumos").style.display = "none";
+                document.getElementById("ValesSalidaInsumos").style.display = "block";
+                document.getElementById("DevolucionesInsumos").style.display = "block";
+                document.getElementById("MermasInsumo").style.display = "block";
+                document.getElementById("RCompraInsumos").style.display = "none";
+                document.getElementById("RCompraIProveedor").style.display = "none";
+                document.getElementById("RCompraIClasificacion").style.display = "none";
+                document.getElementById("RInusmosClasificacion").style.display = "none";
+                document.getElementById("ROrdenProduccion").style.display = "none";
+                document.getElementById("ROrdenProduccionEstado").style.display = "none";
+                document.getElementById("RValeSalidaOrdenProduccion").style.display = "none";
+                document.getElementById("RValeSalida").style.display = "none";
+                document.getElementById("RDevolucionOrdenProduccion").style.display = "none";
+                document.getElementById("RDevolucion").style.display = "none";
+                document.getElementById("RMermas").style.display = "none";
+                document.getElementById("consutal").style.display = "none";
+        }
     const aux = new auxliar();
 
     $(document).ready(function(){
@@ -580,8 +609,8 @@
 
             respuesta.forEach(element => {
                 $('#idProveedor').append($('<option>', { 
-                    value: element.idProveedor,
-                    text : element.nombre 
+                    value: element.IdProveedor,
+                    text : element.Nombre 
                 }));
             });
             aux.cerrar();
@@ -604,10 +633,9 @@
                 aux.alert('<h5>Espere cargando</h5><br/><p>Datos del provedor</p>',false,false)
             }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
-                document.getElementById("NombreProveedor").value=respuesta[0].nombre;
-                document.getElementById("DomicilioProveedor").value=respuesta[0].domicilio + " " + respuesta[0].ciudad;
-                document.getElementById("ContactoProveedor").value=respuesta[0].contacto;
-                document.getElementById("EmailProveedor").value=respuesta[0].email;
+                document.getElementById("NombreProveedor").value=respuesta[0].Nombre;
+                document.getElementById("DomicilioProveedor").value=respuesta[0].Domicilio + " " + respuesta[0].Ciudad;
+                document.getElementById("RFC").value=respuesta[0].RFC;
                 aux.cerrar();
             }).fail(function(){
                 aux.alert('<h5>Espere</h5><br/><p>Error</p>',true,true)

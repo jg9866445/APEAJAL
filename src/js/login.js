@@ -8,21 +8,21 @@ class login {
             case "Cliente":
                 if(window.localStorage.getItem('dato') == undefined)
                     window.location.href = "/SistemaCliente/login.html"
-                    console.log(information);
             break;
             case "No-Clientes":
                 if(window.localStorage.getItem('dato') != undefined)
                     window.location.href = "/SistemaCliente/index.html"
             break;
             case "Empleado":
-                console.log("Empleado")
+                if(window.localStorage.getItem('username') == undefined)
+                    window.location.href = "/index.html"    
             break;
-
             case "No-Empleado":
-
+                if(window.localStorage.getItem('username') != undefined)
+                    window.location.href = "/menu.html"    
             break;
+
             default:
-                console.log("No-Empleado");
             break;
         }
     }
@@ -40,8 +40,9 @@ class login {
         }
         }).then((result) => {
             if (result.isConfirmed) {
+
                 window.localStorage.clear();
-                console.log(users);
+
                 if (users=="Cliente")
                     window.location.href = "/SistemaCliente/login.html"
                 else
@@ -49,15 +50,6 @@ class login {
 
             }
         })
-    }
-
-    alert(mensaje,botton,eliminar){
-        Swal.fire({
-            html: mensaje,
-            showConfirmButton: botton,
-            allowOutsideClick: eliminar,
-
-        });
     }
 
     cerrar(){

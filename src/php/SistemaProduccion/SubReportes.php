@@ -681,7 +681,7 @@ class SubReportes
                                     $writer = new XLSXWriter();
                                     $writer->writeSheetRow('Sheet1', array("Vale de salida por orden de prouduccion"));
                                     $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                                    $Resultado=$this->conexion->RValeSalida($_GET['FI'],$_GET['FF']);
+                                    $Resultado=$this->conexion->RDevolucion($_GET['FI'],$_GET['FF']);
                                     $writer->writeSheetRow('Sheet1', array("idOrden","descripcion","idDevolucion","fecha","responsable","nombre","cantidad"));
                                     foreach( $Resultado as $row){ 
                                             $writer->writeSheetRow('Sheet1', array( $row["idOrden"],$row["descripcion"],$row["idDevolucion"],$row["fecha"],$row["responsable"],$row["nombre"],$row["cantidad"]));
