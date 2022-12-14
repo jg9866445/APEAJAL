@@ -7,6 +7,7 @@ class Reportes {
 
     var $db;
     var $connect;
+    var $connect_externa;
 
 
     function __construct()
@@ -15,6 +16,7 @@ class Reportes {
             $this->db = new DB_Connect();
 
             $this->connect=$this->db->connect();
+            $this->connect_externa=$this->db->connect_externa();
         } 
         catch (PDOException $e) {
             print "¡Error!: " . $e->getMessage() . "<br/>";
@@ -52,7 +54,7 @@ class Reportes {
 
     public function RCompraInumosProveedor($idProveedor,$fi,$ff){
         $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
-        $sql = "SELECT fc.factura,fc.fecha,c.concepto,i.nombre,i.unidad,dfc.cantidad,dfc.costo,(dfc.cantidad*dfc.costo) as 'importe' from facturaCompra as fc INNER JOIN proveedor as p on p.idProveedor=fc.idProveedor INNER JOIN detalleFacturaCompra as dfc ON dfc.idOrdenCompra=fc.idOrdenCompra INNER JOIN insumo as i On dfc.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion WHERE  fc.fecha BETWEEN :fi AND :ff and p.idProveedor = :idProveedor ORDER BY p.idProveedor,fc.factura ;";
+        $sql = "SELECT fc.factura,fc.fecha,c.concepto,i.nombre,i.unidad,dfc.cantidad,dfc.costo,(dfc.cantidad*dfc.costo) as 'importe' from facturaCompra as fc INNER JOIN detalleFacturaCompra as dfc ON dfc.idOrdenCompra=fc.idOrdenCompra INNER JOIN insumo as i On dfc.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion WHERE  fc.fecha BETWEEN :fi AND :ff and fc.idProveedor = :idProveedor ORDER BY fc.idProveedor,fc.factura ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
@@ -60,8 +62,8 @@ class Reportes {
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         
-        $sql = "SELECT * from  proveedor where idProveedor=:idProveedor";
-        $query = $this->connect->prepare($sql);
+        $sql = "SELECT * from  proveedores where idProveedor=:idProveedor";
+        $query = $this->connect_externa->prepare($sql);
         $query->bindParam(':idProveedor', $idProveedor);
         $query -> execute(); 
         $results2 = $query -> fetchAll(); 
@@ -74,13 +76,31 @@ class Reportes {
 
     public function RCompraClasificacion($idClasificacion,$fi,$ff){
         $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
-        $sql = "SELECT p.nombre,fc.factura,fc.fecha,i.nombre,i.unidad,dfc.cantidad,dfc.costo,(dfc.cantidad*dfc.costo) as 'importe'  from facturaCompra as fc INNER JOIN proveedor as p on p.idProveedor=fc.idProveedor INNER JOIN detalleFacturaCompra as dfc ON dfc.idOrdenCompra=fc.idOrdenCompra INNER JOIN insumo as i On dfc.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion WHERE  fc.fecha BETWEEN :fi AND :ff and c.idClasificacion = :idClasificacion ORDER BY c.idClasificacion,fc.factura ;";
+         $sql = "SELECT *  from  proveedores ";
+        $query = $this->connect_externa->prepare($sql);
+        $query -> execute(); 
+        $resultsP = $query -> fetchAll(); 
+        $results=array();
+
+        $sql = "SELECT '' as Nombre,fc.factura,fc.fecha,i.nombre,i.unidad,dfc.cantidad,dfc.costo,(dfc.cantidad*dfc.costo) as 'importe',fc.IdProveedor  from facturaCompra as fc  INNER JOIN detalleFacturaCompra as dfc ON dfc.idOrdenCompra=fc.idOrdenCompra INNER JOIN insumo as i On dfc.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion WHERE  fc.fecha BETWEEN :fi AND :ff and c.idClasificacion = :idClasificacion ORDER BY c.idClasificacion,fc.factura ;";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':fi', $fi,PDO::PARAM_STR);
         $query->bindParam(':ff', $ff,PDO::PARAM_STR);
         $query->bindParam(':idClasificacion', $idClasificacion);
         $query -> execute(); 
-        $results = $query -> fetchAll(); 
+        $resultsR = $query -> fetchAll();
+         
+         foreach($resultsR as $Reportes){
+            foreach( $resultsP as $Proveedores) {
+                if ($Reportes["IdProveedor"]==$Proveedores["IdProveedor"]){
+                    $Reportes["Nombre"]=$Proveedores["Nombre"];
+                    $Reportes[0]=$Proveedores["Nombre"];
+                    array_push($results,$Reportes);
+                }
+            }
+        }
+
+
 
         $sql = "SELECT * from  clasificacion where idClasificacion=:idClasificacion";
         $query = $this->connect->prepare($sql);

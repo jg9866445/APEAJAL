@@ -7,12 +7,14 @@ class Movimientos {
 
     var $db;
     var $connect;
+    var $connect_externa;
 
     function __construct(){        
         try {
             $this->db = new DB_Connect();
 
             $this->connect=$this->db->connect();
+            $this->connect_externa=$this->db->connect_externa();
         } 
         catch (PDOException $e) {
             print "¡Error!: " . $e->getMessage() . "<br/>";
@@ -45,7 +47,7 @@ class Movimientos {
     //Next id 
     function getNextIdCompra(){
         $this->bitacora("Movimientos","Compra de inusmo","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'facturaCompra'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'id19983557_apeajal' AND TABLE_NAME = 'facturaCompra'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -54,7 +56,7 @@ class Movimientos {
 
     function getNextidSalida(){
         $this->bitacora("Movimientos","Vales de salida","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'valeSalida'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'id19983557_apeajal' AND TABLE_NAME = 'valeSalida'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -63,7 +65,7 @@ class Movimientos {
 
     function getNextidOrdenProduccion(){
         $this->bitacora("Movimientos","Ordenes de produccion","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'ordenProduccion'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'id19983557_apeajal' AND TABLE_NAME = 'ordenProduccion'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -72,7 +74,7 @@ class Movimientos {
 
     function getNextidDevolucion(){
         $this->bitacora("Movimientos","Devoluciones","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'devolucion'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'id19983557_apeajal' AND TABLE_NAME = 'devolucion'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -81,7 +83,7 @@ class Movimientos {
     
     function getNextIdMerma(){
         $this->bitacora("Movimientos","Mermas","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'recidenciacyj_apeajal' AND TABLE_NAME = 'mermaInsumo'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'id19983557_apeajal' AND TABLE_NAME = 'mermaInsumo'";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
@@ -92,10 +94,24 @@ class Movimientos {
     //get for table
     public function getTableAllCompras(){
         $this->bitacora("Movimientos","Compras","Consulta general",$_SESSION["id"]);
-        $sql = "SELECT fc.idOrdenCompra,p.nombre,fc.factura,fc.fecha, fc.total  from  facturaCompra as fc Inner join  recidenciacyj_bts.proveedores AS p ON p.idProveedor = fc.idProveedor";
+        $sql = "SELECT *  from  proveedores ";
+        $query = $this->connect_externa->prepare($sql);
+        $query -> execute(); 
+        $resultsP = $query -> fetchAll(); 
+        $sql = "SELECT fc.idOrdenCompra,fc.idProveedor,'' as nombre,fc.factura,fc.fecha, fc.total  from  facturaCompra as fc";
         $query = $this->connect->prepare($sql);
         $query -> execute(); 
-        $results = $query -> fetchAll(); 
+        $resultsC = $query -> fetchAll(); 
+        $results=array();
+        foreach($resultsC as $compras){
+            foreach( $resultsP as $Proveedores) {
+                if ($compras["idProveedor"]==$Proveedores["IdProveedor"]){
+                    $compras["nombre"]=$Proveedores["Nombre"];
+                    $compras[2]=$Proveedores["Nombre"];
+                    array_push($results,$compras);
+                }
+            }
+        }
         return $results;
     }
 
@@ -139,8 +155,8 @@ class Movimientos {
     //get for selected 
     public function getAllProveedoresSelect() {
         $this->bitacora("Movimientos","Proveedores","Obtiene todos los regristos",$_SESSION["id"]);
-        $sql = "SELECT * from recidenciacyj_bts.proveedores";
-        $query = $this->connect->prepare($sql);
+        $sql = "SELECT * from proveedores";
+        $query = $this->connect_externa->prepare($sql);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -233,8 +249,8 @@ class Movimientos {
 
     public function getProveedore($idProveedor) {
         $this->bitacora("Movimientos","Ventas","Obtener regristro ".$this->texto(array("idProveedor"),array($idProveedor)),$_SESSION["id"]);
-        $sql = "SELECT * from  recidenciacyj_bts.proveedores WHERE idProveedor=:idProveedor";
-        $query = $this->connect->prepare($sql);
+        $sql = "SELECT * from  proveedores WHERE idProveedor=:idProveedor";
+        $query = $this->connect_externa->prepare($sql);
         $query->bindParam(':idProveedor', $idProveedor);
         $query -> execute(); 
         $results = $query -> fetchAll(); 

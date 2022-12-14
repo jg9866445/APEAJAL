@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/src/php/connectividad.php");
+session_start();
 
 class Catalago {
 
