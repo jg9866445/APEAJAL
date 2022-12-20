@@ -28,8 +28,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
 
 
-        
-    <!--Links para funciones auxliar-->
+     <!--Links para funciones auxliar-->
     <script src="/src/js/auxliar.js" ></script>
     <script src="/src/js/login.js"></script></head>
 
@@ -87,7 +86,8 @@
                                 <li id="RDevolucionOrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucionOrdenProduccion.html">Consulta de devolución por orden de producción</a></li>
                                 <li id="RDevolucion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucion.html">Consulta de devoluciones por fecha</a></li>
                                 <li id="RMermas"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RMermas.html">Consulta de mermas por fecha</a></li>
-                                <li id="bitacora"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RBitacora.html">Consulta de bitacora</a></li>                            </ul>
+                                <li id="bitacora"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RBitacora.html">Consulta de bitacora</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -105,50 +105,9 @@
 
                 </div>
                 <div class="col-lg-7 ">
-                    <h3>Consulta Compra de insumos dividido por proveedor</h3>
+                    <h3>Consulta de bitacora</h3>
                 </div>
                 <div class="col-lg-2">
-                </div>
-            </div>
-        </div>
-        <br>
-       <div class="container">
-            <div class="row">
-                <div class="col-lg-2 ">
-
-                </div>
-
-                <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">Proveedores</div>
-                    <div class="card-body">
-                            <div class="row g-3">
-                                <select class="form-select" name="idProveedor" id="idProveedor" required onchange="getProveedore()">
-                                <option disabled selected value="-20">Escoja una opción</option>
-                                </select>
-                                <label for="input"></label>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" name="NombreProveedor" id="NombreProveedor" disabled />
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">Domicilio</label>
-                                    <input class="form-control" type="text" name="DomicilioProveedor" id="DomicilioProveedor" disabled/>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="staticEmail" class="form-label">RFC</label>
-                                    <input class="form-control" type="text" name="RFC" id="RFC" disabled />
-                                </div>
-\
-                            </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2">
-
                 </div>
             </div>
         </div>
@@ -200,7 +159,6 @@
                 <div class="col-lg-2 ">
                 </div>
                 <div class="col-lg-4 ">
-                            <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
                 </div>
                 <div class="col-lg-4 ">
                             <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
@@ -213,7 +171,7 @@
 </body>
 
 <script>
-                const session = new login();
+                    const session = new login();
 
             session.confirmarlogin("Empleado");
 
@@ -246,81 +204,22 @@
                 document.getElementById("consutal").style.display = "none";
         }
     const aux = new auxliar();
-    onload=function(){
-        getAllProveedoresSelect();
-    }
+
     $(document).ready(function() {
 
-        $('#PDF').click(function() {
-            if(document.getElementById("idProveedor").value!=-20)
-                if(document.getElementById("fechaInicial").value!=0 )
-                    if( document.getElementById("fechaFinal").value!=0)
-                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraInumosProveedor&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idProveedor").value+"&tipo=PDF"
-                    else aux.alert("<h5>Inserte fecha final</h5>",true,true)
-                else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
-            else aux.alert("<h5>Selecione un proveedor</h5>",true,true)
-        });
-
         $('#EXCEL').click(function() {
-            if(document.getElementById("idProveedor").value!=-20)
                 if(document.getElementById("fechaInicial").value!=0 )
                     if( document.getElementById("fechaFinal").value!=0)
-                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraInumosProveedor&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idProveedor").value+"&tipo=EXCEL"
+                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RBitacora&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value
                     else aux.alert("<h5>Inserte fecha final</h5>",true,true)
                 else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
-            else aux.alert("<h5>Selecione un proveedor</h5>",true,true)
         });
     });
 
 
-    function getAllProveedoresSelect(){
-        $.ajax({
-            url: "/src/php/SistemaProduccion/SubMovimientos.php",
-            method: "POST",
-            data: {
-                "Metodo":'getAllProveedoresSelect',
-            },
-            beforeSend: function() {
-                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de proveedores</p>',false,false)
-            }
-        }).done(function(respuesta) {
-            respuesta=JSON.parse(respuesta);
 
-            respuesta.forEach(element => {
-                $('#idProveedor').append($('<option>', { 
-                    value: element.IdProveedor,
-                    text : element.Nombre 
-                }));
-            });
-            aux.cerrar();
-        }).fail(function(){
-            aux.alert('<h5>Espere</h5><br/><p>Error</p>',true,true)
-            aux.cerrar();
-        });
-    }
-    
-    function getProveedore(){
-        var idProveedor = $("#idProveedor").val();
-        $.ajax({
-            url: "/src/php/SistemaProduccion/SubMovimientos.php",
-            method: "POST",
-            data: {
-                "Metodo":'getProveedore',
-                "idProveedor": idProveedor
-            },
-            beforeSend: function() {
-                aux.alert('<h5>Espere cargando</h5><br/><p>Datos del provedor</p>',false,false)
-            }}).done(function(respuesta) {
-                respuesta=JSON.parse(respuesta);
-                document.getElementById("NombreProveedor").value=respuesta[0].Nombre;
-                document.getElementById("DomicilioProveedor").value=respuesta[0].Domicilio + " " + respuesta[0].Ciudad;
-                document.getElementById("RFC").value=respuesta[0].RFC;
-                aux.cerrar();
-            }).fail(function(){
-                aux.alert('<h5>Espere</h5><br/><p>Error</p>',true,true)
-                aux.cerrar();
-            });
-    }
+
+
 
 </script>
 

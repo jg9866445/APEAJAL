@@ -85,6 +85,7 @@
                                 <li id="consutal5" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacén físico</a></li>
                                 <li id="consutal6" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacén virtual</a></li>
                                 <li id="consutal7" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
+                                <li id="consutal8" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RBitacora.html">Consulta de bitacora</a></li>
                             </ul>
                         </li>
                     </ul>

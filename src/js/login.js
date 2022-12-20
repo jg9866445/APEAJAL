@@ -6,19 +6,19 @@ class login {
     confirmarlogin(information){
         switch(information){
             case "Cliente":
-                if(window.localStorage.getItem('dato') == undefined)
+                if(window.sessionStorage.getItem('dato') == undefined)
                     window.location.href = "/SistemaCliente/login.html"
             break;
             case "No-Clientes":
-                if(window.localStorage.getItem('dato') != undefined)
+                if(window.sessionStorage.getItem('dato') != undefined)
                     window.location.href = "/SistemaCliente/index.html"
             break;
             case "Empleado":
-                if(window.localStorage.getItem('username') == undefined)
+                if(window.sessionStorage.getItem('username') == undefined)
                     window.location.href = "/index.html"    
             break;
             case "No-Empleado":
-                if(window.localStorage.getItem('username') != undefined)
+                if(window.sessionStorage.getItem('username') != undefined)
                     window.location.href = "/menu.html"    
             break;
 
@@ -41,7 +41,7 @@ class login {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                window.localStorage.clear();
+                window.sessionStorage.clear();
 
                 if (users=="Cliente")
                     window.location.href = "/SistemaCliente/login.html"

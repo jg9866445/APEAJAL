@@ -27,6 +27,25 @@ class SubReportes
             if(isset($_GET['metodo'])){
                 
                 switch ($_GET['metodo']) {
+                    
+                    case 'RBitacora':
+                         $fileName = basename('fichero.xlsx');
+
+                        header('Content-disposition: attachment; filename="'.XLSXWriter::sanitize_filename($fileName).'"');
+                        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                        header('Content-Transfer-Encoding: binary');
+                        header('Cache-Control: must-revalidate');
+                        header('Pragma: public');   
+                        $writer = new XLSXWriter();
+                        $writer->writeSheetRow('Sheet1', array("Bitacora"));
+                        $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
+                        $Bitacora=$this->conexion->getBitacora($_GET['id'],$_GET['FI'],$_GET['FF']);
+                        $writer->writeSheetRow('Sheet1', array("Fecha","Hora","Sistema","Area","Tabla","Actividad","Username"));
+                        foreach( $Bitacora as $row){ 
+                            $writer->writeSheetRow('Sheet1', array( $row['Fecha'],$row['Hora'],$row['Sistema'],$row['Area'],$row['Tabla'],$row['Actividad'],$row['Username']));
+                        }
+                        $writer->writeToStdOut();
+                    break;
 
                     case 'RSolicitudes':
                         if($_GET['tipo']=='PDF'){                        

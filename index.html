@@ -88,8 +88,8 @@
                                         respuesta=JSON.parse(respuesta);
                                         console.log(respuesta);
                                         if(Boolean(respuesta[0][0])){
-                                            localStorage.setItem("username", document.getElementById("username").value);
-                                            localStorage.setItem("position", respuesta[0][1]);
+                                            sessionStorage.setItem("username", document.getElementById("username").value);
+                                            sessionStorage.setItem("position", respuesta[0][1]);
                                             window.location.href = "/menu.html"
                                         }else {
                                             aux.cerrar();

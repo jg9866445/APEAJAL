@@ -41,6 +41,16 @@ class Reportes {
         return 0;
     }
 
+    public function getBitacora($fi,$ff){
+        $sql = "SELECT * from Bitacora as b INNER JOIN User as u ON u.idUsuario= b.idUsuario  WHERE  b.Fecha BETWEEN :fi AND :ff;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':fi', $fi,PDO::PARAM_STR);
+        $query->bindParam(':ff', $ff,PDO::PARAM_STR);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
     public function RCompraInumos($fi,$ff){
         $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = "SELECT p.nombre,fc.factura,fc.fecha,c.concepto,i.nombre,i.unidad,dfc.cantidad,dfc.costo,(dfc.cantidad*dfc.costo) as 'importe' from facturaCompra as fc INNER JOIN proveedor as p on p.idProveedor=fc.idProveedor INNER JOIN detalleFacturaCompra as dfc ON dfc.idOrdenCompra=fc.idOrdenCompra INNER JOIN insumo as i On dfc.idInsumo=i.idInsumo INNER JOIN clasificacion as c ON c.idClasificacion=i.idClasificacion WHERE  fc.fecha BETWEEN :fi AND :ff ORDER BY p.idProveedor,fc.factura ;";

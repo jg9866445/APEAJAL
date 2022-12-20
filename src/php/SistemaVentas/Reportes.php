@@ -39,6 +39,16 @@ class Reportes {
         return 0;
     }
 
+    public function getBitacora($fi,$ff){
+        $sql = "SELECT * from Bitacora as b INNER JOIN User as u ON u.idUsuario= b.idUsuario  WHERE  b.Fecha BETWEEN :fi AND :ff;";
+        $query = $this->connect->prepare($sql);
+        $query->bindParam(':fi', $fi,PDO::PARAM_STR);
+        $query->bindParam(':ff', $ff,PDO::PARAM_STR);
+        $query -> execute(); 
+        $results = $query -> fetchAll(); 
+        return $results;
+    }
+
     public function RSolicitudes($fi,$ff){
         $this->bitacora("Reportes","Solicitud","Genera reporte con fechas de fecha inicial:".$fi." fecha final:".$ff,$_SESSION["id"]);
         $sql = "SELECT s.idSolicitud,s.fecha,r.nombre,c.razonSocial,ds.idPredio,e.nombre,ds.cantidadSolicitada,ds.precio,s.estado FROM solicitudes as s INNER JOIN clientes as c ON c.idCliente=s.idCliente INNER JOIN responsable as r ON r.idResponsable=s.idResponsable INNER JOIN detalleSolicitud as ds ON ds.idSolicitud=s.idSolicitud INNER JOIN plantaForestal as pf ON pf.idPlanta= ds.idPlanta INNER JOIN especie as e ON e.idEspecie = pf.idEspecie WHERE   s.fecha BETWEEN :fi AND :ff  ;";
