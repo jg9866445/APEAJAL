@@ -38,10 +38,10 @@ class SubReportes
                         $writer = new XLSXWriter();
                         $writer->writeSheetRow('Sheet1', array("Bitacora"));
                         $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
-                        $Bitacora=$this->conexion->getBitacora($_GET['id'],$_GET['FI'],$_GET['FF']);
                         $writer->writeSheetRow('Sheet1', array("Fecha","Hora","Sistema","Area","Tabla","Actividad","Username"));
+                        $Bitacora=$this->conexion->getBitacora($_GET['FI'],$_GET['FF']);
                         foreach( $Bitacora as $row){ 
-                            $writer->writeSheetRow('Sheet1', array( $row['Fecha'],$row['Hora'],$row['Sistema'],$row['Area'],$row['Tabla'],$row['Actividad'],$row['Username']));
+                            $writer->writeSheetRow('Sheet1', array( $row[6],$row[7],$row[1],$row[2],$row[4],$row[3],$row[9]));
                         }
                         $writer->writeToStdOut();
                     break;

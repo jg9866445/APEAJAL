@@ -179,7 +179,6 @@
                         },
                         }).done(function(respuesta){
                             respuesta=JSON.parse(respuesta);
-                            console.log(respuesta)
                             $.each(respuesta,function(index, value){ 
                                 table.row.add( [
                                     value.idPredio,

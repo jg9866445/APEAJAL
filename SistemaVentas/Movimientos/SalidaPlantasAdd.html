@@ -39,6 +39,13 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
+            <ul class="nav justify-content-between">
+                <li class="nav-item">
+                    <a id="home">
+                        <img class="img-responsive" src="/src/imagenes/home.png" width="50VW" height="50VH" alt="" />
+                    </a>                
+                </li>
+            </ul>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <a id="logout">
@@ -414,10 +421,12 @@
         var i=0;
         $(document).ready(function() {
             session.confirmarlogin("Empleado");
-
-            $('#logout').click(function() {
-                session.alertLogout("Empleado");
-            });
+        $('#logout').click(function() {
+            session.alertLogout();
+        });
+        $('#home').click(function() {
+            window.location.href = "/menu.html"
+        });
 
             if(window.localStorage.getItem("position")=='Viverista'){
                 document.getElementById("Especies").style.display = "none";
@@ -440,6 +449,7 @@
                 document.getElementById("consutal5").style.display = "none";
                 document.getElementById("consutal6").style.display = "none";
                 document.getElementById("consutal7").style.display = "none";
+                document.getElementById("consutal8").style.display = "none";
             }
 
             $('#Cancelar').click(function() {
@@ -460,11 +470,8 @@
             var cantidadSurtida = parseInt(document.getElementById("cantidadSurtida").value,10);
             var cantidadSolicitada = document.getElementById("cantidadSolicitada").value;
             if(idPredio!=""){
-                console.log(idPredio);
                 if(idPlanta!=""){
-                    console.log(idPlanta);
                     if(cantidadSurtida!=0 && !isNaN(cantidadSurtida)){ 
-                        console.log(cantidadSurtida);
                         var fila = 
                             '<tr id="row' + i + '" >'+
                                 '<td id="idPredio">' + idPredio + '</td>'+
@@ -703,7 +710,6 @@
                 }
                 }).done(function(respuesta) {
                     respuesta=JSON.parse(respuesta);
-                    console.log(respuesta);
                     document.getElementById("fechaPago").value=respuesta[0].fecha;
                     document.getElementById("ConceptoGeneral").value=respuesta[0].conceptoGeneral;
                     document.getElementById("importe").value=respuesta[0].importe;

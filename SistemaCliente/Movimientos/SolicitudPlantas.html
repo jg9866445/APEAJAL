@@ -216,7 +216,7 @@
                         method: "POST",
                         data: {
                             "Metodo":'getAllSolicitudPlantasforTabla',
-                            "datosClientes":window.localStorage.getItem('dato')
+                            "datosClientes":window.sessionStorage.getItem('dato')
                         },
                         }).done(function(respuesta){
                             respuesta=JSON.parse(respuesta);

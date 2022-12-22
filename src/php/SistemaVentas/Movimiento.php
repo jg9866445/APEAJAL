@@ -46,8 +46,9 @@ class Movimientos {
 
     public function getNextidPredio(){
         $this->bitacora("Movimientos","Predios","Obtiene el sigueinte id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'u517350403_apeajalvivero' AND TABLE_NAME = 'predios'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = :table_schema AND TABLE_NAME = 'predios'";
         $query = $this->connect->prepare($sql);
+        $query->bindParam(':table_schema', $this->db->table_schema);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -55,8 +56,9 @@ class Movimientos {
     
     public function getNextidSolicitudPlantas(){
         $this->bitacora("Movimientos","Solicitud Plantas","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'u517350403_apeajalvivero' AND TABLE_NAME = 'solicitudes'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = :table_schema AND TABLE_NAME = 'solicitudes'";
         $query = $this->connect->prepare($sql);
+        $query->bindParam(':table_schema', $this->db->table_schema);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -64,8 +66,9 @@ class Movimientos {
 
     public function getNextidVenta(){
         $this->bitacora("Movimientos","Ventas","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'u517350403_apeajalvivero' AND TABLE_NAME = 'ventas'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = :table_schema AND TABLE_NAME = 'ventas'";
         $query = $this->connect->prepare($sql);
+        $query->bindParam(':table_schema', $this->db->table_schema);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -73,8 +76,9 @@ class Movimientos {
     
     public function getNextidPago(){
         $this->bitacora("Movimientos","Pagos","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'u517350403_apeajalvivero' AND TABLE_NAME = 'pagos'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = :table_schema AND TABLE_NAME = 'pagos'";
         $query = $this->connect->prepare($sql);
+        $query->bindParam(':table_schema', $this->db->table_schema);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -82,8 +86,9 @@ class Movimientos {
 
     public function getNextidSalida(){
         $this->bitacora("Movimientos","Salida","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'u517350403_apeajalvivero' AND TABLE_NAME = 'salidas'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = :table_schema AND TABLE_NAME = 'salidas'";
         $query = $this->connect->prepare($sql);
+        $query->bindParam(':table_schema', $this->db->table_schema);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;
@@ -91,8 +96,9 @@ class Movimientos {
 
     public function getNextidMerma(){
         $this->bitacora("Movimientos","Merma","Obtener siguiente id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'u517350403_apeajalvivero' AND TABLE_NAME = 'mermaPlantaForestal'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = :table_schema AND TABLE_NAME = 'mermaPlantaForestal'";
         $query = $this->connect->prepare($sql);
+        $query->bindParam(':table_schema', $this->db->table_schema);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;

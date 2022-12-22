@@ -38,6 +38,13 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
+            <ul class="nav justify-content-between">
+                <li class="nav-item">
+                    <a id="home">
+                        <img class="img-responsive" src="/src/imagenes/home.png" width="50VW" height="50VH" alt="" />
+                    </a>                
+                </li>
+            </ul>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <a id="logout">
@@ -188,10 +195,13 @@
             session.confirmarlogin("Empleado");
             $('#table_id').DataTable({
                 scrollX:true
+                });        
+                $('#logout').click(function() {
+                    session.alertLogout();
                 });
-            $('#logout').click(function() {
-                session.alertLogout("Empleado");
-            });
+                $('#home').click(function() {
+                    window.location.href = "/menu.html"
+                });
             if(window.localStorage.getItem("position")=='Viverista'){
                 document.getElementById("Especies").style.display = "none";
                 document.getElementById("Plantas").style.display = "block";
@@ -213,6 +223,7 @@
                 document.getElementById("consutal5").style.display = "none";
                 document.getElementById("consutal6").style.display = "none";
                 document.getElementById("consutal7").style.display = "none";
+                document.getElementById("consutal8").style.display = "none";
         }
         } );
     </script>

@@ -30,7 +30,6 @@ class SubCatalagos
 
                     case 'InsertarCalsificacion':
                         $data= json_decode($_POST['data']);
-                        var_dump($data);
                         $resultado = $this->conexion->insertClasificacion($data->NombreClasificacion,$data->DescripcionClasificacion);
                         echo json_encode($resultado);
                     break;

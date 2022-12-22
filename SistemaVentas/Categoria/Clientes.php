@@ -39,6 +39,13 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
+            <ul class="nav justify-content-between">
+                <li class="nav-item">
+                    <a id="home">
+                        <img class="img-responsive" src="/src/imagenes/home.png" width="50VW" height="50VH" alt="" />
+                    </a>                
+                </li>
+            </ul>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <a id="logout">
@@ -372,9 +379,11 @@
                     scrollX:true
             });
             session.confirmarlogin("Empleado");
-
             $('#logout').click(function() {
-                session.alertLogout("Empleado");
+                session.alertLogout();
+            });
+            $('#home').click(function() {
+                window.location.href = "/menu.html"
             });
 
             if(window.localStorage.getItem("position")=='Viverista'){
@@ -398,6 +407,7 @@
                 document.getElementById("consutal5").style.display = "none";
                 document.getElementById("consutal6").style.display = "none";
                 document.getElementById("consutal7").style.display = "none";
+                document.getElementById("consutal8").style.display = "none";
         }
         });
 
@@ -489,13 +499,10 @@
                     if(move_uploaded_file($origen, $destino))
                     {
                         }else{
-                            echo ("Error : archivos no movido");
                         }
                 }else{
-                    echo("Error : archivos no es pdf");
                 }
             }else{
-                echo("Error : archivos no encotrados");
             }
     }
 ?>

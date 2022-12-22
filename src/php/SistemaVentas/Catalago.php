@@ -279,8 +279,9 @@ class Catalago {
 
     function getNextIdCliente(){
         $this->bitacora("Catalago","Cliente","Consultar proximo id",$_SESSION["id"]);
-        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'u517350403_apeajalvivero' AND TABLE_NAME = 'clientes'";
+        $sql = "SELECT AUTO_INCREMENT  FROM information_schema.TABLES WHERE TABLE_SCHEMA = :table_schema AND TABLE_NAME = 'clientes'";
         $query = $this->connect->prepare($sql);
+        $query->bindParam(':table_schema', $this->db->table_schema);
         $query -> execute(); 
         $results = $query -> fetchAll(); 
         return $results;

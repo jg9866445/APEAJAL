@@ -86,7 +86,6 @@
                                 },
                                     }).done(function(respuesta){
                                         respuesta=JSON.parse(respuesta);
-                                        console.log(respuesta);
                                         if(Boolean(respuesta[0][0])){
                                             sessionStorage.setItem("username", document.getElementById("username").value);
                                             sessionStorage.setItem("position", respuesta[0][1]);

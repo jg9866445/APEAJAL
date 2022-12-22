@@ -39,6 +39,13 @@
             <a class="navbar-brand">
                 <img src="/src/imagenes/Logo.jpeg" width="50VW" height="50VH" class="d-inline-block align-top" alt="">
             </a>
+            <ul class="nav justify-content-between">
+                <li class="nav-item">
+                    <a id="home">
+                        <img class="img-responsive" src="/src/imagenes/home.png" width="50VW" height="50VH" alt="" />
+                    </a>                
+                </li>
+            </ul>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <a id="logout">
@@ -87,7 +94,7 @@
                                 <li id="RDevolucionOrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucionOrdenProduccion.html">Consulta de devolución por orden de producción</a></li>
                                 <li id="RDevolucion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucion.html">Consulta de devoluciones por fecha</a></li>
                                 <li id="RMermas"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RMermas.html">Consulta de mermas por fecha</a></li>
-                                <li id="bitacora"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RBitacora.html">Consulta de bitacora</a></li>                            </ul>
+                                <li id="RBitacora"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RBitacora.html">Consulta de bitacora</a></li>                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -254,9 +261,11 @@
                             const session = new login();
 
             session.confirmarlogin("Empleado");
-
             $('#logout').click(function() {
-                session.alertLogout("Empleado");
+                session.alertLogout();
+            });
+            $('#home').click(function() {
+                window.location.href = "/menu.html"
             });
             if(window.localStorage.getItem("position")=='Viverista'){
                 document.getElementById("Clasifiacion").style.display = "block";
@@ -281,7 +290,7 @@
                 document.getElementById("RDevolucionOrdenProduccion").style.display = "none";
                 document.getElementById("RDevolucion").style.display = "none";
                 document.getElementById("RMermas").style.display = "none";
-                document.getElementById("consutal").style.display = "none";
+                document.getElementById("RBitacora").style.display = "none";
         }
         const aux = new auxliar();
         var table = $('#table_id').DataTable();

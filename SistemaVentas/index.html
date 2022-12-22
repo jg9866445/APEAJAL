@@ -40,8 +40,8 @@
             </a>
             <ul class="nav justify-content-between">
                 <li class="nav-item">
-                    <a id="logout">
-                        <img class="img-responsive" src="/src/imagenes/logout.jpeg" width="50VW" height="50VH" alt="" />
+                    <a id="home">
+                        <img class="img-responsive" src="/src/imagenes/home.png" width="50VW" height="50VH" alt="" />
                     </a>                
                 </li>
             </ul>
@@ -135,7 +135,9 @@
         $('#logout').click(function() {
             session.alertLogout();
         });
-        console.log(window.localStorage.getItem("position"));
+        $('#home').click(function() {
+            window.location.href = "/menu.html"
+        });
 
         if(window.localStorage.getItem("position")=='Viverista'){
             document.getElementById("Especies").style.display = "none";
@@ -158,7 +160,9 @@
             document.getElementById("consutal5").style.display = "none";
             document.getElementById("consutal6").style.display = "none";
             document.getElementById("consutal7").style.display = "none";
+            document.getElementById("consutal8").style.display = "none";
     }
+            
     });
 </script>
 </html>

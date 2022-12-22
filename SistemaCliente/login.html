@@ -81,7 +81,7 @@
                         }}).done(function(respuesta) {
                             respuesta=JSON.parse(respuesta);
                             if(respuesta[0].ISlogin){
-                                localStorage.setItem("dato", document.getElementById("dato").value);
+                                sessionStorage.setItem("dato", document.getElementById("dato").value);
                                 window.location.href = "/SistemaCliente/index.html"
                             }else{
                                 aux.alert("<h5>Error Cliente no encontrado</h5>",true,true);
