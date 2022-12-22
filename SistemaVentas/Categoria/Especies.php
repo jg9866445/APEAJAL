@@ -41,7 +41,7 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <a id="logout">
-                        <img class="img-responsive" src="/src/imagenes/logout.jpeg" width="50VW" height="50VH" alt="" />
+                        <img class="img-responsive" src="/src/imagenes/salida.png" width="50VW" height="50VH" alt="" />
                     </a>                
                 </li>
             </ul>
@@ -99,8 +99,8 @@
     <div>
         <div class="container botton">
             <div class="row">
-                <div class="col-lg-2 ">
-
+                <div class="col-lg-3 ">
+                    <button class="btn insert"  href="/SistemaVentas/index.html">Regresar</a>
                 </div>
                 <div class="col-lg-7 ">
 
@@ -174,7 +174,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn cancel" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn insert">Guardar cambios</button>
+                        <button type="submit" class="btn insert">Guardar</button>
                     </div>
                 </form>
             </div>

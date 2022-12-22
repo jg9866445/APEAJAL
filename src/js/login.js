@@ -28,7 +28,7 @@ class login {
     }
     alertLogout(users){
         Swal.fire({
-        title: 'Usted desea cerrar sesion?',
+        title: 'Usted desea cerrar sesión?',
         showDenyButton: true,
         confirmButtonText: 'Yes',
         denyButtonText: 'No',

@@ -41,7 +41,7 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <a id="logout">
-                        <img class="img-responsive" src="/src/imagenes/logout.jpeg" width="50VW" height="50VH" alt="" />
+                        <img class="img-responsive" src="/src/imagenes/salida.png" width="50VW" height="50VH" alt="" />
                     </a>                
                 </li>
             </ul>
@@ -100,7 +100,7 @@
         <div class="container botton">
             <div class="row">
                 <div class="col-lg-2 ">
-
+                    <button class="btn insert"  href="/SistemaVentas/index.html">Regresar</a>
                 </div>
                 <div class="col-lg-7 ">
 
@@ -172,9 +172,9 @@
                             <div class="col-sm-10">
                                 <select class="form-select" name="Puesto" id="Puesto" required>
                                     <option disabled selected>Elija una opción</option>
-                                    <option value="Administrdor">Administrdor</option>
+                                    <option value="Administrdor">Administrador</option>
                                     <option value="Viverista">Viverista</option>
-                                    <option value="Cordinador">Cordinador</option>
+                                    <option value="Cordinador">Coordinador</option>
                                 </select>
                                 <label for="input"></label>
                             </div>
@@ -213,9 +213,9 @@
                             <div class="col-sm-10">
                                 <select class="form-select" name="PuestoM" id="PuestoM" required>
                                     <option disabled selected>Elija una opción</option>
-                                    <option value="Administrdor">Administrdor</option>
+                                    <option value="Administrdor">Administrador</option>
                                     <option value="Viverista">Viverista</option>
-                                    <option value="Cordinador">Cordinador</option>
+                                    <option value="Cordinador">Coordinador</option>
                                 </select>
                                 <label for="input"></label>
                             </div>

@@ -41,7 +41,7 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <a id="logout">
-                        <img class="img-responsive" src="/src/imagenes/logout.jpeg" width="50VW" height="50VH" alt="" />
+                        <img class="img-responsive" src="/src/imagenes/salida.png" width="50VW" height="50VH" alt="" />
                     </a>                
                 </li>
             </ul>
@@ -75,12 +75,12 @@
                         <li class="nav-item dropdown">
                             <a class="btn  active menu consultas" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Consultas</a>
                             <ul class="dropdown-menu menu consultas despegable" aria-labelledby="navbarDropdown">
-                                <li id="RCompraInsumos"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraInsumos.html">Consulta de compra de insumos por periodo</a></li>
-                                <li id="RCompraIProveedor"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIProveedor.html">Consulta de compra de insumos por proveedor en un periodo</a></li>
-                                <li id="RCompraIClasificacion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIClasificacion.html">Consulta de compra de insumos por clasificación en un periodo</a></li>
+                                <li id="RCompraInsumos"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraInsumos.html">Consulta de compra de insumos por período</a></li>
+                                <li id="RCompraIProveedor"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIProveedor.html">Consulta de compra de insumos por proveedor en un período</a></li>
+                                <li id="RCompraIClasificacion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RCompraIClasificacion.html">Consulta de compra de insumos por clasificación en un período</a></li>
                                 <li id="RInusmosClasificacion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RInusmosClasificacion.html">Consulta de insumos divididos por clasificación</a></li>
-                                <li id="ROrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccion.html">Consulta de órdenes de producción en un periodo</a></li>
-                                <li id="ROrdenProduccionEstado"><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccionEstado.html">Consulta de órdenes de producción por estado en un periodo</a></li>
+                                <li id="ROrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccion.html">Consulta de órdenes de producción en un período</a></li>
+                                <li id="ROrdenProduccionEstado"><a class="dropdown-item" href="/SistemaProduccion/Reportes/ROrdenProduccionEstado.html">Consulta de órdenes de producción por estado en un período</a></li>
                                 <li id="RValeSalidaOrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RValeSalidaOrdenProduccion.html">Consulta de vale de salida por orden de producción</a></li>
                                 <li id="RValeSalida"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RValeSalida.html">Consulta de vale de salida por fecha </a></li>
                                 <li id="RDevolucionOrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucionOrdenProduccion.html">Consulta de devolución por orden de producción</a></li>
@@ -174,9 +174,9 @@
                             <div class="col-sm-10">
                                 <select class="form-select" name="Puesto" id="Puesto" required>
                                     <option disabled selected>Elija una opción</option>
-                                    <option value="Administrdor">Administrdor</option>
+                                    <option value="Administrdor">Administrador</option>
                                     <option value="Viverista">Viverista</option>
-                                    <option value="Cordinador">Cordinador</option>
+                                    <option value="Cordinador">Coordinador</option>
                                 </select>
                                 <label for="input"></label>
                             </div>
@@ -212,7 +212,7 @@
                     <input type="hidden" name="idUsuarioM" id="idUsuarioM">
                     <div class="modal-body">
                         <div class="mb-3 row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">username </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Username </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="usernameM" name="usernameM" placeholder="Nombre" required  minlength="3" maxlength="40" />
                                 <label for="input"></label>
@@ -222,9 +222,9 @@
                             <div class="col-sm-10">
                                 <select class="form-select" name="PuestoM" id="PuestoM" required>
                                     <option disabled selected>Elija una opción</option>
-                                    <option value="Administrdor">Administrdor</option>
+                                    <option value="Administrdor">Administrador</option>
                                     <option value="Viverista">Viverista</option>
-                                    <option value="Cordinador">Cordinador</option>
+                                    <option value="Cordinador">Coordinador</option>
                                 </select>
                                 <label for="input"></label>
                             </div>
