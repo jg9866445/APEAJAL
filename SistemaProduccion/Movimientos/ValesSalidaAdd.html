@@ -93,7 +93,7 @@
                                 <li id="RDevolucionOrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucionOrdenProduccion.html">Consulta de devolución por orden de producción</a></li>
                                 <li id="RDevolucion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucion.html">Consulta de devoluciones por fecha</a></li>
                                 <li id="RMermas"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RMermas.html">Consulta de mermas por fecha</a></li>
-                                <li id="RBitacora"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RBitacora.html">Consulta de bitacora</a></li>                            </ul>
+                                <li id="RBitacora"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RBitacora.html">Consulta de bitácora</a></li>                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -430,7 +430,7 @@
                 [
                     {"valor":document.getElementById("idResponsable").value,"typeOf":"select","mensaje":"<p>Selecione un responbale</p><br>"},
                     {"valor":document.getElementById("idInsumo").value,"typeOf":"select","mensaje":"<p>Selecione un insumo</p><br>"},
-                    {"valor":document.getElementById("idOrden").value,"typeOf":"select","mensaje":"<p>Selecione una orden de produccion</p><br>"},
+                    {"valor":document.getElementById("idOrden").value,"typeOf":"select","mensaje":"<p>Selecione una orden de producción</p><br>"},
                     {"valor":document.getElementById("CantidadSalida").value,"typeOf":"int","mensaje":"<p>Agregar cantidad de salida</p><br>"},
                 ]
             )
@@ -499,7 +499,7 @@
                 "Metodo":'getAllOrdenProduccionSelect'
             },
             beforeSend:function(){
-                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de Clasificacion</p>',false,false)
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de clasificación</p>',false,false)
             }
         }).done(function(respuesta) {
             respuesta=JSON.parse(respuesta);
@@ -592,7 +592,7 @@
                 "Metodo":'getAllClasificacionSelect'
             },
             beforeSend:function(){
-                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de Clasificacion</p>',false,false)
+                aux.alert('<h5>Espere cargando</h5><br/><p>Lista de clasificación</p>',false,false)
             }
         }).done(function(respuesta) {
             respuesta=JSON.parse(respuesta);
@@ -617,7 +617,7 @@
                 "idClasificacion": idClasificacion
             },
             beforeSend: function() {
-                aux.alert('<h5>Espere cargando</h5><br/><p>Datos de la clasifiacion</p>',false,false)
+                aux.alert('<h5>Espere cargando</h5><br/><p>Datos de la clasifiación</p>',false,false)
             }}).done(function(respuesta) {
                 respuesta=JSON.parse(respuesta);
                 document.getElementById("conceptoClasificacion").value=respuesta[0].concepto;

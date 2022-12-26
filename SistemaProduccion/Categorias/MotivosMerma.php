@@ -90,7 +90,7 @@
                                 <li id="RDevolucionOrdenProduccion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucionOrdenProduccion.html">Consulta de devolución por orden de producción</a></li>
                                 <li id="RDevolucion"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RDevolucion.html">Consulta de devoluciones por fecha</a></li>
                                 <li id="RMermas"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RMermas.html">Consulta de mermas por fecha</a></li>
-                                <li id="RBitacora"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RBitacora.html">Consulta de bitacora</a></li>                            </ul>
+                                <li id="RBitacora"><a class="dropdown-item" href="/SistemaProduccion/Reportes/RBitacora.html">Consulta de bitácora</a></li>                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -179,7 +179,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn cancel" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn insert">Guardar cambios</button>
+                        <button type="submit" class="btn insert">Guardar motivo</button>
                     </div>
                 </form>
             </div>

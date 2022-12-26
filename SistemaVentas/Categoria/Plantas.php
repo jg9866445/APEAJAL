@@ -66,7 +66,7 @@
                                 <li id="Responsable" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Responsable.php">Responsable</a></li>
                                 <li id="Clientes" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Clientes.php">Clientes</a></li>   
                                 <li id="Usuarios" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/Usuarios.php">Usuarios</a></li>   
-                                 <li id="MotivosMermas" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/MotivosMerma.php">Motivos Merma</a></li>   
+                                 <li id="MotivosMermas" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Categoria/MotivosMerma.php">Motivos merma</a></li>   
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -90,7 +90,7 @@
                                 <li id="consutal5" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioFisicio.html">Consulta de existencias en almacén físico</a></li>
                                 <li id="consutal6" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RInventarioVirtual.html">Consultas de existencias en almacén virtual</a></li>
                                 <li id="consutal7" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/Rmermas.html">Consulta de mermas</a></li>
-                                <li id="consutal8" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RBitacora.html">Consulta de bitacora</a></li>
+                                <li id="consutal8" style="display: block;"><a class="dropdown-item" href="/SistemaVentas/Reportes/RBitacora.html">Consulta de bitácora</a></li>
                             </ul>
                         </li>
                     </ul>
