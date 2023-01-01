@@ -61,7 +61,7 @@ class SubReportes
                                 $pdf->SetWidths(array(70,25,25,25,25,25,25,25,25));
                                 $pdf->row(array("Nombre de Proveedor","factura","fecha","Clasificacion","Nombre","unidad","cantidad","costo","importe"));
                                 foreach( $ventas as $row){ 
-                                    $pdf->row(array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8])); 
+                                    $pdf->row(array( $row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9])); 
                                     }
                                 }else{
                                     $pdf->Ln();
@@ -83,7 +83,7 @@ class SubReportes
                                 $writer->writeSheetRow('Sheet1', array("Nombre de Proveedor","factura","fecha","Clasificacion","Nombre","unidad","cantidad","costo","importe"));
                                 $ventas=$this->conexion->RCompraInumos($_GET['FI'],$_GET['FF']);
                                 foreach( $ventas as $row){ 
-                                    $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8]));
+                                    $writer->writeSheetRow('Sheet1', array( $row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7],$row[8],$row[9]));
                                 }
                                 $writer->writeToStdOut();
                         }
@@ -128,8 +128,9 @@ class SubReportes
                                     $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
                                     $Resultado=$this->conexion->RCompraInumosProveedor($_GET['id'],$_GET['FI'],$_GET['FF']);
                                     $proveedor=$Resultado["Proveedor"][0];
+
                                     $ventas=$Resultado["detalles"];
-                                    $writer->writeSheetRow('Sheet1', array("Nombre del proveedor: ",$proveedor['nombre'],"Domicilio:",$proveedor['domicilio']." ".$proveedor['ciudad'],"Telefono: ",$proveedor['telefono'],"Email: ",$proveedor["email"]));
+                                    $writer->writeSheetRow('Sheet1', array("Nombre del proveedor: ",$proveedor['Nombre'],"Domicilio:",$proveedor['Domicilio']." ".$proveedor['Ciudad'],"RFC: ",$proveedor['RFC']));
                                     $writer->writeSheetRow('Sheet1', array("factura","fecha","Clasificacion","Nombre","unidad","cantidad","costo","importe"));
                                     foreach( $ventas as $row){ 
                                         $writer->writeSheetRow('Sheet1', array( $row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6],$row[7]));
@@ -137,6 +138,10 @@ class SubReportes
                                     $writer->writeToStdOut();
                             }
                     break;
+
+
+
+
 
                     case 'RCompraClasificacion':
                         if($_GET['tipo']=='PDF'){
@@ -451,7 +456,7 @@ class SubReportes
                     case 'RDevolucionOrdenProduccion':
                         if($_GET['tipo']=='PDF'){
                             $pdf = new PDF('L','mm','A4');
-                            $pdf->setTitulos("Vale de salida por orden de prouduccion","Desde:".$_GET['FI']." A ".$_GET['FF']);
+                            $pdf->setTitulos("Vale de devolucion por orden de prouduccion","Desde:".$_GET['FI']." A ".$_GET['FF']);
                             $pdf->AddPage();
                             $pdf->SetFont('Arial','',7);
                             $Resultado=$this->conexion->RDevolucionOrdenProduccion($_GET['id'],$_GET['FI'],$_GET['FF']);
@@ -488,7 +493,7 @@ class SubReportes
                                     header('Cache-Control: must-revalidate');
                                     header('Pragma: public');   
                                     $writer = new XLSXWriter();
-                                    $writer->writeSheetRow('Sheet1', array("Vale de salida por orden de prouduccion"));
+                                    $writer->writeSheetRow('Sheet1', array("Vale de devolucion por orden de prouduccion"));
                                     $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
                                     $Resultado=$this->conexion->RDevolucionOrdenProduccion($_GET['id'],$_GET['FI'],$_GET['FF']);
                                     $Orden=$Resultado["Orden"][0];
@@ -540,7 +545,7 @@ class SubReportes
                                     header('Cache-Control: must-revalidate');
                                     header('Pragma: public');   
                                     $writer = new XLSXWriter();
-                                    $writer->writeSheetRow('Sheet1', array("Vale de salida por orden de prouduccion"));
+                                    $writer->writeSheetRow('Sheet1', array("Vale de devolucion por orden de prouduccion"));
                                     $writer->writeSheetRow('Sheet1', array("Desde:",$_GET['FI'], " A: ",$_GET['FF']) );
                                     $Resultado=$this->conexion->RDevolucion($_GET['FI'],$_GET['FF']);
                                     $writer->writeSheetRow('Sheet1', array("idOrden","descripcion","idDevolucion","fecha","responsable","nombre","cantidad"));
