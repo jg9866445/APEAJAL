@@ -281,7 +281,7 @@
             var now = new Date();
             var dateString = moment(now).format('YYYY-MM-DD');
             document.getElementById("Fecha").value=dateString;
-            document.getElementById("dato").value=window.localStorage.getItem('dato')
+            document.getElementById("dato").value=window.sessionStorage.getItem('dato')
             getCliente();
         }
         function getCliente(){

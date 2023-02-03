@@ -175,7 +175,7 @@
                         method: "POST",
                         data: {
                             "Metodo":'getAllPrediosforTabla',
-                            "datosClientes":window.localStorage.getItem('dato')
+                            "datosClientes":window.sessionStorage.getItem('dato')
                         },
                         }).done(function(respuesta){
                             respuesta=JSON.parse(respuesta);
