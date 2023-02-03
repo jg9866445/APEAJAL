@@ -3,6 +3,7 @@ class login {
   
     constructor () {
     }
+    
     confirmarlogin(information){
         switch(information){
             case "Cliente":
@@ -26,6 +27,7 @@ class login {
             break;
         }
     }
+
     alertLogout(users){
         Swal.fire({
         title: 'Usted desea cerrar sesión?',
@@ -50,6 +52,10 @@ class login {
 
             }
         })
+    }
+
+    position(){
+        return window.sessionStorage.getItem("position");
     }
 
     cerrar(){

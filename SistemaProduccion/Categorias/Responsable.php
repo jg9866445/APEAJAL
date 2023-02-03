@@ -234,7 +234,7 @@
             $('#home').click(function() {
                 window.location.href = "/menu.html"
             });
-            if(window.localStorage.getItem("position")=='Viverista'){
+            if(session.position()=='Viverista'){
                 document.getElementById("Clasifiacion").style.display = "block";
                 document.getElementById("Insumos").style.display = "block";
                 document.getElementById("Provedores").style.display = "none";
