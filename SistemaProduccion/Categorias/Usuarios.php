@@ -131,7 +131,7 @@
                         <thead>
                             <tr>
                                 <th> </th>
-                                <th>Username</th>
+                                <th>Usuario</th>
                                 <th>Puesto</th>
                                 <th>Modificar</th>
                             </tr>
@@ -171,7 +171,7 @@
                     <div class="modal-body">
                         <div class="mb-3 row">
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">username </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Usuario </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="username" name="username" placeholder="Nombre" required  minlength="3" maxlength="40" />
                                 <label for="input"></label>
@@ -188,9 +188,9 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">password </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Contraseña </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="password" name="password" placeholder="password" required  minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="password" name="password" placeholder="Contraseña" required  minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
 
@@ -219,7 +219,7 @@
                     <input type="hidden" name="idUsuarioM" id="idUsuarioM">
                     <div class="modal-body">
                         <div class="mb-3 row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Username </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Usuario </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="usernameM" name="usernameM" placeholder="Nombre" required  minlength="3" maxlength="40" />
                                 <label for="input"></label>
@@ -236,9 +236,9 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">password </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Contraseña </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="password" required  minlength="3" maxlength="40" />
+                                <input class="form-control" type="text" id="passwordM" name="passwordM" placeholder="Contraseña" required  minlength="3" maxlength="40" />
                                 <label for="input"></label>
                             </div>
                         </div>
