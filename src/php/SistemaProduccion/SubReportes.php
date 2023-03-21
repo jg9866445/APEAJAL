@@ -68,7 +68,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen compras para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                         }else{
                                 $fileName = basename('fichero.xlsx');
 
@@ -114,7 +114,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen compras para estas fechas y este proveedor",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                             }else{
                                     $fileName = basename('fichero.xlsx');
 
@@ -168,7 +168,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen compras para esta clasificaicon en estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                                 }else{
                                     $fileName = basename('fichero.xlsx');
 
@@ -217,7 +217,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen insumos para esta clasificacion",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                         }else{
                              $fileName = basename('fichero.xlsx');
 
@@ -264,7 +264,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen ordenes de produccion para esta fecha",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                                 }else{
                                     $fileName = basename('fichero.xlsx');
 
@@ -321,7 +321,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen ordenes de produccion para estas fechas con este estado",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                                 }else{
                                     $fileName = basename('fichero.xlsx');
 
@@ -379,7 +379,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen vales de salida para esta orden de produccion en esta fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                             }else{
                                     $fileName = basename('fichero.xlsx');
 
@@ -431,7 +431,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen vales de salida en estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                             }else{
                                     $fileName = basename('fichero.xlsx');
 
@@ -483,7 +483,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen vales de devolucion para esta orden de produccion en estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                             }else{
                                     $fileName = basename('fichero.xlsx');
 
@@ -535,7 +535,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen vales de devolucion para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                             }else{
                                     $fileName = basename('fichero.xlsx');
 
@@ -578,7 +578,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen mermas para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                             }else{
                                     $fileName = basename('fichero.xlsx');
 

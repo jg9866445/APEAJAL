@@ -58,14 +58,10 @@ class SubCatalagos
                     if(move_uploaded_file($origen, $destino))
                     {
                     }else{
-                            save("Archivo no movido");
                         }
                 }else{
-                        save("Archivo no es pdf");
-
                 }
             }else{
-                    save("Archivo no encotrado");
             }
     }
 }

@@ -131,6 +131,7 @@
                                 <th> </th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
+                                <th>Modificar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -141,6 +142,7 @@
                                     echo "<td>" . $row['idEspecie'] . "</td>";
                                     echo "<td>" . $row['nombre'] . "</td>";
                                     echo "<td>" . $row['descripcion'] . "</td>";
+                                    echo "<td><button type='button' class='btn update' data-bs-toggle='modal' data-bs-target='#update' onclick='update(this)'><i class='bi bi-nut'></i> </button></td>";
                                     echo "</tr>";
                                 }
                             ?>
@@ -188,6 +190,41 @@
         </div>
     </div>
 
+    <!-- Modal formulario insertar-->
+    <div class="modal fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar Especie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/SistemaVentas/Categoria/Especies.php" method="POST">
+                    <input type="hidden" name="categoria" value="Modificar">
+                    <input type="hidden" name="idEspecieM" id="idEspecieM">
+                    <div class="modal-body">
+                        <div class="mb-3 row">
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="NombreEspecieM" name="NombreEspecieM" placeholder="Nombre" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"  minlength="3" maxlength="30" />
+                                <label for="input"></label>
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Descripción</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" id="DescripcionEspecieM" name="DescripcionEspecieM" placeholder="Descripcion" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"  minlength="3" maxlength="60" />
+                                <label for="input"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn cancel" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn insert">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script>
         const session = new login();
         $(document).ready( function () {
@@ -225,6 +262,13 @@
                 document.getElementById("consutal8").style.display = "none";
         }
         } );
+        function update(context){
+            var elementosTD=context.parentNode.parentNode.getElementsByTagName('td');
+
+            document.getElementById("idEspecieM").value=elementosTD[0].textContent;
+            document.getElementById("NombreEspecieM").value=elementosTD[1].textContent;
+            document.getElementById("DescripcionEspecieM").value=elementosTD[2].textContent;
+            }
     </script>
    
     <?php
@@ -233,6 +277,15 @@
                 $nombre = $_POST['NombreEspecie'];
                 $descripcion = $_POST['DescripcionEspecie'];
                 $resultado = $conexion->insertEspecies($nombre, $descripcion);
+                unset($_POST);
+                ob_start();
+                $URL = $_SERVER['PHP_SELF'];
+                echo("<meta http-equiv='refresh' content='1'>");
+            }else if (isset($_POST["categoria"]) && $_POST["categoria"] == "Modificar"){
+                $idEspecieM = $_POST['idEspecieM'];
+                $nombreM = $_POST['NombreEspecieM'];
+                $descripcionM = $_POST['DescripcionEspecieM'];
+                $resultado = $conexion->updateEspecies($idEspecieM,$nombreM, $descripcionM);
                 unset($_POST);
                 ob_start();
                 $URL = $_SERVER['PHP_SELF'];

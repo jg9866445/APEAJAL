@@ -69,7 +69,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen solicitudes para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                         }else{
                                 $fileName = basename('fichero.xlsx');
 
@@ -111,7 +111,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen Ventas para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                         }else{
                                 $fileName = basename('fichero.xlsx');
 
@@ -153,7 +153,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen pagos para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                         }else{
                                 $fileName = basename('fichero.xlsx');
 
@@ -196,7 +196,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen salidas para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                         }else{
                                 $fileName = basename('fichero.xlsx');
 
@@ -238,7 +238,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen mermas para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                         }else{
                                 $fileName = basename('fichero.xlsx');
 
@@ -280,7 +280,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen compras para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                         }else{
                                 $fileName = basename('fichero.xlsx');
 
@@ -322,7 +322,7 @@ class SubReportes
                                     $pdf->Cell(100,6,"No existen compras para estas fechas",0,0);
                                 }
                                 $pdf->Ln(20);
-                                $pdf->Output();
+                                $pdf->Output('I');
                         }else{
                                 $fileName = basename('fichero.xlsx');
 

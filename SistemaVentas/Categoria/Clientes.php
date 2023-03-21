@@ -261,7 +261,7 @@
 
                             <label for="staticEmail" class="col-sm-2 col-form-label">Constancia de situación fiscal</label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="file" id="file" name="file"  accept="application/pdf"  required/>
+                                <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" />
                                 <label for="input"></label>
                             </div>
                         </div>
