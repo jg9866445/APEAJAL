@@ -149,17 +149,42 @@
     </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-4 ">
+                    <button type="button" class="btn insert" id="Preconsulta" >Preconsulta</button>
                 </div>
                 <div class="col-lg-4 ">
-                            <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
+                    <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
                 </div>
                 <div class="col-lg-4 ">
-                            <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
-                </div>
-                <div class="col-lg-2">
+                    <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
                 </div>
             </div>
+        </div>
+        <div class="row" > 
+            <div class="col-lg-2 "></div>
+            <div class="col-lg-8 " id="PreconsultaTable" style="display: none;">
+                <h2>Clasificación de insumos</h2>
+                <br>
+                <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
+                    <thead>
+                        <tr>
+                            <th>IdVenta</th>                
+                            <th>Fecha</th>
+                            <th>Nombre del responable</th>
+                            <th>Razon Social</th>
+                            <th>IdPredio</th>
+                            <th>Especie</th>
+                            <th>Cantidad Solicitada</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2 "></div>
         </div>
     </div>
 </body>
@@ -185,6 +210,28 @@
                 else aux.alert("Inserte fecha final",true,true)
             else aux.alert("Inserte fecha inicial",true,true)
         });
+        $('#Preconsulta').click(function() {
+            $.ajax({
+                    url: "/src/php/SistemaProduccion/SubCatalagos.php",
+                    method: "GET",
+                    data: {
+                        "metodo":"RVentas",
+                        "tipo":'Preconsulta',
+                        "FI":document.getElementById('fechaInicial').value,
+                        "FF":document.getElementById('fechaFinal').value
+                         },
+                    success: function(respuesta){
+                        document.getElementById("PreconsultaTable").style.display = "block";
+                        console.log(respuesta);
+                         var table=$('#table_id').DataTable({
+                            scrollX:  true,
+                            data:JSON.parse(respuesta),
+                        });
+                        funciones.cerrar();
+                    },
+                })
+        });
+
         $('#logout').click(function() {
             session.alertLogout();
         });
