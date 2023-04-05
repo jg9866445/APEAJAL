@@ -106,7 +106,6 @@
         <div class="container botton">
             <div class="row">
                 <div class="col-lg-2 ">
-                    <button class="btn insert"  href="/SistemaVentas/index.html">Regresar</a>
                 </div>
                 <div class="col-lg-7 ">
 
