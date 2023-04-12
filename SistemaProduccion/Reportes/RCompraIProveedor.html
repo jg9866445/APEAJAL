@@ -216,6 +216,29 @@
 
             </div>
         </div>
+        <div class="row" > 
+            <div class="col-lg-2 "></div>
+            <div class="col-lg-8 " id="PreconsultaTable" style="display: none;">
+                <h2>Clasificación de insumos</h2>
+                <br>
+                <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Factura</th>
+                            <th>Fecha</th>
+                            <th>Clasificación</th>
+                            <th>Nombre</th>
+                            <th>Unidad</th>
+                            <th>Cantidad</th>
+                            <th>Costo</th>
+                            <th>Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                    </tbody>
+                </table>
+            </div>
     </div>
 </body>
 
@@ -283,9 +306,30 @@
         $('#Preconsulta').click(function() {
             if(document.getElementById("idProveedor").value!=-20)
                 if(document.getElementById("fechaInicial").value!=0 )
-                    if( document.getElementById("fechaFinal").value!=0)
-                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraInumosProveedor&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idProveedor").value+"&tipo=EXCEL"
-                    else aux.alert("<h5>Inserte fecha final</h5>",true,true)
+                    if( document.getElementById("fechaFinal").value!=0){
+                        aux.alert("Cargando datos");
+                        $.ajax({
+                        url: "/src/php/SistemaProduccion/SubReportes.php",
+                        method: "GET",
+                        data: {
+                            "metodo":"RCompraInumosProveedor",
+                            "tipo":'Preconsulta',
+                            "id":document.getElementById("idProveedor").value,
+                            "FI":document.getElementById('fechaInicial').value,
+                            "FF":document.getElementById('fechaFinal').value
+                            },
+                        success: function(respuesta){
+                            document.getElementById("PreconsultaTable").style.display = "block";
+                            $('#table_id').DataTable().destroy();
+                            console.log(JSON.parse(respuesta));
+                            const tabla=$('#table_id').DataTable({
+                                scrollX:  true,
+                                data:JSON.parse(respuesta)
+                            });
+                            aux.cerrar();
+                        },
+                    })
+                    }else aux.alert("<h5>Inserte fecha final</h5>",true,true)
                 else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
             else aux.alert("<h5>Selecione un proveedor</h5>",true,true)
         });

@@ -150,7 +150,8 @@
     </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-4 ">
+                    <button type="button" class="btn insert" id="Preconsulta" >Preconsulta</button>
                 </div>
                 <div class="col-lg-4 ">
                             <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
@@ -158,9 +159,33 @@
                 <div class="col-lg-4 ">
                             <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
                 </div>
-                <div class="col-lg-2">
-                </div>
             </div>
+        </div>
+        <div class="row" > 
+            <div class="col-lg-2 "></div>
+            <div class="col-lg-8 " id="PreconsultaTable" style="display: none;">
+                <h2>Clasificación de insumos</h2>
+                <br>
+                <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nombre de Proveedor</th>                
+                            <th>factura</th>
+                            <th>fecha</th>
+                            <th>Clasificacion</th>
+                            <th>Nombre</th>
+                            <th>unidad</th>
+                            <th>cantidad</th>
+                            <th>costo</th>
+                            <th>importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2 "></div>
         </div>
     </div>
 </body>
@@ -215,6 +240,34 @@
                 if( document.getElementById("fechaFinal").value!=0)
                     window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraInumos&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&tipo=Excel"
                 else aux.alert("Inserte fecha final",true,true)
+            else aux.alert("Inserte fecha inicial",true,true)
+        });
+
+        $('#Preconsulta').click(function() {
+            if(document.getElementById("fechaInicial").value!=0 )
+                if( document.getElementById("fechaFinal").value!=0){
+                    aux.alert("Cargando datos");
+                        $.ajax({
+                        url: "/src/php/SistemaProduccion/SubReportes.php",
+                        method: "GET",
+                        data: {
+                            "metodo":"RCompraInumos",
+                            "tipo":'Preconsulta',
+                            "FI":document.getElementById('fechaInicial').value,
+                            "FF":document.getElementById('fechaFinal').value
+                            },
+                        success: function(respuesta){
+                            document.getElementById("PreconsultaTable").style.display = "block";
+                            $('#table_id').DataTable().destroy();
+                            console.log(JSON.parse(respuesta));
+                            const tabla=$('#table_id').DataTable({
+                                scrollX:  true,
+                                data:JSON.parse(respuesta)
+                            });
+                            aux.cerrar();
+                        },
+                    })
+                }else aux.alert("Inserte fecha final",true,true)
             else aux.alert("Inserte fecha inicial",true,true)
         });
     });

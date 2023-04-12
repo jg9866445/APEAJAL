@@ -171,7 +171,8 @@
     </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-4 ">
+                            <button type="button" class="btn insert" id="Preconsulta" >Preconsulta</button>
                 </div>
                 <div class="col-lg-4 ">
                             <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
@@ -179,10 +180,31 @@
                 <div class="col-lg-4 ">
                             <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
                 </div>
-                <div class="col-lg-2">
-                </div>
             </div>
         </div>
+        <div class="row" > 
+            <div class="col-lg-2 "></div>
+            <div class="col-lg-8 " id="PreconsultaTable" style="display: none;">
+                <h2>Clasificación de insumos</h2>
+                <br>
+                <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Unidad</th>
+                            <th>Existencias</th>
+                            <th>Máximo</th>
+                            <th>Mínimo</th>
+                            <th>Costo promedio</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+    
+                    </tbody>
+                </table>
+            </div>
+    </div>
     </div>
 </body>
 
@@ -238,6 +260,32 @@
                 window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RInusmosClasificacion&id="+document.getElementById("idClasificacion").value+"&tipo=Excel"
             else aux.alert("<h5>Selecione una clasificación</h5>",true,true)
         });
+
+        $('#Preconsulta').click(function() {
+            if(document.getElementById("idClasificacion").value!=-20){
+                aux.alert("Cargando datos");
+                        $.ajax({
+                        url: "/src/php/SistemaProduccion/SubReportes.php",
+                        method: "GET",
+                        data: {
+                            "metodo":"RInusmosClasificacion",
+                            "tipo":'Preconsulta',
+                            "id":document.getElementById("idClasificacion").value,
+                            },
+                        success: function(respuesta){
+                            document.getElementById("PreconsultaTable").style.display = "block";
+                            $('#table_id').DataTable().destroy();
+                            console.log(JSON.parse(respuesta));
+                            const tabla=$('#table_id').DataTable({
+                                scrollX:  true,
+                                data:JSON.parse(respuesta)
+                            });
+                            aux.cerrar();
+                        },
+                    })
+            }else aux.alert("<h5>Selecione una clasificación</h5>",true,true)
+        });
+
 
     });
 

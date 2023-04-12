@@ -191,7 +191,8 @@
     </div>
        <div class="container">
             <div class="row">
-                <div class="col-lg-2 ">
+                <div class="col-lg-4 ">
+                    <button type="button" class="btn insert" id="Preconsulta" >Descargar consulta en pdf</button>
                 </div>
                 <div class="col-lg-4 ">
                             <button type="button" class="btn insert" id="PDF" >Descargar consulta en pdf</button>
@@ -199,9 +200,56 @@
                 <div class="col-lg-4 ">
                             <button type="button" class="btn insert" id="EXCEL" >Descargar consulta en excel</button>
                 </div>
-                <div class="col-lg-2">
-                </div>
             </div>
+        </div>
+                <div class="row" > 
+                    <div class="col-lg-2 "></div>
+                    <div class="col-lg-8 " id="PreconsultaTableTerminado" style="display: none;">
+                        <h2>Clasificación de insumos</h2>
+                        <br>
+                        <table id="table_id_terminado" class="display table table-responsive table-hover nowrap" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>idOrden</th>
+                                    <th>responsable</th>
+                                    <th>planta Forestal</th>
+                                    <th>fecha Orden</th>
+                                    <th>fecha apoximada</th>
+                                    <th>descripcion</th>
+                                    <th>cantidad Esperada</th>
+                                    <th>cantidad Lograda</th>
+                                    <th>costo Produccion</th>
+                                    <th>fecha Termino</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="row" > 
+                <div class="col-lg-2 "></div>
+                <div class="col-lg-8 " id="PreconsultaTable" style="display: none;">
+                    <h2>Clasificación de insumos</h2>
+                    <br>
+                    <table id="table_id" class="display table table-responsive table-hover nowrap" width="100%">
+                        <thead>
+                            <tr>
+                                <th>idOrden</th>
+                                <th>responsable</th>
+                                <th>planta Forestal</th>
+                                <th>fecha Orden</th>
+                                <th>fecha apoximada</th>
+                                <th>descripcion</th>
+                                <th>cantidad Esperada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </body>
@@ -261,7 +309,48 @@
                     else aux.alert("<h5>Inserte fecha final</h5>",true,true)
                 else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
         });
-
+        $('#Preconsulta').click(function() {
+                if(document.getElementById("fechaInicial").value!=0 )
+                    if( document.getElementById("fechaFinal").value!=0){
+                        aux.alert("Cargando datos");
+                        $.ajax({
+                        url: "/src/php/SistemaProduccion/SubReportes.php",
+                        method: "GET",
+                        data: {
+                            "metodo":"ROrdenProduccionEstados",
+                            "tipo":'Preconsulta',
+                            "FI":document.getElementById('fechaInicial').value,
+                            "FF":document.getElementById('fechaFinal').value,
+                            "Estado":document.getElementById("Estado").value
+                            },
+                        success: function(respuesta){
+                        if(document.getElementById("Estado").value=="Terminado"){
+                            document.getElementById("PreconsultaTableTerminado").style.display = "block";
+                            document.getElementById("PreconsultaTable").style.display = "none";
+                            $('#table_id_terminado').DataTable().destroy();
+                            $('#table_id').DataTable().destroy();
+                            console.log(JSON.parse(respuesta));
+                            const tabla=$('#table_id_terminado').DataTable({
+                                scrollX:  true,
+                                data:JSON.parse(respuesta)
+                            });
+                        }else{
+                            document.getElementById("PreconsultaTableTerminado").style.display = "none";
+                            document.getElementById("PreconsultaTable").style.display = "block";
+                            $('#table_id_terminado').DataTable().destroy();
+                            $('#table_id').DataTable().destroy();
+                            console.log(JSON.parse(respuesta));
+                            const tabla=$('#table_id').DataTable({
+                                scrollX:  true,
+                                data:JSON.parse(respuesta)
+                            });
+                        }
+                            aux.cerrar();
+                        },
+                    })
+                    }else aux.alert("<h5>Inserte fecha final</h5>",true,true)
+                else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
+        });
     });
 
 
