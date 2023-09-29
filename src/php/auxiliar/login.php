@@ -11,6 +11,9 @@ class Login
 
     function __construct(){        
         try {
+            $session_lifetime = 1800;
+            session_set_cookie_params($session_lifetime, '/home/u517350403/domains/apeajalisco.com/public_html/viveros', '', false, true); 
+
             $this->db = new DB_Connect();
             $this->connect=$this->db->connect();
             $this->conexion = $this->connect;
