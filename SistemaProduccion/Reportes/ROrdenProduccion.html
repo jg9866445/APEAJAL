@@ -255,7 +255,7 @@
         $('#EXCEL').click(function() {
                 if(document.getElementById("fechaInicial").value!=0 )
                     if( document.getElementById("fechaFinal").value!=0)
-                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=ROrdenProduccion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&tipo=Excel"
+                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=ROrdenProduccion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&tipo=EXCEL"
                     else aux.alert("<h5>Inserte fecha final</h5>",true,true)
                 else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
             });

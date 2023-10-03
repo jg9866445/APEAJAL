@@ -292,7 +292,7 @@
             if(document.getElementById("idClasificacion").value!=-20)
                 if(document.getElementById("fechaInicial").value!=0 )
                     if( document.getElementById("fechaFinal").value!=0)
-                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraClasificacion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idClasificacion").value+"&tipo=Excel"
+                        window.location.href = "/src/php/SistemaProduccion/SubReportes.php?metodo=RCompraClasificacion&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&id="+document.getElementById("idClasificacion").value+"&tipo=EXCEL"
                     else aux.alert("<h5>Inserte fecha final</h5>",true,true)
                 else aux.alert("<h5>Inserte fecha inicial</h5>",true,true)
             else aux.alert("<h5>Selecione un proveedor</h5>",true,true)

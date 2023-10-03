@@ -11,8 +11,6 @@ class Login
 
     function __construct(){        
         try {
-            $session_lifetime = 1800;
-            session_set_cookie_params($session_lifetime, '/home/u517350403/domains/apeajalisco.com/public_html/viveros', '', false, true); 
 
             $this->db = new DB_Connect();
             $this->connect=$this->db->connect();
@@ -36,9 +34,16 @@ class Login
                            $_SESSION["id"] = $resultado[0][0];
                            $_SESSION["Zona"] = $_POST["Zona"];
                             echo json_encode($resultado);
-                        }else{
-                            echo json_encode($resultado);
                         }
+                    break;
+                    case 'ComprobacionSession':
+                        
+                        if(!isset($_SESSION["id"]) && !isset($_SESSION["Zona"]))
+                        echo false;
+                        
+                        else 
+                        echo true;
+
                     break;
                 }
             }

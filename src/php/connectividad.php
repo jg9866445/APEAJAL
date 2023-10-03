@@ -1,7 +1,7 @@
 <?php
 class DB_Connect {
     var $connection=null;
-    var $debug=true;
+    var $debug=false;
     var $table_schema='';
 
     function __construct(){}

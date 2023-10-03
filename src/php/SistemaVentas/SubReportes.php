@@ -72,7 +72,7 @@ class SubReportes
                                 $pdf->Ln(20);
                                 $pdf->Output('I');
                             break;
-                            case 'Excel':
+                            case 'EXCEL':
                                 $fileName = basename('fichero.xlsx');
 
                                 header('Content-disposition: attachment; filename="'.XLSXWriter::sanitize_filename($fileName).'"');

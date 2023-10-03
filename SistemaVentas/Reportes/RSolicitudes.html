@@ -235,7 +235,7 @@
         $('#EXCEL').click(function() {
             if(document.getElementById("fechaInicial").value!=0 )
                 if( document.getElementById("fechaFinal").value!=0)
-                    window.location.href = "/src/php/SistemaVentas/SubReportes.php?metodo=RSolicitudes&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&tipo=Excel"
+                    window.location.href = "/src/php/SistemaVentas/SubReportes.php?metodo=RSolicitudes&FI="+document.getElementById('fechaInicial').value+"&FF="+document.getElementById('fechaFinal').value+"&tipo=EXCEL"
                 else aux.alert("Inserte fecha final",true,true)
             else aux.alert("Inserte fecha inicial",true,true)
         });

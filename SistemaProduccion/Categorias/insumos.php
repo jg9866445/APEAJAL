@@ -327,7 +327,7 @@
 
                                 <label for="staticEmail" class="col-sm-2 col-form-label">Costo</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo" required pattern="[0-9,.]+" minlength="1"  />
+                                    <input class="form-control" type="text" id="CostoPromedio" name="CostoPromedio" placeholder="Costo" required pattern="[0-9,.]+" minlength="1" value="0" />
                                     <label for="input"></label>
                                 </div>
                             </div>

@@ -5,9 +5,10 @@ class login {
     }
     
     confirmarlogin(information){
+        verificarSesion();
         switch(information){
             case "Cliente":
-                if(window.sessionStorage.getItem('dato') == undefined)
+                if(window.sessionStorage.getItem('dato') == undefined )
                     window.location.href = "/SistemaCliente/login.html"
             break;
             case "No-Clientes":
@@ -61,6 +62,19 @@ class login {
     cerrar(){
         Swal.close();
     }
+
+    verificarSesion() {
+        $.ajax({ 
+            url: "/src/php/auxiliar/login.php", 
+            method: "POST",
+            data: {"Metodo":'ComprobacionSession',},
+        }).done(function(respuesta){
+            session=Boolean(respuesta)
+            if(!session){
+                localStorage.clear();
+            }
+        })
+}
     
 
 
