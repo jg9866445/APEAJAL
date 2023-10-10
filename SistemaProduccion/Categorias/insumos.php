@@ -146,9 +146,9 @@
                                     foreach ($resultado as $row) {
                                         echo "<tr>";
                                         echo "<td>" . $row['idInsumo'] . "</td>";
-                                        echo "<td>" . $row['concepto'] . "</td>";
+                                        echo "<td>" . $row['nombre'] . "</td>";
                                         echo "<td>" . $row['descripcion'] . "</td>";
-                                        echo "<td>" . $row['nombre'] . " <div style='visibility: hidden'>" . $row['idClasificacion'] . " </div></td>";
+                                        echo "<td>" . $row['concepto'] . " <div style='visibility: hidden'>" . $row['idClasificacion'] . " </div></td>";
                                         echo "<td>" . $row['unidad'] . "</td>";
                                         echo "<td>" . $row['existencias'] . "</td>";
                                         echo "<td>" . $row['maximo'] . "</td>";

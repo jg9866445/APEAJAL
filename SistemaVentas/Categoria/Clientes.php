@@ -137,7 +137,7 @@
                                 <th>RFC</th>
                                 <th>CURP</th>
                                 <th>Domicilio</th>
-                                <th>Ciudad</th>
+                                <th>Municipio</th>
                                 <th>Estado</th>
                                 <th>Email</th>
                                 <th>Teléfono</th>
@@ -218,7 +218,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Municipio </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="Ciudad" name="Ciudad" placeholder="Ciudad  " required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"  />
                                 <label for="input"></label>
@@ -263,6 +263,7 @@
                                 <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" />
                                 <label for="input"></label>
                             </div>
+                            <label for="staticEmail" class="form-label">En caso de necesitar factura subir constancia</label>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -312,7 +313,7 @@
                                 <label for="input"></label>
                             </div>
 
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Ciudad </label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Municipio </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" id="CiudadM" name="CiudadM" placeholder="Ciudad" required pattern="[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-#]+" minlength="1" maxlength="20"  />
                                 <label for="input"></label>
@@ -357,6 +358,7 @@
                                 <input class="form-control" type="file" id="file" name="file"  accept="application/pdf" />
                                 <label for="input"></label>
                             </div>
+                            <label for="staticEmail" class="form-label">En caso de necesitar factura subir constancia</label>
                         </div>
                     </div>
 
