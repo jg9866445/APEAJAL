@@ -69,8 +69,8 @@ class Catalago {
         $this->bitacora("Catalago","Clasifiacion","Insertar".$this->texto(array("concepto", "descripcion"),array($concepto, $descripcion)),$_SESSION["id"]);
         $sql="INSERT INTO clasificacion (concepto, descripcion) VALUES (:concepto,:descripcion)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':concepto', $concepto);
-        $query->bindParam(':descripcion', $descripcion);
+        $query->bindParam(':concepto', ucwords($concepto));
+        $query->bindParam(':descripcion', ucwords($descripcion));
         $request=$query->execute(); 
         return $request;
     }
@@ -91,9 +91,9 @@ class Catalago {
         $sql = "INSERT INTO insumo (idClasificacion, nombre, descripcion, unidad, existencias, maximo, minimo, costoPromedio) VALUES (:idClasificacion, :nombre, :descripcion, :unidadMetrica, :existencias, :maximo, :minimo, :costoPromedio)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idClasificacion', $idClasificacion);
-        $query->bindParam(':nombre', $nombre);
-        $query->bindParam(':descripcion', $descripcion);
-        $query->bindParam(':unidadMetrica', $unidadMetrica);
+        $query->bindParam(':nombre', ucwords($nombre));
+        $query->bindParam(':descripcion', ucwords($descripcion));
+        $query->bindParam(':unidadMetrica', ucwords($unidadMetrica));
         $query->bindParam(':existencias', $existencias);
         $query->bindParam(':maximo', $maximo);
         $query->bindParam(':minimo', $minimo);
@@ -108,9 +108,9 @@ class Catalago {
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idInsumo', $idInsumo);
         $query->bindParam(':idClasificacion', $idClasificacion);
-        $query->bindParam(':nombre', $nombre);
-        $query->bindParam(':descripcion', $descripcion);
-        $query->bindParam(':unidadMetrica', $unidadMetrica);
+        $query->bindParam(':nombre', ucwords($nombre));
+        $query->bindParam(':descripcion', ucwords($descripcion));
+        $query->bindParam(':unidadMetrica', ucwords($unidadMetrica));
         $query->bindParam(':existencias', $existencias);
         $query->bindParam(':maximo', $maximo);
         $query->bindParam(':minimo', $minimo);
@@ -146,7 +146,7 @@ class Catalago {
         $this->bitacora("Catalago","Responsable","Inserta Responsables".$this->texto(array("nombre", "puesto"),array($nombre, $puesto)),$_SESSION["id"]);
         $sql = "INSERT INTO responsable ( nombre, puesto) VALUES ( :nombre, :puesto)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(':nombre', $nombre);
+        $query->bindParam(':nombre', ucwords($nombre));
         $query->bindParam(':puesto', $puesto);
         $request=$query->execute(); 
         return $request;
@@ -157,8 +157,8 @@ class Catalago {
         $sql = "UPDATE responsable SET nombre=:nombre, puesto=:puesto where idResponsable=:idResponsable";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idResponsable', $idResponsable);
-        $query->bindParam(':nombre', $nombre);
-        $query->bindParam(':puesto', $puesto);
+        $query->bindParam(':nombre',   ucwords($nombre));
+        $query->bindParam(':puesto',  $puesto);
         $request=$query->execute(); 
         return $request;
     }
@@ -181,8 +181,8 @@ class Catalago {
         $this->bitacora("Catalago","Motivo Merma","Insertar".$this->texto(array("nombre", "descripcion"),array($nombre, $descripcion)),$_SESSION["id"]);
         $sql = "INSERT INTO motivoMermaInsumo ( nombre, descripcion) VALUES (:nombre,:descripcion)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(":nombre",$nombre);
-        $query->bindParam(":descripcion",$descripcion);
+        $query->bindParam(":nombre", ucwords($nombre));
+        $query->bindParam(":descripcion", ucwords($descripcion));
         $query->execute();  
         return $query->rowCount(); 
     }

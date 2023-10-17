@@ -38,9 +38,9 @@ class SistemaClientes {
         $query->bindParam(":razonSocial",$razonSocial);
         $query->bindParam(":RFC",$RFC);
         $query->bindParam(":CURP",$CURP);
-        $query->bindParam(":domicilio",$domicilio);
-        $query->bindParam(":ciudad",$ciudad);
-        $query->bindParam(":estado",$estado);
+        $query->bindParam(":domicilio", ucwords($domicilio));
+        $query->bindParam(":ciudad", ucwords($ciudad));
+        $query->bindParam(":estado", ucwords($estado));
         $query->bindParam(":email",$email);
         $query->bindParam(":telefono",$telefono);
         $query->bindParam(":celular",$celular);
@@ -54,9 +54,9 @@ class SistemaClientes {
         $sql = "INSERT INTO predios( idCliente, municipio, extencion, usoPredio, longitud, latitud) VALUES ( :idCliente, :municipio, :extencion, :usoPredio, :longitud, :latitud)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(':idCliente', $idCliente);
-        $query->bindParam(':municipio', $municipio);
-        $query->bindParam(':extencion', $extencion);
-        $query->bindParam(':usoPredio', $usoPredio);
+        $query->bindParam(':municipio',  ucwords($municipio));
+        $query->bindParam(':extencion',  ucwords($extencion));
+        $query->bindParam(':usoPredio',  ucwords($usoPredio));
         $query->bindParam(':longitud', $longitud);
         $query->bindParam(':latitud', $latitud);
         $request=$query->execute(); 

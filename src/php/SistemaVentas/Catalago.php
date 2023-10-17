@@ -113,7 +113,7 @@ class Catalago {
         $sql = "INSERT INTO plantaForestal ( idEspecie, descripcion, existencia, precio) VALUES (:idEspecie,:descripcion,:existencia, :precio)";
         $query = $this->connect->prepare($sql);
         $query->bindParam(":idEspecie",$idEspecie);
-        $query->bindParam(":descripcion",$descripcion);
+        $query->bindParam(":descripcion", ucwords($descripcion));
         $query->bindParam(":existencia",$existencia);
         $query->bindParam(":precio",$precio);
         $query->execute();
@@ -124,8 +124,8 @@ class Catalago {
         $this->bitacora("Catalago","Especie","Insertar".$this->texto(array("nombre", "descripcion"),array($nombre, $descripcion)),$_SESSION["id"]);
         $sql = "INSERT INTO especie ( nombre, descripcion) VALUES (:nombre,:descripcion)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(":nombre",$nombre);
-        $query->bindParam(":descripcion",$descripcion);
+        $query->bindParam(":nombre", ucwords($nombre));
+        $query->bindParam(":descripcion", ucwords($descripcion));
         $query->execute();  
         return $query->rowCount(); 
     }
@@ -145,8 +145,8 @@ class Catalago {
         $this->bitacora("Catalago","Motivo Merma","Insertar ".$this->texto(array("nombre", "descripcion"),array($nombre, $descripcion)),$_SESSION["id"]);
         $sql = "INSERT INTO motivoMermaPlantaForestal ( nombre, descripcion) VALUES (:nombre,:descripcion)";
         $query = $this->connect->prepare($sql);
-        $query->bindParam(":nombre",$nombre);
-        $query->bindParam(":descripcion",$descripcion);
+        $query->bindParam(":nombre", ucwords($nombre));
+        $query->bindParam(":descripcion", ucwords($descripcion));
         $query->execute();  
         return $query->rowCount(); 
     }
@@ -169,9 +169,9 @@ class Catalago {
         $query->bindParam(":razonSocial",$razonSocial);
         $query->bindParam(":RFC",$RFC);
         $query->bindParam(":CURP",$CURP);
-        $query->bindParam(":domicilio",$domicilio);
-        $query->bindParam(":ciudad",$ciudad);
-        $query->bindParam(":estado",$estado);
+        $query->bindParam(":domicilio", ucwords($domicilio));
+        $query->bindParam(":ciudad", ucwords($ciudad));
+        $query->bindParam(":estado", ucwords($estado));
         $query->bindParam(":email",$email);
         $query->bindParam(":telefono",$telefono);
         $query->bindParam(":celular",$celular);
@@ -251,9 +251,9 @@ class Catalago {
         $query->bindParam(":razonSocial",$razonSocial);
         $query->bindParam(":RFC",$RFC);
         $query->bindParam(":CURP",$CURP);
-        $query->bindParam(":domicilio",$domicilio);
-        $query->bindParam(":ciudad",$ciudad);
-        $query->bindParam(":estado",$estado);
+        $query->bindParam(":domicilio", ucwords($domicilio));
+        $query->bindParam(":ciudad", ucwords($ciudad));
+        $query->bindParam(":estado", ucwords($estado));
         $query->bindParam(":email",$email);
         $query->bindParam(":telefono",$telefono);
         $query->bindParam(":celular",$celular);
